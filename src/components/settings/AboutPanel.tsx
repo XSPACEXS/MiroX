@@ -11,6 +11,7 @@ export function AboutPanel() {
   } | null>(null)
 
   useEffect(() => {
+    if (typeof window === 'undefined' || !window.electronAPI) return
     window.electronAPI.getSystemInfo().then(setSystemInfo).catch(() => {})
   }, [])
 
@@ -53,14 +54,14 @@ export function AboutPanel() {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => window.electronAPI.openExternal('https://github.com/mirox')}
+          onClick={() => window.electronAPI?.openExternal('https://github.com/mirox')}
         >
           GitHub
         </Button>
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => window.electronAPI.openExternal('https://miro.com')}
+          onClick={() => window.electronAPI?.openExternal('https://miro.com')}
         >
           Miro.com
         </Button>

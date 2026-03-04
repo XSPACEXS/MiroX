@@ -23,7 +23,7 @@ export class MiroApiClient {
     this.client.interceptors.response.use(
       response => response,
       (error: AxiosError) => {
-        const message = (error.response?.data as any)?.message || error.message
+        const message = (error.response?.data as Record<string, string>)?.message || error.message
         throw new Error(`Miro API Error (${error.response?.status}): ${message}`)
       }
     )
@@ -233,8 +233,6 @@ let _instance: MiroApiClient | null = null
 export function getMiroClient(token?: string): MiroApiClient {
   if (!_instance || token) {
     _instance = new MiroApiClient(token || DEFAULT_TOKEN)
-  } else if (token) {
-    _instance.updateToken(token)
   }
   return _instance
 }

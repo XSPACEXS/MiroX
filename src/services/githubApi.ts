@@ -64,22 +64,18 @@ export class GitHubApiClient {
     const readme = await this.getFileContent(owner, repo, 'README.md')
 
     // Try to detect project type
-    const [packageJson, cargoToml, goMod, requirements, pyproject] = await Promise.all([
+    const [packageJson, cargoToml, goMod] = await Promise.all([
       this.getFileContent(owner, repo, 'package.json'),
       this.getFileContent(owner, repo, 'Cargo.toml'),
       this.getFileContent(owner, repo, 'go.mod'),
-      this.getFileContent(owner, repo, 'requirements.txt'),
-      this.getFileContent(owner, repo, 'pyproject.toml'),
     ])
 
-    const rootFiles = await this.listFiles(owner, repo)
-    const fileNames = rootFiles.map(f => f.name.toLowerCase())
+    await this.listFiles(owner, repo)
 
     // Determine project type and suggest template
     let suggestedTemplate = 'system-architecture'
     let confidence = 0.7
     const techStack: string[] = []
-    const detectedLanguage = 'Unknown'
 
     if (packageJson) {
       try {
@@ -90,7 +86,9 @@ export class GitHubApiClient {
         if (pkg.dependencies?.fastapi || pkg.dependencies?.django) techStack.push('Python API')
         suggestedTemplate = techStack.includes('Express') ? 'api-design' : 'system-architecture'
         confidence = 0.85
-      } catch {}
+      } catch {
+        // Ignore malformed package.json
+      }
     }
 
     if (cargoToml) {

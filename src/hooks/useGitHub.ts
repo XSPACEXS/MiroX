@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import type { GitHubRepo, GitHubUser } from '../types/github'
 import type { ParsedContent } from '../types/import'
 
@@ -20,7 +20,7 @@ interface UseGitHubReturn {
 }
 
 export function useGitHub(): UseGitHubReturn {
-  const isElectron = typeof window !== 'undefined' && !!window.electronAPI
+  const isElectronRef = useRef(typeof window !== 'undefined' && !!window.electronAPI)
 
   const [token, setTokenState] = useState<string | null>(null)
   const [user, setUser] = useState<GitHubUser | null>(null)
@@ -32,19 +32,21 @@ export function useGitHub(): UseGitHubReturn {
   const [analysis, setAnalysis] = useState<ParsedContent | null>(null)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
 
-  const loadReposInternal = async () => {
-    if (!isElectron) return
+  const loadReposInternal = useCallback(async () => {
+    if (!isElectronRef.current) return
     setIsLoadingRepos(true)
     try {
       const result = await window.electronAPI.github.listRepos()
       if (result.ok && result.repos) {
         setRepos(result.repos as unknown as GitHubRepo[])
       }
-    } catch {} finally { setIsLoadingRepos(false) }
-  }
+    } catch {
+      // Repo loading failed silently — user can retry manually
+    } finally { setIsLoadingRepos(false) }
+  }, [])
 
   useEffect(() => {
-    if (!isElectron) return
+    if (!isElectronRef.current) return
     const load = async () => {
       const t = await window.electronAPI.github.getToken()
       if (t && t.hasToken) {
@@ -58,10 +60,10 @@ export function useGitHub(): UseGitHubReturn {
       }
     }
     load()
-  }, [])
+  }, [loadReposInternal])
 
   const setToken = useCallback(async (newToken: string) => {
-    if (!isElectron) return
+    if (!isElectronRef.current) return
     setIsConnecting(true)
     await window.electronAPI.github.setToken(newToken)
     setTokenState(newToken)
@@ -74,10 +76,10 @@ export function useGitHub(): UseGitHubReturn {
       setIsConnected(false)
     }
     setIsConnecting(false)
-  }, [])
+  }, [loadReposInternal])
 
   const disconnect = useCallback(async () => {
-    if (!isElectron) return
+    if (!isElectronRef.current) return
     await window.electronAPI.github.setToken('')
     setTokenState(null)
     setIsConnected(false)
@@ -85,7 +87,7 @@ export function useGitHub(): UseGitHubReturn {
     setRepos([])
   }, [])
 
-  const loadRepos = useCallback(loadReposInternal, [])
+  const loadRepos = useCallback(() => loadReposInternal(), [loadReposInternal])
 
   const selectRepo = useCallback((repo: GitHubRepo) => {
     setSelectedRepo(repo)
@@ -93,7 +95,7 @@ export function useGitHub(): UseGitHubReturn {
   }, [])
 
   const analyzeRepo = useCallback(async (repo: GitHubRepo) => {
-    if (!isElectron) return
+    if (!isElectronRef.current) return
     setIsAnalyzing(true)
     try {
       const result = await window.electronAPI.github.analyzeRepo(repo.owner.login, repo.name)

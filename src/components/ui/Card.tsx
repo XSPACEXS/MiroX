@@ -26,7 +26,7 @@ export function Card({ variant = 'default', hoverable = false, children, classNa
         whileTap={{ scale: 0.98 }}
         className={`${base} ${variantStyles[variant]} cursor-pointer ${className}`}
         onClick={onClick}
-        {...props as any}
+        {...(props as React.ComponentProps<typeof motion.div>)}
       >
         {children}
       </motion.div>

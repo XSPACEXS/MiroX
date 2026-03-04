@@ -58,7 +58,7 @@ export function Sidebar({ collapsed }: SidebarProps) {
               className={`
                 w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150
                 ${isActive
-                  ? 'bg-black-800 text-yellow-400 border-l-4 border-yellow-400'
+                  ? 'bg-yellow-400/10 text-yellow-400 border-l-4 border-yellow-400'
                   : 'text-gray-400 hover:text-white hover:bg-black-700 border-l-4 border-transparent'
                 }
               `}

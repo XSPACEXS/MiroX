@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import type { MiroConnectionStatus, MiroBoard } from '../types/miro'
 
 interface UseMiroReturn {
@@ -15,7 +15,7 @@ interface UseMiroReturn {
 }
 
 export function useMiro(): UseMiroReturn {
-  const isElectron = typeof window !== 'undefined' && !!window.electronAPI
+  const isElectronRef = useRef(typeof window !== 'undefined' && !!window.electronAPI)
 
   const [token, setTokenState] = useState<string | null>(null)
   const [isConnected, setIsConnected] = useState(false)
@@ -24,8 +24,8 @@ export function useMiro(): UseMiroReturn {
   const [boards, setBoards] = useState<MiroBoard[]>([])
   const [isLoadingBoards, setIsLoadingBoards] = useState(false)
 
-  const testConnectionInternal = async () => {
-    if (!isElectron) return
+  const testConnectionInternal = useCallback(async () => {
+    if (!isElectronRef.current) return
     setIsConnecting(true)
     try {
       const status = await window.electronAPI.miro.testConnection()
@@ -37,11 +37,11 @@ export function useMiro(): UseMiroReturn {
     } finally {
       setIsConnecting(false)
     }
-  }
+  }, [])
 
   // Load token on mount
   useEffect(() => {
-    if (!isElectron) return
+    if (!isElectronRef.current) return
     const loadToken = async () => {
       try {
         const savedToken = await window.electronAPI.miro.getToken()
@@ -54,14 +54,14 @@ export function useMiro(): UseMiroReturn {
       }
     }
     loadToken()
-  }, [])
+  }, [testConnectionInternal])
 
   const testConnection = useCallback(async () => {
     await testConnectionInternal()
-  }, [])
+  }, [testConnectionInternal])
 
   const loadBoards = useCallback(async () => {
-    if (!isElectron || !isConnected) return
+    if (!isElectronRef.current || !isConnected) return
     setIsLoadingBoards(true)
     try {
       const result = (await window.electronAPI.miro.listBoards()) as { data?: MiroBoard[] }
@@ -74,7 +74,7 @@ export function useMiro(): UseMiroReturn {
   }, [isConnected])
 
   const createBoard = useCallback(async (name: string, description?: string): Promise<MiroBoard | null> => {
-    if (!isElectron) return null
+    if (!isElectronRef.current) return null
     try {
       const board = (await window.electronAPI.miro.createBoard(name, description)) as MiroBoard
       return board
@@ -85,11 +85,11 @@ export function useMiro(): UseMiroReturn {
   }, [])
 
   const setToken = useCallback(async (newToken: string) => {
-    if (!isElectron) return
+    if (!isElectronRef.current) return
     await window.electronAPI.miro.setToken(newToken)
     setTokenState(newToken)
     await testConnectionInternal()
-  }, [])
+  }, [testConnectionInternal])
 
   return {
     token,

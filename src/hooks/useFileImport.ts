@@ -15,7 +15,7 @@ interface UseFileImportReturn {
 }
 
 export function useFileImport(): UseFileImportReturn {
-  const isElectron = typeof window !== 'undefined' && !!window.electronAPI
+  const isElectronRef = useRef(typeof window !== 'undefined' && !!window.electronAPI)
 
   const [files, setFiles] = useState<ImportedFile[]>([])
   const [isDragging, setIsDragging] = useState(false)
@@ -83,7 +83,7 @@ export function useFileImport(): UseFileImportReturn {
   }, [processFile])
 
   const openFilePicker = useCallback(async () => {
-    if (!isElectron) return
+    if (!isElectronRef.current) return
     const result = await window.electronAPI.files.openDialog({
       properties: ['openFile', 'multiSelections'],
       filters: [
@@ -96,7 +96,7 @@ export function useFileImport(): UseFileImportReturn {
 
     // Result could be a string (single file) or an object with filePaths
     if (result) {
-      const filePaths: string[] = typeof result === 'string' ? [result] : (result as any).filePaths || []
+      const filePaths: string[] = typeof result === 'string' ? [result] : (result as Record<string, string[]>).filePaths || []
       filePaths.forEach((filePath: string) => {
         const fileName = filePath.split('/').pop() || filePath
         const ext = fileName.split('.').pop()?.toLowerCase() || ''

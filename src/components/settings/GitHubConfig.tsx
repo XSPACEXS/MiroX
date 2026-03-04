@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Spinner } from '../ui/Spinner'
 import { Button } from '../ui/Button'
 import { Input } from '../ui/Input'
 import { useGitHub } from '../../hooks/useGitHub'
@@ -10,6 +9,7 @@ export function GitHubConfig() {
   const [maskedToken, setMaskedToken] = useState('')
 
   useEffect(() => {
+    if (typeof window === 'undefined' || !window.electronAPI) return
     window.electronAPI.github.getToken().then(res => {
       if (res && res.hasToken) {
         setMaskedToken(res.masked)
@@ -72,7 +72,7 @@ export function GitHubConfig() {
             <Button
               variant="ghost"
               size="md"
-              onClick={() => window.electronAPI.openExternal('https://github.com/settings/tokens/new?scopes=repo&description=MiroX')}
+              onClick={() => window.electronAPI?.openExternal('https://github.com/settings/tokens/new?scopes=repo&description=MiroX')}
             >
               Create Token on GitHub
             </Button>

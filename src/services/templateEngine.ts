@@ -165,7 +165,7 @@ function generateDocContent(
   return lines.join('\n')
 }
 
-function generateTableContent(section: TemplateSection, values: Record<string, string>): string {
+function generateTableContent(section: TemplateSection, _values: Record<string, string>): string {
   return `${section.icon} ${section.name}\n\nData table will be populated with your project information.`
 }
 

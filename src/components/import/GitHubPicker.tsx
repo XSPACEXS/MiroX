@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Spinner } from '@components/ui/Spinner'
 import { useGitHub } from '../../hooks/useGitHub'
-import type { GitHubRepo } from '../../types/github'
 import type { ParsedContent } from '../../types/import'
 
 const languageColors: Record<string, string> = {
@@ -79,7 +78,7 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
         animate={{ opacity: 1, y: 0 }}
         className="flex flex-col items-center justify-center min-h-[320px] gap-6 px-8"
       >
-        <div className="w-16 h-16 rounded-2xl bg-neutral-800 flex items-center justify-center">
+        <div className="w-16 h-16 rounded-2xl bg-black-700 flex items-center justify-center">
           <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
           </svg>
@@ -87,7 +86,7 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
 
         <div className="text-center">
           <h3 className="text-white font-semibold text-lg">Connect to GitHub</h3>
-          <p className="text-neutral-400 text-sm mt-1 max-w-sm">
+          <p className="text-gray-400 text-sm mt-1 max-w-sm">
             Enter a Personal Access Token to import repositories.
             Needs <span className="text-yellow-400">repo</span> scope for private repos.
           </p>
@@ -100,7 +99,7 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
             onChange={(e) => setTokenInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleConnect()}
             placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
-            className="w-full px-4 py-3 rounded-lg bg-neutral-900 border border-neutral-700 text-white text-sm font-mono placeholder:text-neutral-600 focus:border-yellow-400/50 focus:outline-none focus:ring-1 focus:ring-yellow-400/20 transition-colors"
+            className="w-full px-4 py-3 rounded-lg bg-black-800 border border-black-500 text-white text-sm font-mono placeholder:text-gray-600 focus:border-yellow-400/50 focus:outline-none focus:ring-1 focus:ring-yellow-400/20 transition-colors"
           />
           <button
             onClick={handleConnect}
@@ -120,7 +119,7 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
 
         <button
           onClick={() => window.electronAPI.openExternal('https://github.com/settings/tokens/new?scopes=repo&description=MiroX')}
-          className="text-xs text-neutral-500 hover:text-yellow-400 transition-colors"
+          className="text-xs text-gray-500 hover:text-yellow-400 transition-colors"
         >
           Create a token on GitHub
         </button>
@@ -132,14 +131,14 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
   return (
     <div className="space-y-4">
       {/* User header */}
-      <div className="flex items-center justify-between p-3 rounded-lg bg-neutral-900/60 border border-neutral-800">
+      <div className="flex items-center justify-between p-3 rounded-lg bg-black-800/60 border border-black-600">
         <div className="flex items-center gap-3">
           {user?.avatar_url && (
             <img src={user.avatar_url} alt="" className="w-8 h-8 rounded-full" />
           )}
           <div>
             <p className="text-sm text-white font-medium">{user?.name || user?.login || 'Connected'}</p>
-            <p className="text-xs text-neutral-500">{user?.login ? `@${user.login}` : 'GitHub'}</p>
+            <p className="text-xs text-gray-500">{user?.login ? `@${user.login}` : 'GitHub'}</p>
           </div>
           <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-green-400/10 text-green-400 border border-green-400/20">
             Connected
@@ -147,7 +146,7 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
         </div>
         <button
           onClick={disconnect}
-          className="text-xs text-neutral-500 hover:text-red-400 transition-colors"
+          className="text-xs text-gray-500 hover:text-red-400 transition-colors"
         >
           Disconnect
         </button>
@@ -155,7 +154,7 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
 
       {/* Search */}
       <div className="relative">
-        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
         </svg>
         <input
@@ -163,18 +162,18 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search repositories..."
-          className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-neutral-900 border border-neutral-700 text-white text-sm placeholder:text-neutral-600 focus:border-yellow-400/50 focus:outline-none focus:ring-1 focus:ring-yellow-400/20 transition-colors"
+          className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-black-800 border border-black-500 text-white text-sm placeholder:text-gray-600 focus:border-yellow-400/50 focus:outline-none focus:ring-1 focus:ring-yellow-400/20 transition-colors"
         />
       </div>
 
       {/* Repo list */}
-      <div className="max-h-[320px] overflow-y-auto space-y-2 pr-1 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral-700">
+      <div className="max-h-[320px] overflow-y-auto space-y-2 pr-1 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-black-600">
         {isLoadingRepos ? (
           <div className="flex items-center justify-center py-12">
             <Spinner size="md" />
           </div>
         ) : filteredRepos.length === 0 ? (
-          <div className="text-center py-12 text-neutral-500 text-sm">
+          <div className="text-center py-12 text-gray-500 text-sm">
             {search ? 'No repos match your search' : 'No repositories found'}
           </div>
         ) : (
@@ -189,7 +188,7 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
                 className={`w-full text-left p-3 rounded-lg border transition-all ${
                   selectedRepo?.id === repo.id
                     ? 'bg-yellow-400/5 border-yellow-400/30 ring-1 ring-yellow-400/10'
-                    : 'bg-neutral-900/40 border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900/60'
+                    : 'bg-black-800/40 border-black-600 hover:border-black-500 hover:bg-black-800/60'
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">
@@ -197,22 +196,22 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
                     <p className="text-sm font-medium text-white truncate flex items-center gap-1.5">
                       {repo.name}
                       {repo.private && (
-                        <svg className="w-3 h-3 text-neutral-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <svg className="w-3 h-3 text-gray-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                         </svg>
                       )}
                     </p>
                     {repo.description && (
-                      <p className="text-xs text-neutral-500 mt-0.5 line-clamp-1">{repo.description}</p>
+                      <p className="text-xs text-gray-500 mt-0.5 line-clamp-1">{repo.description}</p>
                     )}
                   </div>
-                  <span className="text-[10px] text-neutral-600 flex-shrink-0 whitespace-nowrap">
+                  <span className="text-[10px] text-gray-600 flex-shrink-0 whitespace-nowrap">
                     {formatDate(repo.updated_at)}
                   </span>
                 </div>
                 <div className="flex items-center gap-3 mt-2">
                   {repo.language && (
-                    <span className="flex items-center gap-1 text-[11px] text-neutral-400">
+                    <span className="flex items-center gap-1 text-[11px] text-gray-400">
                       <span
                         className="w-2 h-2 rounded-full"
                         style={{ backgroundColor: languageColors[repo.language] || '#888' }}
@@ -221,7 +220,7 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
                     </span>
                   )}
                   {repo.stargazers_count > 0 && (
-                    <span className="flex items-center gap-1 text-[11px] text-neutral-400">
+                    <span className="flex items-center gap-1 text-[11px] text-gray-400">
                       <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                       </svg>

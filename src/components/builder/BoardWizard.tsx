@@ -16,7 +16,7 @@ export function BoardWizard() {
   const [searchParams] = useSearchParams()
   const {
     currentStep, selectedTemplate, boardName, boardDescription,
-    fieldValues, creationProgress, creationSteps, isCreating, isComplete,
+    fieldValues, creationProgress, creationSteps, isComplete,
     boardUrl, error,
     setTemplate, setBoardName, setBoardDescription, setFieldValue,
     nextStep, prevStep, setCurrentStep, startCreation, reset,

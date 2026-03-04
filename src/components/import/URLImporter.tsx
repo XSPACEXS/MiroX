@@ -87,7 +87,7 @@ export default function URLImporter({ onAnalysisReady }: URLImporterProps) {
       {/* URL input */}
       <div className="flex gap-2">
         <div className="relative flex-1">
-          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m9.07-9.07l4.5-4.5a4.5 4.5 0 016.364 6.364l-1.757 1.757" />
           </svg>
           <input
@@ -96,7 +96,7 @@ export default function URLImporter({ onAnalysisReady }: URLImporterProps) {
             onChange={(e) => { setUrl(e.target.value); setError(null) }}
             onKeyDown={(e) => e.key === 'Enter' && handleFetch()}
             placeholder="https://..."
-            className="w-full pl-10 pr-4 py-3 rounded-lg bg-neutral-900 border border-neutral-700 text-white text-sm placeholder:text-neutral-600 focus:border-yellow-400/50 focus:outline-none focus:ring-1 focus:ring-yellow-400/20 transition-colors"
+            className="w-full pl-10 pr-4 py-3 rounded-lg bg-black-800 border border-black-600 text-white text-sm placeholder:text-gray-500 focus:border-yellow-400/50 focus:outline-none focus:ring-1 focus:ring-yellow-400/20 transition-colors"
           />
         </div>
         <button
@@ -139,14 +139,14 @@ export default function URLImporter({ onAnalysisReady }: URLImporterProps) {
           animate={{ opacity: 1 }}
           className="flex flex-col items-center justify-center min-h-[220px] gap-3 text-center"
         >
-          <div className="w-14 h-14 rounded-2xl bg-neutral-800 flex items-center justify-center">
-            <svg className="w-7 h-7 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <div className="w-14 h-14 rounded-2xl bg-black-700 flex items-center justify-center">
+            <svg className="w-7 h-7 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
             </svg>
           </div>
           <div>
-            <p className="text-neutral-400 text-sm">Enter a URL to fetch and analyze web content</p>
-            <p className="text-neutral-600 text-xs mt-1">Works with articles, docs, blog posts, and more</p>
+            <p className="text-gray-400 text-sm">Enter a URL to fetch and analyze web content</p>
+            <p className="text-gray-600 text-xs mt-1">Works with articles, docs, blog posts, and more</p>
           </div>
         </motion.div>
       )}
@@ -158,7 +158,7 @@ export default function URLImporter({ onAnalysisReady }: URLImporterProps) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="p-4 rounded-lg bg-neutral-900/60 border border-neutral-800 space-y-3"
+            className="p-4 rounded-lg bg-black-800/60 border border-black-600 space-y-3"
           >
             <div className="flex items-start gap-3">
               <div className="w-10 h-10 rounded-lg bg-green-400/10 flex items-center justify-center flex-shrink-0">
@@ -168,7 +168,7 @@ export default function URLImporter({ onAnalysisReady }: URLImporterProps) {
               </div>
               <div className="min-w-0">
                 <p className="text-sm font-medium text-white">{result.title}</p>
-                <p className="text-xs text-neutral-500 mt-1 line-clamp-2">{result.excerpt}</p>
+                <p className="text-xs text-gray-500 mt-1 line-clamp-2">{result.excerpt}</p>
               </div>
             </div>
 
@@ -176,7 +176,7 @@ export default function URLImporter({ onAnalysisReady }: URLImporterProps) {
               <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-yellow-400/10 text-yellow-400 border border-yellow-400/20">
                 {result.content.suggestedTemplate}
               </span>
-              <span className="text-[10px] text-neutral-600">
+              <span className="text-[10px] text-gray-600">
                 {Math.round(result.content.confidence * 100)}% match
               </span>
             </div>

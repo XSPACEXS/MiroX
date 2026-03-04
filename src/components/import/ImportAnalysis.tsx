@@ -31,7 +31,7 @@ const fileTypeBadges: Record<string, { label: string; color: string }> = {
   code: { label: 'Repository', color: 'bg-purple-400/10 text-purple-400 border-purple-400/20' },
   archive: { label: 'Archive', color: 'bg-orange-400/10 text-orange-400 border-orange-400/20' },
   image: { label: 'Image', color: 'bg-pink-400/10 text-pink-400 border-pink-400/20' },
-  other: { label: 'Content', color: 'bg-neutral-400/10 text-neutral-400 border-neutral-400/20' },
+  other: { label: 'Content', color: 'bg-black-400/10 text-gray-400 border-black-400/20' },
 }
 
 interface ImportAnalysisProps {
@@ -58,7 +58,7 @@ export default function ImportAnalysis({ content, onUseTemplate, onChooseDiffere
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: 'spring', stiffness: 250, damping: 25 }}
-      className="p-5 rounded-xl bg-neutral-900/80 border border-neutral-800 space-y-5"
+      className="p-5 rounded-xl bg-black-800/80 border border-black-600 space-y-5"
     >
       {/* Header */}
       <div className="flex items-center gap-2">
@@ -70,12 +70,12 @@ export default function ImportAnalysis({ content, onUseTemplate, onChooseDiffere
       <div className="flex items-center gap-4">
         {/* Content type badge */}
         <div className="flex-1">
-          <p className="text-xs text-neutral-500 mb-1.5">Detected Content</p>
+          <p className="text-xs text-gray-500 mb-1.5">Detected Content</p>
           <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border ${badge.color}`}>
             {badge.label}
           </span>
           {content.detectedLanguage && content.detectedLanguage !== 'Unknown' && (
-            <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-neutral-800 text-neutral-400 border border-neutral-700">
+            <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-black-700 text-gray-400 border border-black-500">
               {content.detectedLanguage}
             </span>
           )}
@@ -83,10 +83,10 @@ export default function ImportAnalysis({ content, onUseTemplate, onChooseDiffere
 
         {/* Confidence meter */}
         <div className="flex flex-col items-center">
-          <p className="text-xs text-neutral-500 mb-1.5">Confidence</p>
+          <p className="text-xs text-gray-500 mb-1.5">Confidence</p>
           <div className="relative w-16 h-16">
             <svg className="w-16 h-16 -rotate-90" viewBox="0 0 64 64">
-              <circle cx="32" cy="32" r={radius} fill="none" stroke="currentColor" strokeWidth="4" className="text-neutral-800" />
+              <circle cx="32" cy="32" r={radius} fill="none" stroke="currentColor" strokeWidth="4" className="text-black-700" />
               <motion.circle
                 cx="32" cy="32" r={radius} fill="none" strokeWidth="4"
                 strokeLinecap="round"
@@ -107,14 +107,14 @@ export default function ImportAnalysis({ content, onUseTemplate, onChooseDiffere
 
       {/* Suggested template card */}
       <div className="p-4 rounded-lg bg-yellow-400/5 border border-yellow-400/15">
-        <p className="text-xs text-neutral-500 mb-2">Suggested Template</p>
+        <p className="text-xs text-gray-500 mb-2">Suggested Template</p>
         <div className="flex items-center gap-3">
           <span className="text-2xl">{template.emoji}</span>
           <div>
             <p className="text-sm font-medium text-white capitalize">
               {content.suggestedTemplate.replace(/-/g, ' ')}
             </p>
-            <p className="text-xs text-neutral-400 mt-0.5">{template.description}</p>
+            <p className="text-xs text-gray-400 mt-0.5">{template.description}</p>
           </div>
         </div>
       </div>
@@ -125,7 +125,7 @@ export default function ImportAnalysis({ content, onUseTemplate, onChooseDiffere
           {content.keyPhrases.slice(0, 8).map((phrase, i) => (
             <span
               key={i}
-              className="px-2 py-0.5 rounded text-[10px] font-medium bg-neutral-800 text-neutral-400 border border-neutral-700"
+              className="px-2 py-0.5 rounded text-[10px] font-medium bg-black-700 text-gray-400 border border-black-500"
             >
               {phrase}
             </span>
@@ -146,7 +146,7 @@ export default function ImportAnalysis({ content, onUseTemplate, onChooseDiffere
         </button>
         <button
           onClick={onChooseDifferent}
-          className="px-4 py-2.5 rounded-lg text-neutral-400 text-sm font-medium hover:text-white hover:bg-neutral-800 transition-colors"
+          className="px-4 py-2.5 rounded-lg text-gray-400 text-sm font-medium hover:text-white hover:bg-black-700 transition-colors"
         >
           Choose Different
         </button>

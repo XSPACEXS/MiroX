@@ -59,7 +59,7 @@ export default function ImportHub() {
   return (
     <div className="space-y-6">
       {/* Tab bar */}
-      <div className="flex gap-1 p-1 rounded-xl bg-neutral-900/60 border border-neutral-800">
+      <div className="flex gap-1 p-1 rounded-xl bg-black-800/60 border border-black-600">
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -67,7 +67,7 @@ export default function ImportHub() {
             className={`relative flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-medium transition-colors ${
               activeTab === tab.id
                 ? 'text-black'
-                : 'text-neutral-400 hover:text-white'
+                : 'text-gray-400 hover:text-white'
             }`}
           >
             {activeTab === tab.id && (

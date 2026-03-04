@@ -47,7 +47,7 @@ export function TemplateGallery({ compact = false, onSelect }: TemplateGalleryPr
         >
           {templates.map(template => (
             <motion.div key={template.id} variants={listItemVariants}>
-              <TemplateCard template={template} />
+              <TemplateCard template={template} onSelect={onSelect} />
             </motion.div>
           ))}
         </motion.div>

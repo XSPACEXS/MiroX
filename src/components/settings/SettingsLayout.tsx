@@ -1,5 +1,4 @@
-import { useState, type ReactNode } from 'react'
-import { motion } from 'framer-motion'
+import { type ReactNode } from 'react'
 import { Plug, Github, Palette, Info } from 'lucide-react'
 
 interface Tab {

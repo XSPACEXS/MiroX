@@ -7,6 +7,7 @@ import type { TemplateDefinition } from '../../templates/types'
 
 interface TemplateCardProps {
   template: TemplateDefinition
+  onSelect?: (templateId: string) => void
 }
 
 const complexityColor: Record<string, 'green' | 'yellow' | 'orange'> = {
@@ -15,15 +16,23 @@ const complexityColor: Record<string, 'green' | 'yellow' | 'orange'> = {
   complex: 'orange',
 }
 
-export function TemplateCard({ template }: TemplateCardProps) {
+export function TemplateCard({ template, onSelect }: TemplateCardProps) {
   const navigate = useNavigate()
   const setPreviewTemplate = useTemplateStore(s => s.setPreviewTemplate)
+
+  const handleClick = () => {
+    if (onSelect) {
+      onSelect(template.id)
+    } else {
+      setPreviewTemplate(template)
+    }
+  }
 
   return (
     <Card
       hoverable
       className="p-5 group"
-      onClick={() => setPreviewTemplate(template)}
+      onClick={handleClick}
     >
       {/* Header */}
       <div className="flex items-start justify-between">

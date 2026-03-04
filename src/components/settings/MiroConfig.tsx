@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
 import { Spinner } from '../ui/Spinner'
 import { Button } from '../ui/Button'
 import { Input } from '../ui/Input'
 import { useMiro } from '../../hooks/useMiro'
 
 export function MiroConfig() {
-  const { isConnected, isConnecting, connectionStatus, setToken, testConnection } = useMiro()
+  const { isConnected, isConnecting, setToken, testConnection } = useMiro()
   const [tokenInput, setTokenInput] = useState('')
   const [maskedToken, setMaskedToken] = useState('')
 

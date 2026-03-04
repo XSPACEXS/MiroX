@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Spinner } from '@components/ui/Spinner'
 import { useFileImport } from '../../hooks/useFileImport'
-import type { ImportedFile, ParsedContent } from '../../types/import'
+import type { ImportedFile } from '../../types/import'
 
 const fileTypeIcons: Record<string, string> = {
   'application/pdf': 'PDF',
@@ -14,25 +14,16 @@ const fileTypeIcons: Record<string, string> = {
   'application/zip': 'ZIP',
 }
 
-const statusColors: Record<ImportedFile['status'], string> = {
-  uploading: 'text-yellow-400',
-  parsing: 'text-yellow-400',
-  ready: 'text-green-400',
-  error: 'text-red-400',
-}
-
 interface FileDropZoneProps {
   onFileReady?: (file: ImportedFile) => void
 }
 
-export default function FileDropZone({ onFileReady }: FileDropZoneProps) {
+export default function FileDropZone({ onFileReady: _onFileReady }: FileDropZoneProps) {
   const {
-    files, isDragging, isParsingFile,
+    files, isDragging,
     onDragOver, onDragLeave, onDrop,
     openFilePicker, removeFile, clearFiles,
   } = useFileImport()
-
-  const readyFile = files.find(f => f.status === 'ready' && f.content)
 
   return (
     <div className="space-y-4">
@@ -72,7 +63,7 @@ export default function FileDropZone({ onFileReady }: FileDropZoneProps) {
             </div>
             <div>
               <p className="text-white font-medium text-lg">Drop files here or click to browse</p>
-              <p className="text-neutral-500 text-sm mt-1">
+              <p className="text-gray-500 text-sm mt-1">
                 PDF, DOCX, TXT, MD, CSV, XLSX, JSON, ZIP
               </p>
             </div>
@@ -109,10 +100,10 @@ export default function FileDropZone({ onFileReady }: FileDropZoneProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, x: -20, scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 300, damping: 25, delay: i * 0.05 }}
-            className="flex items-center gap-3 p-3 rounded-lg bg-neutral-900/60 border border-neutral-800"
+            className="flex items-center gap-3 p-3 rounded-lg bg-black-800/60 border border-black-600"
           >
             {/* File type badge */}
-            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center">
+            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-black-700 flex items-center justify-center">
               <span className="text-[10px] font-bold text-yellow-400 tracking-wider">
                 {fileTypeIcons[file.type] || file.name.split('.').pop()?.toUpperCase() || '?'}
               </span>
@@ -152,7 +143,7 @@ export default function FileDropZone({ onFileReady }: FileDropZoneProps) {
             {/* Remove button */}
             <button
               onClick={(e) => { e.stopPropagation(); removeFile(file.id) }}
-              className="flex-shrink-0 p-1.5 rounded-md hover:bg-neutral-800 text-neutral-500 hover:text-neutral-300 transition-colors"
+              className="flex-shrink-0 p-1.5 rounded-md hover:bg-black-700 text-gray-500 hover:text-gray-300 transition-colors"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -171,13 +162,13 @@ export default function FileDropZone({ onFileReady }: FileDropZoneProps) {
         >
           <button
             onClick={openFilePicker}
-            className="px-4 py-2 text-sm font-medium text-white bg-neutral-800 hover:bg-neutral-700 rounded-lg border border-neutral-700 transition-colors"
+            className="px-4 py-2 text-sm font-medium text-white bg-black-700 hover:bg-black-600 rounded-lg border border-black-500 transition-colors"
           >
             Add More Files
           </button>
           <button
             onClick={clearFiles}
-            className="px-4 py-2 text-sm font-medium text-neutral-400 hover:text-white transition-colors"
+            className="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition-colors"
           >
             Clear All
           </button>

@@ -9,7 +9,7 @@ export default function Builder() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="h-full"
+      className="h-full overflow-y-auto p-6"
     >
       <BoardWizard />
     </motion.div>
