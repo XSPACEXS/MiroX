@@ -1,0 +1,50 @@
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+import { lazy, Suspense, useEffect } from 'react'
+import AppShell from '@components/layout/AppShell'
+import { Spinner } from '@components/ui/Spinner'
+
+const Home = lazy(() => import('@pages/Home'))
+const Templates = lazy(() => import('@pages/Templates'))
+const Import = lazy(() => import('@pages/Import'))
+const Builder = lazy(() => import('@pages/Builder'))
+const Settings = lazy(() => import('@pages/Settings'))
+
+export default function App() {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  // Listen for navigation events from Electron main process (menu commands)
+  useEffect(() => {
+    const api = window.electronAPI
+    if (!api?.onNavigate) return
+
+    const cleanup = api.onNavigate((path: string) => {
+      navigate(path)
+    })
+
+    return cleanup
+  }, [navigate])
+
+  return (
+    <AppShell>
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center h-full">
+            <Spinner size="lg" />
+          </div>
+        }
+      >
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home />} />
+            <Route path="/templates" element={<Templates />} />
+            <Route path="/import" element={<Import />} />
+            <Route path="/builder" element={<Builder />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </AnimatePresence>
+      </Suspense>
+    </AppShell>
+  )
+}
