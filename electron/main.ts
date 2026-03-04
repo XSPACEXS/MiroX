@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu, shell } from 'electron'
+import { app, BrowserWindow, Menu, shell, session } from 'electron'
 import path from 'path'
 import { store } from './config'
 import { registerSystemHandlers } from './ipc/handlers'
@@ -227,8 +227,25 @@ function createMenu(): void {
   Menu.setApplicationMenu(menu)
 }
 
+// Set CSP headers for production (dev mode needs relaxed CSP for Vite HMR)
+function setupCSP(): void {
+  if (!isDev) {
+    session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+      callback({
+        responseHeaders: {
+          ...details.responseHeaders,
+          'Content-Security-Policy': [
+            "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.miro.com https://api.github.com;"
+          ]
+        }
+      })
+    })
+  }
+}
+
 // App lifecycle
 app.whenReady().then(() => {
+  setupCSP()
   createWindow()
   createMenu()
 
