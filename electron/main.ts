@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu, shell, session } from 'electron'
+import { app, BrowserWindow, Menu, session, shell } from 'electron'
 import path from 'path'
 import { store } from './config'
 import { registerSystemHandlers } from './ipc/handlers'
@@ -7,7 +7,7 @@ import { registerGithubHandlers } from './ipc/githubHandlers'
 
 let mainWindow: BrowserWindow | null = null
 
-const isDev = process.env.NODE_ENV !== 'production' || !app.isPackaged
+const isDev = !app.isPackaged
 
 function createWindow(): void {
   const savedBounds = store.get('windowBounds')
