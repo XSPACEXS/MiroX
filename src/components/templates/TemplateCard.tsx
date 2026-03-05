@@ -65,6 +65,7 @@ export function TemplateCard({ template, onSelect }: TemplateCardProps) {
             e.stopPropagation()
             navigate(`/builder?template=${template.id}`)
           }}
+          aria-label={`Use ${template.name} template`}
           className="flex items-center gap-1 text-sm text-yellow-400 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:underline"
         >
           Use Template <ArrowRight size={14} />

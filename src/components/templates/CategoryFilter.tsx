@@ -28,6 +28,7 @@ export function CategoryFilter() {
           <button
             key={cat.id}
             onClick={() => setCategory(cat.id)}
+            aria-pressed={isActive}
             className={`
               flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-150
               ${isActive

@@ -75,6 +75,7 @@ export function ContentEditor({ fields, values, onChange, errors = {}, className
                     <button
                       key={opt}
                       type="button"
+                      aria-pressed={isSelected}
                       onClick={() => {
                         const next = isSelected
                           ? selected.filter(s => s !== opt)

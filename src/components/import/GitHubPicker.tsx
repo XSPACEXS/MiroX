@@ -99,6 +99,7 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
             onChange={(e) => setTokenInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleConnect()}
             placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
+            aria-label="GitHub personal access token"
             className="w-full px-4 py-3 rounded-lg bg-black-800 border border-black-500 text-white text-sm font-mono placeholder:text-gray-600 focus:border-yellow-400/50 focus:outline-none focus:ring-1 focus:ring-yellow-400/20 transition-colors"
           />
           <button
@@ -162,6 +163,7 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search repositories..."
+          aria-label="Search repositories"
           className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-black-800 border border-black-500 text-white text-sm placeholder:text-gray-600 focus:border-yellow-400/50 focus:outline-none focus:ring-1 focus:ring-yellow-400/20 transition-colors"
         />
       </div>

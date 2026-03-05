@@ -51,7 +51,7 @@ export function Sidebar({ collapsed }: SidebarProps) {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 py-3 px-2 flex flex-col gap-1">
+      <nav aria-label="Main navigation" className="flex-1 py-3 px-2 flex flex-col gap-1">
         {navItems.map(item => {
           const isActive = location.pathname === item.path
           const Icon = item.icon
@@ -59,6 +59,7 @@ export function Sidebar({ collapsed }: SidebarProps) {
             <button
               key={item.path}
               onClick={() => navigate(item.path)}
+              aria-current={isActive ? 'page' : undefined}
               className={`
                 w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150
                 ${isActive
@@ -96,6 +97,7 @@ export function Sidebar({ collapsed }: SidebarProps) {
         {/* Collapse toggle */}
         <button
           onClick={toggleSidebar}
+          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           className="flex items-center justify-center w-full p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
         >
           {collapsed ? <PanelLeft size={18} /> : <PanelLeftClose size={18} />}

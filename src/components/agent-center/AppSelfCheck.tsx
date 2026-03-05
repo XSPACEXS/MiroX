@@ -145,6 +145,7 @@ export function AppSelfCheck(): JSX.Element {
             <div className="mt-3 border-t border-black-600 pt-3">
               <button
                 onClick={() => setErrorsExpanded(!errorsExpanded)}
+                aria-expanded={errorsExpanded}
                 className="flex items-center gap-2 w-full text-left"
               >
                 <ChevronDown

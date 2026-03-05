@@ -24,11 +24,12 @@ export function SettingsLayout({ activeTab, onTabChange, children }: SettingsLay
   return (
     <div className="flex gap-8 h-full">
       {/* Sidebar */}
-      <nav className="w-48 flex-shrink-0 space-y-1">
+      <nav aria-label="Settings navigation" className="w-48 flex-shrink-0 space-y-1">
         {tabs.map(tab => (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
+            aria-current={activeTab === tab.id ? 'page' : undefined}
             className={`
               w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-150
               ${activeTab === tab.id

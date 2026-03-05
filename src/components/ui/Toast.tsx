@@ -42,7 +42,7 @@ function ToastItem({ toast }: { toast: ToastType }) {
         <p className="text-sm font-medium text-white">{toast.title}</p>
         {toast.message && <p className="text-xs text-gray-400 mt-0.5">{toast.message}</p>}
       </div>
-      <button onClick={() => removeToast(toast.id)} className="p-0.5 text-gray-500 hover:text-white transition-colors">
+      <button onClick={() => removeToast(toast.id)} aria-label="Dismiss notification" className="p-0.5 text-gray-500 hover:text-white transition-colors">
         <X size={14} />
       </button>
     </motion.div>
@@ -53,7 +53,7 @@ export function ToastContainer() {
   const toasts = useUIStore(s => s.toasts)
 
   return (
-    <div className="fixed top-4 right-4 z-[100] flex flex-col gap-2 w-80 max-w-[calc(100vw-2rem)] pointer-events-none">
+    <div role="region" aria-live="polite" aria-label="Notifications" className="fixed top-4 right-4 z-[100] flex flex-col gap-2 w-80 max-w-[calc(100vw-2rem)] pointer-events-none">
       <AnimatePresence mode="popLayout">
         {toasts.map(toast => (
           <div key={toast.id} className="pointer-events-auto">

@@ -8,7 +8,7 @@ interface LinearProgressProps {
 
 export function LinearProgress({ value, className = '', size = 'md' }: LinearProgressProps) {
   return (
-    <div className={`w-full bg-black-700 rounded-full overflow-hidden ${size === 'sm' ? 'h-1' : 'h-2'} ${className}`}>
+    <div role="progressbar" aria-valuenow={Math.round(Math.min(value, 100))} aria-valuemin={0} aria-valuemax={100} className={`w-full bg-black-700 rounded-full overflow-hidden ${size === 'sm' ? 'h-1' : 'h-2'} ${className}`}>
       <motion.div
         className="h-full bg-yellow-400 rounded-full origin-left"
         initial={{ scaleX: 0 }}
@@ -32,7 +32,7 @@ export function CircularProgress({ value, size = 40, strokeWidth = 3, className 
   const offset = circumference - (Math.min(value, 100) / 100) * circumference
 
   return (
-    <svg width={size} height={size} className={className}>
+    <svg role="progressbar" aria-valuenow={Math.round(Math.min(value, 100))} aria-valuemin={0} aria-valuemax={100} width={size} height={size} className={className}>
       <circle
         cx={size / 2}
         cy={size / 2}

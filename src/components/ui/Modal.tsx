@@ -22,6 +22,8 @@ const sizeStyles: Record<ModalSize, string> = {
 }
 
 export function Modal({ isOpen, onClose, title, size = 'md', children }: ModalProps) {
+  const titleId = title ? 'modal-title-' + title.replace(/\s+/g, '-').toLowerCase() : undefined
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     document.addEventListener('keydown', handler)
@@ -38,13 +40,16 @@ export function Modal({ isOpen, onClose, title, size = 'md', children }: ModalPr
           onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
         >
           <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={titleId}
             variants={modalPanelVariants}
             className={`w-full ${sizeStyles[size]} bg-black-800 border border-black-600 rounded-2xl shadow-2xl overflow-hidden`}
           >
             {title && (
               <div className="flex items-center justify-between px-6 py-4 border-b border-black-600">
-                <h2 className="font-display font-semibold text-lg text-white">{title}</h2>
-                <button onClick={onClose} className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
+                <h2 id={titleId} className="font-display font-semibold text-lg text-white">{title}</h2>
+                <button onClick={onClose} aria-label="Close dialog" className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
                   <X size={16} />
                 </button>
               </div>

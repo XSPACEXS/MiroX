@@ -107,6 +107,7 @@ export default function URLImporter({ onAnalysisReady }: URLImporterProps) {
             onChange={(e) => { setUrl(e.target.value); setError(null) }}
             onKeyDown={(e) => e.key === 'Enter' && handleFetch()}
             placeholder="https://..."
+            aria-label="URL to fetch and analyze"
             className="w-full pl-10 pr-4 py-3 rounded-lg bg-black-800 border border-black-600 text-white text-sm placeholder:text-gray-500 focus:border-yellow-400/50 focus:outline-none focus:ring-1 focus:ring-yellow-400/20 transition-colors"
           />
         </div>

@@ -29,12 +29,14 @@ export function TopBar() {
       <div className="no-drag flex items-center gap-1">
         <button
           onClick={toggleSearch}
+          aria-label="Search"
           className="p-1.5 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-colors"
         >
           <Search size={14} />
         </button>
         <button
           onClick={() => navigate('/settings')}
+          aria-label="Settings"
           className="p-1.5 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-colors"
         >
           <Settings2 size={14} />

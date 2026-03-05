@@ -106,6 +106,8 @@ export function LiveLogs(): JSX.Element {
         <div
           ref={containerRef}
           onScroll={handleScroll}
+          role="log"
+          aria-label="Agent output logs"
           className="h-80 overflow-y-auto p-4 font-mono text-xs leading-relaxed"
         >
           {allLogs.length === 0 ? (

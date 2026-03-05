@@ -33,6 +33,7 @@ export function AppearanceConfig() {
             variant={theme === 'dark' ? 'secondary' : 'ghost'}
             size="sm"
             onClick={() => setTheme('dark')}
+            aria-pressed={theme === 'dark'}
             className={`flex-1 p-4 flex-col items-stretch h-auto ${
               theme === 'dark' ? 'border-yellow-400' : ''
             }`}
@@ -45,6 +46,7 @@ export function AppearanceConfig() {
             variant={theme === 'light' ? 'secondary' : 'ghost'}
             size="sm"
             onClick={() => setTheme('light')}
+            aria-pressed={theme === 'light'}
             className={`flex-1 p-4 flex-col items-stretch h-auto ${
               theme === 'light' ? 'border-yellow-400' : ''
             }`}
@@ -64,6 +66,8 @@ export function AppearanceConfig() {
             <button
               key={color.value}
               onClick={() => setAccentColor(color.value)}
+              aria-label={`${color.label} accent color`}
+              aria-pressed={accentColor === color.value}
               className={`w-10 h-10 rounded-xl border-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 focus-visible:ring-offset-1 focus-visible:ring-offset-black-900 ${
                 accentColor === color.value
                   ? 'border-white scale-110'

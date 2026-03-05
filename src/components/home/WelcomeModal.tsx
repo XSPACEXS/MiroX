@@ -99,6 +99,7 @@ function StepConnect({ onNext }: { onNext: () => void }) {
           value={token}
           onChange={(e) => setToken(e.target.value)}
           placeholder="Paste your Miro API token..."
+          aria-label="Miro API token"
           className="w-full px-4 py-3 bg-black-800 border border-black-600 rounded-xl text-white placeholder-black-400 focus:outline-none focus:border-yellow-400 transition-colors"
         />
         <div className="flex gap-3">
@@ -203,6 +204,9 @@ export function WelcomeModal() {
         className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
       >
         <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Welcome to MiroX"
           variants={modalPanelVariants}
           initial="initial"
           animate="animate"

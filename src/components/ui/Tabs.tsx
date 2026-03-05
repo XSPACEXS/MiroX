@@ -15,10 +15,12 @@ interface TabsProps {
 
 export function Tabs({ tabs, activeTab, onChange, className = '' }: TabsProps) {
   return (
-    <div className={`flex gap-1 ${className}`}>
+    <div role="tablist" className={`flex gap-1 ${className}`}>
       {tabs.map(tab => (
         <button
           key={tab.id}
+          role="tab"
+          aria-selected={activeTab === tab.id}
           onClick={() => onChange(tab.id)}
           className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 focus-visible:ring-offset-1 focus-visible:ring-offset-black-900 ${
             activeTab === tab.id ? 'text-yellow-400' : 'text-gray-400 hover:text-white'
@@ -50,10 +52,12 @@ interface VerticalTabsProps {
 
 export function VerticalTabs({ tabs, activeTab, onChange, className = '' }: VerticalTabsProps) {
   return (
-    <div className={`flex flex-col gap-1 ${className}`}>
+    <div role="tablist" aria-orientation="vertical" className={`flex flex-col gap-1 ${className}`}>
       {tabs.map(tab => (
         <button
           key={tab.id}
+          role="tab"
+          aria-selected={activeTab === tab.id}
           onClick={() => onChange(tab.id)}
           className={`relative flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-xl transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 focus-visible:ring-offset-1 focus-visible:ring-offset-black-900 ${
             activeTab === tab.id ? 'text-yellow-400' : 'text-gray-400 hover:text-white'

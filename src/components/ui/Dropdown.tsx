@@ -36,6 +36,8 @@ export function Dropdown({ options, value, onChange, placeholder = 'Select...', 
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
+          aria-haspopup="listbox"
+          aria-expanded={isOpen}
           className={`
             w-full flex items-center justify-between bg-black-700 border rounded-xl text-sm
             px-4 py-2.5 transition-all duration-150
@@ -48,11 +50,13 @@ export function Dropdown({ options, value, onChange, placeholder = 'Select...', 
           <ChevronDown size={16} className={`transition-transform duration-150 ${isOpen ? 'rotate-180' : ''}`} />
         </button>
         {isOpen && (
-          <div className="absolute z-50 w-full mt-1 bg-black-700 border border-black-500 rounded-xl shadow-xl overflow-hidden">
+          <div role="listbox" className="absolute z-50 w-full mt-1 bg-black-700 border border-black-500 rounded-xl shadow-xl overflow-hidden">
             {options.map(option => (
               <button
                 key={option.value}
                 type="button"
+                role="option"
+                aria-selected={option.value === value}
                 onClick={() => { onChange(option.value); setIsOpen(false) }}
                 className={`
                   w-full text-left px-4 py-2.5 text-sm transition-colors
