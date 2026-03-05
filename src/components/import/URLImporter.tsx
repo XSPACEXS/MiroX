@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Spinner } from '@components/ui/Spinner'
 import type { ParsedContent } from '../../types/import'
-import { suggestTemplate } from '../../services/fileParser'
+import { fetchAndParseUrl } from '../../services/urlParser'
 
 interface URLImporterProps {
   onAnalysisReady?: (analysis: ParsedContent) => void
@@ -34,58 +34,9 @@ export default function URLImporter({ onAnalysisReady }: URLImporterProps) {
     setResult(null)
 
     try {
-      const res = await window.electronAPI.files.fetchUrl(url.trim())
-      if (!res.ok || !res.text) {
-        setError(res.error || 'Failed to fetch URL')
-        return
-      }
-
-      const text = res.text
-      // Try DOMParser first for robust HTML parsing
-      let title: string
-      let headings: string[]
-      try {
-        const parser = new DOMParser()
-        const doc = parser.parseFromString(text, 'text/html')
-        title = doc.title || new URL(url).hostname
-        headings = Array.from(doc.querySelectorAll('h1, h2, h3'))
-          .map(h => h.textContent?.trim() || '')
-          .filter(Boolean)
-          .slice(0, 10)
-      } catch {
-        // Fallback to regex for non-browser environments
-        const titleMatch = text.match(/<title[^>]*>(.*?)<\/title>/i)
-        title = titleMatch?.[1]?.trim() || new URL(url).hostname
-        headings = (text.match(/<h[1-3][^>]*>(.*?)<\/h[1-3]>/gi) || [])
-          .map(h => h.replace(/<[^>]+>/g, '').trim())
-          .filter(Boolean)
-          .slice(0, 10)
-      }
-
-      // Strip HTML for plain text excerpt
-      const plainText = text
-        .replace(/<script[\s\S]*?<\/script>/gi, '')
-        .replace(/<style[\s\S]*?<\/style>/gi, '')
-        .replace(/<[^>]+>/g, ' ')
-        .replace(/\s+/g, ' ')
-        .trim()
-
-      const excerpt = plainText.slice(0, 300) + (plainText.length > 300 ? '...' : '')
-
-      const content: ParsedContent = {
-        rawText: plainText.slice(0, 5000),
-        title,
-        headings,
-        keyPhrases: [],
-        summary: excerpt.slice(0, 200),
-        fileType: 'document',
-        suggestedTemplate: 'brainstorm-session',
-        confidence: 0.6,
-      }
-
-      content.suggestedTemplate = suggestTemplate(content)
-      setResult({ title, excerpt, content })
-      onAnalysisReady?.(content)
+      const parsed = await fetchAndParseUrl(url.trim())
+      setResult(parsed)
+      onAnalysisReady?.(parsed.content)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch URL')
     } finally {
@@ -185,10 +136,10 @@ export default function URLImporter({ onAnalysisReady }: URLImporterProps) {
             </div>
 
             <div className="flex items-center gap-2 pt-1">
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-yellow-400/10 text-yellow-400 border border-yellow-400/20">
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-2xs font-medium bg-yellow-400/10 text-yellow-400 border border-yellow-400/20">
                 {result.content.suggestedTemplate}
               </span>
-              <span className="text-[10px] text-gray-600">
+              <span className="text-2xs text-gray-600">
                 {Math.round(result.content.confidence * 100)}% match
               </span>
             </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Button } from '../ui/Button'
 
 export function AboutPanel() {
@@ -9,10 +9,14 @@ export function AboutPanel() {
     appVersion: string
     nodeVersion: string
   } | null>(null)
+  const mountedRef = useRef(true)
+  useEffect(() => () => { mountedRef.current = false }, [])
 
   useEffect(() => {
     if (typeof window === 'undefined' || !window.electronAPI) return
-    window.electronAPI.getSystemInfo().then(setSystemInfo).catch(() => {})
+    window.electronAPI.getSystemInfo().then(info => {
+      if (mountedRef.current) setSystemInfo(info)
+    }).catch(() => {})
   }, [])
 
   return (
