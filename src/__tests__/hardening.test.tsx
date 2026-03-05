@@ -558,7 +558,7 @@ describe('Navigation flows', () => {
   it('Home page renders hero section', () => {
     renderWithRouter(<Home />)
     expect(screen.getByText('Enterprise Board Builder')).toBeInTheDocument()
-    expect(screen.getByText('v1.0.0')).toBeInTheDocument()
+    expect(screen.getByText(`v${__APP_VERSION__}`)).toBeInTheDocument()
   })
 
   it('Templates page renders search and gallery', () => {

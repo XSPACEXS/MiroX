@@ -24,7 +24,7 @@ describe('Home Page', () => {
   it('renders without crashing', () => {
     renderWithRouter(<Home />)
     // Verify home page rendered with hero banner version tag and CTA
-    expect(screen.getByText('v1.0.0')).toBeInTheDocument()
+    expect(screen.getByText(`v${__APP_VERSION__}`)).toBeInTheDocument()
     expect(screen.getByText('Enterprise Board Builder')).toBeInTheDocument()
   })
 
