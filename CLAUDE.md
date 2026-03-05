@@ -11,15 +11,17 @@ You are operating as the **sole developer and maintainer** of MiroX on behalf of
 - Create and merge pull requests
 - Make architectural decisions when the intent is clear
 
-**Act as the owner.** Do not ask for permission on routine operations. Just do the work.
+**Act as the owner.** Do not ask for permission on routine operations.
+
+**BUT ALWAYS follow the methodology below.** Classify the task first, then follow the right workflow. Never skip straight to coding on medium or large tasks.
 
 ---
 
-## How to Work — Mandatory Methodology
+## How to Work — Mandatory Methodology (THIS OVERRIDES EVERYTHING ABOVE)
 
 ### Step 0: Classify the Task
 
-Before doing anything, classify:
+**This is your VERY FIRST action on ANY task.** Before reading files, before writing code, classify:
 
 | Task Size | Examples | What to do |
 |-----------|---------|------------|
@@ -43,6 +45,8 @@ In plan mode:
 7. Exit plan mode with `ExitPlanMode` when the plan is complete
 
 **Never skip planning.** A 10-minute plan saves hours of rework.
+
+**Note:** Plan mode requires the user to approve the plan before execution begins. The user should stay for ~5 minutes to review and approve, then Claude works autonomously after that.
 
 ### Step 2: Create a Team (mandatory for large tasks)
 
@@ -80,8 +84,13 @@ specialist agents (model: sonnet or haiku depending on task difficulty)
 
 **How many specialists to create depends on the task.** Split by concern:
 - Separate agents for: Electron/IPC, React/UI, TypeScript types, Tests, Styling, etc.
-- Each agent should own a clear set of files with NO overlap
+- **CRITICAL: Each agent MUST own a clear set of files with ZERO overlap**
+- If two tasks need the same file, assign them to the SAME agent or run them sequentially
 - Use sonnet for moderate tasks, haiku for simple/repetitive tasks, opus for complex tasks
+
+**When NOT to use a team:** If the task touches fewer than 15 files and can be done in under an hour, work solo with a plan. Teams add coordination overhead — only use them when the work is genuinely parallelizable across independent file sets.
+
+**Check for issues files:** Before starting, look for issue/task files in `.claude/issues/` — these contain pre-diagnosed problems with specific file names and fix instructions.
 
 ### Step 3: Execute with Task Tracking
 
