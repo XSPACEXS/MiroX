@@ -8,6 +8,7 @@ const pageTitles: Record<string, string> = {
   '/import': 'Import',
   '/builder': 'Board Builder',
   '/settings': 'Settings',
+  '/agent-center': 'Agent Command Center',
 }
 
 export function TopBar() {

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Spinner } from '@components/ui/Spinner'
 import { useFileImport } from '../../hooks/useFileImport'
@@ -18,12 +19,24 @@ interface FileDropZoneProps {
   onFileReady?: (file: ImportedFile) => void
 }
 
-export default function FileDropZone({ onFileReady: _onFileReady }: FileDropZoneProps) {
+export default function FileDropZone({ onFileReady }: FileDropZoneProps) {
   const {
     files, isDragging,
     onDragOver, onDragLeave, onDrop,
     openFilePicker, removeFile, clearFiles,
   } = useFileImport()
+
+  // Track which files have been reported as ready
+  const readyReported = useRef<Set<string>>(new Set())
+
+  useEffect(() => {
+    files.forEach(file => {
+      if (file.status === 'ready' && file.content && !readyReported.current.has(file.id)) {
+        readyReported.current.add(file.id)
+        onFileReady?.(file)
+      }
+    })
+  }, [files, onFileReady])
 
   return (
     <div className="space-y-4">

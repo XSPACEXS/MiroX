@@ -92,8 +92,11 @@ export function BoardWizard() {
             />
 
             {error && (
-              <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
-                {error}
+              <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm flex items-center justify-between gap-3">
+                <span>{error}</span>
+                <Button variant="ghost" size="sm" onClick={reset}>
+                  Try Again
+                </Button>
               </div>
             )}
 

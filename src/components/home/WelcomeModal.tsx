@@ -52,13 +52,17 @@ function StepConnect({ onNext }: { onNext: () => void }) {
   const testConnection = useCallback(async () => {
     if (!token.trim()) return
     setStatus('testing')
-    // Simulate connection test
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    if (token.trim().length > 10) {
-      setStatus('success')
-      setMiroConnected(true, 'MiroX User')
-      setTimeout(onNext, 800)
-    } else {
+    try {
+      await window.electronAPI.miro.setToken(token.trim())
+      const result = await window.electronAPI.miro.testConnection()
+      if (result.ok) {
+        setStatus('success')
+        setMiroConnected(true, 'MiroX User')
+        setTimeout(onNext, 800)
+      } else {
+        setStatus('error')
+      }
+    } catch {
       setStatus('error')
     }
   }, [token, setMiroConnected, onNext])

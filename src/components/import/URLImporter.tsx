@@ -41,15 +41,26 @@ export default function URLImporter({ onAnalysisReady }: URLImporterProps) {
       }
 
       const text = res.text
-      // Extract title from HTML
-      const titleMatch = text.match(/<title[^>]*>(.*?)<\/title>/i)
-      const title = titleMatch?.[1]?.trim() || new URL(url).hostname
-
-      // Extract headings
-      const headings = (text.match(/<h[1-3][^>]*>(.*?)<\/h[1-3]>/gi) || [])
-        .map(h => h.replace(/<[^>]+>/g, '').trim())
-        .filter(Boolean)
-        .slice(0, 10)
+      // Try DOMParser first for robust HTML parsing
+      let title: string
+      let headings: string[]
+      try {
+        const parser = new DOMParser()
+        const doc = parser.parseFromString(text, 'text/html')
+        title = doc.title || new URL(url).hostname
+        headings = Array.from(doc.querySelectorAll('h1, h2, h3'))
+          .map(h => h.textContent?.trim() || '')
+          .filter(Boolean)
+          .slice(0, 10)
+      } catch {
+        // Fallback to regex for non-browser environments
+        const titleMatch = text.match(/<title[^>]*>(.*?)<\/title>/i)
+        title = titleMatch?.[1]?.trim() || new URL(url).hostname
+        headings = (text.match(/<h[1-3][^>]*>(.*?)<\/h[1-3]>/gi) || [])
+          .map(h => h.replace(/<[^>]+>/g, '').trim())
+          .filter(Boolean)
+          .slice(0, 10)
+      }
 
       // Strip HTML for plain text excerpt
       const plainText = text
