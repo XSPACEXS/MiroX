@@ -177,7 +177,7 @@ export function RunHistory(): JSX.Element {
                         className="p-4 max-h-60 overflow-y-auto font-mono text-xs leading-relaxed"
                       >
                         {agent.logs.length === 0 ? (
-                          <p className="text-gray-600">No logs recorded</p>
+                          <p className="text-gray-500">No logs recorded</p>
                         ) : (
                           agent.logs.map((log, i) => (
                             <div key={i} className="flex gap-2">

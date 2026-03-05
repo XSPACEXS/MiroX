@@ -109,7 +109,7 @@ export default function URLImporter({ onAnalysisReady }: URLImporterProps) {
           </div>
           <div>
             <p className="text-gray-400 text-sm">Enter a URL to fetch and analyze web content</p>
-            <p className="text-gray-600 text-xs mt-1">Works with articles, docs, blog posts, and more</p>
+            <p className="text-gray-500 text-xs mt-1">Works with articles, docs, blog posts, and more</p>
           </div>
         </motion.div>
       )}
@@ -139,7 +139,7 @@ export default function URLImporter({ onAnalysisReady }: URLImporterProps) {
               <span className="inline-flex items-center px-2 py-0.5 rounded-full text-2xs font-medium bg-yellow-400/10 text-yellow-400 border border-yellow-400/20">
                 {result.content.suggestedTemplate}
               </span>
-              <span className="text-2xs text-gray-600">
+              <span className="text-2xs text-gray-500">
                 {Math.round(result.content.confidence * 100)}% match
               </span>
             </div>

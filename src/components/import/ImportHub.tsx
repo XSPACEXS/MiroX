@@ -63,8 +63,10 @@ export default function ImportHub() {
         {tabs.map((tab) => (
           <button
             key={tab.id}
+            id={`import-tab-${tab.id}`}
             role="tab"
             aria-selected={activeTab === tab.id}
+            aria-controls={`import-tabpanel-${tab.id}`}
             onClick={() => { setActiveTab(tab.id); setAnalysisContent(null) }}
             className={`relative flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-medium transition-colors ${
               activeTab === tab.id
@@ -91,12 +93,15 @@ export default function ImportHub() {
       <AnimatePresence mode="wait">
         <motion.div
           key={activeTab}
+          id={`import-tabpanel-${activeTab}`}
+          role="tabpanel"
+          aria-labelledby={`import-tab-${activeTab}`}
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.2 }}
         >
-          {activeTab === 'file' && <FileDropZone onFileReady={() => {}} />}
+          {activeTab === 'file' && <FileDropZone onFileReady={(file) => { if (file.content) handleAnalysisReady(file.content) }} />}
           {activeTab === 'github' && <GitHubPicker onAnalysisReady={handleAnalysisReady} />}
           {activeTab === 'url' && <URLImporter onAnalysisReady={handleAnalysisReady} />}
         </motion.div>

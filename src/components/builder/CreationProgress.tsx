@@ -38,7 +38,7 @@ export function CreationProgress({ progress, steps, className = '' }: CreationPr
       </motion.div>
 
       <h2 className="font-display font-semibold text-xl text-white mb-2">Creating your board...</h2>
-      <p className="text-sm text-gray-400 mb-8">{subtitle}</p>
+      <p className="text-sm text-gray-400 mb-8" aria-live="polite">{subtitle}</p>
 
       {/* Step checklist */}
       <div className="w-full max-w-sm space-y-3">
@@ -62,7 +62,7 @@ export function CreationProgress({ progress, steps, className = '' }: CreationPr
               <span className={`text-sm ${
                 step.status === 'complete' ? 'text-gray-300' :
                 step.status === 'active' ? 'text-white font-medium' :
-                'text-gray-600'
+                'text-gray-500'
               }`}>
                 {step.label}
               </span>

@@ -39,11 +39,14 @@ export function useFileImport(): UseFileImportReturn {
     try {
       const content = await parseFileContent(filePath, fileName, mimeType)
       const suggested = content.suggestedTemplate || suggestTemplate(content)
+      const confidence = suggested !== 'brainstorm-session'
+        ? Math.min(content.confidence + 0.2, 0.95)
+        : content.confidence
 
       setFiles(prev => prev.map(f => f.id === id ? {
         ...f,
         status: 'ready' as const,
-        content: { ...content, suggestedTemplate: suggested },
+        content: { ...content, suggestedTemplate: suggested, confidence },
       } : f))
       useSettingsStore.getState().incrementFilesImported()
     } catch (err) {

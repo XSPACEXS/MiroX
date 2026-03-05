@@ -5,6 +5,7 @@ import { modalVariants, modalPanelVariants, stepVariants } from '../../design-sy
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Button } from '@components/ui/Button'
 import { Input } from '@components/ui/Input'
+import { ALL_TEMPLATES } from '@templates/index'
 
 type Step = 1 | 2 | 3
 
@@ -36,7 +37,7 @@ function StepWelcome({ onNext }: { onNext: () => void }) {
       </div>
       <h2 className="font-display font-bold text-3xl text-white mb-3">Welcome to MiroX</h2>
       <p className="text-gray-400 text-lg mb-8 max-w-sm leading-relaxed">
-        The enterprise Miro board builder. Create professional boards from 30+ templates in
+        The enterprise Miro board builder. Create professional boards from {ALL_TEMPLATES.length}+ templates in
         seconds.
       </p>
       <Button variant="primary" size="md" onClick={onNext}>

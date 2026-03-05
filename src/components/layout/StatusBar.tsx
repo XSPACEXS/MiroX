@@ -14,10 +14,10 @@ export function StatusBar() {
       </div>
 
       {/* Center: empty or hint */}
-      <span className="text-2xs text-gray-600" />
+      <span className="text-2xs text-gray-500" />
 
       {/* Right: version */}
-      <span className="text-2xs text-gray-600">v1.0.0</span>
+      <span className="text-2xs text-gray-500">v{__APP_VERSION__}</span>
     </div>
   )
 }

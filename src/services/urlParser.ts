@@ -42,6 +42,12 @@ export async function fetchAndParseUrl(url: string): Promise<UrlParseResult> {
 
   const excerpt = plainText.slice(0, 300) + (plainText.length > 300 ? '...' : '')
 
+  let confidence = 0.3
+  if (title !== new URL(url).hostname) confidence += 0.15
+  if (headings.length >= 3) confidence += 0.15
+  if (plainText.length > 1000) confidence += 0.2
+  confidence = Math.min(confidence, 0.95)
+
   const content: ParsedContent = {
     rawText: plainText.slice(0, 5000),
     title,
@@ -50,10 +56,13 @@ export async function fetchAndParseUrl(url: string): Promise<UrlParseResult> {
     summary: excerpt.slice(0, 200),
     fileType: 'document',
     suggestedTemplate: 'brainstorm-session',
-    confidence: 0.6,
+    confidence,
   }
 
   content.suggestedTemplate = suggestTemplate(content)
+  if (content.suggestedTemplate !== 'brainstorm-session') {
+    content.confidence = Math.min(content.confidence + 0.15, 0.95)
+  }
 
   return { title, excerpt, content }
 }

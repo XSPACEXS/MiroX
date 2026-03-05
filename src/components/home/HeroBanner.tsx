@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { slideUpVariants, listContainerVariants, listItemVariants } from '../../design-system/animations'
 import { Button } from '@components/ui/Button'
+import { ALL_TEMPLATES } from '@templates/index'
 
 export function HeroBanner() {
   const navigate = useNavigate()
@@ -33,7 +34,7 @@ export function HeroBanner() {
       >
         <motion.div variants={listItemVariants} className="flex items-center gap-3 mb-4">
           <span className="text-yellow-400 font-mono text-sm tracking-widest uppercase">
-            v1.0.0
+            v{__APP_VERSION__}
           </span>
           <div className="w-px h-4 bg-black-500" />
           <span className="text-gray-400 text-sm">Enterprise Board Builder</span>
@@ -50,7 +51,7 @@ export function HeroBanner() {
           variants={listItemVariants}
           className="font-body text-gray-400 text-xl mb-8 max-w-xl leading-relaxed"
         >
-          Turn any idea into a professional Miro board — instantly. 30+ templates, file import,
+          Turn any idea into a professional Miro board — instantly. {ALL_TEMPLATES.length}+ templates, file import,
           GitHub integration.
         </motion.p>
 

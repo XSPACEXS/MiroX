@@ -82,7 +82,7 @@ export function ActiveAgents(): JSX.Element {
         <Card variant="default" className="p-6 text-center">
           <Bot size={32} className="text-gray-600 mx-auto mb-2" aria-hidden="true" />
           <p className="text-sm text-gray-500">No agents running</p>
-          <p className="text-xs text-gray-600 mt-1">Launch an agent above to get started</p>
+          <p className="text-xs text-gray-500 mt-1">Launch an agent above to get started</p>
         </Card>
       ) : (
         <div className="space-y-2">

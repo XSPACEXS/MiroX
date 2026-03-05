@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useBoardBuilder } from '../../hooks/useBoardBuilder'
+import { useMiro } from '../../hooks/useMiro'
 import { getTemplateById } from '../../templates'
 import { StepIndicator } from './StepIndicator'
 import { ContentEditor } from './ContentEditor'
@@ -14,9 +15,11 @@ import { Input } from '../ui/Input'
 
 export function BoardWizard() {
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
+  const { isConnected: isMiroConnected } = useMiro()
   const {
     currentStep, selectedTemplate, boardName, boardDescription,
-    fieldValues, creationProgress, creationSteps, isComplete,
+    fieldValues, creationProgress, creationSteps, isCreating, isComplete,
     boardUrl, error,
     setTemplate, setBoardName, setBoardDescription, setFieldValue,
     nextStep, prevStep, setCurrentStep, startCreation, reset,
@@ -76,6 +79,15 @@ export function BoardWizard() {
                 <p className="text-gray-400 text-sm">{selectedTemplate.description}</p>
               </div>
             </div>
+
+            {!isMiroConnected && (
+              <div className="p-3 rounded-lg bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 text-sm flex items-center justify-between gap-3">
+                <span>Connect your Miro account in Settings to create boards.</span>
+                <Button variant="ghost" size="sm" onClick={() => navigate('/settings')}>
+                  Settings
+                </Button>
+              </div>
+            )}
 
             <Input
               label="Board Name"
@@ -145,10 +157,26 @@ export function BoardWizard() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
           >
-            <CreationProgress
-              progress={creationProgress}
-              steps={creationSteps}
-            />
+            {error && !isCreating ? (
+              <div className="max-w-xl mx-auto w-full space-y-4">
+                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-center space-y-3">
+                  <p className="text-red-400 text-sm">{error}</p>
+                  <div className="flex justify-center gap-3">
+                    <Button variant="ghost" size="sm" onClick={reset}>
+                      Start Over
+                    </Button>
+                    <Button variant="primary" size="sm" onClick={startCreation}>
+                      Try Again
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <CreationProgress
+                progress={creationProgress}
+                steps={creationSteps}
+              />
+            )}
           </motion.div>
         )}
 

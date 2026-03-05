@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { listContainerVariants, listItemVariants } from '../../design-system/animations'
+import { ALL_TEMPLATES } from '@templates/index'
 
 interface ActionItem {
   emoji: string
@@ -13,7 +14,7 @@ const actions: ActionItem[] = [
   {
     emoji: '\u2728',
     title: 'New Board',
-    description: 'Start from 30+ professional templates',
+    description: `Start from ${ALL_TEMPLATES.length}+ professional templates`,
     path: '/templates',
   },
   {

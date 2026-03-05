@@ -59,7 +59,11 @@ export default function FileDropZone({ onFileReady }: FileDropZoneProps) {
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}
-        onClick={() => files.length === 0 && openFilePicker()}
+        onClick={() => { if (files.length === 0) void openFilePicker() }}
+        onKeyDown={(e: React.KeyboardEvent) => { if ((e.key === 'Enter' || e.key === ' ') && files.length === 0) { e.preventDefault(); void openFilePicker() } }}
+        tabIndex={0}
+        role="button"
+        aria-label="Drop files here or click to browse"
         animate={isDragging ? 'dragging' : 'idle'}
         variants={dropzoneVariants}
         transition={{ duration: 0.2 }}

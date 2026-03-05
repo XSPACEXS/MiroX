@@ -15,15 +15,23 @@ export async function parseFileContent(
   const text = result.text || ''
   const headings = (text.match(/^#{1,3} .+/gm) || []).map((h: string) => h.replace(/^#+\s/, ''))
 
+  const fileType = detectFileType(result.ext || '')
+
+  let confidence = 0.3
+  if (headings.length > 0) confidence += 0.15
+  if (text.length > 500) confidence += 0.15
+  if (fileType !== 'other') confidence += 0.2
+  confidence = Math.min(confidence, 0.95)
+
   return {
     rawText: text.slice(0, 5000),
     title: fileName.replace(/\.[^.]+$/, ''),
     headings,
     keyPhrases: headings.slice(0, 10),
     summary: text.slice(0, 200),
-    fileType: detectFileType(result.ext || ''),
+    fileType,
     suggestedTemplate: '',
-    confidence: 0.6,
+    confidence,
   }
 }
 

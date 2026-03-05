@@ -91,7 +91,7 @@ export function AppSelfCheck(): JSX.Element {
             />
           ) : (
             <div className="h-48 flex items-center justify-center border border-dashed border-black-500 rounded-lg">
-              <p className="text-sm text-gray-600">No screenshot captured</p>
+              <p className="text-sm text-gray-500">No screenshot captured</p>
             </div>
           )}
         </Card>
@@ -136,7 +136,7 @@ export function AppSelfCheck(): JSX.Element {
             </div>
           ) : (
             <div className="h-48 flex items-center justify-center border border-dashed border-black-500 rounded-lg">
-              <p className="text-sm text-gray-600">Click &quot;Run Checks&quot; to test the app</p>
+              <p className="text-sm text-gray-500">Click &quot;Run Checks&quot; to test the app</p>
             </div>
           )}
 

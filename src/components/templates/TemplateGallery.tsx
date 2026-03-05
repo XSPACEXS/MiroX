@@ -54,7 +54,7 @@ export function TemplateGallery({ compact = false, onSelect }: TemplateGalleryPr
       ) : (
         <div className="flex flex-col items-center justify-center py-20 text-center">
           <p className="text-gray-400 text-lg mb-2">No templates match "{searchQuery}"</p>
-          <p className="text-gray-600 text-sm mb-4">Try a different search term or clear filters</p>
+          <p className="text-gray-500 text-sm mb-4">Try a different search term or clear filters</p>
           <Button variant="secondary" size="sm" onClick={() => setSearch('')}>
             Clear Search
           </Button>

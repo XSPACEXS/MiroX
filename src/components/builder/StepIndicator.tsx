@@ -15,13 +15,13 @@ const steps = [
 
 export function StepIndicator({ currentStep, className = '' }: StepIndicatorProps) {
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div role="list" aria-label="Board creation steps" className={`flex items-center gap-2 ${className}`}>
       {steps.map((step, i) => {
         const isComplete = currentStep > step.num
         const isActive = currentStep === step.num
 
         return (
-          <div key={step.num} className="flex items-center gap-2">
+          <div key={step.num} role="listitem" aria-current={isActive ? 'step' : undefined} className="flex items-center gap-2">
             <div className="flex items-center gap-2">
               <motion.div
                 animate={{

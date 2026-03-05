@@ -11,6 +11,9 @@ import { useBoardStore } from '../stores/boardStore'
 import { useSettingsStore } from '../stores/settingsStore'
 import { useAgentStore } from '../stores/agentStore'
 
+// Templates
+import { ALL_TEMPLATES } from '../templates'
+
 // Components
 import { TopBar } from '../components/layout/TopBar'
 import { QuickActions } from '../components/home/QuickActions'
@@ -1006,7 +1009,7 @@ describe('QuickActions descriptions', () => {
 
   it('renders all four action descriptions', () => {
     renderWithRouter(<QuickActions />)
-    expect(screen.getByText('Start from 30+ professional templates')).toBeInTheDocument()
+    expect(screen.getByText(`Start from ${ALL_TEMPLATES.length}+ professional templates`)).toBeInTheDocument()
     expect(screen.getByText('Upload PDF, DOCX, CSV, and more')).toBeInTheDocument()
     expect(screen.getByText('Connect your repos in seconds')).toBeInTheDocument()
     expect(screen.getByText('View your last 10 boards')).toBeInTheDocument()

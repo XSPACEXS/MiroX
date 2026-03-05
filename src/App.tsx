@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, MotionConfig } from 'framer-motion'
 import { lazy, Suspense, useEffect } from 'react'
 import AppShell from '@components/layout/AppShell'
 import { Spinner } from '@components/ui/Spinner'
@@ -35,28 +35,30 @@ export default function App() {
   }, [navigate])
 
   return (
-    <AppShell>
-      <ErrorBoundary>
-        <Suspense
-          fallback={
-            <div className="flex items-center justify-center h-full">
-              <Spinner size="lg" />
-            </div>
-          }
-        >
-          <AnimatePresence mode="wait">
-            <Routes location={location} key={location.pathname}>
-              <Route path="/" element={<Home />} />
-              <Route path="/templates" element={<Templates />} />
-              <Route path="/import" element={<Import />} />
-              <Route path="/builder" element={<Builder />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/agent-center" element={<AgentCenter />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </AnimatePresence>
-        </Suspense>
-      </ErrorBoundary>
-    </AppShell>
+    <MotionConfig reducedMotion="user">
+      <AppShell>
+        <ErrorBoundary>
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center h-full">
+                <Spinner size="lg" />
+              </div>
+            }
+          >
+            <AnimatePresence mode="wait">
+              <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<Home />} />
+                <Route path="/templates" element={<Templates />} />
+                <Route path="/import" element={<Import />} />
+                <Route path="/builder" element={<Builder />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/agent-center" element={<AgentCenter />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </AnimatePresence>
+          </Suspense>
+        </ErrorBoundary>
+      </AppShell>
+    </MotionConfig>
   )
 }

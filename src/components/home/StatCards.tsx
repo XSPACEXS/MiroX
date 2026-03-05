@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { listContainerVariants, listItemVariants } from '../../design-system/animations'
 import { useBoardStore } from '../../stores/boardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
+import { ALL_TEMPLATES } from '@templates/index'
 
 function AnimatedNumber({ value }: { value: number }) {
   const count = useMotionValue(0)
@@ -49,7 +50,7 @@ export function StatCards() {
       animate="animate"
     >
       <StatCard label="Boards Created" value={totalBoardsCreated} />
-      <StatCard label="Templates Available" value={30} suffix="+" />
+      <StatCard label="Templates Available" value={ALL_TEMPLATES.length} suffix="+" />
       <StatCard label="Imports Processed" value={filesImported} />
     </motion.div>
   )
