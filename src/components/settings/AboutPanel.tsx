@@ -54,7 +54,7 @@ export function AboutPanel() {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => window.electronAPI?.openExternal('https://github.com/mirox')}
+          onClick={() => window.electronAPI?.openExternal('https://github.com/XSPACEXS/MiroX')}
         >
           GitHub
         </Button>

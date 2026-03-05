@@ -221,13 +221,13 @@ function createMenu(): void {
         {
           label: 'MiroX Documentation',
           click: () => {
-            shell.openExternal('https://github.com/mirox/docs')
+            shell.openExternal('https://github.com/XSPACEXS/MiroX')
           },
         },
         {
           label: 'Report Issue',
           click: () => {
-            shell.openExternal('https://github.com/mirox/issues')
+            shell.openExternal('https://github.com/XSPACEXS/MiroX/issues')
           },
         },
       ],
