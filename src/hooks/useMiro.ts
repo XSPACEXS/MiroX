@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import type { MiroConnectionStatus, MiroBoard } from '../types/miro'
 import { logger } from '../utils/logger'
+import { useUIStore } from '../stores/uiStore'
 
 interface UseMiroReturn {
   token: string | null
@@ -44,18 +45,23 @@ export function useMiro(): UseMiroReturn {
   // Load token on mount
   useEffect(() => {
     if (!isElectronRef.current) return
+    let cancelled = false
     const loadToken = async () => {
       try {
         const savedToken = await window.electronAPI.miro.getToken()
+        if (cancelled) return
         if (savedToken && savedToken.hasToken) {
           setTokenState(savedToken.masked)
           await testConnectionInternal()
+          if (cancelled) return
         }
       } catch (err) {
         logger.error('Failed to load Miro token:', err)
+        useUIStore.getState().addToast({ type: 'error', title: 'Miro Error', message: err instanceof Error ? err.message : String(err) })
       }
     }
-    loadToken()
+    void loadToken()
+    return () => { cancelled = true }
   }, [testConnectionInternal])
 
   const testConnection = useCallback(async () => {
@@ -78,6 +84,7 @@ export function useMiro(): UseMiroReturn {
       })))
     } catch (err) {
       logger.error('Failed to load boards:', err)
+      useUIStore.getState().addToast({ type: 'error', title: 'Miro Error', message: err instanceof Error ? err.message : String(err) })
     } finally {
       setIsLoadingBoards(false)
     }
@@ -98,15 +105,21 @@ export function useMiro(): UseMiroReturn {
       return board
     } catch (err) {
       logger.error('Failed to create board:', err)
+      useUIStore.getState().addToast({ type: 'error', title: 'Miro Error', message: err instanceof Error ? err.message : String(err) })
       return null
     }
   }, [])
 
   const setToken = useCallback(async (newToken: string) => {
     if (!isElectronRef.current) return
-    await window.electronAPI.miro.setToken(newToken)
-    setTokenState(newToken)
-    await testConnectionInternal()
+    try {
+      await window.electronAPI.miro.setToken(newToken)
+      setTokenState(newToken)
+      await testConnectionInternal()
+    } catch (err) {
+      logger.error('Failed to set Miro token:', err)
+      useUIStore.getState().addToast({ type: 'error', title: 'Miro Error', message: err instanceof Error ? err.message : String(err) })
+    }
   }, [testConnectionInternal])
 
   return {

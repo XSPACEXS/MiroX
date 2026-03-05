@@ -1,6 +1,7 @@
 import Store from 'electron-store'
 
 interface AppSettings {
+  _version?: number
   windowBounds?: { x: number; y: number; width: number; height: number }
   windowMaximized?: boolean
   onboardingComplete?: boolean
@@ -17,6 +18,7 @@ interface AppSettings {
 }
 
 const defaults: AppSettings = {
+  _version: 1,
   theme: 'dark',
   accentColor: '#FFD600',
   onboardingComplete: false,
@@ -43,6 +45,12 @@ for (const [key, value] of Object.entries(defaults)) {
   if (store.get(key as keyof AppSettings) === undefined) {
     store.set(key as keyof AppSettings, value as AppSettings[keyof AppSettings])
   }
+}
+
+// Config versioning — migrate if needed
+const currentVersion = 1
+if ((store.get('_version') ?? 0) < currentVersion) {
+  store.set('_version', currentVersion)
 }
 
 export { store }

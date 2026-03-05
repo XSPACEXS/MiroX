@@ -4,6 +4,7 @@ import { lazy, Suspense, useEffect } from 'react'
 import AppShell from '@components/layout/AppShell'
 import { Spinner } from '@components/ui/Spinner'
 import { ErrorBoundary } from '@components/ui/ErrorBoundary'
+import { useSettingsStore } from '@stores/settingsStore'
 
 const Home = lazy(() => import('@pages/Home'))
 const Templates = lazy(() => import('@pages/Templates'))
@@ -15,6 +16,11 @@ const AgentCenter = lazy(() => import('@pages/AgentCenter'))
 export default function App() {
   const location = useLocation()
   const navigate = useNavigate()
+
+  // Load persisted settings from electron-store on mount
+  useEffect(() => {
+    void useSettingsStore.getState().loadFromDisk()
+  }, [])
 
   // Listen for navigation events from Electron main process (menu commands)
   useEffect(() => {

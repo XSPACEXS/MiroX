@@ -70,9 +70,6 @@ describe('Board Store', () => {
     useBoardStore.setState({
       recentBoards: [],
       totalBoardsCreated: 0,
-      isCreating: false,
-      creationProgress: 0,
-      creationStep: '',
       lastCreatedBoard: null,
     })
   })
@@ -81,9 +78,6 @@ describe('Board Store', () => {
     const state = useBoardStore.getState()
     expect(state.recentBoards).toEqual([])
     expect(state.totalBoardsCreated).toBe(0)
-    expect(state.isCreating).toBe(false)
-    expect(state.creationProgress).toBe(0)
-    expect(state.creationStep).toBe('')
     expect(state.lastCreatedBoard).toBeNull()
   })
 
@@ -134,12 +128,17 @@ describe('Board Store', () => {
     expect(useBoardStore.getState().totalBoardsCreated).toBe(2)
   })
 
-  it('sets creation state', () => {
-    useBoardStore.getState().setCreating(true)
-    expect(useBoardStore.getState().isCreating).toBe(true)
-    useBoardStore.getState().setProgress(50, 'Building diagrams')
-    expect(useBoardStore.getState().creationProgress).toBe(50)
-    expect(useBoardStore.getState().creationStep).toBe('Building diagrams')
+  it('sets last created board', () => {
+    const board = {
+      id: 'b1',
+      name: 'Test Board',
+      url: 'https://miro.com/board/1',
+      templateId: 't1',
+      templateName: 'Kanban',
+      createdAt: new Date().toISOString(),
+    }
+    useBoardStore.getState().setLastCreated(board)
+    expect(useBoardStore.getState().lastCreatedBoard).toEqual(board)
   })
 })
 
@@ -156,6 +155,7 @@ describe('Settings Store', () => {
       onboardingComplete: false,
       filesImported: 0,
       templatesUsed: [],
+      _loaded: false,
     })
   })
 

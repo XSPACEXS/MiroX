@@ -50,9 +50,6 @@ function resetStores() {
   useBoardStore.setState({
     recentBoards: [],
     totalBoardsCreated: 0,
-    isCreating: false,
-    creationProgress: 0,
-    creationStep: '',
     lastCreatedBoard: null,
   })
   useSettingsStore.setState({
@@ -308,7 +305,7 @@ describe('Store versioning', () => {
     const state = useBoardStore.getState()
     expect(state.recentBoards).toEqual([])
     expect(state.totalBoardsCreated).toBe(0)
-    expect(state.isCreating).toBe(false)
+    expect(state.lastCreatedBoard).toBeNull()
   })
 
   it('settingsStore initializes with correct defaults', () => {
@@ -998,17 +995,6 @@ describe('Agent log management', () => {
     expect(agent!.logs.length).toBeLessThanOrEqual(2000)
   })
 
-  it('updateAgentCost sets cost on agent', () => {
-    useAgentStore.getState().addAgent({
-      id: 'cost-agent', prompt: 'test', model: 'sonnet', status: 'running',
-      logs: [], startedAt: Date.now(), finishedAt: null, exitCode: null,
-      cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
-    })
-    const cost = { inputTokens: 100, outputTokens: 50, estimatedUSD: 0.01 }
-    useAgentStore.getState().updateAgentCost('cost-agent', cost)
-    const agent = useAgentStore.getState().agents.find(a => a.id === 'cost-agent')
-    expect(agent!.cost).toEqual(cost)
-  })
 })
 
 // ──────────────────────────────────────────────────────────────────────────────

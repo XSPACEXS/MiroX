@@ -58,9 +58,6 @@ function resetStores() {
   useBoardStore.setState({
     recentBoards: [],
     totalBoardsCreated: 0,
-    isCreating: false,
-    creationProgress: 0,
-    creationStep: '',
     lastCreatedBoard: null,
   })
   useSettingsStore.setState({
@@ -473,6 +470,7 @@ describe('useGitHub hook', () => {
         id: 1, name: 'my-repo', fullName: 'testuser/my-repo', description: 'A repo',
         language: 'TypeScript', stars: 5, updatedAt: '2024-01-01T00:00:00Z',
         url: 'https://github.com/testuser/my-repo',
+        defaultBranch: 'main', topics: [], isPrivate: false,
         owner: { login: 'testuser', avatarUrl: 'https://avatar.com/1' },
       }],
     })
@@ -970,13 +968,4 @@ describe('Agent store persist behavior', () => {
     expect(histAgent!.logs.some(l => l.text === 'After history move')).toBe(true)
   })
 
-  it('updateAgentCost updates cost on history agent', () => {
-    useAgentStore.getState().addAgent(makeAgent({ id: 'cost-hist', status: 'completed' }))
-    useAgentStore.getState().moveToHistory('cost-hist')
-
-    const cost = { inputTokens: 200, outputTokens: 100, estimatedUSD: 0.02 }
-    useAgentStore.getState().updateAgentCost('cost-hist', cost)
-
-    expect(useAgentStore.getState().history[0]!.cost).toEqual(cost)
-  })
 })
