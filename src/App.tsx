@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion'
 import { lazy, Suspense, useEffect } from 'react'
 import AppShell from '@components/layout/AppShell'
 import { Spinner } from '@components/ui/Spinner'
+import { ErrorBoundary } from '@components/ui/ErrorBoundary'
 
 const Home = lazy(() => import('@pages/Home'))
 const Templates = lazy(() => import('@pages/Templates'))
@@ -29,24 +30,26 @@ export default function App() {
 
   return (
     <AppShell>
-      <Suspense
-        fallback={
-          <div className="flex items-center justify-center h-full">
-            <Spinner size="lg" />
-          </div>
-        }
-      >
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<Home />} />
-            <Route path="/templates" element={<Templates />} />
-            <Route path="/import" element={<Import />} />
-            <Route path="/builder" element={<Builder />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/agent-center" element={<AgentCenter />} />
-          </Routes>
-        </AnimatePresence>
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center h-full">
+              <Spinner size="lg" />
+            </div>
+          }
+        >
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={<Home />} />
+              <Route path="/templates" element={<Templates />} />
+              <Route path="/import" element={<Import />} />
+              <Route path="/builder" element={<Builder />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/agent-center" element={<AgentCenter />} />
+            </Routes>
+          </AnimatePresence>
+        </Suspense>
+      </ErrorBoundary>
     </AppShell>
   )
 }

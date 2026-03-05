@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react'
 import type { TemplateDefinition } from '../templates/types'
 import { useBoardStore } from '../stores/boardStore'
 import { useSettingsStore } from '../stores/settingsStore'
+import { buildBoard } from '../services/boardBuilder'
 
 export interface CreationStep {
   id: string
@@ -68,32 +69,53 @@ export function useBoardBuilder() {
     if (!selectedTemplate) return
     setIsCreating(true)
     setError(null)
+    setCurrentStep(4)
     setCreationSteps(DEFAULT_STEPS.map(s => ({ ...s, status: 'pending' as const })))
 
     try {
-      // Simulate board creation steps
-      const steps = DEFAULT_STEPS
-      for (let i = 0; i < steps.length; i++) {
-        const step = steps[i]!
-        updateStep(step.id, 'active')
-        setCreationProgress(Math.round(((i + 0.5) / steps.length) * 100))
+      const result = await buildBoard(
+        selectedTemplate,
+        fieldValues,
+        boardName || selectedTemplate.name,
+        (step, progress) => {
+          setCreationProgress(progress)
+          // Map progress to step statuses
+          if (progress >= 5) updateStep('validate', 'active')
+          if (progress >= 15) {
+            updateStep('validate', 'complete')
+            updateStep('create-board', 'active')
+          }
+          if (progress >= 30) {
+            updateStep('create-board', 'complete')
+            updateStep('diagrams', 'active')
+          }
+          if (progress >= 50) {
+            updateStep('diagrams', 'complete')
+            updateStep('documents', 'active')
+          }
+          if (progress >= 65) {
+            updateStep('documents', 'complete')
+            updateStep('tables', 'active')
+          }
+          if (progress >= 80) {
+            updateStep('tables', 'complete')
+            updateStep('polish', 'active')
+          }
+          if (progress >= 88) {
+            updateStep('polish', 'complete')
+            updateStep('cleanup', 'active')
+          }
+          if (progress >= 100) updateStep('cleanup', 'complete')
+          void step // progress callback provides step name for logging
+        }
+      )
 
-        // Simulate API call delay
-        await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 600))
+      setBoardUrl(result.boardUrl)
 
-        updateStep(step.id, 'complete')
-        setCreationProgress(Math.round(((i + 1) / steps.length) * 100))
-      }
-
-      // Create a fake board URL (in real implementation, this would be from the Miro API)
-      const fakeUrl = `https://miro.com/app/board/new-${Date.now()}/`
-      setBoardUrl(fakeUrl)
-
-      // Record in stores
       boardStore.addRecentBoard({
-        id: `board-${Date.now()}`,
-        name: boardName || selectedTemplate.name,
-        url: fakeUrl,
+        id: result.boardId,
+        name: result.boardName,
+        url: result.boardUrl,
         templateId: selectedTemplate.id,
         templateName: selectedTemplate.name,
         createdAt: new Date().toISOString(),
@@ -107,7 +129,7 @@ export function useBoardBuilder() {
     } finally {
       setIsCreating(false)
     }
-  }, [selectedTemplate, boardName, boardStore, settingsStore, updateStep])
+  }, [selectedTemplate, boardName, fieldValues, boardStore, settingsStore, updateStep, setCurrentStep])
 
   const reset = useCallback(() => {
     setCurrentStep(1)
