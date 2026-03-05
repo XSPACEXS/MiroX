@@ -1055,3 +1055,40 @@ describe('TopBar UI elements', () => {
     expect(buttons.length).toBeGreaterThanOrEqual(1)
   })
 })
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 21. Catch-all 404 route (1 test)
+// ──────────────────────────────────────────────────────────────────────────────
+
+describe('Catch-all 404 route', () => {
+  beforeEach(() => resetStores())
+
+  it('redirects unknown routes to home', async () => {
+    renderWithRouter(<Home />, { route: '/nonexistent-page' })
+    await waitFor(() => {
+      expect(screen.getByText('Enterprise Board Builder')).toBeInTheDocument()
+    })
+  })
+})
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 22. useBoardBuilder boardDescription (2 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
+describe('useBoardBuilder boardDescription', () => {
+  beforeEach(() => {
+    resetStores()
+    vi.clearAllMocks()
+  })
+
+  it('exposes boardDescription state initialized to empty string', () => {
+    const { result } = renderHook(() => useBoardBuilder(), { wrapper: hookWrapper })
+    expect(result.current.boardDescription).toBe('')
+  })
+
+  it('setBoardDescription updates boardDescription', () => {
+    const { result } = renderHook(() => useBoardBuilder(), { wrapper: hookWrapper })
+    act(() => result.current.setBoardDescription('My description'))
+    expect(result.current.boardDescription).toBe('My description')
+  })
+})
