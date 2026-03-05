@@ -5,6 +5,7 @@ import { Card } from '@components/ui/Card'
 import { Button } from '@components/ui/Button'
 import { Badge } from '@components/ui/Badge'
 import { useAgentStore } from '@stores/agentStore'
+import { useUIStore } from '@stores/uiStore'
 import { listItemVariants } from '@design-system/animations'
 import type { AgentRun } from '@/types/agent'
 
@@ -35,14 +36,28 @@ function ElapsedTime({ startedAt }: { startedAt: number }): JSX.Element {
 
 export function ActiveAgents(): JSX.Element {
   const agents = useAgentStore((s) => s.agents.filter((a) => a.status === 'running'))
+  const addToast = useUIStore((s) => s.addToast)
 
   const handleKill = useCallback(async (id: string) => {
-    await window.electronAPI.agent.kill(id)
-  }, [])
+    const result = await window.electronAPI.agent.kill(id)
+    if (!result.ok) {
+      addToast({
+        type: 'error',
+        title: 'Failed to kill agent',
+        message: result.error,
+      })
+    }
+  }, [addToast])
 
   const handleKillAll = useCallback(async () => {
-    await window.electronAPI.agent.killAll()
-  }, [])
+    const result = await window.electronAPI.agent.killAll()
+    if (!result.ok) {
+      addToast({
+        type: 'error',
+        title: 'Failed to kill all agents',
+      })
+    }
+  }, [addToast])
 
   return (
     <div>
@@ -65,7 +80,7 @@ export function ActiveAgents(): JSX.Element {
 
       {agents.length === 0 ? (
         <Card variant="default" className="p-6 text-center">
-          <Bot size={32} className="text-gray-600 mx-auto mb-2" />
+          <Bot size={32} className="text-gray-600 mx-auto mb-2" aria-hidden="true" />
           <p className="text-sm text-gray-500">No agents running</p>
           <p className="text-xs text-gray-600 mt-1">Launch an agent above to get started</p>
         </Card>
@@ -84,7 +99,7 @@ export function ActiveAgents(): JSX.Element {
                 <Card variant="default" className="p-4">
                   <div className="flex items-center gap-3">
                     {/* Pulsing status dot */}
-                    <div className="relative flex-shrink-0">
+                    <div className="relative flex-shrink-0" aria-hidden="true">
                       <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
                       <div className="absolute inset-0 w-2.5 h-2.5 rounded-full bg-green-400 animate-ping opacity-75" />
                     </div>

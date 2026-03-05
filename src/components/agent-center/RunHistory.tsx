@@ -4,15 +4,24 @@ import { ChevronDown, Clock, History, RotateCcw, Trash2 } from 'lucide-react'
 import { Card } from '@components/ui/Card'
 import { Button } from '@components/ui/Button'
 import { Badge } from '@components/ui/Badge'
+import { Modal } from '@components/ui/Modal'
 import { useAgentStore } from '@stores/agentStore'
+import { useUIStore } from '@stores/uiStore'
 import { listItemVariants } from '@design-system/animations'
 import type { AgentRun } from '@/types/agent'
 
+// Module-level constants to avoid re-creation on every render
 const STATUS_COLORS: Record<string, 'green' | 'red' | 'yellow' | 'gray' | 'blue'> = {
   completed: 'green',
   failed: 'red',
   killed: 'yellow',
   running: 'blue',
+}
+
+const MODEL_COLORS: Record<string, 'purple' | 'blue' | 'green' | 'gray'> = {
+  opus: 'purple',
+  sonnet: 'blue',
+  haiku: 'green',
 }
 
 function formatDuration(start: number, end: number | null): string {
@@ -40,21 +49,26 @@ function formatCost(cost: AgentRun['cost']): string {
 export function RunHistory(): JSX.Element {
   const history = useAgentStore((s) => s.history)
   const clearHistory = useAgentStore((s) => s.clearHistory)
+  const addToast = useUIStore((s) => s.addToast)
   const [expandedId, setExpandedId] = useState<string | null>(null)
+  const [rollbackTarget, setRollbackTarget] = useState<AgentRun | null>(null)
 
-  const handleRollback = useCallback((agent: AgentRun) => {
+  const handleRollbackRequest = useCallback((agent: AgentRun) => {
     if (!agent.gitTagStart) return
-    const confirmed = window.confirm(
-      `This will run git reset --hard ${agent.gitTagStart}. All changes since this agent run will be lost. Continue?`
-    )
-    if (confirmed) {
-      window.electronAPI.agent.launch({
-        model: 'haiku',
-        prompt: `Run: git reset --hard ${agent.gitTagStart}`,
-        allowedTools: ['Bash'],
-      })
-    }
+    setRollbackTarget(agent)
   }, [])
+
+  const handleRollbackConfirm = useCallback(async () => {
+    if (!rollbackTarget?.gitTagStart) return
+    const tag = rollbackTarget.gitTagStart
+    setRollbackTarget(null)
+    const result = await window.electronAPI.agent.rollback(tag)
+    if (result.ok) {
+      addToast({ type: 'success', title: 'Rollback complete', message: `Reset to ${tag}` })
+    } else {
+      addToast({ type: 'error', title: 'Rollback failed', message: result.error })
+    }
+  }, [rollbackTarget, addToast])
 
   const toggleExpand = useCallback(
     (id: string) => {
@@ -62,12 +76,6 @@ export function RunHistory(): JSX.Element {
     },
     [expandedId]
   )
-
-  const MODEL_COLORS: Record<string, 'purple' | 'blue' | 'green' | 'gray'> = {
-    opus: 'purple',
-    sonnet: 'blue',
-    haiku: 'green',
-  }
 
   return (
     <div>
@@ -95,7 +103,7 @@ export function RunHistory(): JSX.Element {
 
       {history.length === 0 ? (
         <Card variant="default" className="p-6 text-center">
-          <Clock size={32} className="text-gray-600 mx-auto mb-2" />
+          <Clock size={32} className="text-gray-600 mx-auto mb-2" aria-hidden="true" />
           <p className="text-sm text-gray-500">No completed runs yet</p>
         </Card>
       ) : (
@@ -131,14 +139,17 @@ export function RunHistory(): JSX.Element {
                         <Button
                           variant="danger"
                           size="sm"
-                          onClick={() => handleRollback(agent)}
+                          onClick={() => handleRollbackRequest(agent)}
                           leftIcon={<RotateCcw size={14} />}
                         >
                           Rollback
                         </Button>
                       )}
                       <button
+                        type="button"
                         onClick={() => toggleExpand(agent.id)}
+                        aria-label={expandedId === agent.id ? 'Collapse logs' : 'Expand logs'}
+                        aria-expanded={expandedId === agent.id}
                         className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
                       >
                         <ChevronDown
@@ -160,7 +171,11 @@ export function RunHistory(): JSX.Element {
                       exit={{ height: 0, opacity: 0 }}
                       className="overflow-hidden border-t border-black-600"
                     >
-                      <div className="p-4 max-h-60 overflow-y-auto font-mono text-xs leading-relaxed">
+                      <div
+                        role="log"
+                        aria-label="Agent run logs"
+                        className="p-4 max-h-60 overflow-y-auto font-mono text-xs leading-relaxed"
+                      >
                         {agent.logs.length === 0 ? (
                           <p className="text-gray-600">No logs recorded</p>
                         ) : (
@@ -197,6 +212,37 @@ export function RunHistory(): JSX.Element {
           ))}
         </div>
       )}
+
+      {/* Rollback confirmation modal — replaces window.confirm for design consistency */}
+      <Modal
+        isOpen={rollbackTarget !== null}
+        onClose={() => setRollbackTarget(null)}
+        title="Confirm Rollback"
+        size="sm"
+      >
+        <div className="p-6 space-y-4">
+          <p className="text-sm text-gray-300">
+            This will run{' '}
+            <code className="font-mono text-yellow-400 bg-black-700 px-1.5 py-0.5 rounded text-xs">
+              git reset --hard {rollbackTarget?.gitTagStart}
+            </code>
+            . All changes since this agent run will be lost.
+          </p>
+          <div className="flex justify-end gap-3">
+            <Button variant="ghost" size="sm" onClick={() => setRollbackTarget(null)}>
+              Cancel
+            </Button>
+            <Button
+              variant="danger"
+              size="sm"
+              onClick={handleRollbackConfirm}
+              leftIcon={<RotateCcw size={14} />}
+            >
+              Rollback
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   )
 }

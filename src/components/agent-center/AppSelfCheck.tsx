@@ -9,14 +9,12 @@ import { useAgentStore } from '@stores/agentStore'
 import { fadeInVariants } from '@design-system/animations'
 
 export function AppSelfCheck(): JSX.Element {
-  const {
-    lastScreenshot,
-    setLastScreenshot,
-    consoleErrors,
-    setConsoleErrors,
-    domCheckResults,
-    setDomCheckResults,
-  } = useAgentStore()
+  const lastScreenshot = useAgentStore((s) => s.lastScreenshot)
+  const setLastScreenshot = useAgentStore((s) => s.setLastScreenshot)
+  const consoleErrors = useAgentStore((s) => s.consoleErrors)
+  const setConsoleErrors = useAgentStore((s) => s.setConsoleErrors)
+  const domCheckResults = useAgentStore((s) => s.domCheckResults)
+  const setDomCheckResults = useAgentStore((s) => s.setDomCheckResults)
 
   const [isCapturing, setIsCapturing] = useState(false)
   const [isRunningChecks, setIsRunningChecks] = useState(false)

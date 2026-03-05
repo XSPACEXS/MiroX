@@ -6,6 +6,7 @@ import { Input } from '@components/ui/Input'
 import { Dropdown } from '@components/ui/Dropdown'
 import { QuickActions } from './QuickActions'
 import { useAgentStore } from '@stores/agentStore'
+import { useUIStore } from '@stores/uiStore'
 import type { AgentRun, QuickAction } from '@/types/agent'
 
 const MODEL_OPTIONS = [
@@ -22,6 +23,7 @@ export function AgentLauncher(): JSX.Element {
   const [tools, setTools] = useState<string[]>(DEFAULT_TOOLS)
   const [isLaunching, setIsLaunching] = useState(false)
   const addAgent = useAgentStore((s) => s.addAgent)
+  const addToast = useUIStore((s) => s.addToast)
 
   const handleQuickAction = useCallback((action: QuickAction) => {
     setPrompt(action.prompt)
@@ -40,14 +42,14 @@ export function AgentLauncher(): JSX.Element {
         allowedTools: tools,
       })
 
-      if (result.ok && result.id) {
+      if (result.ok) {
         const agent: AgentRun = {
           id: result.id,
           prompt: prompt.trim(),
           model: model,
           status: 'running',
           logs: [],
-          startedAt: result.startedAt || Date.now(),
+          startedAt: result.startedAt,
           finishedAt: null,
           exitCode: null,
           cost: null,
@@ -57,19 +59,29 @@ export function AgentLauncher(): JSX.Element {
         }
         addAgent(agent)
         setPrompt('')
+      } else {
+        addToast({
+          type: 'error',
+          title: 'Agent launch failed',
+          message: result.error,
+        })
       }
+    } catch (err) {
+      addToast({
+        type: 'error',
+        title: 'Agent launch failed',
+        message: String(err),
+      })
     } finally {
       setIsLaunching(false)
     }
-  }, [prompt, model, tools, isLaunching, addAgent])
+  }, [prompt, model, tools, isLaunching, addAgent, addToast])
 
   const toggleTool = useCallback((tool: string) => {
     setTools((prev) =>
       prev.includes(tool) ? prev.filter((t) => t !== tool) : [...prev, tool]
     )
   }, [])
-
-  const allTools = ['Read', 'Edit', 'Glob', 'Grep', 'Bash']
 
   return (
     <div className="space-y-4">
@@ -102,12 +114,16 @@ export function AgentLauncher(): JSX.Element {
           />
         </div>
 
+        {/* Tool toggle chips — intentionally styled as toggles, not Button primitives */}
         <div className="flex items-center gap-2 flex-wrap">
           <span className="text-xs text-gray-400 mr-1">Tools:</span>
-          {allTools.map((tool) => (
+          {DEFAULT_TOOLS.map((tool) => (
             <button
               key={tool}
+              type="button"
               onClick={() => toggleTool(tool)}
+              aria-pressed={tools.includes(tool)}
+              aria-label={`Toggle ${tool} tool`}
               className={`px-2.5 py-1 text-xs font-mono rounded-lg border transition-all duration-150 ${
                 tools.includes(tool)
                   ? 'bg-yellow-400/10 border-yellow-400/30 text-yellow-400'
