@@ -19,10 +19,10 @@ export async function parseFileContent(
     rawText: text.slice(0, 5000),
     title: fileName.replace(/\.[^.]+$/, ''),
     headings,
-    keyPhrases: [],
+    keyPhrases: headings.slice(0, 10),
     summary: text.slice(0, 200),
     fileType: detectFileType(result.ext || ''),
-    suggestedTemplate: 'brainstorm-session',
+    suggestedTemplate: '',
     confidence: 0.6,
   }
 }

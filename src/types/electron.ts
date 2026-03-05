@@ -5,7 +5,9 @@
  */
 interface MiroItemResponse {
   id: string
-  [key: string]: unknown
+  type?: string
+  position?: { x: number; y: number }
+  geometry?: { width: number; height: number }
 }
 
 interface MiroBoardResponse {
@@ -13,7 +15,8 @@ interface MiroBoardResponse {
   viewLink: string
   name: string
   description?: string
-  [key: string]: unknown
+  createdAt?: string
+  modifiedAt?: string
 }
 
 export interface ElectronAPI {
@@ -94,6 +97,9 @@ export interface ElectronAPI {
         stars: number
         updatedAt: string
         url: string
+        defaultBranch: string
+        topics: string[]
+        isPrivate: boolean
         owner: { login: string; avatarUrl: string }
       }>
       error?: string
@@ -121,7 +127,7 @@ export interface ElectronAPI {
 
   // Files
   files: {
-    openDialog: (options?: unknown) => Promise<string | null>
+    openDialog: (options?: unknown) => Promise<string[] | null>
     readFile: (filePath: string) => Promise<{
       ok: boolean
       content?: string

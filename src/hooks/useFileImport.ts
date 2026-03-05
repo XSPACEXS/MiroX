@@ -1,6 +1,9 @@
 import { useState, useCallback, useRef } from 'react'
 import type { ImportedFile } from '../types/import'
 import { parseFileContent, suggestTemplate } from '../services/fileParser'
+import { logger } from '../utils/logger'
+import { useUIStore } from '../stores/uiStore'
+import { useSettingsStore } from '../stores/settingsStore'
 
 interface UseFileImportReturn {
   files: ImportedFile[]
@@ -42,7 +45,10 @@ export function useFileImport(): UseFileImportReturn {
         status: 'ready' as const,
         content: { ...content, suggestedTemplate: suggested },
       } : f))
+      useSettingsStore.getState().incrementFilesImported()
     } catch (err) {
+      logger.error('File parse failed:', err)
+      useUIStore.getState().addToast({ type: 'error', title: 'Import Error', message: err instanceof Error ? err.message : String(err) })
       setFiles(prev => prev.map(f => f.id === id ? {
         ...f,
         status: 'error' as const,
@@ -78,7 +84,7 @@ export function useFileImport(): UseFileImportReturn {
     droppedFiles.forEach(file => {
       // In Electron, dropped files have a path property
       const path = (file as File & { path?: string }).path || file.name
-      processFile(path, file.name, file.type)
+      void processFile(path, file.name, file.type)
     })
   }, [processFile])
 
@@ -94,9 +100,8 @@ export function useFileImport(): UseFileImportReturn {
       ],
     })
 
-    if (result) {
-      const filePaths: string[] = [result]
-      filePaths.forEach((filePath: string) => {
+    if (result && Array.isArray(result)) {
+      for (const filePath of result) {
         const fileName = filePath.split('/').pop() || filePath
         const ext = fileName.split('.').pop()?.toLowerCase() || ''
         const mimeMap: Record<string, string> = {
@@ -105,8 +110,8 @@ export function useFileImport(): UseFileImportReturn {
           csv: 'text/csv', json: 'application/json', txt: 'text/plain',
           md: 'text/markdown', zip: 'application/zip',
         }
-        processFile(filePath, fileName, mimeMap[ext] || 'application/octet-stream')
-      })
+        void processFile(filePath, fileName, mimeMap[ext] || 'application/octet-stream')
+      }
     }
   }, [processFile])
 

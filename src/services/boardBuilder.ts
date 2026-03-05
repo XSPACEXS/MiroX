@@ -8,6 +8,8 @@ export interface BuildResult {
   boardId: string
   boardUrl: string
   boardName: string
+  failedSections: number
+  sectionErrors: string[]
 }
 
 export async function buildBoard(
@@ -34,6 +36,9 @@ export async function buildBoard(
   const totalSections = manifest.sections.length
 
   // Create each section
+  let failedSections = 0
+  const sectionErrors: string[] = []
+
   for (let i = 0; i < manifest.sections.length; i++) {
     const section = manifest.sections[i]!
     const progress = 15 + ((i / totalSections) * 70)
@@ -44,6 +49,9 @@ export async function buildBoard(
       await createBoardSection(boardId, section, api)
       await delay(200)
     } catch (err) {
+      failedSections++
+      const msg = err instanceof Error ? err.message : String(err)
+      sectionErrors.push(`Section ${i}: ${msg}`)
       logger.error(`Error creating section ${i}:`, err)
     }
   }
@@ -58,7 +66,7 @@ export async function buildBoard(
 
   onProgress?.('Board ready!', 100)
 
-  return { boardId, boardUrl, boardName }
+  return { boardId, boardUrl, boardName, failedSections, sectionErrors }
 }
 
 async function createBoardSection(boardId: string, section: BoardSection, api: typeof window.electronAPI) {
