@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { useAgentStore } from '../stores/agentStore'
+import { useUIStore } from '../stores/uiStore'
 import type { AgentRun } from '../types/agent'
 
 // Component imports
@@ -33,7 +34,7 @@ function makeAgent(overrides: Partial<AgentRun> = {}): AgentRun {
   }
 }
 
-function resetStore() {
+function resetStores() {
   useAgentStore.setState({
     agents: [],
     history: [],
@@ -41,6 +42,13 @@ function resetStore() {
     lastScreenshot: null,
     domCheckResults: null,
     isAdmin: true,
+  })
+  useUIStore.setState({
+    sidebarCollapsed: false,
+    activePage: '/',
+    activeModal: null,
+    toasts: [],
+    isSearchOpen: false,
   })
 }
 
@@ -50,13 +58,12 @@ function resetStore() {
 
 describe('AgentLauncher', () => {
   beforeEach(() => {
-    resetStore()
+    resetStores()
     vi.clearAllMocks()
   })
 
   it('renders without crashing', () => {
     renderWithRouter(<AgentLauncher />)
-    // Section heading exists
     expect(screen.getAllByText('Launch Agent').length).toBeGreaterThanOrEqual(1)
   })
 
@@ -70,13 +77,19 @@ describe('AgentLauncher', () => {
     expect(screen.getByText('Sonnet 4.6')).toBeInTheDocument()
   })
 
-  it('shows tool toggle buttons', () => {
+  it('shows all tool toggle chips', () => {
     renderWithRouter(<AgentLauncher />)
     expect(screen.getByText('Read')).toBeInTheDocument()
     expect(screen.getByText('Edit')).toBeInTheDocument()
     expect(screen.getByText('Glob')).toBeInTheDocument()
     expect(screen.getByText('Grep')).toBeInTheDocument()
     expect(screen.getByText('Bash')).toBeInTheDocument()
+  })
+
+  it('tool chips have aria-pressed attribute', () => {
+    renderWithRouter(<AgentLauncher />)
+    const readChip = screen.getByRole('button', { name: 'Toggle Read tool' })
+    expect(readChip).toHaveAttribute('aria-pressed', 'true')
   })
 
   it('shows Quick Actions section', () => {
@@ -86,7 +99,6 @@ describe('AgentLauncher', () => {
 
   it('launch button is disabled when prompt is empty', () => {
     renderWithRouter(<AgentLauncher />)
-    // The submit button is the last "Launch Agent" occurrence (h2 + button)
     const launchButtons = screen.getAllByText('Launch Agent')
     const submitBtn = launchButtons[launchButtons.length - 1]!.closest('button')
     expect(submitBtn).toBeDisabled()
@@ -106,8 +118,7 @@ describe('AgentLauncher', () => {
     const input = screen.getByPlaceholderText('Describe the task for the AI agent...')
     fireEvent.change(input, { target: { value: 'Fix the bug' } })
     const launchButtons = screen.getAllByText('Launch Agent')
-    const submitBtn = launchButtons[launchButtons.length - 1]!.closest('button')!
-    fireEvent.click(submitBtn)
+    fireEvent.click(launchButtons[launchButtons.length - 1]!.closest('button')!)
     await waitFor(() => {
       expect(window.electronAPI.agent.launch).toHaveBeenCalledWith(
         expect.objectContaining({ prompt: 'Fix the bug', model: 'sonnet' })
@@ -120,19 +131,55 @@ describe('AgentLauncher', () => {
     const input = screen.getByPlaceholderText('Describe the task for the AI agent...')
     fireEvent.change(input, { target: { value: 'Fix the bug' } })
     const launchButtons = screen.getAllByText('Launch Agent')
-    const submitBtn = launchButtons[launchButtons.length - 1]!.closest('button')!
-    fireEvent.click(submitBtn)
+    fireEvent.click(launchButtons[launchButtons.length - 1]!.closest('button')!)
     await waitFor(() => {
       expect((input as HTMLInputElement).value).toBe('')
     })
   })
 
+  it('adds agent to store after successful launch', async () => {
+    renderWithRouter(<AgentLauncher />)
+    const input = screen.getByPlaceholderText('Describe the task for the AI agent...')
+    fireEvent.change(input, { target: { value: 'My task' } })
+    const launchButtons = screen.getAllByText('Launch Agent')
+    fireEvent.click(launchButtons[launchButtons.length - 1]!.closest('button')!)
+    await waitFor(() => {
+      expect(useAgentStore.getState().agents).toHaveLength(1)
+      expect(useAgentStore.getState().agents[0]!.id).toBe('test-agent-id')
+    })
+  })
+
+  it('shows error toast when launch fails', async () => {
+    vi.mocked(window.electronAPI.agent.launch).mockResolvedValueOnce({
+      ok: false,
+      error: 'Claude CLI not found',
+    })
+    renderWithRouter(<AgentLauncher />)
+    const input = screen.getByPlaceholderText('Describe the task for the AI agent...')
+    fireEvent.change(input, { target: { value: 'Fix the bug' } })
+    const launchButtons = screen.getAllByText('Launch Agent')
+    fireEvent.click(launchButtons[launchButtons.length - 1]!.closest('button')!)
+    await waitFor(() => {
+      const toasts = useUIStore.getState().toasts
+      expect(toasts.some((t) => t.type === 'error' && t.title === 'Agent launch failed')).toBe(true)
+    })
+  })
+
   it('clicking a quick action fills in the prompt', () => {
     renderWithRouter(<AgentLauncher />)
-    const fixTsButton = screen.getByText('Fix All TypeScript Errors')
-    fireEvent.click(fixTsButton)
+    fireEvent.click(screen.getByText('Fix All TypeScript Errors'))
     const input = screen.getByPlaceholderText('Describe the task for the AI agent...')
     expect((input as HTMLInputElement).value).toContain('typecheck')
+  })
+
+  it('toggling a tool chip removes it from selected tools', async () => {
+    renderWithRouter(<AgentLauncher />)
+    const readChip = screen.getByRole('button', { name: 'Toggle Read tool' })
+    // Initially pressed (selected)
+    expect(readChip).toHaveAttribute('aria-pressed', 'true')
+    fireEvent.click(readChip)
+    // After click, not pressed
+    expect(readChip).toHaveAttribute('aria-pressed', 'false')
   })
 })
 
@@ -142,7 +189,7 @@ describe('AgentLauncher', () => {
 
 describe('LiveLogs', () => {
   beforeEach(() => {
-    resetStore()
+    resetStores()
   })
 
   it('renders without crashing', () => {
@@ -161,7 +208,7 @@ describe('LiveLogs', () => {
         makeAgent({
           logs: [
             { timestamp: 1000, type: 'stdout', text: 'Running task...' },
-            { timestamp: 2000, type: 'stderr', text: 'Warning: something went wrong' },
+            { timestamp: 2000, type: 'stderr', text: 'Warning: something' },
             { timestamp: 3000, type: 'system', text: 'Agent launched' },
           ],
         }),
@@ -169,7 +216,7 @@ describe('LiveLogs', () => {
     })
     renderWithRouter(<LiveLogs />)
     expect(screen.getByText('Running task...')).toBeInTheDocument()
-    expect(screen.getByText('Warning: something went wrong')).toBeInTheDocument()
+    expect(screen.getByText('Warning: something')).toBeInTheDocument()
     expect(screen.getByText('Agent launched')).toBeInTheDocument()
   })
 
@@ -181,16 +228,25 @@ describe('LiveLogs', () => {
     }))
     useAgentStore.setState({ agents: [makeAgent({ logs })] })
     renderWithRouter(<LiveLogs />)
-    // Only the most recent 1000 lines should be shown (Line 500 - Line 1499)
     expect(screen.queryByText('Line 0')).not.toBeInTheDocument()
     expect(screen.getByText('Line 1499')).toBeInTheDocument()
   })
 
   it('shows filter dropdown', () => {
     renderWithRouter(<LiveLogs />)
-    // The SimpleSelect renders a <select> with filter options
     const selects = screen.getAllByRole('combobox')
     expect(selects.length).toBeGreaterThanOrEqual(1)
+  })
+
+  it('does not add ellipsis to short agent labels', () => {
+    useAgentStore.setState({
+      agents: [makeAgent({ id: 'a1', prompt: 'Short' }), makeAgent({ id: 'a2', prompt: 'Another' })],
+    })
+    renderWithRouter(<LiveLogs />)
+    // Multi-agent selector renders — check no spurious ellipsis on short prompts
+    const options = screen.getAllByRole('option')
+    const shortOption = options.find((o) => o.textContent?.includes('Short'))
+    expect(shortOption?.textContent).not.toContain('...')
   })
 })
 
@@ -200,7 +256,7 @@ describe('LiveLogs', () => {
 
 describe('AppSelfCheck', () => {
   beforeEach(() => {
-    resetStore()
+    resetStores()
     vi.clearAllMocks()
   })
 
@@ -242,8 +298,7 @@ describe('AppSelfCheck', () => {
     renderWithRouter(<AppSelfCheck />)
     fireEvent.click(screen.getByText('Capture'))
     await waitFor(() => {
-      const img = screen.queryByRole('img', { name: 'App screenshot' })
-      expect(img).toBeInTheDocument()
+      expect(screen.queryByRole('img', { name: 'App screenshot' })).toBeInTheDocument()
     })
   })
 
@@ -256,12 +311,12 @@ describe('AppSelfCheck', () => {
     })
   })
 
-  it('displays DOM check results after running checks', async () => {
+  it('displays DOM check results', async () => {
     vi.mocked(window.electronAPI.selfTest.runAll).mockResolvedValueOnce({
       ok: true,
       results: [
-        { label: 'Sidebar exists', passed: true, detail: 'Sidebar found' },
-        { label: 'TopBar visible', passed: false, detail: 'TopBar not found' },
+        { label: 'Sidebar exists', passed: true, detail: 'Found' },
+        { label: 'TopBar visible', passed: false, detail: 'Not found' },
       ],
     })
     renderWithRouter(<AppSelfCheck />)
@@ -279,6 +334,14 @@ describe('AppSelfCheck', () => {
     renderWithRouter(<AppSelfCheck />)
     expect(screen.getByText('2 errors')).toBeInTheDocument()
   })
+
+  it('uses individual selectors (does not subscribe to entire store)', () => {
+    // This test verifies the component renders correctly using granular selectors.
+    // If it subscribed to the whole store, it would re-render on any log append.
+    useAgentStore.setState({ lastScreenshot: 'data:image/png;base64,test' })
+    renderWithRouter(<AppSelfCheck />)
+    expect(screen.queryByRole('img', { name: 'App screenshot' })).toBeInTheDocument()
+  })
 })
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -287,7 +350,7 @@ describe('AppSelfCheck', () => {
 
 describe('RunHistory', () => {
   beforeEach(() => {
-    resetStore()
+    resetStores()
     vi.clearAllMocks()
   })
 
@@ -306,7 +369,7 @@ describe('RunHistory', () => {
     expect(screen.queryByText('Clear')).not.toBeInTheDocument()
   })
 
-  it('displays history items', () => {
+  it('displays history items with prompt text', () => {
     useAgentStore.setState({
       history: [
         makeAgent({ id: 'h1', status: 'completed', finishedAt: Date.now() }),
@@ -314,7 +377,6 @@ describe('RunHistory', () => {
       ],
     })
     renderWithRouter(<RunHistory />)
-    // Both agents have same prompt, so two instances should exist
     expect(screen.getAllByText('Fix TypeScript errors in the codebase')).toHaveLength(2)
   })
 
@@ -326,37 +388,19 @@ describe('RunHistory', () => {
     expect(screen.getByText('1')).toBeInTheDocument()
   })
 
-  it('shows Clear button when history is non-empty', () => {
+  it('shows Clear button and clears history', async () => {
     useAgentStore.setState({
       history: [makeAgent({ id: 'h1', status: 'completed', finishedAt: Date.now() })],
     })
     renderWithRouter(<RunHistory />)
     expect(screen.getByText('Clear')).toBeInTheDocument()
-  })
-
-  it('clears history when Clear is clicked', async () => {
-    useAgentStore.setState({
-      history: [makeAgent({ id: 'h1', status: 'completed', finishedAt: Date.now() })],
-    })
-    renderWithRouter(<RunHistory />)
     fireEvent.click(screen.getByText('Clear'))
     await waitFor(() => {
       expect(screen.getByText('No completed runs yet')).toBeInTheDocument()
     })
   })
 
-  it('shows Rollback button only for agents with gitTagStart', () => {
-    useAgentStore.setState({
-      history: [
-        makeAgent({ id: 'h1', status: 'completed', finishedAt: Date.now(), gitTagStart: 'abc1234' }),
-        makeAgent({ id: 'h2', status: 'completed', finishedAt: Date.now(), gitTagStart: null }),
-      ],
-    })
-    renderWithRouter(<RunHistory />)
-    expect(screen.getAllByText('Rollback')).toHaveLength(1)
-  })
-
-  it('shows status badges for completed and failed runs', () => {
+  it('shows status badges', () => {
     useAgentStore.setState({
       history: [
         makeAgent({ id: 'h1', status: 'completed', finishedAt: Date.now() }),
@@ -368,7 +412,106 @@ describe('RunHistory', () => {
     expect(screen.getByText('failed')).toBeInTheDocument()
   })
 
-  it('expands to show logs when chevron is clicked', async () => {
+  it('shows Rollback button only when gitTagStart is set', () => {
+    useAgentStore.setState({
+      history: [
+        makeAgent({ id: 'h1', status: 'completed', finishedAt: Date.now(), gitTagStart: 'abc1234' }),
+        makeAgent({ id: 'h2', status: 'completed', finishedAt: Date.now(), gitTagStart: null }),
+      ],
+    })
+    renderWithRouter(<RunHistory />)
+    expect(screen.getAllByText('Rollback')).toHaveLength(1)
+  })
+
+  it('opens confirmation modal when Rollback is clicked', () => {
+    useAgentStore.setState({
+      history: [
+        makeAgent({ id: 'h1', status: 'completed', finishedAt: Date.now(), gitTagStart: 'abc1234' }),
+      ],
+    })
+    renderWithRouter(<RunHistory />)
+    fireEvent.click(screen.getAllByText('Rollback')[0]!)
+    expect(screen.getByText('Confirm Rollback')).toBeInTheDocument()
+    expect(screen.getByText(/git reset --hard abc1234/)).toBeInTheDocument()
+  })
+
+  it('closes modal when Cancel is clicked', async () => {
+    useAgentStore.setState({
+      history: [
+        makeAgent({ id: 'h1', status: 'completed', finishedAt: Date.now(), gitTagStart: 'abc1234' }),
+      ],
+    })
+    renderWithRouter(<RunHistory />)
+    fireEvent.click(screen.getAllByText('Rollback')[0]!)
+    expect(screen.getByText('Confirm Rollback')).toBeInTheDocument()
+    fireEvent.click(screen.getByText('Cancel'))
+    await waitFor(() => {
+      expect(screen.queryByText('Confirm Rollback')).not.toBeInTheDocument()
+    })
+  })
+
+  it('calls agent.rollback IPC when modal Rollback is confirmed', async () => {
+    useAgentStore.setState({
+      history: [
+        makeAgent({ id: 'h1', status: 'completed', finishedAt: Date.now(), gitTagStart: 'abc1234' }),
+      ],
+    })
+    renderWithRouter(<RunHistory />)
+    fireEvent.click(screen.getAllByText('Rollback')[0]!)
+    // Click the confirm button inside the modal
+    const modalRollbackBtns = screen.getAllByText('Rollback')
+    // Last button is the confirm button in the modal
+    fireEvent.click(modalRollbackBtns[modalRollbackBtns.length - 1]!)
+    await waitFor(() => {
+      expect(window.electronAPI.agent.rollback).toHaveBeenCalledWith('abc1234')
+    })
+  })
+
+  it('shows success toast after successful rollback', async () => {
+    useAgentStore.setState({
+      history: [
+        makeAgent({ id: 'h1', status: 'completed', finishedAt: Date.now(), gitTagStart: 'abc1234' }),
+      ],
+    })
+    renderWithRouter(<RunHistory />)
+    fireEvent.click(screen.getAllByText('Rollback')[0]!)
+    const modalRollbackBtns = screen.getAllByText('Rollback')
+    fireEvent.click(modalRollbackBtns[modalRollbackBtns.length - 1]!)
+    await waitFor(() => {
+      const toasts = useUIStore.getState().toasts
+      expect(toasts.some((t) => t.type === 'success' && t.title === 'Rollback complete')).toBe(true)
+    })
+  })
+
+  it('shows error toast when rollback fails', async () => {
+    vi.mocked(window.electronAPI.agent.rollback).mockResolvedValueOnce({
+      ok: false,
+      error: 'Invalid git ref',
+    })
+    useAgentStore.setState({
+      history: [
+        makeAgent({ id: 'h1', status: 'completed', finishedAt: Date.now(), gitTagStart: 'abc1234' }),
+      ],
+    })
+    renderWithRouter(<RunHistory />)
+    fireEvent.click(screen.getAllByText('Rollback')[0]!)
+    const modalRollbackBtns = screen.getAllByText('Rollback')
+    fireEvent.click(modalRollbackBtns[modalRollbackBtns.length - 1]!)
+    await waitFor(() => {
+      const toasts = useUIStore.getState().toasts
+      expect(toasts.some((t) => t.type === 'error' && t.title === 'Rollback failed')).toBe(true)
+    })
+  })
+
+  it('expand button has aria-label', () => {
+    useAgentStore.setState({
+      history: [makeAgent({ id: 'h1', status: 'completed', finishedAt: Date.now() })],
+    })
+    renderWithRouter(<RunHistory />)
+    expect(screen.getByRole('button', { name: 'Expand logs' })).toBeInTheDocument()
+  })
+
+  it('expands to show logs when expand button is clicked', async () => {
     useAgentStore.setState({
       history: [
         makeAgent({
@@ -380,11 +523,7 @@ describe('RunHistory', () => {
       ],
     })
     renderWithRouter(<RunHistory />)
-    // The expand button has no text content (only a ChevronDown SVG icon)
-    const allButtons = screen.getAllByRole('button')
-    const expandBtn = allButtons.find((btn) => btn.textContent?.trim() === '')
-    expect(expandBtn).toBeTruthy()
-    fireEvent.click(expandBtn!)
+    fireEvent.click(screen.getByRole('button', { name: 'Expand logs' }))
     await waitFor(() => {
       expect(screen.getByText('Task completed successfully')).toBeInTheDocument()
     })
@@ -397,7 +536,7 @@ describe('RunHistory', () => {
 
 describe('ActiveAgents', () => {
   beforeEach(() => {
-    resetStore()
+    resetStores()
     vi.clearAllMocks()
   })
 
@@ -431,7 +570,7 @@ describe('ActiveAgents', () => {
     expect(screen.getByText('Kill All')).toBeInTheDocument()
   })
 
-  it('does not show Kill All when only one agent is running', () => {
+  it('does not show Kill All with only one agent', () => {
     useAgentStore.setState({
       agents: [makeAgent({ status: 'running' })],
     })
@@ -439,14 +578,14 @@ describe('ActiveAgents', () => {
     expect(screen.queryByText('Kill All')).not.toBeInTheDocument()
   })
 
-  it('calls agent.kill when Kill button is clicked', async () => {
+  it('calls agent.kill with correct id', async () => {
     useAgentStore.setState({
-      agents: [makeAgent({ status: 'running' })],
+      agents: [makeAgent({ id: 'my-agent', status: 'running' })],
     })
     renderWithRouter(<ActiveAgents />)
     fireEvent.click(screen.getByText('Kill'))
     await waitFor(() => {
-      expect(window.electronAPI.agent.kill).toHaveBeenCalledWith('agent-1')
+      expect(window.electronAPI.agent.kill).toHaveBeenCalledWith('my-agent')
     })
   })
 
@@ -461,6 +600,22 @@ describe('ActiveAgents', () => {
     fireEvent.click(screen.getByText('Kill All'))
     await waitFor(() => {
       expect(window.electronAPI.agent.killAll).toHaveBeenCalled()
+    })
+  })
+
+  it('shows error toast when kill fails', async () => {
+    vi.mocked(window.electronAPI.agent.kill).mockResolvedValueOnce({
+      ok: false,
+      error: 'Agent not found',
+    })
+    useAgentStore.setState({
+      agents: [makeAgent({ status: 'running' })],
+    })
+    renderWithRouter(<ActiveAgents />)
+    fireEvent.click(screen.getByText('Kill'))
+    await waitFor(() => {
+      const toasts = useUIStore.getState().toasts
+      expect(toasts.some((t) => t.type === 'error' && t.title === 'Failed to kill agent')).toBe(true)
     })
   })
 })

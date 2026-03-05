@@ -55,6 +55,7 @@ const mockElectronAPI = {
     launch: vi.fn().mockResolvedValue({ ok: true, id: 'test-agent-id', model: 'sonnet', startedAt: 1000 }),
     kill: vi.fn().mockResolvedValue({ ok: true }),
     killAll: vi.fn().mockResolvedValue({ ok: true, killed: 0 }),
+    rollback: vi.fn().mockResolvedValue({ ok: true }),
     onLog: vi.fn().mockReturnValue(() => {}),
     onExit: vi.fn().mockReturnValue(() => {}),
   },
@@ -62,6 +63,7 @@ const mockElectronAPI = {
     screenshot: vi.fn().mockResolvedValue({ ok: true, dataURL: 'data:image/png;base64,abc', filePath: '/tmp/test.png' }),
     domCheck: vi.fn().mockResolvedValue({ ok: true, result: {} }),
     consoleErrors: vi.fn().mockResolvedValue({ ok: true, errors: [] }),
+    clearConsoleErrors: vi.fn().mockResolvedValue({ ok: true }),
     runAll: vi.fn().mockResolvedValue({ ok: true, results: [] }),
   },
 }
