@@ -4,6 +4,8 @@ import { store } from './config'
 import { registerSystemHandlers } from './ipc/handlers'
 import { registerMiroHandlers } from './ipc/miroHandlers'
 import { registerGithubHandlers } from './ipc/githubHandlers'
+import { registerAgentHandlers } from './ipc/agentHandlers'
+import { registerSelfTestHandlers } from './ipc/selfTestHandlers'
 
 let mainWindow: BrowserWindow | null = null
 
@@ -68,6 +70,8 @@ function createWindow(): void {
   registerSystemHandlers(mainWindow)
   registerMiroHandlers()
   registerGithubHandlers()
+  registerAgentHandlers(mainWindow)
+  registerSelfTestHandlers(mainWindow)
 
   // Prevent new windows — open external links in browser
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {

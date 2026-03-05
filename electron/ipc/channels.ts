@@ -42,6 +42,19 @@ export const IPC_CHANNELS = {
 
   // Shell
   SHELL_OPEN_EXTERNAL: 'shell:open-external',
+
+  // Agent
+  AGENT_LAUNCH: 'agent:launch',
+  AGENT_KILL: 'agent:kill',
+  AGENT_KILL_ALL: 'agent:kill-all',
+  AGENT_LOG: 'agent:log',
+  AGENT_EXIT: 'agent:exit',
+
+  // Self-test
+  SELFTEST_SCREENSHOT: 'selftest:screenshot',
+  SELFTEST_DOM_CHECK: 'selftest:dom-check',
+  SELFTEST_CONSOLE_ERRORS: 'selftest:console-errors',
+  SELFTEST_RUN_ALL: 'selftest:run-all',
 } as const
 
 export type IPCChannel = (typeof IPC_CHANNELS)[keyof typeof IPC_CHANNELS]

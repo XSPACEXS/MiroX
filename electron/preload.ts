@@ -62,6 +62,36 @@ const electronAPI = {
   // Shell
   openExternal: (url: string) => ipcRenderer.invoke('shell:open-external', url),
 
+  // Agent
+  agent: {
+    launch: (config: { model: string; prompt: string; allowedTools: string[] }) =>
+      ipcRenderer.invoke('agent:launch', config),
+    kill: (id: string) => ipcRenderer.invoke('agent:kill', id),
+    killAll: () => ipcRenderer.invoke('agent:kill-all'),
+    onLog: (callback: (data: { agentId: string; timestamp: number; type: string; text: string }) => void) => {
+      const handler = (_event: Electron.IpcRendererEvent, data: { agentId: string; timestamp: number; type: string; text: string }) => callback(data)
+      ipcRenderer.on('agent:log', handler)
+      return () => {
+        ipcRenderer.removeListener('agent:log', handler)
+      }
+    },
+    onExit: (callback: (data: { id: string; exitCode: number; status: string }) => void) => {
+      const handler = (_event: Electron.IpcRendererEvent, data: { id: string; exitCode: number; status: string }) => callback(data)
+      ipcRenderer.on('agent:exit', handler)
+      return () => {
+        ipcRenderer.removeListener('agent:exit', handler)
+      }
+    },
+  },
+
+  // Self-test
+  selfTest: {
+    screenshot: () => ipcRenderer.invoke('selftest:screenshot'),
+    domCheck: (code: string) => ipcRenderer.invoke('selftest:dom-check', code),
+    consoleErrors: () => ipcRenderer.invoke('selftest:console-errors'),
+    runAll: () => ipcRenderer.invoke('selftest:run-all'),
+  },
+
   // Navigation listener (from main process menu)
   onNavigate: (callback: (path: string) => void) => {
     ipcRenderer.on('navigate', (_event, path: string) => callback(path))
