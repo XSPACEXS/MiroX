@@ -5,10 +5,8 @@ const DEFAULT_TOKEN = 'eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_1lHPl4N2tFRPuZK2z6CoFkGTsx
 
 export class MiroApiClient {
   private client: AxiosInstance
-  private token: string
 
   constructor(token: string = DEFAULT_TOKEN) {
-    this.token = token
     this.client = axios.create({
       baseURL: 'https://api.miro.com/v2',
       headers: {
@@ -30,7 +28,6 @@ export class MiroApiClient {
   }
 
   updateToken(token: string): void {
-    this.token = token
     this.client.defaults.headers['Authorization'] = `Bearer ${token}`
   }
 

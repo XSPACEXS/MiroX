@@ -60,6 +60,9 @@ export function registerSystemHandlers(mainWindow: BrowserWindow): void {
   // File read
   ipcMain.removeHandler('file:read')
   ipcMain.handle('file:read', async (_event, filePath: string) => {
+    if (typeof filePath !== 'string' || !filePath.trim()) {
+      return { ok: false, error: 'Invalid file path' }
+    }
     try {
       const content = await fs.readFile(filePath)
       return {
@@ -77,6 +80,12 @@ export function registerSystemHandlers(mainWindow: BrowserWindow): void {
   // File parse — delegates to appropriate parser based on file type
   ipcMain.removeHandler('file:parse')
   ipcMain.handle('file:parse', async (_event, filePath: string, fileName: string, mimeType: string) => {
+    if (typeof filePath !== 'string' || !filePath.trim()) {
+      return { ok: false, error: 'Invalid file path' }
+    }
+    if (typeof fileName !== 'string' || !fileName.trim()) {
+      return { ok: false, error: 'Invalid file name' }
+    }
     try {
       const ext = path.extname(fileName).toLowerCase()
       let text = ''
@@ -127,6 +136,17 @@ export function registerSystemHandlers(mainWindow: BrowserWindow): void {
   // URL fetch
   ipcMain.removeHandler('file:fetch-url')
   ipcMain.handle('file:fetch-url', async (_event, url: string) => {
+    if (typeof url !== 'string' || !url.trim()) {
+      return { ok: false, error: 'Invalid URL' }
+    }
+    try {
+      const parsed = new URL(url)
+      if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') {
+        return { ok: false, error: 'Only http/https URLs are supported' }
+      }
+    } catch {
+      return { ok: false, error: 'Invalid URL format' }
+    }
     try {
       const response = await fetch(url)
       if (!response.ok) {
@@ -147,6 +167,9 @@ export function registerSystemHandlers(mainWindow: BrowserWindow): void {
 
   ipcMain.removeHandler('settings:save')
   ipcMain.handle('settings:save', (_event, settings: Record<string, unknown>) => {
+    if (!settings || typeof settings !== 'object' || Array.isArray(settings)) {
+      return { ok: false, error: 'Invalid settings object' }
+    }
     for (const [key, value] of Object.entries(settings)) {
       store.set(key as keyof typeof store.store, value)
     }

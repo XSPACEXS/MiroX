@@ -59,6 +59,9 @@ export function registerMiroHandlers(): void {
   // Create board
   ipcMain.removeHandler('miro:create-board')
   ipcMain.handle('miro:create-board', async (_event, name: string, description?: string) => {
+    if (typeof name !== 'string' || !name.trim()) {
+      return { ok: false, error: 'Board name is required' }
+    }
     const body: Record<string, unknown> = { name }
     if (description) body.description = description
     return miroRequest('POST', '/boards', body)
@@ -82,6 +85,9 @@ export function registerMiroHandlers(): void {
   // Set token
   ipcMain.removeHandler('miro:set-token')
   ipcMain.handle('miro:set-token', async (_event, token: string) => {
+    if (typeof token !== 'string' || !token.trim()) {
+      return { ok: false, error: 'Token is required' }
+    }
     try {
       await keytar.setPassword(SERVICE, ACCOUNT_MIRO, token)
       return { ok: true }
@@ -100,6 +106,9 @@ export function registerMiroHandlers(): void {
     height: number
     style?: { fillColor?: string }
   }) => {
+    if (typeof boardId !== 'string' || !boardId.trim()) {
+      return { ok: false, error: 'Board ID is required' }
+    }
     return miroRequest('POST', `/boards/${boardId}/frames`, {
       data: { title: data.title, format: 'custom', type: 'freeform' },
       style: data.style || { fillColor: '#1a1a1a' },
@@ -119,6 +128,9 @@ export function registerMiroHandlers(): void {
     height: number
     style?: Record<string, unknown>
   }) => {
+    if (typeof boardId !== 'string' || !boardId.trim()) {
+      return { ok: false, error: 'Board ID is required' }
+    }
     return miroRequest('POST', `/boards/${boardId}/shapes`, {
       data: { content: data.content, shape: data.shape },
       style: data.style || {
@@ -144,6 +156,9 @@ export function registerMiroHandlers(): void {
     shape?: string
     style?: Record<string, unknown>
   }) => {
+    if (typeof boardId !== 'string' || !boardId.trim()) {
+      return { ok: false, error: 'Board ID is required' }
+    }
     return miroRequest('POST', `/boards/${boardId}/sticky_notes`, {
       data: { content: data.content, shape: data.shape || 'square' },
       style: data.style || { fillColor: 'yellow', textAlign: 'center', textAlignVertical: 'middle' },
@@ -160,6 +175,9 @@ export function registerMiroHandlers(): void {
     width?: number
     style?: Record<string, unknown>
   }) => {
+    if (typeof boardId !== 'string' || !boardId.trim()) {
+      return { ok: false, error: 'Board ID is required' }
+    }
     return miroRequest('POST', `/boards/${boardId}/texts`, {
       data: { content: data.content },
       style: data.style || { color: '#ffffff', fontSize: '14', textAlign: 'left' },
@@ -176,6 +194,9 @@ export function registerMiroHandlers(): void {
     style?: Record<string, unknown>
     captions?: Array<{ content: string }>
   }) => {
+    if (typeof boardId !== 'string' || !boardId.trim()) {
+      return { ok: false, error: 'Board ID is required' }
+    }
     return miroRequest('POST', `/boards/${boardId}/connectors`, {
       startItem: { id: data.startItemId },
       endItem: { id: data.endItemId },
@@ -193,12 +214,24 @@ export function registerMiroHandlers(): void {
   // Delete item
   ipcMain.removeHandler('miro:delete-item')
   ipcMain.handle('miro:delete-item', async (_event, boardId: string, itemId: string) => {
+    if (typeof boardId !== 'string' || !boardId.trim()) {
+      return { ok: false, error: 'Board ID is required' }
+    }
+    if (typeof itemId !== 'string' || !itemId.trim()) {
+      return { ok: false, error: 'Item ID is required' }
+    }
     return miroRequest('DELETE', `/boards/${boardId}/items/${itemId}`)
   })
 
   // Reposition item
   ipcMain.removeHandler('miro:reposition-item')
   ipcMain.handle('miro:reposition-item', async (_event, boardId: string, itemId: string, x: number, y: number) => {
+    if (typeof boardId !== 'string' || !boardId.trim()) {
+      return { ok: false, error: 'Board ID is required' }
+    }
+    if (typeof itemId !== 'string' || !itemId.trim()) {
+      return { ok: false, error: 'Item ID is required' }
+    }
     return miroRequest('PATCH', `/boards/${boardId}/items/${itemId}`, {
       position: { x, y },
     })
@@ -207,6 +240,9 @@ export function registerMiroHandlers(): void {
   // Delete ghost items (ai_generation_result at position 20,20)
   ipcMain.removeHandler('miro:delete-ghosts')
   ipcMain.handle('miro:delete-ghosts', async (_event, boardId: string) => {
+    if (typeof boardId !== 'string' || !boardId.trim()) {
+      return { ok: false, error: 'Board ID is required' }
+    }
     try {
       const result = await miroRequest('GET', `/boards/${boardId}/items?limit=50`) as {
         data?: Array<{ id: string; type?: string; position?: { x: number; y: number } }>

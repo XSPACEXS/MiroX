@@ -41,6 +41,9 @@ export function registerGithubHandlers(): void {
   // Set token
   ipcMain.removeHandler('github:set-token')
   ipcMain.handle('github:set-token', async (_event, token: string) => {
+    if (typeof token !== 'string' || !token.trim()) {
+      return { ok: false, error: 'Token is required' }
+    }
     try {
       await keytar.setPassword(SERVICE, ACCOUNT_GITHUB, token)
       return { ok: true }
@@ -119,6 +122,12 @@ export function registerGithubHandlers(): void {
   // Analyze repo
   ipcMain.removeHandler('github:analyze-repo')
   ipcMain.handle('github:analyze-repo', async (_event, owner: string, repo: string) => {
+    if (typeof owner !== 'string' || !owner.trim()) {
+      return { ok: false, error: 'Repository owner is required' }
+    }
+    if (typeof repo !== 'string' || !repo.trim()) {
+      return { ok: false, error: 'Repository name is required' }
+    }
     try {
       const token = await getGithubToken()
       if (!token) return { ok: false, error: 'No GitHub token configured' }
