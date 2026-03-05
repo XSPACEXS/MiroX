@@ -18,7 +18,7 @@ const DEFAULT_TOOLS = ['Read', 'Edit', 'Glob', 'Grep', 'Bash']
 
 export function AgentLauncher(): JSX.Element {
   const [prompt, setPrompt] = useState('')
-  const [model, setModel] = useState<string>('sonnet')
+  const [model, setModel] = useState<AgentRun['model']>('sonnet')
   const [tools, setTools] = useState<string[]>(DEFAULT_TOOLS)
   const [isLaunching, setIsLaunching] = useState(false)
   const addAgent = useAgentStore((s) => s.addAgent)
@@ -35,7 +35,7 @@ export function AgentLauncher(): JSX.Element {
     setIsLaunching(true)
     try {
       const result = await window.electronAPI.agent.launch({
-        model,
+        model: model,
         prompt: prompt.trim(),
         allowedTools: tools,
       })
@@ -44,7 +44,7 @@ export function AgentLauncher(): JSX.Element {
         const agent: AgentRun = {
           id: result.id,
           prompt: prompt.trim(),
-          model: model as AgentRun['model'],
+          model: model,
           status: 'running',
           logs: [],
           startedAt: result.startedAt || Date.now(),
@@ -97,7 +97,7 @@ export function AgentLauncher(): JSX.Element {
           <Dropdown
             options={MODEL_OPTIONS}
             value={model}
-            onChange={setModel}
+            onChange={(v) => setModel(v as AgentRun['model'])}
             className="w-40"
           />
         </div>

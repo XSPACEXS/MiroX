@@ -37,7 +37,7 @@ export function LiveLogs(): JSX.Element {
       { value: '', label: 'All Agents' },
       ...agents.map((a) => ({
         value: a.id,
-        label: `${a.model} — ${a.prompt.slice(0, 40)}...`,
+        label: a.prompt.length > 40 ? `${a.model} — ${a.prompt.slice(0, 40)}...` : `${a.model} — ${a.prompt}`,
       })),
     ],
     [agents]

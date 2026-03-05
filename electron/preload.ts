@@ -68,15 +68,15 @@ const electronAPI = {
       ipcRenderer.invoke('agent:launch', config),
     kill: (id: string) => ipcRenderer.invoke('agent:kill', id),
     killAll: () => ipcRenderer.invoke('agent:kill-all'),
-    onLog: (callback: (data: { agentId: string; timestamp: number; type: string; text: string }) => void) => {
-      const handler = (_event: Electron.IpcRendererEvent, data: { agentId: string; timestamp: number; type: string; text: string }) => callback(data)
+    onLog: (callback: (data: { agentId: string; timestamp: number; type: 'stdout' | 'stderr' | 'system'; text: string }) => void) => {
+      const handler = (_event: Electron.IpcRendererEvent, data: { agentId: string; timestamp: number; type: 'stdout' | 'stderr' | 'system'; text: string }) => callback(data)
       ipcRenderer.on('agent:log', handler)
       return () => {
         ipcRenderer.removeListener('agent:log', handler)
       }
     },
-    onExit: (callback: (data: { id: string; exitCode: number; status: string }) => void) => {
-      const handler = (_event: Electron.IpcRendererEvent, data: { id: string; exitCode: number; status: string }) => callback(data)
+    onExit: (callback: (data: { id: string; exitCode: number; status: 'completed' | 'failed' | 'killed' }) => void) => {
+      const handler = (_event: Electron.IpcRendererEvent, data: { id: string; exitCode: number; status: 'completed' | 'failed' | 'killed' }) => callback(data)
       ipcRenderer.on('agent:exit', handler)
       return () => {
         ipcRenderer.removeListener('agent:exit', handler)

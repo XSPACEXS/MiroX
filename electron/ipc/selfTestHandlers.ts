@@ -133,7 +133,7 @@ export function registerSelfTestHandlers(mainWindow: BrowserWindow): void {
       },
     ]
 
-    const results = []
+    const results: Array<{ label: string; passed: boolean; detail: string }> = []
     for (const check of checks) {
       try {
         const raw = await mainWindow.webContents.executeJavaScript(check.code)

@@ -1,6 +1,9 @@
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
 
+// jsdom does not implement scrollIntoView — mock it globally
+window.HTMLElement.prototype.scrollIntoView = vi.fn()
+
 // Mock window.electronAPI for all tests
 const mockElectronAPI = {
   getSystemInfo: vi.fn().mockResolvedValue({
@@ -48,6 +51,19 @@ const mockElectronAPI = {
   },
   openExternal: vi.fn().mockResolvedValue({ ok: true }),
   onNavigate: vi.fn().mockReturnValue(() => {}),
+  agent: {
+    launch: vi.fn().mockResolvedValue({ ok: true, id: 'test-agent-id', model: 'sonnet', startedAt: 1000 }),
+    kill: vi.fn().mockResolvedValue({ ok: true }),
+    killAll: vi.fn().mockResolvedValue({ ok: true, killed: 0 }),
+    onLog: vi.fn().mockReturnValue(() => {}),
+    onExit: vi.fn().mockReturnValue(() => {}),
+  },
+  selfTest: {
+    screenshot: vi.fn().mockResolvedValue({ ok: true, dataURL: 'data:image/png;base64,abc', filePath: '/tmp/test.png' }),
+    domCheck: vi.fn().mockResolvedValue({ ok: true, result: {} }),
+    consoleErrors: vi.fn().mockResolvedValue({ ok: true, errors: [] }),
+    runAll: vi.fn().mockResolvedValue({ ok: true, results: [] }),
+  },
 }
 
 Object.defineProperty(window, 'electronAPI', {
