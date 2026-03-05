@@ -94,9 +94,8 @@ export function useFileImport(): UseFileImportReturn {
       ],
     })
 
-    // Result could be a string (single file) or an object with filePaths
     if (result) {
-      const filePaths: string[] = typeof result === 'string' ? [result] : (result as Record<string, string[]>).filePaths || []
+      const filePaths: string[] = [result]
       filePaths.forEach((filePath: string) => {
         const fileName = filePath.split('/').pop() || filePath
         const ext = fileName.split('.').pop()?.toLowerCase() || ''

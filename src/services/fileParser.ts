@@ -7,6 +7,10 @@ export async function parseFileContent(
 ): Promise<ParsedContent> {
   const result = await window.electronAPI.files.parseFile(filePath, fileName, mimeType)
 
+  if (!result.ok) {
+    throw new Error(result.error || 'File parsing failed')
+  }
+
   // Transform raw parse result into ParsedContent
   const text = result.text || ''
   const headings = (text.match(/^#{1,3} .+/gm) || []).map((h: string) => h.replace(/^#+\s/, ''))

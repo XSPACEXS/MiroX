@@ -29,9 +29,10 @@ export function useMiro(): UseMiroReturn {
     if (!isElectronRef.current) return
     setIsConnecting(true)
     try {
-      const status = await window.electronAPI.miro.testConnection()
+      const result = await window.electronAPI.miro.testConnection()
+      const status: MiroConnectionStatus = { ok: result.ok, error: result.error }
       setConnectionStatus(status)
-      setIsConnected(status.ok)
+      setIsConnected(result.ok)
     } catch {
       setConnectionStatus({ ok: false, error: 'Connection failed' })
       setIsConnected(false)
@@ -65,8 +66,16 @@ export function useMiro(): UseMiroReturn {
     if (!isElectronRef.current || !isConnected) return
     setIsLoadingBoards(true)
     try {
-      const result = (await window.electronAPI.miro.listBoards()) as { data?: MiroBoard[] }
-      setBoards(result?.data || [])
+      const result = await window.electronAPI.miro.listBoards()
+      const data = result.data || []
+      setBoards(data.map((b) => ({
+        id: b.id,
+        name: b.name,
+        description: b.description,
+        viewLink: b.viewLink,
+        createdAt: String(b.createdAt ?? new Date().toISOString()),
+        modifiedAt: String(b.modifiedAt ?? new Date().toISOString()),
+      })))
     } catch (err) {
       logger.error('Failed to load boards:', err)
     } finally {
@@ -83,8 +92,8 @@ export function useMiro(): UseMiroReturn {
         name: response.name,
         description: response.description,
         viewLink: response.viewLink,
-        createdAt: (response.createdAt as string) || new Date().toISOString(),
-        modifiedAt: (response.modifiedAt as string) || new Date().toISOString(),
+        createdAt: typeof response.createdAt === 'string' ? response.createdAt : new Date().toISOString(),
+        modifiedAt: typeof response.modifiedAt === 'string' ? response.modifiedAt : new Date().toISOString(),
       }
       return board
     } catch (err) {
