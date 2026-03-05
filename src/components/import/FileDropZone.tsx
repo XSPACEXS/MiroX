@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Button } from '@components/ui/Button'
 import { Spinner } from '@components/ui/Spinner'
 import { useFileImport } from '../../hooks/useFileImport'
 import type { ImportedFile } from '../../types/import'
@@ -13,6 +14,19 @@ const fileTypeIcons: Record<string, string> = {
   'text/plain': 'TXT',
   'text/markdown': 'MD',
   'application/zip': 'ZIP',
+}
+
+const dropzoneVariants = {
+  idle: {
+    borderColor: 'rgba(255, 214, 0, 0.2)',
+    backgroundColor: 'rgba(255, 214, 0, 0.02)',
+    boxShadow: '0 0 0px rgba(255, 214, 0, 0)',
+  },
+  dragging: {
+    borderColor: 'rgba(255, 214, 0, 0.8)',
+    backgroundColor: 'rgba(255, 214, 0, 0.06)',
+    boxShadow: '0 0 40px rgba(255, 214, 0, 0.15)',
+  },
 }
 
 interface FileDropZoneProps {
@@ -47,18 +61,7 @@ export default function FileDropZone({ onFileReady }: FileDropZoneProps) {
         onDrop={onDrop}
         onClick={() => files.length === 0 && openFilePicker()}
         animate={isDragging ? 'dragging' : 'idle'}
-        variants={{
-          idle: {
-            borderColor: 'rgba(255, 214, 0, 0.2)',
-            backgroundColor: 'rgba(255, 214, 0, 0.02)',
-            boxShadow: '0 0 0px rgba(255, 214, 0, 0)',
-          },
-          dragging: {
-            borderColor: 'rgba(255, 214, 0, 0.8)',
-            backgroundColor: 'rgba(255, 214, 0, 0.06)',
-            boxShadow: '0 0 40px rgba(255, 214, 0, 0.15)',
-          },
-        }}
+        variants={dropzoneVariants}
         transition={{ duration: 0.2 }}
         className="relative flex flex-col items-center justify-center min-h-[320px] rounded-xl border-2 border-dashed cursor-pointer"
       >
@@ -117,7 +120,7 @@ export default function FileDropZone({ onFileReady }: FileDropZoneProps) {
           >
             {/* File type badge */}
             <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-black-700 flex items-center justify-center">
-              <span className="text-[10px] font-bold text-yellow-400 tracking-wider">
+              <span className="text-2xs font-bold text-yellow-400 tracking-wider">
                 {fileTypeIcons[file.type] || file.name.split('.').pop()?.toUpperCase() || '?'}
               </span>
             </div>
@@ -146,7 +149,7 @@ export default function FileDropZone({ onFileReady }: FileDropZoneProps) {
 
                 {/* Template suggestion badge */}
                 {file.status === 'ready' && file.content?.suggestedTemplate && (
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-yellow-400/10 text-yellow-400 border border-yellow-400/20">
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-2xs font-medium bg-yellow-400/10 text-yellow-400 border border-yellow-400/20">
                     {file.content.suggestedTemplate}
                   </span>
                 )}
@@ -174,18 +177,12 @@ export default function FileDropZone({ onFileReady }: FileDropZoneProps) {
           animate={{ opacity: 1 }}
           className="flex items-center gap-3"
         >
-          <button
-            onClick={openFilePicker}
-            className="px-4 py-2 text-sm font-medium text-white bg-black-700 hover:bg-black-600 rounded-lg border border-black-500 transition-colors"
-          >
+          <Button variant="secondary" size="sm" onClick={openFilePicker}>
             Add More Files
-          </button>
-          <button
-            onClick={clearFiles}
-            className="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition-colors"
-          >
+          </Button>
+          <Button variant="ghost" size="sm" onClick={clearFiles}>
             Clear All
-          </button>
+          </Button>
         </motion.div>
       )}
     </div>

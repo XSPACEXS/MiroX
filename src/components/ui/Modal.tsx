@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
+import FocusTrap from 'focus-trap-react'
 import { X } from 'lucide-react'
 import { useEffect, type ReactNode } from 'react'
 import { modalVariants, modalPanelVariants } from '../../design-system/animations'
@@ -39,23 +40,26 @@ export function Modal({ isOpen, onClose, title, size = 'md', children }: ModalPr
           style={{ backdropFilter: 'blur(12px)', background: 'rgba(0,0,0,0.7)' }}
           onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
         >
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={titleId}
-            variants={modalPanelVariants}
-            className={`w-full ${sizeStyles[size]} bg-black-800 border border-black-600 rounded-2xl shadow-2xl overflow-hidden`}
-          >
-            {title && (
-              <div className="flex items-center justify-between px-6 py-4 border-b border-black-600">
-                <h2 id={titleId} className="font-display font-semibold text-lg text-white">{title}</h2>
-                <button onClick={onClose} aria-label="Close dialog" className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
-                  <X size={16} />
-                </button>
-              </div>
-            )}
-            {children}
-          </motion.div>
+          <FocusTrap focusTrapOptions={{ allowOutsideClick: true, escapeDeactivates: false, fallbackFocus: '[role="dialog"]' }}>
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={titleId}
+              tabIndex={-1}
+              variants={modalPanelVariants}
+              className={`w-full ${sizeStyles[size]} bg-black-800 border border-black-600 rounded-2xl shadow-2xl overflow-hidden outline-none`}
+            >
+              {title && (
+                <div className="flex items-center justify-between px-6 py-4 border-b border-black-600">
+                  <h2 id={titleId} className="font-display font-semibold text-lg text-white">{title}</h2>
+                  <button onClick={onClose} aria-label="Close dialog" className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
+                    <X size={16} />
+                  </button>
+                </div>
+              )}
+              {children}
+            </motion.div>
+          </FocusTrap>
         </motion.div>
       )}
     </AnimatePresence>

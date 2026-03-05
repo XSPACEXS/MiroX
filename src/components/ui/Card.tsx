@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import type React from 'react'
 import type { ReactNode, HTMLAttributes } from 'react'
 
 type CardVariant = 'default' | 'elevated' | 'highlighted' | 'interactive'
@@ -27,6 +28,12 @@ export function Card({ variant = 'default', hoverable = false, children, classNa
         tabIndex={0}
         className={`${base} ${variantStyles[variant]} cursor-pointer hover:shadow-yellow-glow transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 focus-visible:ring-offset-1 focus-visible:ring-offset-black-900 ${className}`}
         onClick={onClick}
+        onKeyDown={(e: React.KeyboardEvent) => {
+          if ((e.key === 'Enter' || e.key === ' ') && onClick) {
+            e.preventDefault()
+            onClick(e as unknown as React.MouseEvent<HTMLDivElement>)
+          }
+        }}
         {...(props as React.ComponentProps<typeof motion.div>)}
       >
         {children}

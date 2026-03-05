@@ -26,8 +26,8 @@ export function StepIndicator({ currentStep, className = '' }: StepIndicatorProp
               <motion.div
                 animate={{
                   scale: isActive ? 1 : 0.9,
-                  backgroundColor: isComplete ? '#FFD600' : isActive ? '#FFD600' : 'rgba(34,34,34,1)',
-                  borderColor: isComplete || isActive ? '#FFD600' : 'rgba(51,51,51,1)',
+                  backgroundColor: isComplete || isActive ? '#FFD600' : '#222222',
+                  borderColor: isComplete || isActive ? '#FFD600' : '#333333',
                 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                 className="w-8 h-8 rounded-full border-2 flex items-center justify-center text-sm font-semibold"

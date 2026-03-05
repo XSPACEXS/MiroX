@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Button } from '@components/ui/Button'
 import { Spinner } from '@components/ui/Spinner'
 import { useGitHub } from '../../hooks/useGitHub'
 import type { ParsedContent } from '../../types/import'
@@ -102,28 +103,26 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
             aria-label="GitHub personal access token"
             className="w-full px-4 py-3 rounded-lg bg-black-800 border border-black-500 text-white text-sm font-mono placeholder:text-gray-600 focus:border-yellow-400/50 focus:outline-none focus:ring-1 focus:ring-yellow-400/20 transition-colors"
           />
-          <button
+          <Button
+            variant="primary"
+            size="lg"
             onClick={handleConnect}
             disabled={!tokenInput.trim() || isConnecting}
-            className="w-full py-3 rounded-lg bg-yellow-400 text-black font-semibold text-sm hover:bg-yellow-300 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+            isLoading={isConnecting}
+            className="w-full"
           >
-            {isConnecting ? (
-              <>
-                <Spinner size="sm" className="border-black/20 border-t-black" />
-                Connecting...
-              </>
-            ) : (
-              'Connect'
-            )}
-          </button>
+            {isConnecting ? 'Connecting...' : 'Connect'}
+          </Button>
         </div>
 
-        <button
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={() => window.electronAPI.openExternal('https://github.com/settings/tokens/new?scopes=repo&description=MiroX')}
-          className="text-xs text-gray-500 hover:text-yellow-400 transition-colors"
+          className="text-xs"
         >
           Create a token on GitHub
-        </button>
+        </Button>
       </motion.div>
     )
   }
@@ -141,16 +140,18 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
             <p className="text-sm text-white font-medium">{user?.name || user?.login || 'Connected'}</p>
             <p className="text-xs text-gray-500">{user?.login ? `@${user.login}` : 'GitHub'}</p>
           </div>
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-green-400/10 text-green-400 border border-green-400/20">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-2xs font-medium bg-green-400/10 text-green-400 border border-green-400/20">
             Connected
           </span>
         </div>
-        <button
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={disconnect}
-          className="text-xs text-gray-500 hover:text-red-400 transition-colors"
+          className="text-xs text-gray-500 hover:text-red-400"
         >
           Disconnect
-        </button>
+        </Button>
       </div>
 
       {/* Search */}
@@ -207,7 +208,7 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
                       <p className="text-xs text-gray-500 mt-0.5 line-clamp-1">{repo.description}</p>
                     )}
                   </div>
-                  <span className="text-[10px] text-gray-600 flex-shrink-0 whitespace-nowrap">
+                  <span className="text-2xs text-gray-600 flex-shrink-0 whitespace-nowrap">
                     {formatDate(repo.updated_at)}
                   </span>
                 </div>
@@ -242,22 +243,16 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <button
+          <Button
+            variant="primary"
+            size="lg"
             onClick={handleAnalyze}
             disabled={isAnalyzing}
-            className="w-full py-3 rounded-lg bg-yellow-400 text-black font-semibold text-sm hover:bg-yellow-300 disabled:opacity-60 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+            isLoading={isAnalyzing}
+            className="w-full"
           >
-            {isAnalyzing ? (
-              <>
-                <Spinner size="sm" className="border-black/20 border-t-black" />
-                Analyzing {selectedRepo.name}...
-              </>
-            ) : (
-              <>
-                Analyze {selectedRepo.name}
-              </>
-            )}
-          </button>
+            {isAnalyzing ? `Analyzing ${selectedRepo.name}...` : `Analyze ${selectedRepo.name}`}
+          </Button>
         </motion.div>
       )}
     </div>

@@ -1,8 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion'
+import FocusTrap from 'focus-trap-react'
 import { useState, useCallback } from 'react'
 import { modalVariants, modalPanelVariants, stepVariants } from '../../design-system/animations'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Button } from '@components/ui/Button'
+import { Input } from '@components/ui/Input'
 
 type Step = 1 | 2 | 3
 
@@ -94,13 +96,12 @@ function StepConnect({ onNext }: { onNext: () => void }) {
         Paste your Miro API token to enable board creation. You can also do this later in Settings.
       </p>
       <div className="w-full max-w-sm space-y-4">
-        <input
+        <Input
           type="password"
           value={token}
           onChange={(e) => setToken(e.target.value)}
           placeholder="Paste your Miro API token..."
           aria-label="Miro API token"
-          className="w-full px-4 py-3 bg-black-800 border border-black-600 rounded-xl text-white placeholder-black-400 focus:outline-none focus:border-yellow-400 transition-colors"
         />
         <div className="flex gap-3">
           <Button
@@ -203,23 +204,26 @@ export function WelcomeModal() {
         exit="exit"
         className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
       >
-        <motion.div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Welcome to MiroX"
-          variants={modalPanelVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          className="glass-heavy rounded-2xl p-10 w-full max-w-md mx-4"
-        >
-          <StepIndicator current={step} total={3} />
-          <AnimatePresence mode="wait">
-            {step === 1 && <StepWelcome key="s1" onNext={() => setStep(2)} />}
-            {step === 2 && <StepConnect key="s2" onNext={() => setStep(3)} />}
-            {step === 3 && <StepComplete key="s3" onFinish={handleFinish} />}
-          </AnimatePresence>
-        </motion.div>
+        <FocusTrap focusTrapOptions={{ allowOutsideClick: true, escapeDeactivates: false, fallbackFocus: '[role="dialog"]' }}>
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Welcome to MiroX"
+            tabIndex={-1}
+            variants={modalPanelVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="glass-heavy rounded-2xl p-10 w-full max-w-md mx-4 outline-none"
+          >
+            <StepIndicator current={step} total={3} />
+            <AnimatePresence mode="wait">
+              {step === 1 && <StepWelcome key="s1" onNext={() => setStep(2)} />}
+              {step === 2 && <StepConnect key="s2" onNext={() => setStep(3)} />}
+              {step === 3 && <StepComplete key="s3" onFinish={handleFinish} />}
+            </AnimatePresence>
+          </motion.div>
+        </FocusTrap>
       </motion.div>
     </AnimatePresence>
   )

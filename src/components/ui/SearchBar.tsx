@@ -45,7 +45,7 @@ export function SearchBar({ value, onChange, placeholder = 'Search...', showShor
           </button>
         )}
         {showShortcut && !value && (
-          <kbd className="px-1.5 py-0.5 text-[10px] font-mono text-gray-500 bg-black-600 border border-black-500 rounded">
+          <kbd className="px-1.5 py-0.5 text-2xs font-mono text-gray-500 bg-black-600 border border-black-500 rounded">
             Cmd+K
           </kbd>
         )}

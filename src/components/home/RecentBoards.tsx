@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { listContainerVariants, listItemVariants } from '../../design-system/animations'
 import { useBoardStore } from '../../stores/boardStore'
 import { Button } from '@components/ui/Button'
+import { Badge } from '@components/ui/Badge'
 
 function EmptyState() {
   const navigate = useNavigate()
@@ -70,9 +71,9 @@ export function RecentBoards() {
                 <div className="min-w-0">
                   <div className="font-semibold text-white truncate">{board.name}</div>
                   <div className="text-gray-400 text-sm flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded-full bg-yellow-400/10 text-yellow-400 text-xs font-medium">
+                    <Badge color="yellow">
                       {board.templateName}
-                    </span>
+                    </Badge>
                     <span>{formatDate(board.createdAt)}</span>
                   </div>
                 </div>

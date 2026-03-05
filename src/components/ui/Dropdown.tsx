@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, type ReactNode } from 'react'
+import { useState, useRef, useEffect, useCallback, type ReactNode } from 'react'
 import { ChevronDown } from 'lucide-react'
 
 interface DropdownOption {
@@ -18,16 +18,57 @@ interface DropdownProps {
 
 export function Dropdown({ options, value, onChange, placeholder = 'Select...', label, error, className = '' }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [highlightedIndex, setHighlightedIndex] = useState(-1)
   const ref = useRef<HTMLDivElement>(null)
   const selected = options.find(o => o.value === value)
 
+  const closeDropdown = useCallback(() => {
+    setIsOpen(false)
+    setHighlightedIndex(-1)
+  }, [])
+
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setIsOpen(false)
+      if (ref.current && !ref.current.contains(e.target as Node)) closeDropdown()
     }
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
-  }, [])
+  }, [closeDropdown])
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (!isOpen) {
+      if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        setIsOpen(true)
+        const currentIndex = options.findIndex(o => o.value === value)
+        setHighlightedIndex(currentIndex >= 0 ? currentIndex : 0)
+      }
+      return
+    }
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault()
+        setHighlightedIndex(prev => Math.min(prev + 1, options.length - 1))
+        break
+      case 'ArrowUp':
+        e.preventDefault()
+        setHighlightedIndex(prev => Math.max(prev - 1, 0))
+        break
+      case 'Enter':
+      case ' ':
+        e.preventDefault()
+        if (highlightedIndex >= 0 && highlightedIndex < options.length) {
+          onChange(options[highlightedIndex]!.value)
+          closeDropdown()
+        }
+        break
+      case 'Escape':
+        e.preventDefault()
+        closeDropdown()
+        break
+    }
+  }, [isOpen, highlightedIndex, options, value, onChange, closeDropdown])
 
   return (
     <div className={`flex flex-col gap-1.5 ${className}`} ref={ref}>
@@ -36,6 +77,7 @@ export function Dropdown({ options, value, onChange, placeholder = 'Select...', 
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
+          onKeyDown={handleKeyDown}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           className={`
@@ -51,16 +93,16 @@ export function Dropdown({ options, value, onChange, placeholder = 'Select...', 
         </button>
         {isOpen && (
           <div role="listbox" className="absolute z-50 w-full mt-1 bg-black-700 border border-black-500 rounded-xl shadow-xl overflow-hidden">
-            {options.map(option => (
+            {options.map((option, index) => (
               <button
                 key={option.value}
                 type="button"
                 role="option"
                 aria-selected={option.value === value}
-                onClick={() => { onChange(option.value); setIsOpen(false) }}
+                onClick={() => { onChange(option.value); closeDropdown() }}
                 className={`
                   w-full text-left px-4 py-2.5 text-sm transition-colors
-                  ${option.value === value ? 'bg-yellow-400/10 text-yellow-400' : 'text-gray-300 hover:bg-white/5 hover:text-white'}
+                  ${option.value === value ? 'bg-yellow-400/10 text-yellow-400' : index === highlightedIndex ? 'bg-black-600 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white'}
                 `}
               >
                 {option.label}

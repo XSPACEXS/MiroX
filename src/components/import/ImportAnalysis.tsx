@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Button } from '@components/ui/Button'
 import type { ParsedContent } from '../../types/import'
 
 const templateInfo: Record<string, { emoji: string; description: string }> = {
@@ -75,7 +76,7 @@ export default function ImportAnalysis({ content, onUseTemplate, onChooseDiffere
             {badge.label}
           </span>
           {content.detectedLanguage && content.detectedLanguage !== 'Unknown' && (
-            <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-black-700 text-gray-400 border border-black-500">
+            <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-2xs font-medium bg-black-700 text-gray-400 border border-black-500">
               {content.detectedLanguage}
             </span>
           )}
@@ -125,7 +126,7 @@ export default function ImportAnalysis({ content, onUseTemplate, onChooseDiffere
           {content.keyPhrases.slice(0, 8).map((phrase, i) => (
             <span
               key={i}
-              className="px-2 py-0.5 rounded text-[10px] font-medium bg-black-700 text-gray-400 border border-black-500"
+              className="px-2 py-0.5 rounded text-2xs font-medium bg-black-700 text-gray-400 border border-black-500"
             >
               {phrase}
             </span>
@@ -135,21 +136,22 @@ export default function ImportAnalysis({ content, onUseTemplate, onChooseDiffere
 
       {/* Actions */}
       <div className="flex gap-3 pt-1">
-        <button
+        <Button
+          variant="primary"
+          size="md"
           onClick={() => onUseTemplate(content.suggestedTemplate)}
-          className="flex-1 py-2.5 rounded-lg bg-yellow-400 text-black font-semibold text-sm hover:bg-yellow-300 transition-colors flex items-center justify-center gap-1.5"
+          className="flex-1"
+          rightIcon={
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          }
         >
           Use This Template
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-          </svg>
-        </button>
-        <button
-          onClick={onChooseDifferent}
-          className="px-4 py-2.5 rounded-lg text-gray-400 text-sm font-medium hover:text-white hover:bg-black-700 transition-colors"
-        >
+        </Button>
+        <Button variant="ghost" size="md" onClick={onChooseDifferent}>
           Choose Different
-        </button>
+        </Button>
       </div>
     </motion.div>
   )
