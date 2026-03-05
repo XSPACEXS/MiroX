@@ -346,6 +346,9 @@ describe('Store versioning', () => {
       id: 'a1', prompt: 'test', provider: 'claude', model: 'sonnet', status: 'running',
       logs: [], startedAt: Date.now(), finishedAt: null, exitCode: null,
       cost: null, allowedTools: ['Read'], gitTagStart: null, gitTagEnd: null,
+    outputType: 'text' as const,
+    teamRunId: null,
+    teamRole: null,
     })
     expect(useAgentStore.getState().agents).toHaveLength(1)
   })
@@ -800,6 +803,9 @@ describe('Additional store operations', () => {
       id: 'move-me', prompt: 'test', provider: 'claude', model: 'sonnet', status: 'completed',
       logs: [], startedAt: Date.now(), finishedAt: Date.now(), exitCode: 0,
       cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
+    outputType: 'text' as const,
+    teamRunId: null,
+    teamRole: null,
     })
     useAgentStore.getState().moveToHistory('move-me')
     expect(useAgentStore.getState().agents).toHaveLength(0)
@@ -811,6 +817,9 @@ describe('Additional store operations', () => {
       id: 'h1', prompt: 'test', provider: 'claude', model: 'sonnet', status: 'completed',
       logs: [], startedAt: Date.now(), finishedAt: Date.now(), exitCode: 0,
       cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
+    outputType: 'text' as const,
+    teamRunId: null,
+    teamRole: null,
     })
     useAgentStore.getState().moveToHistory('h1')
     useAgentStore.getState().clearHistory()
@@ -822,6 +831,9 @@ describe('Additional store operations', () => {
       id: 'status-test', prompt: 'test', provider: 'claude', model: 'sonnet', status: 'running',
       logs: [], startedAt: Date.now(), finishedAt: null, exitCode: null,
       cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
+    outputType: 'text' as const,
+    teamRunId: null,
+    teamRole: null,
     })
     useAgentStore.getState().updateAgentStatus('status-test', 'completed', 0)
     const agent = useAgentStore.getState().agents.find(a => a.id === 'status-test')
@@ -975,6 +987,9 @@ describe('Agent log management', () => {
       id: 'log-agent', prompt: 'test', provider: 'claude', model: 'sonnet', status: 'running',
       logs: [], startedAt: Date.now(), finishedAt: null, exitCode: null,
       cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
+    outputType: 'text' as const,
+    teamRunId: null,
+    teamRole: null,
     })
     useAgentStore.getState().appendLog('log-agent', { timestamp: 1000, type: 'stdout', text: 'Line 1' })
     useAgentStore.getState().appendLog('log-agent', { timestamp: 2000, type: 'stderr', text: 'Line 2' })
@@ -990,6 +1005,9 @@ describe('Agent log management', () => {
       id: 'cap-agent', prompt: 'test', provider: 'claude', model: 'sonnet', status: 'running',
       logs: [], startedAt: Date.now(), finishedAt: null, exitCode: null,
       cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
+    outputType: 'text' as const,
+    teamRunId: null,
+    teamRole: null,
     })
     for (let i = 0; i < 2100; i++) {
       useAgentStore.getState().appendLog('cap-agent', { timestamp: i, type: 'stdout', text: `Line ${i}` })

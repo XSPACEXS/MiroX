@@ -1,17 +1,15 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Lock, Wrench } from 'lucide-react'
 import { pageVariants } from '@design-system/animations'
 import { useAgentStore } from '@stores/agentStore'
 import { AgentLauncher } from '@components/agent-center/AgentLauncher'
-import { SessionLauncher } from '@components/agent-center/SessionLauncher'
 import { ActiveAgents } from '@components/agent-center/ActiveAgents'
 import { LiveLogs } from '@components/agent-center/LiveLogs'
 import { AppSelfCheck } from '@components/agent-center/AppSelfCheck'
 import { RunHistory } from '@components/agent-center/RunHistory'
 
 export default function AgentCenter(): JSX.Element {
-  const [mode, setMode] = useState<'launch' | 'session'>('launch')
   const isAdmin = useAgentStore((s) => s.isAdmin)
   const agents = useAgentStore((s) => s.agents)
   const appendLog = useAgentStore((s) => s.appendLog)
@@ -36,7 +34,6 @@ export default function AgentCenter(): JSX.Element {
 
     const unsubExit = api.agent.onExit((data) => {
       updateAgentStatus(data.id, data.status, data.exitCode)
-      // Move to history after a short delay so the user sees the final status
       const tid = setTimeout(() => {
         moveToHistory(data.id)
         pendingTimeouts.current = pendingTimeouts.current.filter((t) => t !== tid)
@@ -47,8 +44,10 @@ export default function AgentCenter(): JSX.Element {
     const unsubGeminiLog = api.gemini.onLog((data) => {
       appendLog(data.agentId, {
         timestamp: data.timestamp,
-        type: data.type as 'stdout' | 'stderr' | 'system',
+        type: data.type,
         text: data.text,
+        mediaUrl: data.mediaUrl,
+        mediaMimeType: data.mediaMimeType,
       })
     })
 
@@ -120,25 +119,7 @@ export default function AgentCenter(): JSX.Element {
         )}
       </div>
 
-      {/* Mode switcher */}
-      <div className="flex gap-1 p-1 bg-black-800 rounded-xl w-fit">
-        <button
-          onClick={() => setMode('launch')}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150
-            ${mode === 'launch' ? 'bg-yellow-400/10 text-yellow-400' : 'text-gray-400 hover:text-white'}`}
-        >
-          Launch Agent
-        </button>
-        <button
-          onClick={() => setMode('session')}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150
-            ${mode === 'session' ? 'bg-yellow-400/10 text-yellow-400' : 'text-gray-400 hover:text-white'}`}
-        >
-          Build Session
-        </button>
-      </div>
-
-      {mode === 'launch' ? <AgentLauncher /> : <SessionLauncher />}
+      <AgentLauncher />
       <ActiveAgents />
       <LiveLogs />
       <AppSelfCheck />

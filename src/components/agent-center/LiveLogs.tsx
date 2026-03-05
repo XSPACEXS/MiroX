@@ -3,14 +3,16 @@ import { Terminal, Filter } from 'lucide-react'
 import { Card } from '@components/ui/Card'
 import { SimpleSelect } from '@components/ui/Dropdown'
 import { useAgentStore } from '@stores/agentStore'
+import { MediaLogEntry } from './MediaLogEntry'
 
-type LogFilter = 'all' | 'stdout' | 'stderr' | 'system'
+type LogFilter = 'all' | 'stdout' | 'stderr' | 'system' | 'media'
 
 const FILTER_OPTIONS = [
   { value: 'all', label: 'All' },
   { value: 'stdout', label: 'stdout' },
   { value: 'stderr', label: 'stderr' },
   { value: 'system', label: 'system' },
+  { value: 'media', label: 'media' },
 ]
 
 const PROVIDER_OPTIONS = [
@@ -23,6 +25,7 @@ const TYPE_COLORS: Record<string, string> = {
   stdout: 'text-gray-200',
   stderr: 'text-red-400',
   system: 'text-yellow-400/60',
+  media: 'text-orange-400',
 }
 
 function formatTimestamp(ts: number): string {
@@ -137,9 +140,17 @@ export function LiveLogs(): JSX.Element {
                 <span className="text-gray-600 flex-shrink-0 select-none">
                   {formatTimestamp(log.timestamp)}
                 </span>
-                <span className={TYPE_COLORS[log.type] || 'text-gray-200'}>
-                  {log.text}
-                </span>
+                {log.type === 'media' && log.mediaUrl ? (
+                  <MediaLogEntry
+                    text={log.text}
+                    mediaUrl={log.mediaUrl}
+                    mediaMimeType={log.mediaMimeType}
+                  />
+                ) : (
+                  <span className={TYPE_COLORS[log.type] || 'text-gray-200'}>
+                    {log.text}
+                  </span>
+                )}
               </div>
             ))
           )}

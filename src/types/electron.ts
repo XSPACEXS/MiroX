@@ -185,12 +185,18 @@ export interface ElectronAPI {
     testConnection: () => Promise<{ ok: boolean; modelCount?: number; error?: string }>
     launch: (config: { model: string; prompt: string; contextFiles?: string[] }) =>
       Promise<{ ok: true; id: string; model: string; startedAt: number } | { ok: false; error: string }>
+    launchImagen: (config: { prompt: string; model?: string; count?: number; aspectRatio?: string }) =>
+      Promise<{ ok: true; id: string; startedAt: number } | { ok: false; error: string }>
+    launchVeo: (config: { prompt: string; durationSeconds?: number; aspectRatio?: string }) =>
+      Promise<{ ok: true; id: string; startedAt: number } | { ok: false; error: string }>
     stop: (id: string) => Promise<{ ok: boolean; error?: string }>
     onLog: (callback: (data: {
       agentId: string
       timestamp: number
-      type: 'stdout' | 'stderr' | 'system'
+      type: 'stdout' | 'stderr' | 'system' | 'media'
       text: string
+      mediaUrl?: string
+      mediaMimeType?: string
     }) => void) => () => void
     onExit: (callback: (data: {
       id: string

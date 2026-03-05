@@ -12,6 +12,8 @@ const GEMINI_MODEL_MAP: Record<string, string> = {
   'gemini-pro': 'gemini-2.5-pro-preview-06-05',
   'gemini-flash': 'gemini-2.5-flash-preview-04-17',
   'gemini-flash-2': 'gemini-2.0-flash',
+  'gemini-flash-lite': 'gemini-2.0-flash-lite',
+  'gemini-nano-banana': 'gemini-3.1-flash-image-preview',
 }
 
 const BASE_URL = 'https://generativelanguage.googleapis.com/v1beta'
@@ -166,6 +168,84 @@ export function registerGeminiHandlers(mainWindow: BrowserWindow): void {
           },
         }
 
+        // Nano Banana: non-streaming with image output
+        if (config.model === 'gemini-nano-banana') {
+          void (async () => {
+            try {
+              sendLog(mainWindow, id, 'system', `Nano Banana 2 started`)
+              const nanoBananaBody = {
+                contents: [
+                  {
+                    parts: [
+                      ...(contextText ? [{ text: `Project context:\n${contextText}` }] : []),
+                      { text: config.prompt },
+                    ],
+                  },
+                ],
+                generationConfig: {
+                  responseModalities: ['TEXT', 'IMAGE'],
+                  imageConfig: { aspectRatio: '1:1' },
+                },
+              }
+
+              const res = await fetch(
+                `${BASE_URL}/models/${modelId}:generateContent?key=${token}`,
+                {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(nanoBananaBody),
+                  signal: controller.signal,
+                }
+              )
+
+              if (!res.ok) {
+                const errText = await res.text()
+                sendLog(mainWindow, id, 'stderr', `API error ${res.status}: ${errText}`)
+                sendExit(mainWindow, id, 'failed', 1)
+                activeSessions.delete(id)
+                return
+              }
+
+              const data = await res.json() as {
+                candidates?: Array<{
+                  content?: {
+                    parts?: Array<{
+                      text?: string
+                      inline_data?: { mime_type: string; data: string }
+                    }>
+                  }
+                }>
+              }
+
+              const parts = data.candidates?.[0]?.content?.parts || []
+              for (const part of parts) {
+                if (part.text) {
+                  sendLog(mainWindow, id, 'stdout', part.text)
+                }
+                if (part.inline_data) {
+                  const dataUrl = `data:${part.inline_data.mime_type};base64,${part.inline_data.data}`
+                  sendMediaLog(mainWindow, id, 'Generated image', dataUrl, part.inline_data.mime_type)
+                }
+              }
+
+              sendLog(mainWindow, id, 'system', 'Nano Banana 2 finished')
+              sendExit(mainWindow, id, 'completed', 0)
+            } catch (err) {
+              if ((err as Error).name === 'AbortError') {
+                sendLog(mainWindow, id, 'system', 'Nano Banana stopped by user')
+                sendExit(mainWindow, id, 'killed', -1)
+              } else {
+                sendLog(mainWindow, id, 'stderr', (err as Error).message)
+                sendExit(mainWindow, id, 'failed', 1)
+              }
+            } finally {
+              activeSessions.delete(id)
+            }
+          })()
+
+          return { ok: true, id, model: config.model, startedAt: session.startedAt }
+        }
+
         // Send initial system log
         sendLog(mainWindow, id, 'system', `Gemini ${modelId} started`)
 
@@ -265,6 +345,263 @@ export function registerGeminiHandlers(mainWindow: BrowserWindow): void {
     activeSessions.delete(id)
     return { ok: true }
   })
+
+  // Launch Imagen image generation
+  ipcMain.removeHandler(IPC_CHANNELS.GEMINI_LAUNCH_IMAGEN)
+  ipcMain.handle(
+    IPC_CHANNELS.GEMINI_LAUNCH_IMAGEN,
+    async (
+      _event,
+      config: { prompt: string; model?: string; count?: number; aspectRatio?: string }
+    ) => {
+      try {
+        const token = await keytar.getPassword(SERVICE, GEMINI_ACCOUNT)
+        if (!token) return { ok: false, error: 'No Gemini API key configured' }
+
+        if (!config?.prompt?.trim()) return { ok: false, error: 'Prompt is required' }
+        if (config.prompt.length > 480) {
+          return { ok: false, error: 'Imagen prompt max 480 tokens. Please shorten your prompt.' }
+        }
+
+        const id = `imagen-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+        const startedAt = Date.now()
+        const imagenModel = config.model === 'gemini-imagen-fast'
+          ? 'imagen-4.0-fast-generate-001'
+          : 'imagen-4.0-generate-001'
+
+        sendLog(mainWindow, id, 'system', `Imagen 4 generation started`)
+
+        void (async () => {
+          try {
+            const res = await fetchWithTimeout(
+              `${BASE_URL}/models/${imagenModel}:predict?key=${token}`,
+              {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  instances: [{ prompt: config.prompt }],
+                  parameters: {
+                    sampleCount: Math.min(config.count || 1, 4),
+                    aspectRatio: config.aspectRatio || '1:1',
+                    imageSize: '1K',
+                  },
+                }),
+              },
+              60_000
+            )
+
+            if (!res.ok) {
+              const errText = await res.text()
+              sendLog(mainWindow, id, 'stderr', `Imagen API error ${res.status}: ${errText}`)
+              sendExit(mainWindow, id, 'failed', 1)
+              return
+            }
+
+            const data = await res.json() as {
+              predictions?: Array<{ bytesBase64Encoded: string; mimeType: string }>
+            }
+
+            if (!data.predictions?.length) {
+              sendLog(mainWindow, id, 'stderr', 'No images generated')
+              sendExit(mainWindow, id, 'failed', 1)
+              return
+            }
+
+            for (const [i, pred] of data.predictions.entries()) {
+              const dataUrl = `data:${pred.mimeType};base64,${pred.bytesBase64Encoded}`
+              sendMediaLog(
+                mainWindow,
+                id,
+                `Image ${i + 1} of ${data.predictions.length}`,
+                dataUrl,
+                pred.mimeType
+              )
+            }
+
+            sendLog(mainWindow, id, 'system', `Imagen generated ${data.predictions.length} image(s)`)
+            sendExit(mainWindow, id, 'completed', 0)
+          } catch (err) {
+            sendLog(mainWindow, id, 'stderr', (err as Error).message)
+            sendExit(mainWindow, id, 'failed', 1)
+          }
+        })()
+
+        return { ok: true, id, startedAt }
+      } catch (err) {
+        return { ok: false, error: (err as Error).message }
+      }
+    }
+  )
+
+  // Launch Veo video generation
+  ipcMain.removeHandler(IPC_CHANNELS.GEMINI_LAUNCH_VEO)
+  ipcMain.handle(
+    IPC_CHANNELS.GEMINI_LAUNCH_VEO,
+    async (
+      _event,
+      config: { prompt: string; durationSeconds?: number; aspectRatio?: string }
+    ) => {
+      try {
+        const token = await keytar.getPassword(SERVICE, GEMINI_ACCOUNT)
+        if (!token) return { ok: false, error: 'No Gemini API key configured' }
+
+        if (!config?.prompt?.trim()) return { ok: false, error: 'Prompt is required' }
+
+        const id = `veo-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+        const startedAt = Date.now()
+        const controller = new AbortController()
+
+        const session: GeminiSession = {
+          id,
+          controller,
+          model: 'gemini-veo',
+          prompt: config.prompt,
+          startedAt,
+        }
+        activeSessions.set(id, session)
+
+        sendLog(mainWindow, id, 'system', 'Veo 3.1 video generation started (may take 1-3 minutes)')
+
+        void (async () => {
+          try {
+            const generateRes = await fetchWithTimeout(
+              `${BASE_URL}/models/veo-3.1-generate-preview:predictLongRunning?key=${token}`,
+              {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  instances: [{ prompt: config.prompt }],
+                  parameters: {
+                    durationSeconds: config.durationSeconds || 5,
+                    aspectRatio: config.aspectRatio || '16:9',
+                  },
+                }),
+                signal: controller.signal,
+              },
+              30_000
+            )
+
+            if (!generateRes.ok) {
+              const errText = await generateRes.text()
+              sendLog(mainWindow, id, 'stderr', `Veo API error ${generateRes.status}: ${errText}`)
+              sendExit(mainWindow, id, 'failed', 1)
+              return
+            }
+
+            const opData = await generateRes.json() as { name?: string }
+            if (!opData.name) {
+              sendLog(mainWindow, id, 'stderr', 'No operation name returned')
+              sendExit(mainWindow, id, 'failed', 1)
+              return
+            }
+
+            // Poll for completion (max 5 minutes)
+            const maxPollTime = 5 * 60 * 1000
+            const pollStart = Date.now()
+
+            while (Date.now() - pollStart < maxPollTime) {
+              // Check if aborted
+              if (controller.signal.aborted) {
+                sendLog(mainWindow, id, 'system', 'Veo stopped by user')
+                sendExit(mainWindow, id, 'killed', -1)
+                return
+              }
+
+              await new Promise((r) => setTimeout(r, 10_000))
+
+              try {
+                const pollRes = await fetchWithTimeout(
+                  `${BASE_URL}/${opData.name}?key=${token}`,
+                  { method: 'GET', signal: controller.signal },
+                  15_000
+                )
+
+                if (!pollRes.ok) {
+                  sendLog(mainWindow, id, 'system', 'Polling... video still generating')
+                  continue
+                }
+
+                const pollData = await pollRes.json() as {
+                  done?: boolean
+                  response?: {
+                    generateVideoResponse?: {
+                      generatedSamples?: Array<{
+                        video: { uri?: string; bytesBase64Encoded?: string; mimeType?: string }
+                      }>
+                    }
+                  }
+                }
+
+                if (pollData.done) {
+                  const sample =
+                    pollData.response?.generateVideoResponse?.generatedSamples?.[0]
+                  if (sample?.video) {
+                    if (sample.video.bytesBase64Encoded) {
+                      const mimeType = sample.video.mimeType || 'video/mp4'
+                      const dataUrl = `data:${mimeType};base64,${sample.video.bytesBase64Encoded}`
+                      sendMediaLog(mainWindow, id, 'Generated video', dataUrl, mimeType)
+                    } else if (sample.video.uri) {
+                      // Video is at a GCS URI — download it
+                      try {
+                        const videoRes = await fetchWithTimeout(
+                          `${sample.video.uri}`,
+                          {
+                            method: 'GET',
+                            headers: { 'x-goog-api-key': token },
+                          },
+                          120_000
+                        )
+                        if (videoRes.ok) {
+                          const buffer = Buffer.from(await videoRes.arrayBuffer())
+                          const mimeType = sample.video.mimeType || 'video/mp4'
+                          const dataUrl = `data:${mimeType};base64,${buffer.toString('base64')}`
+                          sendMediaLog(mainWindow, id, 'Generated video', dataUrl, mimeType)
+                        } else {
+                          sendLog(mainWindow, id, 'stderr', `Failed to download video: ${videoRes.status}`)
+                        }
+                      } catch (dlErr) {
+                        sendLog(mainWindow, id, 'stderr', `Video download error: ${(dlErr as Error).message}`)
+                      }
+                    }
+                  }
+
+                  sendLog(mainWindow, id, 'system', 'Veo 3.1 video generation complete')
+                  sendExit(mainWindow, id, 'completed', 0)
+                  return
+                }
+
+                sendLog(mainWindow, id, 'system', 'Polling... video still generating')
+              } catch (pollErr) {
+                if ((pollErr as Error).name === 'AbortError') {
+                  sendLog(mainWindow, id, 'system', 'Veo stopped by user')
+                  sendExit(mainWindow, id, 'killed', -1)
+                  return
+                }
+                // Continue polling on transient errors
+              }
+            }
+
+            sendLog(mainWindow, id, 'stderr', 'Video generation timed out after 5 minutes')
+            sendExit(mainWindow, id, 'failed', 1)
+          } catch (err) {
+            if ((err as Error).name === 'AbortError') {
+              sendLog(mainWindow, id, 'system', 'Veo stopped by user')
+              sendExit(mainWindow, id, 'killed', -1)
+            } else {
+              sendLog(mainWindow, id, 'stderr', (err as Error).message)
+              sendExit(mainWindow, id, 'failed', 1)
+            }
+          } finally {
+            activeSessions.delete(id)
+          }
+        })()
+
+        return { ok: true, id, startedAt }
+      } catch (err) {
+        return { ok: false, error: (err as Error).message }
+      }
+    }
+  )
 }
 
 function sendLog(
@@ -294,6 +631,25 @@ function sendExit(
       id,
       status,
       exitCode,
+    })
+  }
+}
+
+function sendMediaLog(
+  mainWindow: BrowserWindow,
+  agentId: string,
+  text: string,
+  mediaUrl: string,
+  mediaMimeType: string
+): void {
+  if (!mainWindow.isDestroyed()) {
+    mainWindow.webContents.send(IPC_CHANNELS.GEMINI_LOG, {
+      agentId,
+      timestamp: Date.now(),
+      type: 'media',
+      text,
+      mediaUrl,
+      mediaMimeType,
     })
   }
 }

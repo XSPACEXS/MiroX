@@ -11,6 +11,7 @@ import {
 import { Card } from '@components/ui/Card'
 import { Badge } from '@components/ui/Badge'
 import { listContainerVariants, listItemVariants } from '@design-system/animations'
+import { getModelById } from '@services/modelRegistry'
 import type { QuickAction } from '@/types/agent'
 
 const QUICK_ACTIONS: QuickAction[] = [
@@ -112,13 +113,8 @@ const ICON_MAP: Record<string, typeof Bug> = {
   sparkles: Sparkles,
 }
 
-const MODEL_COLORS: Record<string, 'purple' | 'blue' | 'green' | 'yellow'> = {
-  opus: 'purple',
-  sonnet: 'blue',
-  haiku: 'green',
-  'gemini-pro': 'blue',
-  'gemini-flash': 'green',
-  'gemini-flash-2': 'yellow',
+function getModelBadgeColor(modelId: string): 'purple' | 'blue' | 'green' | 'yellow' | 'gray' | 'orange' | 'red' {
+  return getModelById(modelId)?.badgeColor || 'gray'
 }
 
 interface QuickActionsProps {
@@ -157,8 +153,8 @@ export function QuickActions({ onSelect }: QuickActionsProps): JSX.Element {
                     </div>
                     <p className="text-xs text-gray-400 line-clamp-2">{action.description}</p>
                     <div className="mt-2 flex items-center gap-1.5">
-                      <Badge color={MODEL_COLORS[action.model] || 'gray'} size="sm">
-                        {action.model}
+                      <Badge color={getModelBadgeColor(action.model)} size="sm">
+                        {getModelById(action.model)?.label || action.model}
                       </Badge>
                       <Badge color={action.provider === 'gemini' ? 'blue' : 'yellow'} size="sm">
                         {action.provider === 'gemini' ? 'Gemini' : 'Claude'}

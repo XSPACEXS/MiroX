@@ -31,6 +31,9 @@ function makeAgent(overrides: Partial<AgentRun> = {}): AgentRun {
     allowedTools: ['Read', 'Edit'],
     gitTagStart: null,
     gitTagEnd: null,
+    outputType: 'text' as const,
+    teamRunId: null,
+    teamRole: null,
     ...overrides,
   }
 }
@@ -70,12 +73,12 @@ describe('AgentLauncher', () => {
 
   it('shows the prompt input', () => {
     renderWithRouter(<AgentLauncher />)
-    expect(screen.getByPlaceholderText('Describe the task for the AI agent...')).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('Describe the task for your AI team...')).toBeInTheDocument()
   })
 
   it('shows model dropdown with Sonnet 4.6 default', () => {
     renderWithRouter(<AgentLauncher />)
-    expect(screen.getByText('Sonnet 4.6')).toBeInTheDocument()
+    expect(screen.getAllByText('Sonnet 4.6').length).toBeGreaterThan(0)
   })
 
   it('shows all tool toggle chips', () => {
@@ -107,7 +110,7 @@ describe('AgentLauncher', () => {
 
   it('launch button enables when prompt is entered', () => {
     renderWithRouter(<AgentLauncher />)
-    const input = screen.getByPlaceholderText('Describe the task for the AI agent...')
+    const input = screen.getByPlaceholderText('Describe the task for your AI team...')
     fireEvent.change(input, { target: { value: 'Fix the bug' } })
     const launchButtons = screen.getAllByText('Launch Agent')
     const submitBtn = launchButtons[launchButtons.length - 1]!.closest('button')
@@ -116,7 +119,7 @@ describe('AgentLauncher', () => {
 
   it('calls electronAPI.agent.launch when launch button is clicked', async () => {
     renderWithRouter(<AgentLauncher />)
-    const input = screen.getByPlaceholderText('Describe the task for the AI agent...')
+    const input = screen.getByPlaceholderText('Describe the task for your AI team...')
     fireEvent.change(input, { target: { value: 'Fix the bug' } })
     const launchButtons = screen.getAllByText('Launch Agent')
     fireEvent.click(launchButtons[launchButtons.length - 1]!.closest('button')!)
@@ -129,7 +132,7 @@ describe('AgentLauncher', () => {
 
   it('clears prompt after successful launch', async () => {
     renderWithRouter(<AgentLauncher />)
-    const input = screen.getByPlaceholderText('Describe the task for the AI agent...')
+    const input = screen.getByPlaceholderText('Describe the task for your AI team...')
     fireEvent.change(input, { target: { value: 'Fix the bug' } })
     const launchButtons = screen.getAllByText('Launch Agent')
     fireEvent.click(launchButtons[launchButtons.length - 1]!.closest('button')!)
@@ -140,7 +143,7 @@ describe('AgentLauncher', () => {
 
   it('adds agent to store after successful launch', async () => {
     renderWithRouter(<AgentLauncher />)
-    const input = screen.getByPlaceholderText('Describe the task for the AI agent...')
+    const input = screen.getByPlaceholderText('Describe the task for your AI team...')
     fireEvent.change(input, { target: { value: 'My task' } })
     const launchButtons = screen.getAllByText('Launch Agent')
     fireEvent.click(launchButtons[launchButtons.length - 1]!.closest('button')!)
@@ -156,7 +159,7 @@ describe('AgentLauncher', () => {
       error: 'Claude CLI not found',
     })
     renderWithRouter(<AgentLauncher />)
-    const input = screen.getByPlaceholderText('Describe the task for the AI agent...')
+    const input = screen.getByPlaceholderText('Describe the task for your AI team...')
     fireEvent.change(input, { target: { value: 'Fix the bug' } })
     const launchButtons = screen.getAllByText('Launch Agent')
     fireEvent.click(launchButtons[launchButtons.length - 1]!.closest('button')!)
@@ -169,7 +172,7 @@ describe('AgentLauncher', () => {
   it('clicking a quick action fills in the prompt', () => {
     renderWithRouter(<AgentLauncher />)
     fireEvent.click(screen.getByText('Fix All TypeScript Errors'))
-    const input = screen.getByPlaceholderText('Describe the task for the AI agent...')
+    const input = screen.getByPlaceholderText('Describe the task for your AI team...')
     expect((input as HTMLInputElement).value).toContain('typecheck')
   })
 

@@ -1,8 +1,24 @@
 export type AIProvider = 'claude' | 'gemini'
 
 export type ClaudeModel = 'opus' | 'sonnet' | 'haiku'
-export type GeminiModel = 'gemini-pro' | 'gemini-flash' | 'gemini-flash-2'
+export type GeminiTextModel = 'gemini-pro' | 'gemini-flash' | 'gemini-flash-2' | 'gemini-flash-lite'
+export type GeminiMediaModel =
+  | 'gemini-imagen'
+  | 'gemini-imagen-fast'
+  | 'gemini-nano-banana'
+  | 'gemini-veo'
+export type GeminiModel = GeminiTextModel | GeminiMediaModel
 export type AgentModel = ClaudeModel | GeminiModel
+
+export type AgentOutputType = 'text' | 'image' | 'video'
+
+export interface AgentLogEntry {
+  timestamp: number
+  type: 'stdout' | 'stderr' | 'system' | 'media'
+  text: string
+  mediaUrl?: string
+  mediaMimeType?: string
+}
 
 export interface AgentRun {
   id: string
@@ -10,7 +26,7 @@ export interface AgentRun {
   provider: AIProvider
   model: AgentModel
   status: 'running' | 'completed' | 'failed' | 'killed'
-  logs: Array<{ timestamp: number; type: 'stdout' | 'stderr' | 'system'; text: string }>
+  logs: AgentLogEntry[]
   startedAt: number
   finishedAt: number | null
   exitCode: number | null
@@ -18,6 +34,9 @@ export interface AgentRun {
   allowedTools: string[]
   gitTagStart: string | null
   gitTagEnd: string | null
+  outputType: AgentOutputType
+  teamRunId: string | null
+  teamRole: 'primary' | 'collaborator' | null
 }
 
 export interface AgentConfig {
@@ -34,6 +53,21 @@ export interface DomCheckResult {
   detail: string
 }
 
+export interface CollaboratorConfig {
+  model: GeminiModel
+  role: string
+  promptOverride?: string
+}
+
+export interface TeamRunConfig {
+  primary: {
+    model: ClaudeModel
+    prompt: string
+    allowedTools: string[]
+  }
+  collaborators: CollaboratorConfig[]
+}
+
 export interface QuickAction {
   id: string
   label: string
@@ -43,6 +77,7 @@ export interface QuickAction {
   model: AgentModel
   tools: string[]
   icon: 'bug' | 'alert' | 'paintbrush' | 'package' | 'shield' | 'hammer' | 'sparkles'
+  collaborators?: CollaboratorConfig[]
 }
 
 export interface SessionConfig {

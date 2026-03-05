@@ -17,6 +17,9 @@ function makeAgent(overrides: Partial<AgentRun> = {}): AgentRun {
     allowedTools: ['Read', 'Edit'],
     gitTagStart: null,
     gitTagEnd: null,
+    outputType: 'text' as const,
+    teamRunId: null,
+    teamRole: null,
     ...overrides,
   }
 }

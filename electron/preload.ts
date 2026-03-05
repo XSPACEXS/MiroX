@@ -112,16 +112,29 @@ const electronAPI = {
     testConnection: () => ipcRenderer.invoke(IPC_CHANNELS.GEMINI_TEST_CONNECTION),
     launch: (config: { model: string; prompt: string; contextFiles?: string[] }) =>
       ipcRenderer.invoke(IPC_CHANNELS.GEMINI_LAUNCH, config),
+    launchImagen: (config: { prompt: string; model?: string; count?: number; aspectRatio?: string }) =>
+      ipcRenderer.invoke(IPC_CHANNELS.GEMINI_LAUNCH_IMAGEN, config),
+    launchVeo: (config: { prompt: string; durationSeconds?: number; aspectRatio?: string }) =>
+      ipcRenderer.invoke(IPC_CHANNELS.GEMINI_LAUNCH_VEO, config),
     stop: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.GEMINI_STOP, id),
     onLog: (callback: (data: {
       agentId: string
       timestamp: number
-      type: 'stdout' | 'stderr' | 'system'
+      type: 'stdout' | 'stderr' | 'system' | 'media'
       text: string
+      mediaUrl?: string
+      mediaMimeType?: string
     }) => void) => {
       const handler = (
         _event: Electron.IpcRendererEvent,
-        data: { agentId: string; timestamp: number; type: 'stdout' | 'stderr' | 'system'; text: string }
+        data: {
+          agentId: string
+          timestamp: number
+          type: 'stdout' | 'stderr' | 'system' | 'media'
+          text: string
+          mediaUrl?: string
+          mediaMimeType?: string
+        }
       ) => callback(data)
       ipcRenderer.on(IPC_CHANNELS.GEMINI_LOG, handler)
       return () => {

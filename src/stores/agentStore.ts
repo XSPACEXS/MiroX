@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 import { persist } from 'zustand/middleware'
-import type { AgentRun, DomCheckResult } from '@/types/agent'
+import type { AgentRun, AgentLogEntry, DomCheckResult } from '@/types/agent'
 
 interface AgentState {
   agents: AgentRun[]
@@ -14,7 +14,7 @@ interface AgentState {
   // Actions
   addAgent: (agent: AgentRun) => void
   updateAgentStatus: (id: string, status: AgentRun['status'], exitCode?: number | null) => void
-  appendLog: (id: string, log: { timestamp: number; type: 'stdout' | 'stderr' | 'system'; text: string }) => void
+  appendLog: (id: string, log: AgentLogEntry) => void
   removeAgent: (id: string) => void
   moveToHistory: (id: string) => void
   clearHistory: () => void
@@ -119,9 +119,16 @@ export const useAgentStore = create<AgentState>()(
       partialize: (state) => ({
         // Persist only the last 100 log lines per history entry to keep
         // localStorage from growing unbounded (50 entries × 2000 logs = 100MB worst case).
+        // Strip large base64 media URLs to avoid blowing up localStorage.
         history: state.history.map((agent) => ({
           ...agent,
-          logs: agent.logs.slice(-100),
+          logs: agent.logs.slice(-100).map((log) => ({
+            ...log,
+            mediaUrl:
+              log.mediaUrl && log.mediaUrl.length > 1000
+                ? '[media stripped from history]'
+                : log.mediaUrl,
+          })),
         })),
         isAdmin: state.isAdmin,
       }),

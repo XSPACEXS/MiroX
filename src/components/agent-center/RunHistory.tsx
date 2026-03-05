@@ -5,23 +5,18 @@ import { Card } from '@components/ui/Card'
 import { Button } from '@components/ui/Button'
 import { Badge } from '@components/ui/Badge'
 import { Modal } from '@components/ui/Modal'
+import { MediaLogEntry } from './MediaLogEntry'
 import { useAgentStore } from '@stores/agentStore'
 import { useUIStore } from '@stores/uiStore'
 import { listItemVariants } from '@design-system/animations'
+import { getModelById } from '@services/modelRegistry'
 import type { AgentRun } from '@/types/agent'
 
-// Module-level constants to avoid re-creation on every render
 const STATUS_COLORS: Record<string, 'green' | 'red' | 'yellow' | 'gray' | 'blue'> = {
   completed: 'green',
   failed: 'red',
   killed: 'yellow',
   running: 'blue',
-}
-
-const MODEL_COLORS: Record<string, 'purple' | 'blue' | 'green' | 'gray'> = {
-  opus: 'purple',
-  sonnet: 'blue',
-  haiku: 'green',
 }
 
 function formatDuration(start: number, end: number | null): string {
@@ -119,8 +114,8 @@ export function RunHistory(): JSX.Element {
                         <Badge color={STATUS_COLORS[agent.status] || 'gray'} size="sm">
                           {agent.status}
                         </Badge>
-                        <Badge color={MODEL_COLORS[agent.model] || 'gray'} size="sm">
-                          {agent.model}
+                        <Badge color={getModelById(agent.model)?.badgeColor || 'gray'} size="sm">
+                          {getModelById(agent.model)?.label || agent.model}
                         </Badge>
                         <span className="text-xs text-gray-500">
                           {formatDate(agent.startedAt)}
@@ -189,17 +184,27 @@ export function RunHistory(): JSX.Element {
                                   second: '2-digit',
                                 })}
                               </span>
-                              <span
-                                className={
-                                  log.type === 'stderr'
-                                    ? 'text-red-400'
-                                    : log.type === 'system'
-                                      ? 'text-yellow-400/60'
-                                      : 'text-gray-200'
-                                }
-                              >
-                                {log.text}
-                              </span>
+                              {log.type === 'media' && log.mediaUrl ? (
+                                <MediaLogEntry
+                                  text={log.text}
+                                  mediaUrl={log.mediaUrl}
+                                  mediaMimeType={log.mediaMimeType}
+                                />
+                              ) : (
+                                <span
+                                  className={
+                                    log.type === 'stderr'
+                                      ? 'text-red-400'
+                                      : log.type === 'system'
+                                        ? 'text-yellow-400/60'
+                                        : log.type === 'media'
+                                          ? 'text-orange-400'
+                                          : 'text-gray-200'
+                                  }
+                                >
+                                  {log.text}
+                                </span>
+                              )}
                             </div>
                           ))
                         )}

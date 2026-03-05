@@ -110,6 +110,9 @@ function makeAgent(overrides: Partial<AgentRun> = {}): AgentRun {
     allowedTools: ['Read', 'Edit'],
     gitTagStart: null,
     gitTagEnd: null,
+    outputType: 'text' as const,
+    teamRunId: null,
+    teamRole: null,
     ...overrides,
   }
 }
@@ -665,7 +668,7 @@ describe('Edge: Agent launch ENOENT', () => {
     })
 
     renderWithRouter(<AgentLauncher />)
-    const input = screen.getByPlaceholderText('Describe the task for the AI agent...')
+    const input = screen.getByPlaceholderText('Describe the task for your AI team...')
     fireEvent.change(input, { target: { value: 'Do something' } })
     const launchButtons = screen.getAllByText('Launch Agent')
     fireEvent.click(launchButtons[launchButtons.length - 1]!.closest('button')!)
