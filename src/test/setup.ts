@@ -30,7 +30,7 @@ const mockElectronAPI = {
     createConnector: vi.fn().mockResolvedValue({ id: 'conn-1' }),
     deleteItem: vi.fn().mockResolvedValue(undefined),
     repositionItem: vi.fn().mockResolvedValue(undefined),
-    deleteGhosts: vi.fn().mockResolvedValue({ ok: true, deleted: 0 }),
+    deleteGhosts: vi.fn().mockResolvedValue({ ok: true, deleted: 0, failed: 0 }),
   },
   github: {
     getToken: vi.fn().mockResolvedValue({ ok: true, hasToken: false, masked: '' }),
