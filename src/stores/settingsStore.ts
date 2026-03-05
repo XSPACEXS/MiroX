@@ -46,13 +46,6 @@ export const useSettingsStore = create<SettingsStore>()(
     }),
     {
       name: 'mirox-settings',
-      version: 1,
-      migrate: (persisted: unknown, version: number) => {
-        if (version === 0) {
-          return persisted as Record<string, unknown>
-        }
-        return persisted as Record<string, unknown>
-      },
     }
   )
 )

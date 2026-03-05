@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { lazy, Suspense, useEffect } from 'react'
 import AppShell from '@components/layout/AppShell'
@@ -46,6 +46,7 @@ export default function App() {
               <Route path="/builder" element={<Builder />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/agent-center" element={<AgentCenter />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </AnimatePresence>
         </Suspense>

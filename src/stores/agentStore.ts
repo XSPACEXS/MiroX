@@ -131,13 +131,6 @@ export const useAgentStore = create<AgentState>()(
     })),
     {
       name: 'mirox-agent-center',
-      version: 1,
-      migrate: (persisted: unknown, version: number) => {
-        if (version === 0) {
-          return persisted as Record<string, unknown>
-        }
-        return persisted as Record<string, unknown>
-      },
       partialize: (state) => ({
         // Persist only the last 100 log lines per history entry to keep
         // localStorage from growing unbounded (50 entries × 2000 logs = 100MB worst case).

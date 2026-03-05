@@ -38,5 +38,12 @@ try {
   })
 }
 
+// Validate all required keys exist
+for (const [key, value] of Object.entries(defaults)) {
+  if (store.get(key as keyof AppSettings) === undefined) {
+    store.set(key as keyof AppSettings, value as AppSettings[keyof AppSettings])
+  }
+}
+
 export { store }
 export type { AppSettings }
