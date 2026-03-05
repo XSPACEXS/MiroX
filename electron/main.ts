@@ -6,6 +6,7 @@ import { registerMiroHandlers } from './ipc/miroHandlers'
 import { registerGithubHandlers } from './ipc/githubHandlers'
 import { registerAgentHandlers } from './ipc/agentHandlers'
 import { registerSelfTestHandlers } from './ipc/selfTestHandlers'
+import { registerGeminiHandlers } from './ipc/geminiHandlers'
 import { IPC_CHANNELS } from './ipc/channels'
 
 let mainWindow: BrowserWindow | null = null
@@ -82,6 +83,7 @@ function createWindow(): void {
   registerGithubHandlers()
   registerAgentHandlers(mainWindow)
   registerSelfTestHandlers(mainWindow)
+  registerGeminiHandlers(mainWindow)
 
   // Prevent new windows — open external links in browser
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
@@ -270,7 +272,7 @@ function setupCSP(): void {
         responseHeaders: {
           ...details.responseHeaders,
           'Content-Security-Policy': [
-            "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.miro.com https://api.github.com;"
+            "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.miro.com https://api.github.com https://generativelanguage.googleapis.com;"
           ]
         }
       })

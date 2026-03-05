@@ -178,6 +178,27 @@ export interface ElectronAPI {
     }) => void) => () => void
   }
 
+  // Gemini
+  gemini: {
+    getToken: () => Promise<{ ok: boolean; token?: string | null; error?: string }>
+    setToken: (token: string) => Promise<{ ok: boolean; error?: string }>
+    testConnection: () => Promise<{ ok: boolean; modelCount?: number; error?: string }>
+    launch: (config: { model: string; prompt: string; contextFiles?: string[] }) =>
+      Promise<{ ok: true; id: string; model: string; startedAt: number } | { ok: false; error: string }>
+    stop: (id: string) => Promise<{ ok: boolean; error?: string }>
+    onLog: (callback: (data: {
+      agentId: string
+      timestamp: number
+      type: 'stdout' | 'stderr' | 'system'
+      text: string
+    }) => void) => () => void
+    onExit: (callback: (data: {
+      id: string
+      exitCode: number | null
+      status: 'completed' | 'failed' | 'killed'
+    }) => void) => () => void
+  }
+
   // Self-test
   selfTest: {
     screenshot: () => Promise<{ ok: boolean; dataURL?: string; filePath?: string; error?: string }>

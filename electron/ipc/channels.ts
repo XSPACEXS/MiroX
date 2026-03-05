@@ -51,6 +51,15 @@ export const IPC_CHANNELS = {
   AGENT_LOG: 'agent:log',
   AGENT_EXIT: 'agent:exit',
 
+  // Gemini
+  GEMINI_GET_TOKEN: 'gemini:get-token',
+  GEMINI_SET_TOKEN: 'gemini:set-token',
+  GEMINI_TEST_CONNECTION: 'gemini:test-connection',
+  GEMINI_LAUNCH: 'gemini:launch',
+  GEMINI_STOP: 'gemini:stop',
+  GEMINI_LOG: 'gemini:log',
+  GEMINI_EXIT: 'gemini:exit',
+
   // Navigation
   NAVIGATE: 'navigate',
 

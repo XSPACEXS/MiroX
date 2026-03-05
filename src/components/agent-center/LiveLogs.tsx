@@ -13,6 +13,12 @@ const FILTER_OPTIONS = [
   { value: 'system', label: 'system' },
 ]
 
+const PROVIDER_OPTIONS = [
+  { value: 'all', label: 'All Providers' },
+  { value: 'claude', label: 'Claude' },
+  { value: 'gemini', label: 'Gemini' },
+]
+
 const TYPE_COLORS: Record<string, string> = {
   stdout: 'text-gray-200',
   stderr: 'text-red-400',
@@ -27,6 +33,7 @@ function formatTimestamp(ts: number): string {
 export function LiveLogs(): JSX.Element {
   const agents = useAgentStore((s) => s.agents)
   const [filter, setFilter] = useState<LogFilter>('all')
+  const [providerFilter, setProviderFilter] = useState('all')
   const [selectedAgentId, setSelectedAgentId] = useState<string>('')
   const logEndRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -44,9 +51,13 @@ export function LiveLogs(): JSX.Element {
   )
 
   const allLogs = useMemo(() => {
-    const source = selectedAgentId
+    let source = selectedAgentId
       ? agents.filter((a) => a.id === selectedAgentId)
       : agents
+    // Provider filter
+    if (providerFilter !== 'all') {
+      source = source.filter((a) => a.provider === providerFilter)
+    }
     const merged = source.flatMap((a) =>
       a.logs.map((l) => ({ ...l, agentId: a.id }))
     )
@@ -57,7 +68,7 @@ export function LiveLogs(): JSX.Element {
 
     // Max 1000 lines
     return filtered.slice(-1000)
-  }, [agents, selectedAgentId, filter])
+  }, [agents, selectedAgentId, filter, providerFilter])
 
   // Auto-scroll
   useEffect(() => {
@@ -90,6 +101,12 @@ export function LiveLogs(): JSX.Element {
               className="w-52"
             />
           )}
+          <SimpleSelect
+            options={PROVIDER_OPTIONS}
+            value={providerFilter}
+            onChange={setProviderFilter}
+            className="w-36"
+          />
           <div className="flex items-center gap-1">
             <Filter size={14} className="text-gray-400" />
             <SimpleSelect

@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react'
-import { Plug, Github, Palette, Info } from 'lucide-react'
+import { Plug, Github, Sparkles, Palette, Info } from 'lucide-react'
 
 interface Tab {
   id: string
@@ -10,6 +10,7 @@ interface Tab {
 const tabs: Tab[] = [
   { id: 'miro', label: 'Miro', icon: <Plug size={18} /> },
   { id: 'github', label: 'GitHub', icon: <Github size={18} /> },
+  { id: 'gemini', label: 'Gemini', icon: <Sparkles size={18} /> },
   { id: 'appearance', label: 'Appearance', icon: <Palette size={18} /> },
   { id: 'about', label: 'About', icon: <Info size={18} /> },
 ]

@@ -10,6 +10,7 @@ interface SettingsStore {
   // Transient — not persisted
   miroConnected: boolean
   githubConnected: boolean
+  geminiConnected: boolean
   miroUsername: string | null
   githubUsername: string | null
   githubAvatarUrl: string | null
@@ -19,6 +20,7 @@ interface SettingsStore {
   saveToDisk: () => void
   setMiroConnected: (connected: boolean, username?: string) => void
   setGithubConnected: (connected: boolean, username?: string, avatarUrl?: string) => void
+  setGeminiConnected: (connected: boolean) => void
   setTheme: (theme: 'dark' | 'light') => void
   setAccentColor: (color: string) => void
   completeOnboarding: () => void
@@ -34,6 +36,7 @@ export const useSettingsStore = create<SettingsStore>()((set, get) => ({
   templatesUsed: [],
   miroConnected: false,
   githubConnected: false,
+  geminiConnected: false,
   miroUsername: null,
   githubUsername: null,
   githubAvatarUrl: null,
@@ -64,6 +67,7 @@ export const useSettingsStore = create<SettingsStore>()((set, get) => ({
     set({ miroConnected, miroUsername: miroUsername || null }),
   setGithubConnected: (githubConnected, githubUsername, githubAvatarUrl) =>
     set({ githubConnected, githubUsername: githubUsername || null, githubAvatarUrl: githubAvatarUrl || null }),
+  setGeminiConnected: (geminiConnected) => set({ geminiConnected }),
   setTheme: (theme) => { set({ theme }); get().saveToDisk() },
   setAccentColor: (accentColor) => { set({ accentColor }); get().saveToDisk() },
   completeOnboarding: () => { set({ onboardingComplete: true }); get().saveToDisk() },

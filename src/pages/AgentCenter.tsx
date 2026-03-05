@@ -1,15 +1,17 @@
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Lock, Wrench } from 'lucide-react'
 import { pageVariants } from '@design-system/animations'
 import { useAgentStore } from '@stores/agentStore'
 import { AgentLauncher } from '@components/agent-center/AgentLauncher'
+import { SessionLauncher } from '@components/agent-center/SessionLauncher'
 import { ActiveAgents } from '@components/agent-center/ActiveAgents'
 import { LiveLogs } from '@components/agent-center/LiveLogs'
 import { AppSelfCheck } from '@components/agent-center/AppSelfCheck'
 import { RunHistory } from '@components/agent-center/RunHistory'
 
 export default function AgentCenter(): JSX.Element {
+  const [mode, setMode] = useState<'launch' | 'session'>('launch')
   const isAdmin = useAgentStore((s) => s.isAdmin)
   const agents = useAgentStore((s) => s.agents)
   const appendLog = useAgentStore((s) => s.appendLog)
@@ -22,7 +24,7 @@ export default function AgentCenter(): JSX.Element {
   // Subscribe to IPC events
   useEffect(() => {
     const api = window.electronAPI
-    if (!api?.agent) return
+    if (!api?.agent || !api?.gemini) return
 
     const unsubLog = api.agent.onLog((data) => {
       appendLog(data.agentId, {
@@ -42,9 +44,28 @@ export default function AgentCenter(): JSX.Element {
       pendingTimeouts.current.push(tid)
     })
 
+    const unsubGeminiLog = api.gemini.onLog((data) => {
+      appendLog(data.agentId, {
+        timestamp: data.timestamp,
+        type: data.type as 'stdout' | 'stderr' | 'system',
+        text: data.text,
+      })
+    })
+
+    const unsubGeminiExit = api.gemini.onExit((data) => {
+      updateAgentStatus(data.id, data.status, data.exitCode)
+      const tid = setTimeout(() => {
+        moveToHistory(data.id)
+        pendingTimeouts.current = pendingTimeouts.current.filter((t) => t !== tid)
+      }, 2000)
+      pendingTimeouts.current.push(tid)
+    })
+
     return () => {
       unsubLog()
       unsubExit()
+      unsubGeminiLog()
+      unsubGeminiExit()
       pendingTimeouts.current.forEach(clearTimeout)
       pendingTimeouts.current = []
     }
@@ -99,7 +120,25 @@ export default function AgentCenter(): JSX.Element {
         )}
       </div>
 
-      <AgentLauncher />
+      {/* Mode switcher */}
+      <div className="flex gap-1 p-1 bg-black-800 rounded-xl w-fit">
+        <button
+          onClick={() => setMode('launch')}
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150
+            ${mode === 'launch' ? 'bg-yellow-400/10 text-yellow-400' : 'text-gray-400 hover:text-white'}`}
+        >
+          Launch Agent
+        </button>
+        <button
+          onClick={() => setMode('session')}
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150
+            ${mode === 'session' ? 'bg-yellow-400/10 text-yellow-400' : 'text-gray-400 hover:text-white'}`}
+        >
+          Build Session
+        </button>
+      </div>
+
+      {mode === 'launch' ? <AgentLauncher /> : <SessionLauncher />}
       <ActiveAgents />
       <LiveLogs />
       <AppSelfCheck />

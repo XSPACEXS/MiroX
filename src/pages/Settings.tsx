@@ -4,12 +4,14 @@ import { pageVariants } from '../design-system/animations'
 import { SettingsLayout } from '../components/settings/SettingsLayout'
 import { MiroConfig } from '../components/settings/MiroConfig'
 import { GitHubConfig } from '../components/settings/GitHubConfig'
+import { GeminiConfig } from '../components/settings/GeminiConfig'
 import { AppearanceConfig } from '../components/settings/AppearanceConfig'
 import { AboutPanel } from '../components/settings/AboutPanel'
 
 const panels: Record<string, React.ReactNode> = {
   miro: <MiroConfig />,
   github: <GitHubConfig />,
+  gemini: <GeminiConfig />,
   appearance: <AppearanceConfig />,
   about: <AboutPanel />,
 }

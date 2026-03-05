@@ -20,6 +20,7 @@ function makeAgent(overrides: Partial<AgentRun> = {}): AgentRun {
   return {
     id: 'agent-1',
     prompt: 'Fix TypeScript errors in the codebase',
+    provider: 'claude',
     model: 'sonnet',
     status: 'running',
     logs: [],
@@ -161,7 +162,7 @@ describe('AgentLauncher', () => {
     fireEvent.click(launchButtons[launchButtons.length - 1]!.closest('button')!)
     await waitFor(() => {
       const toasts = useUIStore.getState().toasts
-      expect(toasts.some((t) => t.type === 'error' && t.title === 'Agent launch failed')).toBe(true)
+      expect(toasts.some((t) => t.type === 'error' && t.title === 'Launch failed')).toBe(true)
     })
   })
 

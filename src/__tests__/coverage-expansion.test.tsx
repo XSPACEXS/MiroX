@@ -99,6 +99,7 @@ function makeAgent(overrides: Partial<AgentRun> = {}): AgentRun {
   return {
     id: 'agent-1',
     prompt: 'Test prompt',
+    provider: 'claude',
     model: 'sonnet',
     status: 'running',
     logs: [],

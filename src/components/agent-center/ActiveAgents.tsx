@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Bot, Skull, XCircle } from 'lucide-react'
+import { Bot, Skull, XCircle, Sparkles } from 'lucide-react'
 import { Card } from '@components/ui/Card'
 import { Button } from '@components/ui/Button'
 import { Badge } from '@components/ui/Badge'
@@ -9,10 +9,13 @@ import { useUIStore } from '@stores/uiStore'
 import { listItemVariants } from '@design-system/animations'
 import type { AgentRun } from '@/types/agent'
 
-const MODEL_COLORS: Record<string, 'purple' | 'blue' | 'green'> = {
+const MODEL_COLORS: Record<string, 'purple' | 'blue' | 'green' | 'yellow'> = {
   opus: 'purple',
   sonnet: 'blue',
   haiku: 'green',
+  'gemini-pro': 'blue',
+  'gemini-flash': 'green',
+  'gemini-flash-2': 'yellow',
 }
 
 function ElapsedTime({ startedAt }: { startedAt: number }): JSX.Element {
@@ -35,19 +38,28 @@ function ElapsedTime({ startedAt }: { startedAt: number }): JSX.Element {
 }
 
 export function ActiveAgents(): JSX.Element {
-  const agents = useAgentStore((s) => s.agents.filter((a) => a.status === 'running'))
+  const agents = useAgentStore((s) => s.agents)
+  const runningAgents = agents.filter((a) => a.status === 'running')
   const addToast = useUIStore((s) => s.addToast)
 
   const handleKill = useCallback(async (id: string) => {
-    const result = await window.electronAPI.agent.kill(id)
-    if (!result.ok) {
-      addToast({
-        type: 'error',
-        title: 'Failed to kill agent',
-        message: result.error,
-      })
+    const agent = agents.find(a => a.id === id)
+    try {
+      if (agent?.provider === 'gemini') {
+        const result = await window.electronAPI.gemini.stop(id)
+        if (!result.ok) {
+          addToast({ type: 'error', title: 'Failed to stop agent', message: result.error })
+        }
+      } else {
+        const result = await window.electronAPI.agent.kill(id)
+        if (!result.ok) {
+          addToast({ type: 'error', title: 'Failed to kill agent', message: result.error })
+        }
+      }
+    } catch (err) {
+      addToast({ type: 'error', title: 'Failed to kill agent', message: String(err) })
     }
-  }, [addToast])
+  }, [addToast, agents])
 
   const handleKillAll = useCallback(async () => {
     const result = await window.electronAPI.agent.killAll()
@@ -65,20 +77,20 @@ export function ActiveAgents(): JSX.Element {
         <div className="flex items-center gap-2">
           <Bot size={20} className="text-yellow-400" />
           <h2 className="font-display font-bold text-xl text-white">Active Agents</h2>
-          {agents.length > 0 && (
+          {runningAgents.length > 0 && (
             <Badge color="yellow" size="sm">
-              {agents.length}
+              {runningAgents.length}
             </Badge>
           )}
         </div>
-        {agents.length > 1 && (
+        {runningAgents.length > 1 && (
           <Button variant="danger" size="sm" onClick={handleKillAll} leftIcon={<Skull size={14} />}>
             Kill All
           </Button>
         )}
       </div>
 
-      {agents.length === 0 ? (
+      {runningAgents.length === 0 ? (
         <Card variant="default" className="p-6 text-center">
           <Bot size={32} className="text-gray-600 mx-auto mb-2" aria-hidden="true" />
           <p className="text-sm text-gray-500">No agents running</p>
@@ -87,7 +99,7 @@ export function ActiveAgents(): JSX.Element {
       ) : (
         <div className="space-y-2">
           <AnimatePresence mode="popLayout">
-            {agents.map((agent: AgentRun) => (
+            {runningAgents.map((agent: AgentRun) => (
               <motion.div
                 key={agent.id}
                 variants={listItemVariants}
@@ -103,6 +115,13 @@ export function ActiveAgents(): JSX.Element {
                       <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
                       <div className="absolute inset-0 w-2.5 h-2.5 rounded-full bg-green-400 animate-ping opacity-75" />
                     </div>
+
+                    {/* Provider icon */}
+                    {agent.provider === 'gemini' ? (
+                      <Sparkles size={14} className="text-blue-400" />
+                    ) : (
+                      <Bot size={14} className="text-yellow-400" />
+                    )}
 
                     {/* Info */}
                     <div className="flex-1 min-w-0">

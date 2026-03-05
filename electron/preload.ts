@@ -105,6 +105,45 @@ const electronAPI = {
     },
   },
 
+  // Gemini
+  gemini: {
+    getToken: () => ipcRenderer.invoke(IPC_CHANNELS.GEMINI_GET_TOKEN),
+    setToken: (token: string) => ipcRenderer.invoke(IPC_CHANNELS.GEMINI_SET_TOKEN, token),
+    testConnection: () => ipcRenderer.invoke(IPC_CHANNELS.GEMINI_TEST_CONNECTION),
+    launch: (config: { model: string; prompt: string; contextFiles?: string[] }) =>
+      ipcRenderer.invoke(IPC_CHANNELS.GEMINI_LAUNCH, config),
+    stop: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.GEMINI_STOP, id),
+    onLog: (callback: (data: {
+      agentId: string
+      timestamp: number
+      type: 'stdout' | 'stderr' | 'system'
+      text: string
+    }) => void) => {
+      const handler = (
+        _event: Electron.IpcRendererEvent,
+        data: { agentId: string; timestamp: number; type: 'stdout' | 'stderr' | 'system'; text: string }
+      ) => callback(data)
+      ipcRenderer.on(IPC_CHANNELS.GEMINI_LOG, handler)
+      return () => {
+        ipcRenderer.removeListener(IPC_CHANNELS.GEMINI_LOG, handler)
+      }
+    },
+    onExit: (callback: (data: {
+      id: string
+      exitCode: number | null
+      status: 'completed' | 'failed' | 'killed'
+    }) => void) => {
+      const handler = (
+        _event: Electron.IpcRendererEvent,
+        data: { id: string; exitCode: number | null; status: 'completed' | 'failed' | 'killed' }
+      ) => callback(data)
+      ipcRenderer.on(IPC_CHANNELS.GEMINI_EXIT, handler)
+      return () => {
+        ipcRenderer.removeListener(IPC_CHANNELS.GEMINI_EXIT, handler)
+      }
+    },
+  },
+
   // Self-test
   selfTest: {
     screenshot: () => ipcRenderer.invoke(IPC_CHANNELS.SELFTEST_SCREENSHOT),

@@ -6,6 +6,7 @@ function makeAgent(overrides: Partial<AgentRun> = {}): AgentRun {
   return {
     id: 'agent-1',
     prompt: 'Fix all TypeScript errors',
+    provider: 'claude',
     model: 'sonnet',
     status: 'running',
     logs: [],

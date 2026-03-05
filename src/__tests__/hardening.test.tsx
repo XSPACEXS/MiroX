@@ -343,7 +343,7 @@ describe('Store versioning', () => {
 
   it('agentStore operations work with versioned persist', () => {
     useAgentStore.getState().addAgent({
-      id: 'a1', prompt: 'test', model: 'sonnet', status: 'running',
+      id: 'a1', prompt: 'test', provider: 'claude', model: 'sonnet', status: 'running',
       logs: [], startedAt: Date.now(), finishedAt: null, exitCode: null,
       cost: null, allowedTools: ['Read'], gitTagStart: null, gitTagEnd: null,
     })
@@ -797,7 +797,7 @@ describe('Additional store operations', () => {
 
   it('agentStore moveToHistory moves agent from active to history', () => {
     useAgentStore.getState().addAgent({
-      id: 'move-me', prompt: 'test', model: 'sonnet', status: 'completed',
+      id: 'move-me', prompt: 'test', provider: 'claude', model: 'sonnet', status: 'completed',
       logs: [], startedAt: Date.now(), finishedAt: Date.now(), exitCode: 0,
       cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
     })
@@ -808,7 +808,7 @@ describe('Additional store operations', () => {
 
   it('agentStore clearHistory empties history array', () => {
     useAgentStore.getState().addAgent({
-      id: 'h1', prompt: 'test', model: 'sonnet', status: 'completed',
+      id: 'h1', prompt: 'test', provider: 'claude', model: 'sonnet', status: 'completed',
       logs: [], startedAt: Date.now(), finishedAt: Date.now(), exitCode: 0,
       cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
     })
@@ -819,7 +819,7 @@ describe('Additional store operations', () => {
 
   it('agentStore updateAgentStatus changes status and sets finishedAt', () => {
     useAgentStore.getState().addAgent({
-      id: 'status-test', prompt: 'test', model: 'sonnet', status: 'running',
+      id: 'status-test', prompt: 'test', provider: 'claude', model: 'sonnet', status: 'running',
       logs: [], startedAt: Date.now(), finishedAt: null, exitCode: null,
       cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
     })
@@ -972,7 +972,7 @@ describe('Agent log management', () => {
 
   it('appendLog adds log entries to the correct agent', () => {
     useAgentStore.getState().addAgent({
-      id: 'log-agent', prompt: 'test', model: 'sonnet', status: 'running',
+      id: 'log-agent', prompt: 'test', provider: 'claude', model: 'sonnet', status: 'running',
       logs: [], startedAt: Date.now(), finishedAt: null, exitCode: null,
       cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
     })
@@ -987,7 +987,7 @@ describe('Agent log management', () => {
 
   it('appendLog caps at 2000 entries', () => {
     useAgentStore.getState().addAgent({
-      id: 'cap-agent', prompt: 'test', model: 'sonnet', status: 'running',
+      id: 'cap-agent', prompt: 'test', provider: 'claude', model: 'sonnet', status: 'running',
       logs: [], startedAt: Date.now(), finishedAt: null, exitCode: null,
       cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
     })

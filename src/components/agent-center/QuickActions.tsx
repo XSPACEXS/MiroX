@@ -6,6 +6,7 @@ import {
   Package,
   Paintbrush,
   Shield,
+  Sparkles,
 } from 'lucide-react'
 import { Card } from '@components/ui/Card'
 import { Badge } from '@components/ui/Badge'
@@ -19,6 +20,7 @@ const QUICK_ACTIONS: QuickAction[] = [
     description: 'Run typecheck and fix every error found',
     prompt:
       'Run `npm run typecheck` and fix ALL TypeScript errors. Read each file, understand the error, and apply the correct fix. Re-run typecheck until zero errors remain.',
+    provider: 'claude',
     model: 'haiku',
     tools: ['Read', 'Edit', 'Glob', 'Grep'],
     icon: 'bug',
@@ -29,6 +31,7 @@ const QUICK_ACTIONS: QuickAction[] = [
     description: 'Execute test suite and fix failures',
     prompt:
       'Run `npm run test` and fix ALL failing tests. Read test files and source files to understand failures. Apply fixes and re-run until all tests pass.',
+    provider: 'claude',
     model: 'sonnet',
     tools: ['Read', 'Edit', 'Glob', 'Grep', 'Bash'],
     icon: 'alert',
@@ -39,6 +42,7 @@ const QUICK_ACTIONS: QuickAction[] = [
     description: 'Audit and align all UI to design system',
     prompt:
       'Read src/design-system/ to understand the design tokens. Then audit all components in src/components/ and src/pages/ to ensure they follow the design system exactly: correct colors (yellow-400 accent, black-900 bg), correct fonts, correct spacing. Fix any deviations.',
+    provider: 'claude',
     model: 'sonnet',
     tools: ['Read', 'Edit', 'Glob', 'Grep'],
     icon: 'paintbrush',
@@ -49,6 +53,7 @@ const QUICK_ACTIONS: QuickAction[] = [
     description: 'Full build and package as DMG',
     prompt:
       'Run `npm run build` first. If the build succeeds, run `npm run build:mac:arm64` to package the macOS app. Report the output path of the DMG/ZIP.',
+    provider: 'claude',
     model: 'haiku',
     tools: ['Read', 'Bash'],
     icon: 'package',
@@ -59,6 +64,7 @@ const QUICK_ACTIONS: QuickAction[] = [
     description: 'Check for XSS, injection, and OWASP issues',
     prompt:
       'Perform a security audit of the entire codebase. Check for: XSS vulnerabilities, SQL/command injection, insecure IPC patterns, exposed secrets, missing input validation, unsafe eval usage. Report findings with file paths and line numbers.',
+    provider: 'claude',
     model: 'sonnet',
     tools: ['Read', 'Glob', 'Grep'],
     icon: 'shield',
@@ -69,9 +75,30 @@ const QUICK_ACTIONS: QuickAction[] = [
     description: 'Typecheck, lint, test, and fix everything',
     prompt:
       'Run a full QA pass: 1) npm run typecheck — fix all errors, 2) npm run lint — fix all warnings/errors, 3) npm run test — fix all failing tests, 4) npm run build — ensure clean build. Keep iterating until all four pass cleanly.',
+    provider: 'claude',
     model: 'opus',
     tools: ['Read', 'Edit', 'Glob', 'Grep', 'Bash'],
     icon: 'hammer',
+  },
+  {
+    id: 'design-audit',
+    label: 'Design System Audit',
+    description: 'Review UI components against design tokens and suggest improvements',
+    prompt: 'Audit all React components in src/components/ against the design system in src/design-system/tokens.ts. Check for inconsistent spacing, border radius, colors, typography, and animations. For each issue found, provide the exact Tailwind class fix.',
+    provider: 'gemini',
+    model: 'gemini-pro',
+    tools: [],
+    icon: 'sparkles',
+  },
+  {
+    id: 'ui-polish',
+    label: 'Visual Polish Suggestions',
+    description: 'Get AI-powered design improvement suggestions for the UI',
+    prompt: 'Review the MiroX UI components and suggest visual improvements. Focus on: hover states, transitions, empty states, loading skeletons, micro-interactions, and spacing refinement. Provide specific Tailwind CSS and Framer Motion code for each suggestion.',
+    provider: 'gemini',
+    model: 'gemini-flash',
+    tools: [],
+    icon: 'paintbrush',
   },
 ]
 
@@ -82,12 +109,16 @@ const ICON_MAP: Record<string, typeof Bug> = {
   package: Package,
   shield: Shield,
   hammer: Hammer,
+  sparkles: Sparkles,
 }
 
-const MODEL_COLORS: Record<string, 'purple' | 'blue' | 'green'> = {
+const MODEL_COLORS: Record<string, 'purple' | 'blue' | 'green' | 'yellow'> = {
   opus: 'purple',
   sonnet: 'blue',
   haiku: 'green',
+  'gemini-pro': 'blue',
+  'gemini-flash': 'green',
+  'gemini-flash-2': 'yellow',
 }
 
 interface QuickActionsProps {
@@ -125,9 +156,12 @@ export function QuickActions({ onSelect }: QuickActionsProps): JSX.Element {
                       </span>
                     </div>
                     <p className="text-xs text-gray-400 line-clamp-2">{action.description}</p>
-                    <div className="mt-2">
+                    <div className="mt-2 flex items-center gap-1.5">
                       <Badge color={MODEL_COLORS[action.model] || 'gray'} size="sm">
                         {action.model}
+                      </Badge>
+                      <Badge color={action.provider === 'gemini' ? 'blue' : 'yellow'} size="sm">
+                        {action.provider === 'gemini' ? 'Gemini' : 'Claude'}
                       </Badge>
                     </div>
                   </div>
