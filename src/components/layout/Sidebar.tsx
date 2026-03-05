@@ -31,6 +31,9 @@ export function Sidebar({ collapsed }: SidebarProps) {
       animate={collapsed ? 'collapsed' : 'expanded'}
       className="flex flex-col h-full bg-black-800 border-r border-black-600 overflow-hidden flex-shrink-0"
     >
+      {/* macOS traffic light safe zone — buttons sit at y≈10–22px; this 32px spacer clears them */}
+      <div className="h-8 flex-shrink-0 drag-region" />
+
       {/* Logo */}
       <div className="flex items-center gap-3 px-4 h-14 flex-shrink-0 border-b border-black-600">
         <div className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center flex-shrink-0">

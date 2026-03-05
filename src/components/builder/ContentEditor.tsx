@@ -13,8 +13,8 @@ interface ContentEditorProps {
 export function ContentEditor({ fields, values, onChange, errors = {}, className = '' }: ContentEditorProps) {
   return (
     <div className={`flex flex-col gap-5 ${className}`}>
-      <div className="flex items-center gap-2 px-3 py-2 bg-blue-500/10 border border-blue-500/30 rounded-xl">
-        <span className="text-sm text-blue-400">Fill in the fields below to customize your board content.</span>
+      <div className="flex items-center gap-2 px-3 py-2 bg-yellow-400/10 border border-yellow-400/20 rounded-xl">
+        <span className="text-sm text-yellow-400">Fill in the fields below to customize your board content.</span>
       </div>
 
       {fields.map(field => {

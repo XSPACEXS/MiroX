@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { slideUpVariants, listContainerVariants, listItemVariants } from '../../design-system/animations'
+import { Button } from '@components/ui/Button'
 
 export function HeroBanner() {
   const navigate = useNavigate()
@@ -47,25 +48,19 @@ export function HeroBanner() {
 
         <motion.p
           variants={listItemVariants}
-          className="font-body text-black-300 text-xl mb-8 max-w-xl leading-relaxed"
+          className="font-body text-gray-400 text-xl mb-8 max-w-xl leading-relaxed"
         >
           Turn any idea into a professional Miro board — instantly. 30+ templates, file import,
           GitHub integration.
         </motion.p>
 
         <motion.div variants={listItemVariants} className="flex gap-4">
-          <button
-            onClick={() => navigate('/templates')}
-            className="px-6 py-3 bg-yellow-400 text-black font-semibold rounded-xl hover:bg-yellow-500 transition-all hover:-translate-y-0.5 hover:shadow-yellow-glow active:scale-95"
-          >
+          <Button variant="primary" size="md" onClick={() => navigate('/templates')}>
             Browse Templates →
-          </button>
-          <button
-            onClick={() => navigate('/import')}
-            className="px-6 py-3 border border-yellow-400/50 text-yellow-400 font-semibold rounded-xl hover:bg-yellow-400/10 hover:border-yellow-400 transition-all hover:-translate-y-0.5 active:scale-95"
-          >
+          </Button>
+          <Button variant="secondary" size="md" onClick={() => navigate('/import')}>
             Import Project
-          </button>
+          </Button>
         </motion.div>
       </motion.div>
     </motion.div>

@@ -58,14 +58,14 @@ export function QuickActions() {
         <motion.button
           key={action.title}
           variants={listItemVariants}
-          whileHover={{ y: -4, boxShadow: '0 0 30px rgba(255, 214, 0, 0.3)' }}
+          whileHover={{ y: -4 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => handleClick(action.path)}
-          className="glass rounded-xl p-6 text-left transition-all duration-200 hover:border-yellow-400/30 cursor-pointer"
+          className="glass rounded-xl p-6 text-left transition-all duration-200 hover:border-yellow-400/30 hover:shadow-yellow-glow cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 focus-visible:ring-offset-1 focus-visible:ring-offset-black-900"
         >
           <div className="text-4xl mb-3">{action.emoji}</div>
           <div className="font-display font-bold text-lg text-white mb-1">{action.title}</div>
-          <div className="text-black-300 text-sm leading-relaxed">{action.description}</div>
+          <div className="text-gray-400 text-sm leading-relaxed">{action.description}</div>
         </motion.button>
       ))}
     </motion.div>

@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useCallback } from 'react'
 import { modalVariants, modalPanelVariants, stepVariants } from '../../design-system/animations'
 import { useSettingsStore } from '../../stores/settingsStore'
+import { Button } from '@components/ui/Button'
 
 type Step = 1 | 2 | 3
 
@@ -32,16 +33,13 @@ function StepWelcome({ onNext }: { onNext: () => void }) {
         <span className="font-display font-extrabold text-3xl text-black">M</span>
       </div>
       <h2 className="font-display font-bold text-3xl text-white mb-3">Welcome to MiroX</h2>
-      <p className="text-black-300 text-lg mb-8 max-w-sm leading-relaxed">
+      <p className="text-gray-400 text-lg mb-8 max-w-sm leading-relaxed">
         The enterprise Miro board builder. Create professional boards from 30+ templates in
         seconds.
       </p>
-      <button
-        onClick={onNext}
-        className="px-8 py-3 bg-yellow-400 text-black font-semibold rounded-xl hover:bg-yellow-500 transition-all hover:-translate-y-0.5 active:scale-95"
-      >
+      <Button variant="primary" size="md" onClick={onNext}>
         Get Started
-      </button>
+      </Button>
     </motion.div>
   )
 }
@@ -88,7 +86,7 @@ function StepConnect({ onNext }: { onNext: () => void }) {
         </svg>
       </div>
       <h2 className="font-display font-bold text-2xl text-white mb-2">Connect to Miro</h2>
-      <p className="text-black-300 mb-6 max-w-sm">
+      <p className="text-gray-400 mb-6 max-w-sm">
         Paste your Miro API token to enable board creation. You can also do this later in Settings.
       </p>
       <div className="w-full max-w-sm space-y-4">
@@ -100,19 +98,19 @@ function StepConnect({ onNext }: { onNext: () => void }) {
           className="w-full px-4 py-3 bg-black-800 border border-black-600 rounded-xl text-white placeholder-black-400 focus:outline-none focus:border-yellow-400 transition-colors"
         />
         <div className="flex gap-3">
-          <button
+          <Button
+            variant="primary"
+            size="md"
             onClick={testConnection}
             disabled={!token.trim() || status === 'testing'}
-            className="flex-1 px-5 py-3 bg-yellow-400 text-black font-semibold rounded-xl hover:bg-yellow-500 transition-all disabled:opacity-40 disabled:cursor-not-allowed active:scale-95"
+            isLoading={status === 'testing'}
+            className="flex-1"
           >
             {status === 'testing' ? 'Testing...' : 'Test Connection'}
-          </button>
-          <button
-            onClick={onNext}
-            className="px-5 py-3 border border-black-500 text-black-300 font-medium rounded-xl hover:border-yellow-400 hover:text-white transition-all"
-          >
+          </Button>
+          <Button variant="ghost" size="sm" onClick={onNext}>
             Skip
-          </button>
+          </Button>
         </div>
         {status === 'success' && (
           <motion.p
@@ -169,15 +167,12 @@ function StepComplete({ onFinish }: { onFinish: () => void }) {
         </svg>
       </motion.div>
       <h2 className="font-display font-bold text-3xl text-white mb-3">You're All Set!</h2>
-      <p className="text-black-300 text-lg mb-8 max-w-sm leading-relaxed">
+      <p className="text-gray-400 text-lg mb-8 max-w-sm leading-relaxed">
         Start exploring templates or import your first project.
       </p>
-      <button
-        onClick={onFinish}
-        className="px-8 py-3 bg-yellow-400 text-black font-semibold rounded-xl hover:bg-yellow-500 transition-all hover:-translate-y-0.5 active:scale-95"
-      >
+      <Button variant="primary" size="md" onClick={onFinish}>
         Open MiroX
-      </button>
+      </Button>
     </motion.div>
   )
 }

@@ -2,19 +2,17 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { listContainerVariants, listItemVariants } from '../../design-system/animations'
 import { useBoardStore } from '../../stores/boardStore'
+import { Button } from '@components/ui/Button'
 
 function EmptyState() {
   const navigate = useNavigate()
   return (
     <div className="text-center py-16">
       <div className="text-5xl mb-4 opacity-30">{'\uD83D\uDCCB'}</div>
-      <p className="text-black-300 text-lg mb-4">No boards yet. Create your first board!</p>
-      <button
-        onClick={() => navigate('/templates')}
-        className="px-5 py-2.5 bg-yellow-400 text-black font-semibold rounded-lg hover:bg-yellow-500 transition-colors active:scale-95"
-      >
+      <p className="text-gray-400 text-lg mb-4">No boards yet. Create your first board!</p>
+      <Button variant="primary" size="md" onClick={() => navigate('/templates')}>
         Browse Templates
-      </button>
+      </Button>
     </div>
   )
 }
@@ -41,7 +39,7 @@ export function RecentBoards() {
       <div className="flex items-center justify-between mb-4">
         <h2 className="font-display font-bold text-2xl text-white">Recent Boards</h2>
         {recentBoards.length > 0 && (
-          <span className="text-black-300 text-sm">{recentBoards.length} boards</span>
+          <span className="text-gray-400 text-sm">{recentBoards.length} boards</span>
         )}
       </div>
 
@@ -71,7 +69,7 @@ export function RecentBoards() {
                 </div>
                 <div className="min-w-0">
                   <div className="font-semibold text-white truncate">{board.name}</div>
-                  <div className="text-black-300 text-sm flex items-center gap-2">
+                  <div className="text-gray-400 text-sm flex items-center gap-2">
                     <span className="px-2 py-0.5 rounded-full bg-yellow-400/10 text-yellow-400 text-xs font-medium">
                       {board.templateName}
                     </span>
@@ -79,7 +77,7 @@ export function RecentBoards() {
                   </div>
                 </div>
               </div>
-              <span className="text-black-400 group-hover:text-yellow-400 transition-colors text-sm font-medium flex-shrink-0">
+              <span className="text-gray-500 group-hover:text-yellow-400 transition-colors text-sm font-medium flex-shrink-0">
                 Open →
               </span>
             </motion.a>

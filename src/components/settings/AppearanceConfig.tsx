@@ -1,4 +1,5 @@
 import { useSettingsStore } from '../../stores/settingsStore'
+import { Button } from '@components/ui/Button'
 
 const accentColors = [
   { value: '#FFD600', label: 'Yellow' },
@@ -28,30 +29,30 @@ export function AppearanceConfig() {
       <div className="space-y-3">
         <label className="text-sm font-medium text-gray-200">Theme</label>
         <div className="flex gap-3">
-          <button
+          <Button
+            variant={theme === 'dark' ? 'secondary' : 'ghost'}
+            size="sm"
             onClick={() => setTheme('dark')}
-            className={`flex-1 p-4 rounded-xl border-2 transition-all ${
-              theme === 'dark'
-                ? 'border-yellow-400 bg-black-700'
-                : 'border-black-500 bg-black-800 hover:border-black-400'
+            className={`flex-1 p-4 flex-col items-stretch h-auto ${
+              theme === 'dark' ? 'border-yellow-400' : ''
             }`}
           >
             <div className="w-full h-16 bg-black-900 rounded-lg mb-3 border border-black-600" />
             <p className="text-sm font-medium text-white">Dark</p>
             <p className="text-xs text-gray-500">Default theme</p>
-          </button>
-          <button
+          </Button>
+          <Button
+            variant={theme === 'light' ? 'secondary' : 'ghost'}
+            size="sm"
             onClick={() => setTheme('light')}
-            className={`flex-1 p-4 rounded-xl border-2 transition-all ${
-              theme === 'light'
-                ? 'border-yellow-400 bg-black-700'
-                : 'border-black-500 bg-black-800 hover:border-black-400'
+            className={`flex-1 p-4 flex-col items-stretch h-auto ${
+              theme === 'light' ? 'border-yellow-400' : ''
             }`}
           >
             <div className="w-full h-16 bg-gray-200 rounded-lg mb-3 border border-gray-300" />
             <p className="text-sm font-medium text-white">Light</p>
             <p className="text-xs text-gray-500">Coming soon</p>
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -63,7 +64,7 @@ export function AppearanceConfig() {
             <button
               key={color.value}
               onClick={() => setAccentColor(color.value)}
-              className={`w-10 h-10 rounded-xl border-2 transition-all ${
+              className={`w-10 h-10 rounded-xl border-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 focus-visible:ring-offset-1 focus-visible:ring-offset-black-900 ${
                 accentColor === color.value
                   ? 'border-white scale-110'
                   : 'border-transparent hover:border-gray-600'

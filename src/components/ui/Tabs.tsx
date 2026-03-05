@@ -20,7 +20,7 @@ export function Tabs({ tabs, activeTab, onChange, className = '' }: TabsProps) {
         <button
           key={tab.id}
           onClick={() => onChange(tab.id)}
-          className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+          className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 focus-visible:ring-offset-1 focus-visible:ring-offset-black-900 ${
             activeTab === tab.id ? 'text-yellow-400' : 'text-gray-400 hover:text-white'
           }`}
         >
@@ -30,7 +30,7 @@ export function Tabs({ tabs, activeTab, onChange, className = '' }: TabsProps) {
           </span>
           {activeTab === tab.id && (
             <motion.div
-              layoutId="tab-indicator"
+              layoutId="tab-indicator-h"
               className="absolute inset-0 bg-yellow-400/10 rounded-lg"
               transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             />
@@ -55,13 +55,13 @@ export function VerticalTabs({ tabs, activeTab, onChange, className = '' }: Vert
         <button
           key={tab.id}
           onClick={() => onChange(tab.id)}
-          className={`relative flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-xl transition-colors text-left ${
+          className={`relative flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-xl transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 focus-visible:ring-offset-1 focus-visible:ring-offset-black-900 ${
             activeTab === tab.id ? 'text-yellow-400' : 'text-gray-400 hover:text-white'
           }`}
         >
           {activeTab === tab.id && (
             <motion.div
-              layoutId="vtab-indicator"
+              layoutId="tab-indicator-v"
               className="absolute inset-0 bg-yellow-400/10 rounded-xl"
               transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             />

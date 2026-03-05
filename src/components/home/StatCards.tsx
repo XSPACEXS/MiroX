@@ -32,7 +32,7 @@ function StatCard({ label, value, suffix }: StatCardProps) {
         <AnimatedNumber value={value} />
         {suffix && <span>{suffix}</span>}
       </div>
-      <div className="text-black-300 text-sm font-medium">{label}</div>
+      <div className="text-gray-400 text-sm font-medium">{label}</div>
     </motion.div>
   )
 }
@@ -43,7 +43,7 @@ export function StatCards() {
 
   return (
     <motion.div
-      className="grid grid-cols-3 gap-4 mb-8"
+      className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8"
       variants={listContainerVariants}
       initial="initial"
       animate="animate"

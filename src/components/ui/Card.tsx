@@ -22,9 +22,10 @@ export function Card({ variant = 'default', hoverable = false, children, classNa
   if (hoverable || onClick) {
     return (
       <motion.div
-        whileHover={{ y: -4, boxShadow: '0 0 30px rgba(255, 214, 0, 0.2)' }}
+        whileHover={{ y: -4 }}
         whileTap={{ scale: 0.98 }}
-        className={`${base} ${variantStyles[variant]} cursor-pointer ${className}`}
+        tabIndex={0}
+        className={`${base} ${variantStyles[variant]} cursor-pointer hover:shadow-yellow-glow transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 focus-visible:ring-offset-1 focus-visible:ring-offset-black-900 ${className}`}
         onClick={onClick}
         {...(props as React.ComponentProps<typeof motion.div>)}
       >

@@ -36,6 +36,7 @@ export function Button({ variant = 'primary', size = 'md', isLoading, leftIcon, 
         inline-flex items-center justify-center font-medium transition-all duration-150
         disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0
         hover:-translate-y-0.5 active:translate-y-0
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 focus-visible:ring-offset-1 focus-visible:ring-offset-black-900
         ${variants[variant]} ${sizes[size]} ${className}
       `}
       {...props}
