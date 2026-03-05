@@ -132,6 +132,41 @@ export interface ElectronAPI {
   // Shell
   openExternal: (url: string) => Promise<{ ok: boolean; error?: string }>
 
+  // Agent
+  agent: {
+    launch: (config: { model: string; prompt: string; allowedTools: string[] }) => Promise<{
+      ok: boolean
+      id?: string
+      model?: string
+      startedAt?: number
+      error?: string
+    }>
+    kill: (id: string) => Promise<{ ok: boolean; error?: string }>
+    killAll: () => Promise<{ ok: boolean; killed?: number }>
+    onLog: (callback: (data: {
+      agentId: string
+      timestamp: number
+      type: 'stdout' | 'stderr' | 'system'
+      text: string
+    }) => void) => () => void
+    onExit: (callback: (data: {
+      id: string
+      exitCode: number
+      status: 'completed' | 'failed' | 'killed'
+    }) => void) => () => void
+  }
+
+  // Self-test
+  selfTest: {
+    screenshot: () => Promise<{ ok: boolean; dataURL?: string; filePath?: string; error?: string }>
+    domCheck: (code: string) => Promise<{ ok: boolean; result?: unknown; error?: string }>
+    consoleErrors: () => Promise<{ ok: boolean; errors?: string[] }>
+    runAll: () => Promise<{
+      ok: boolean
+      results?: Array<{ label: string; passed: boolean; detail: string }>
+    }>
+  }
+
   // Navigation listener
   onNavigate: (callback: (path: string) => void) => () => void
 }
