@@ -51,6 +51,9 @@ export const IPC_CHANNELS = {
   AGENT_LOG: 'agent:log',
   AGENT_EXIT: 'agent:exit',
 
+  // Navigation
+  NAVIGATE: 'navigate',
+
   // Self-test
   SELFTEST_SCREENSHOT: 'selftest:screenshot',
   SELFTEST_DOM_CHECK: 'selftest:dom-check',

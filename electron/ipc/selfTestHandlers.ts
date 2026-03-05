@@ -4,21 +4,25 @@ import fs from 'fs/promises'
 import { IPC_CHANNELS } from './channels'
 
 let consoleErrors: string[] = []
+let consoleListenerRegistered = false
 
 export function registerSelfTestHandlers(mainWindow: BrowserWindow): void {
   // Capture console errors/warnings from the renderer process
   // Electron 28: console-message params are (event, level, message, line, sourceId)
   // level is an integer: 0=debug, 1=info, 2=warning, 3=error
-  mainWindow.webContents.on('console-message', (_event, level, message) => {
-    if (level >= 2) {
-      const label = level === 3 ? 'error' : 'warning'
-      consoleErrors.push(`[${label}] ${message}`)
-      // Keep max 500 entries
-      if (consoleErrors.length > 500) {
-        consoleErrors.splice(0, consoleErrors.length - 500)
+  if (!consoleListenerRegistered) {
+    consoleListenerRegistered = true
+    mainWindow.webContents.on('console-message', (_event, level, message) => {
+      if (level >= 2) {
+        const label = level === 3 ? 'error' : 'warning'
+        consoleErrors.push(`[${label}] ${message}`)
+        // Keep max 500 entries
+        if (consoleErrors.length > 500) {
+          consoleErrors.splice(0, consoleErrors.length - 500)
+        }
       }
-    }
-  })
+    })
+  }
 
   // Screenshot
   ipcMain.removeHandler(IPC_CHANNELS.SELFTEST_SCREENSHOT)
@@ -73,8 +77,9 @@ export function registerSelfTestHandlers(mainWindow: BrowserWindow): void {
     return { ok: true }
   })
 
-  // Run all predefined DOM checks
+  // Run all predefined DOM checks — only available in dev builds
   ipcMain.removeHandler(IPC_CHANNELS.SELFTEST_RUN_ALL)
+  if (!app.isPackaged) {
   ipcMain.handle(IPC_CHANNELS.SELFTEST_RUN_ALL, async () => {
     const checks = [
       {
@@ -162,4 +167,5 @@ export function registerSelfTestHandlers(mainWindow: BrowserWindow): void {
 
     return { ok: true, results }
   })
+  }
 }
