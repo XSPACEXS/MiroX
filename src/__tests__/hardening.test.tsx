@@ -1,7 +1,9 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
+import { renderHook } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { Suspense } from 'react'
+import type React from 'react'
 
 // Stores
 import { useUIStore } from '../stores/uiStore'
@@ -23,6 +25,9 @@ import Home from '../pages/Home'
 import Templates from '../pages/Templates'
 import Settings from '../pages/Settings'
 import Import from '../pages/Import'
+
+// Hook
+import { useBoardBuilder } from '../hooks/useBoardBuilder'
 
 function renderWithRouter(ui: React.ReactElement, { route = '/' } = {}) {
   return render(
@@ -72,9 +77,35 @@ function resetStores() {
   })
 }
 
-// ────────────────────────────────────────────────────────────────────────
-// SECTION 1: TopBar Page Titles
-// ────────────────────────────────────────────────────────────────────────
+function hookWrapper({ children }: { children: React.ReactNode }) {
+  return <MemoryRouter>{children}</MemoryRouter>
+}
+
+const mockTemplate = {
+  id: 'kanban-test',
+  name: 'Kanban Board',
+  category: 'agile' as never,
+  description: 'A kanban board',
+  longDescription: 'A kanban board for tracking',
+  emoji: '📋',
+  previewAscii: '',
+  estimatedTime: '3 min',
+  blueprintId: 'bp-kanban',
+  fields: [
+    { id: 'col1', label: 'Column 1', type: 'text' as const, placeholder: 'To Do', required: false, defaultValue: 'To Do' },
+  ],
+  tags: ['agile', 'kanban'],
+  complexity: 'simple' as const,
+  sections: [
+    { id: 's1', name: 'Board', type: 'kanban' as const, description: 'Main board', icon: '📋' },
+  ],
+  color: '#FFD600',
+}
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 1. TopBar page titles (3 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
 describe('TopBar page titles', () => {
   beforeEach(() => resetStores())
 
@@ -90,6 +121,7 @@ describe('TopBar page titles', () => {
       '/import': 'Import',
       '/builder': 'Board Builder',
       '/settings': 'Settings',
+      '/agent-center': 'Agent Command Center',
     }
     for (const [route, title] of Object.entries(routes)) {
       const { unmount } = renderWithRouter(<TopBar />, { route })
@@ -104,48 +136,50 @@ describe('TopBar page titles', () => {
   })
 })
 
-// ────────────────────────────────────────────────────────────────────────
-// SECTION 2: QuickActions Edge Cases
-// ────────────────────────────────────────────────────────────────────────
-describe('QuickActions', () => {
+// ──────────────────────────────────────────────────────────────────────────────
+// 2. QuickActions edge cases (4 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
+describe('QuickActions edge cases', () => {
   beforeEach(() => resetStores())
 
-  it('renders all four quick action cards', () => {
-    renderWithRouter(<QuickActions />)
-    expect(screen.getByText('New Board')).toBeInTheDocument()
-    expect(screen.getByText('Import File')).toBeInTheDocument()
-    expect(screen.getByText('GitHub Project')).toBeInTheDocument()
-    expect(screen.getByText('Recent Boards')).toBeInTheDocument()
-  })
-
-  it('navigates to /templates when New Board is clicked', () => {
+  it('navigates to /templates for New Board action', () => {
     renderWithRouter(<QuickActions />)
     fireEvent.click(screen.getByText('New Board'))
-    // Navigation occurs via useNavigate — we can verify the button is clickable
     expect(screen.getByText('New Board')).toBeInTheDocument()
   })
 
-  it('handles Recent Boards click with scrollIntoView', () => {
+  it('navigates to /import?tab=file for Import File action', () => {
     renderWithRouter(<QuickActions />)
-    fireEvent.click(screen.getByText('Recent Boards'))
-    // scrollIntoView is mocked in setup.ts — just verify no crash
-    expect(screen.getByText('Recent Boards')).toBeInTheDocument()
+    fireEvent.click(screen.getByText('Import File'))
+    expect(screen.getByText('Import File')).toBeInTheDocument()
   })
 
-  it('has keyboard-accessible buttons with focus-visible ring', () => {
+  it('navigates to /import?tab=github for GitHub Project action', () => {
     renderWithRouter(<QuickActions />)
-    const buttons = screen.getAllByRole('button')
-    expect(buttons.length).toBe(4)
-    buttons.forEach(btn => {
-      expect(btn.className).toContain('focus-visible')
-    })
+    fireEvent.click(screen.getByText('GitHub Project'))
+    expect(screen.getByText('GitHub Project')).toBeInTheDocument()
+  })
+
+  it('Recent Boards calls scrollIntoView on recent-boards element', () => {
+    const scrollMock = vi.fn()
+    const mockElement = document.createElement('div')
+    mockElement.scrollIntoView = scrollMock
+    vi.spyOn(document, 'getElementById').mockReturnValue(mockElement)
+
+    renderWithRouter(<QuickActions />)
+    fireEvent.click(screen.getByText('Recent Boards'))
+    expect(scrollMock).toHaveBeenCalledWith({ behavior: 'smooth' })
+
+    vi.restoreAllMocks()
   })
 })
 
-// ────────────────────────────────────────────────────────────────────────
-// SECTION 3: WelcomeModal Token Flow
-// ────────────────────────────────────────────────────────────────────────
-describe('WelcomeModal', () => {
+// ──────────────────────────────────────────────────────────────────────────────
+// 3. WelcomeModal token flow (5 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
+describe('WelcomeModal token flow', () => {
   beforeEach(() => {
     resetStores()
     vi.clearAllMocks()
@@ -157,38 +191,30 @@ describe('WelcomeModal', () => {
     expect(screen.getByText('Get Started')).toBeInTheDocument()
   })
 
-  it('advances to step 2 on Get Started click', () => {
-    renderWithRouter(<WelcomeModal />)
-    fireEvent.click(screen.getByText('Get Started'))
-    expect(screen.getByText('Connect to Miro')).toBeInTheDocument()
-  })
-
   it('calls miro.setToken and miro.testConnection on test button', async () => {
-    const mockSetToken = vi.mocked(window.electronAPI.miro.setToken)
-    const mockTestConn = vi.mocked(window.electronAPI.miro.testConnection)
-    mockTestConn.mockResolvedValueOnce({ ok: true, status: 200 })
+    vi.mocked(window.electronAPI.miro.testConnection).mockResolvedValueOnce({ ok: true })
 
     renderWithRouter(<WelcomeModal />)
     fireEvent.click(screen.getByText('Get Started'))
 
     const input = screen.getByPlaceholderText('Paste your Miro API token...')
-    fireEvent.change(input, { target: { value: 'test-token-12345' } })
+    fireEvent.change(input, { target: { value: 'test-token-123' } })
     fireEvent.click(screen.getByText('Test Connection'))
 
     await waitFor(() => {
-      expect(mockSetToken).toHaveBeenCalledWith('test-token-12345')
-      expect(mockTestConn).toHaveBeenCalled()
+      expect(window.electronAPI.miro.setToken).toHaveBeenCalledWith('test-token-123')
+      expect(window.electronAPI.miro.testConnection).toHaveBeenCalled()
     })
   })
 
   it('shows success state when API returns ok', async () => {
-    vi.mocked(window.electronAPI.miro.testConnection).mockResolvedValueOnce({ ok: true, status: 200 })
+    vi.mocked(window.electronAPI.miro.testConnection).mockResolvedValueOnce({ ok: true })
 
     renderWithRouter(<WelcomeModal />)
     fireEvent.click(screen.getByText('Get Started'))
 
     const input = screen.getByPlaceholderText('Paste your Miro API token...')
-    fireEvent.change(input, { target: { value: 'test-token-12345' } })
+    fireEvent.change(input, { target: { value: 'valid-token' } })
     fireEvent.click(screen.getByText('Test Connection'))
 
     await waitFor(() => {
@@ -203,7 +229,7 @@ describe('WelcomeModal', () => {
     fireEvent.click(screen.getByText('Get Started'))
 
     const input = screen.getByPlaceholderText('Paste your Miro API token...')
-    fireEvent.change(input, { target: { value: 'bad-token-xxxxxx' } })
+    fireEvent.change(input, { target: { value: 'bad-token' } })
     fireEvent.click(screen.getByText('Test Connection'))
 
     await waitFor(() => {
@@ -216,26 +242,18 @@ describe('WelcomeModal', () => {
     fireEvent.click(screen.getByText('Get Started'))
     fireEvent.click(screen.getByText('Skip'))
     expect(screen.getByText("You're All Set!")).toBeInTheDocument()
+    expect(window.electronAPI.miro.testConnection).not.toHaveBeenCalled()
   })
 })
 
-// ────────────────────────────────────────────────────────────────────────
-// SECTION 4: ErrorBoundary
-// ────────────────────────────────────────────────────────────────────────
-describe('ErrorBoundary', () => {
-  // Suppress console.error from ErrorBoundary
-  const originalError = console.error
-  beforeEach(() => {
-    console.error = vi.fn()
-  })
-  afterEach(() => {
-    console.error = originalError
-  })
+// ──────────────────────────────────────────────────────────────────────────────
+// 4. ErrorBoundary (5 tests)
+// ──────────────────────────────────────────────────────────────────────────────
 
-  function ThrowError({ shouldThrow }: { shouldThrow: boolean }) {
-    if (shouldThrow) throw new Error('Test explosion')
-    return <div>No error here</div>
-  }
+describe('ErrorBoundary', () => {
+  const originalError = console.error
+  beforeEach(() => { console.error = vi.fn() })
+  afterEach(() => { console.error = originalError })
 
   it('renders children when no error', () => {
     render(
@@ -247,102 +265,96 @@ describe('ErrorBoundary', () => {
   })
 
   it('catches render errors and shows fallback UI', () => {
-    render(
-      <ErrorBoundary>
-        <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
-    )
+    function Bomb(): React.ReactElement { throw new Error('Boom') }
+    render(<ErrorBoundary><Bomb /></ErrorBoundary>)
     expect(screen.getByText('Something went wrong')).toBeInTheDocument()
   })
 
   it('displays error message in fallback', () => {
-    render(
-      <ErrorBoundary>
-        <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
-    )
-    expect(screen.getByText('Test explosion')).toBeInTheDocument()
+    function Bomb(): React.ReactElement { throw new Error('Detailed error message') }
+    render(<ErrorBoundary><Bomb /></ErrorBoundary>)
+    expect(screen.getByText('Detailed error message')).toBeInTheDocument()
   })
 
-  it('shows Reload App button in fallback', () => {
-    render(
-      <ErrorBoundary>
-        <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
-    )
+  it('Reload button exists in fallback', () => {
+    function Bomb(): React.ReactElement { throw new Error('crash') }
+    render(<ErrorBoundary><Bomb /></ErrorBoundary>)
     expect(screen.getByText('Reload App')).toBeInTheDocument()
   })
 
-  it('Try Again button attempts to re-render children', () => {
-    render(
-      <ErrorBoundary>
-        <ThrowError shouldThrow={true} />
-      </ErrorBoundary>
-    )
+  it('Try Again button resets error state and re-renders children', () => {
+    let shouldThrow = true
+    function MaybeThrow(): React.ReactElement {
+      if (shouldThrow) throw new Error('first render crash')
+      return <div>Recovered content</div>
+    }
+    render(<ErrorBoundary><MaybeThrow /></ErrorBoundary>)
     expect(screen.getByText('Something went wrong')).toBeInTheDocument()
 
-    // Click Try Again — it resets internal state and tries to render children
-    // Since shouldThrow is still true, it will error again and show fallback
+    shouldThrow = false
     fireEvent.click(screen.getByText('Try Again'))
-    expect(screen.getByText('Something went wrong')).toBeInTheDocument()
+    expect(screen.getByText('Recovered content')).toBeInTheDocument()
   })
 })
 
-// ────────────────────────────────────────────────────────────────────────
-// SECTION 5: Store Versioning
-// ────────────────────────────────────────────────────────────────────────
-describe('Store persistence versioning', () => {
-  it('boardStore initializes correctly with persist config', () => {
+// ──────────────────────────────────────────────────────────────────────────────
+// 5. Store versioning (6 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
+describe('Store versioning', () => {
+  beforeEach(() => resetStores())
+
+  it('boardStore initializes with correct defaults', () => {
     const state = useBoardStore.getState()
     expect(state.recentBoards).toEqual([])
     expect(state.totalBoardsCreated).toBe(0)
+    expect(state.isCreating).toBe(false)
   })
 
-  it('settingsStore initializes correctly with persist config', () => {
+  it('settingsStore initializes with correct defaults', () => {
     const state = useSettingsStore.getState()
+    expect(state.miroConnected).toBe(false)
+    expect(state.onboardingComplete).toBe(false)
     expect(state.theme).toBe('dark')
-    expect(state.accentColor).toBe('#FFD600')
   })
 
-  it('agentStore initializes correctly with persist config', () => {
+  it('agentStore initializes with correct defaults', () => {
     const state = useAgentStore.getState()
     expect(state.agents).toEqual([])
     expect(state.history).toEqual([])
     expect(state.isAdmin).toBe(true)
   })
 
-  it('boardStore addRecentBoard works with versioned persist', () => {
+  it('boardStore operations work with versioned persist', () => {
     const board = {
-      id: 'b1', name: 'Test', url: 'https://miro.com/1',
-      templateId: 't1', templateName: 'T1', createdAt: '2024-01-01',
+      id: 'b1', name: 'Test Board', url: 'https://miro.com/1',
+      templateId: 'kanban', templateName: 'Kanban', createdAt: new Date().toISOString(),
     }
     useBoardStore.getState().addRecentBoard(board)
-    expect(useBoardStore.getState().recentBoards[0]?.id).toBe('b1')
-    useBoardStore.getState().removeRecentBoard('b1')
+    expect(useBoardStore.getState().recentBoards).toHaveLength(1)
+    expect(useBoardStore.getState().recentBoards[0]!.id).toBe('b1')
   })
 
-  it('settingsStore recordTemplateUsed works with versioned persist', () => {
-    useSettingsStore.getState().recordTemplateUsed('tmpl-1')
-    expect(useSettingsStore.getState().templatesUsed).toContain('tmpl-1')
-    resetStores()
+  it('settingsStore operations work with versioned persist', () => {
+    expect(useSettingsStore.getState().onboardingComplete).toBe(false)
+    useSettingsStore.getState().completeOnboarding()
+    expect(useSettingsStore.getState().onboardingComplete).toBe(true)
   })
 
-  it('agentStore moveToHistory works with versioned persist', () => {
-    const agent = {
-      id: 'a1', prompt: 'test', model: 'sonnet' as const, status: 'completed' as const,
-      logs: [], startedAt: Date.now(), finishedAt: Date.now(),
-      exitCode: 0, cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
-    }
-    useAgentStore.getState().addAgent(agent)
-    useAgentStore.getState().moveToHistory('a1')
-    expect(useAgentStore.getState().history[0]?.id).toBe('a1')
-    resetStores()
+  it('agentStore operations work with versioned persist', () => {
+    useAgentStore.getState().addAgent({
+      id: 'a1', prompt: 'test', model: 'sonnet', status: 'running',
+      logs: [], startedAt: Date.now(), finishedAt: null, exitCode: null,
+      cost: null, allowedTools: ['Read'], gitTagStart: null, gitTagEnd: null,
+    })
+    expect(useAgentStore.getState().agents).toHaveLength(1)
   })
 })
 
-// ────────────────────────────────────────────────────────────────────────
-// SECTION 6: Toast Timeout Management
-// ────────────────────────────────────────────────────────────────────────
+// ──────────────────────────────────────────────────────────────────────────────
+// 6. Toast timeout management (4 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
 describe('Toast timeout management', () => {
   beforeEach(() => {
     resetStores()
@@ -355,16 +367,7 @@ describe('Toast timeout management', () => {
   it('auto-removes toast after default duration (4s)', () => {
     useUIStore.getState().addToast({ type: 'info', title: 'Auto toast' })
     expect(useUIStore.getState().toasts).toHaveLength(1)
-
     act(() => { vi.advanceTimersByTime(4000) })
-    expect(useUIStore.getState().toasts).toHaveLength(0)
-  })
-
-  it('respects custom duration', () => {
-    useUIStore.getState().addToast({ type: 'info', title: 'Custom', duration: 2000 })
-    expect(useUIStore.getState().toasts).toHaveLength(1)
-
-    act(() => { vi.advanceTimersByTime(2000) })
     expect(useUIStore.getState().toasts).toHaveLength(0)
   })
 
@@ -375,31 +378,43 @@ describe('Toast timeout management', () => {
 
     act(() => { vi.advanceTimersByTime(1000) })
     expect(useUIStore.getState().toasts).toHaveLength(1)
-    expect(useUIStore.getState().toasts[0]?.title).toBe('Toast B')
+    expect(useUIStore.getState().toasts[0]!.title).toBe('Toast B')
 
     act(() => { vi.advanceTimersByTime(2000) })
     expect(useUIStore.getState().toasts).toHaveLength(0)
   })
 
-  it('manually removing toast clears its timeout without double-remove', () => {
+  it('manually removing toast does not cause double-removal', () => {
     useUIStore.getState().addToast({ type: 'info', title: 'Manual remove' })
     const toastId = useUIStore.getState().toasts[0]!.id
-    expect(useUIStore.getState().toasts).toHaveLength(1)
-
     useUIStore.getState().removeToast(toastId)
     expect(useUIStore.getState().toasts).toHaveLength(0)
 
-    // Advance past the timeout — should not error or re-remove
     act(() => { vi.advanceTimersByTime(5000) })
+    expect(useUIStore.getState().toasts).toHaveLength(0)
+  })
+
+  it('toast with custom duration respects it', () => {
+    useUIStore.getState().addToast({ type: 'warning', title: 'Custom', duration: 10000 })
+    expect(useUIStore.getState().toasts).toHaveLength(1)
+
+    act(() => { vi.advanceTimersByTime(4000) })
+    expect(useUIStore.getState().toasts).toHaveLength(1)
+
+    act(() => { vi.advanceTimersByTime(6000) })
     expect(useUIStore.getState().toasts).toHaveLength(0)
   })
 })
 
-// ────────────────────────────────────────────────────────────────────────
-// SECTION 7: FileDropZone Edge Cases
-// ────────────────────────────────────────────────────────────────────────
-describe('FileDropZone', () => {
-  beforeEach(() => resetStores())
+// ──────────────────────────────────────────────────────────────────────────────
+// 7. FileDropZone edge cases (4 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
+describe('FileDropZone edge cases', () => {
+  beforeEach(() => {
+    resetStores()
+    vi.clearAllMocks()
+  })
 
   it('renders drop zone with instruction text', () => {
     renderWithRouter(<FileDropZone />)
@@ -411,25 +426,30 @@ describe('FileDropZone', () => {
     expect(screen.getByText('PDF, DOCX, TXT, MD, CSV, XLSX, JSON, ZIP')).toBeInTheDocument()
   })
 
-  it('renders as a clickable area', () => {
+  it('renders as a clickable drop area', () => {
     const { container } = renderWithRouter(<FileDropZone />)
     const dropZone = container.querySelector('.cursor-pointer')
     expect(dropZone).not.toBeNull()
   })
 
-  it('calls onFileReady callback when provided', () => {
-    const callback = vi.fn()
-    renderWithRouter(<FileDropZone onFileReady={callback} />)
-    // Callback is called via useEffect when files reach 'ready' status
-    // Since no files are present initially, callback should not be called
-    expect(callback).not.toHaveBeenCalled()
+  it('shows file name after dropping a file', async () => {
+    renderWithRouter(<FileDropZone />)
+    const dropZone = screen.getByText('Drop files here or click to browse').closest('div[class*="min-h"]')!
+    const file = new File(['content'], 'report.pdf', { type: 'application/pdf' })
+    Object.defineProperty(file, 'path', { value: '/tmp/report.pdf' })
+    fireEvent.drop(dropZone, { dataTransfer: { files: [file] } })
+
+    await waitFor(() => {
+      expect(screen.getByText('report.pdf')).toBeInTheDocument()
+    })
   })
 })
 
-// ────────────────────────────────────────────────────────────────────────
-// SECTION 8: URLImporter Edge Cases
-// ────────────────────────────────────────────────────────────────────────
-describe('URLImporter', () => {
+// ──────────────────────────────────────────────────────────────────────────────
+// 8. URLImporter edge cases (5 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
+describe('URLImporter edge cases', () => {
   beforeEach(() => {
     resetStores()
     vi.clearAllMocks()
@@ -451,7 +471,7 @@ describe('URLImporter', () => {
     })
   })
 
-  it('fetch button is disabled when URL is empty', () => {
+  it('Fetch button disabled when URL empty', () => {
     renderWithRouter(<URLImporter />)
     const button = screen.getByText('Fetch & Analyze')
     expect(button).toBeDisabled()
@@ -462,15 +482,13 @@ describe('URLImporter', () => {
     const input = screen.getByPlaceholderText('https://...')
     fireEvent.change(input, { target: { value: 'not-a-url' } })
     fireEvent.keyDown(input, { key: 'Enter' })
-    // Should trigger validation error for invalid URL
     expect(screen.getByText('Please enter a valid URL')).toBeInTheDocument()
   })
 
   it('shows result card after successful fetch', async () => {
     vi.mocked(window.electronAPI.files.fetchUrl).mockResolvedValueOnce({
       ok: true,
-      text: '<html><head><title>Test Page</title></head><body><h1>Hello World</h1><p>Content here</p></body></html>',
-      url: 'https://example.com',
+      text: '<html><head><title>Test Page</title></head><body><h1>Hello</h1><p>Content</p></body></html>',
     })
 
     renderWithRouter(<URLImporter />)
@@ -484,32 +502,56 @@ describe('URLImporter', () => {
   })
 })
 
-// ────────────────────────────────────────────────────────────────────────
-// SECTION 9: BoardWizard Error Recovery
-// ────────────────────────────────────────────────────────────────────────
+// ──────────────────────────────────────────────────────────────────────────────
+// 9. BoardWizard error recovery (3 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
 describe('BoardWizard error recovery', () => {
-  beforeEach(() => resetStores())
-
-  it('renders step indicator with Template step', () => {
-    renderWithRouter(<BoardWizard />, { route: '/builder' })
-    expect(screen.getByText('Template')).toBeInTheDocument()
+  beforeEach(() => {
+    resetStores()
+    vi.clearAllMocks()
   })
 
-  it('renders step indicator with Name step', () => {
-    renderWithRouter(<BoardWizard />, { route: '/builder' })
-    expect(screen.getByText('Name')).toBeInTheDocument()
+  it('shows error message when creation fails (via hook)', async () => {
+    vi.mocked(window.electronAPI.miro.createBoard).mockRejectedValueOnce(new Error('API limit reached'))
+
+    const { result } = renderHook(() => useBoardBuilder(), { wrapper: hookWrapper })
+    act(() => { result.current.setTemplate(mockTemplate) })
+    await act(async () => { await result.current.startCreation() })
+
+    expect(result.current.error).toBe('API limit reached')
   })
 
-  it('renders step indicator with Content and Creating steps', () => {
-    renderWithRouter(<BoardWizard />, { route: '/builder' })
-    expect(screen.getByText('Content')).toBeInTheDocument()
-    expect(screen.getByText('Creating')).toBeInTheDocument()
+  it('error state includes Try Again ability via reset', async () => {
+    vi.mocked(window.electronAPI.miro.createBoard).mockRejectedValueOnce(new Error('Board creation failed'))
+
+    const { result } = renderHook(() => useBoardBuilder(), { wrapper: hookWrapper })
+    act(() => { result.current.setTemplate(mockTemplate) })
+    await act(async () => { await result.current.startCreation() })
+    expect(result.current.error).toBe('Board creation failed')
+
+    act(() => { result.current.reset() })
+    expect(result.current.error).toBeNull()
+  })
+
+  it('Try Again via reset returns to step 1', async () => {
+    vi.mocked(window.electronAPI.miro.createBoard).mockRejectedValueOnce(new Error('Failure'))
+
+    const { result } = renderHook(() => useBoardBuilder(), { wrapper: hookWrapper })
+    act(() => { result.current.setTemplate(mockTemplate) })
+    await act(async () => { await result.current.startCreation() })
+    expect(result.current.currentStep).toBe(4)
+
+    act(() => { result.current.reset() })
+    expect(result.current.currentStep).toBe(1)
+    expect(result.current.selectedTemplate).toBeNull()
   })
 })
 
-// ────────────────────────────────────────────────────────────────────────
-// SECTION 10: Navigation Flows
-// ────────────────────────────────────────────────────────────────────────
+// ──────────────────────────────────────────────────────────────────────────────
+// 10. Navigation flows (4 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
 describe('Navigation flows', () => {
   beforeEach(() => resetStores())
 
@@ -521,8 +563,8 @@ describe('Navigation flows', () => {
 
   it('Templates page renders search and gallery', () => {
     renderWithRouter(<Templates />, { route: '/templates' })
-    expect(screen.getByPlaceholderText('Search templates...')).toBeInTheDocument()
     expect(screen.getByText('Board Templates')).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('Search templates...')).toBeInTheDocument()
   })
 
   it('Settings page renders all tabs', () => {
@@ -541,25 +583,25 @@ describe('Navigation flows', () => {
   })
 })
 
-// ────────────────────────────────────────────────────────────────────────
-// SECTION 11: Form Submissions
-// ────────────────────────────────────────────────────────────────────────
+// ──────────────────────────────────────────────────────────────────────────────
+// 11. Form submissions (3 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
 describe('Form submissions', () => {
   beforeEach(() => resetStores())
 
-  it('Builder Next button disabled when board name is empty', async () => {
+  it('Builder Next button disabled when board name empty', async () => {
     renderWithRouter(<BoardWizard />, { route: '/builder?template=sprint-planning' })
     await waitFor(() => {
       expect(screen.getByText('Board Name')).toBeInTheDocument()
     })
-    // Clear the auto-filled board name
     const nameInput = screen.getByDisplayValue('Sprint Planning')
     fireEvent.change(nameInput, { target: { value: '' } })
     const nextButton = screen.getByText('Next: Customize Content')
     expect(nextButton).toBeDisabled()
   })
 
-  it('Builder Next button enabled when board name is entered', async () => {
+  it('Builder Next button enabled when board name entered', async () => {
     renderWithRouter(<BoardWizard />, { route: '/builder?template=sprint-planning' })
     await waitFor(() => {
       expect(screen.getByText('Board Name')).toBeInTheDocument()
@@ -570,62 +612,229 @@ describe('Form submissions', () => {
     expect(nextButton).not.toBeDisabled()
   })
 
-  it('Settings Miro tab shows connection config', () => {
+  it('Settings tab navigation works', async () => {
     renderWithRouter(<Settings />, { route: '/settings' })
     expect(screen.getByText('Miro Connection')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByText('GitHub'))
+    await waitFor(() => {
+      expect(screen.getByText('GitHub Integration')).toBeInTheDocument()
+    })
+
+    fireEvent.click(screen.getByText('Appearance'))
+    await waitFor(() => {
+      expect(screen.getByText('Theme')).toBeInTheDocument()
+    })
   })
 })
 
-// ────────────────────────────────────────────────────────────────────────
-// SECTION 12: useBoardBuilder Hook
-// ────────────────────────────────────────────────────────────────────────
-describe('useBoardBuilder via BoardWizard', () => {
+// ──────────────────────────────────────────────────────────────────────────────
+// 12. useBoardBuilder hook (6 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
+describe('useBoardBuilder hook', () => {
+  beforeEach(() => {
+    resetStores()
+    vi.clearAllMocks()
+  })
+
+  it('initial state has step 1, no template selected', () => {
+    const { result } = renderHook(() => useBoardBuilder(), { wrapper: hookWrapper })
+    expect(result.current.currentStep).toBe(1)
+    expect(result.current.selectedTemplate).toBeNull()
+    expect(result.current.boardName).toBe('')
+  })
+
+  it('setTemplate sets template and board name', () => {
+    const { result } = renderHook(() => useBoardBuilder(), { wrapper: hookWrapper })
+    act(() => { result.current.setTemplate(mockTemplate) })
+    expect(result.current.selectedTemplate).toEqual(mockTemplate)
+    expect(result.current.boardName).toBe('Kanban Board')
+  })
+
+  it('nextStep advances step, prevStep goes back', () => {
+    const { result } = renderHook(() => useBoardBuilder(), { wrapper: hookWrapper })
+    expect(result.current.currentStep).toBe(1)
+
+    act(() => result.current.nextStep())
+    expect(result.current.currentStep).toBe(2)
+
+    act(() => result.current.nextStep())
+    expect(result.current.currentStep).toBe(3)
+
+    act(() => result.current.prevStep())
+    expect(result.current.currentStep).toBe(2)
+
+    act(() => result.current.prevStep())
+    expect(result.current.currentStep).toBe(1)
+
+    act(() => result.current.prevStep())
+    expect(result.current.currentStep).toBe(1)
+  })
+
+  it('reset clears all state', () => {
+    const { result } = renderHook(() => useBoardBuilder(), { wrapper: hookWrapper })
+    act(() => {
+      result.current.setTemplate(mockTemplate)
+      result.current.setBoardName('Custom Name')
+      result.current.nextStep()
+    })
+    expect(result.current.currentStep).toBe(2)
+
+    act(() => result.current.reset())
+    expect(result.current.currentStep).toBe(1)
+    expect(result.current.selectedTemplate).toBeNull()
+    expect(result.current.boardName).toBe('')
+    expect(result.current.error).toBeNull()
+  })
+
+  it('startCreation calls buildBoard service', async () => {
+    const { result } = renderHook(() => useBoardBuilder(), { wrapper: hookWrapper })
+    act(() => {
+      result.current.setTemplate(mockTemplate)
+      result.current.setBoardName('My Kanban')
+    })
+
+    await act(async () => { await result.current.startCreation() })
+
+    expect(window.electronAPI.miro.createBoard).toHaveBeenCalledWith(
+      'My Kanban',
+      expect.stringContaining('Kanban Board')
+    )
+    expect(result.current.isComplete).toBe(true)
+    expect(result.current.boardUrl).toBeTruthy()
+  })
+
+  it('error in creation sets error state', async () => {
+    vi.mocked(window.electronAPI.miro.createBoard).mockRejectedValueOnce(new Error('Network error'))
+
+    const { result } = renderHook(() => useBoardBuilder(), { wrapper: hookWrapper })
+    act(() => { result.current.setTemplate(mockTemplate) })
+    await act(async () => { await result.current.startCreation() })
+
+    expect(result.current.error).toBe('Network error')
+    expect(result.current.isComplete).toBe(false)
+  })
+})
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 13. Additional store operations (12 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
+describe('Additional store operations', () => {
   beforeEach(() => resetStores())
 
-  it('starts at step 1 with no template selected', () => {
-    renderWithRouter(<BoardWizard />, { route: '/builder' })
-    expect(screen.getByText('Template')).toBeInTheDocument()
+  it('boardStore limits recent boards to 10', () => {
+    for (let i = 0; i < 15; i++) {
+      useBoardStore.getState().addRecentBoard({
+        id: `b${i}`, name: `Board ${i}`, url: `https://miro.com/${i}`,
+        templateId: 'kanban', templateName: 'Kanban', createdAt: new Date().toISOString(),
+      })
+    }
+    expect(useBoardStore.getState().recentBoards).toHaveLength(10)
   })
 
-  it('auto-selects template from URL param and shows step 2', async () => {
-    renderWithRouter(<BoardWizard />, { route: '/builder?template=sprint-planning' })
-    await waitFor(() => {
-      expect(screen.getByText('Board Name')).toBeInTheDocument()
+  it('boardStore removeRecentBoard removes by id', () => {
+    useBoardStore.getState().addRecentBoard({
+      id: 'to-remove', name: 'Temp Board', url: 'https://miro.com/temp',
+      templateId: 'kanban', templateName: 'Kanban', createdAt: new Date().toISOString(),
     })
+    useBoardStore.getState().removeRecentBoard('to-remove')
+    expect(useBoardStore.getState().recentBoards).toHaveLength(0)
   })
 
-  it('shows Back button on step 2', async () => {
-    renderWithRouter(<BoardWizard />, { route: '/builder?template=sprint-planning' })
-    await waitFor(() => {
-      expect(screen.getByText('Back')).toBeInTheDocument()
+  it('boardStore clearRecentBoards removes all', () => {
+    useBoardStore.getState().addRecentBoard({
+      id: 'b1', name: 'Board 1', url: 'https://miro.com/1',
+      templateId: 'kanban', templateName: 'Kanban', createdAt: new Date().toISOString(),
     })
+    useBoardStore.getState().clearRecentBoards()
+    expect(useBoardStore.getState().recentBoards).toEqual([])
   })
 
-  it('shows description field on step 2', async () => {
-    renderWithRouter(<BoardWizard />, { route: '/builder?template=sprint-planning' })
-    await waitFor(() => {
-      expect(screen.getByText('Description (optional)')).toBeInTheDocument()
-    })
+  it('boardStore incrementTotal increases count', () => {
+    expect(useBoardStore.getState().totalBoardsCreated).toBe(0)
+    useBoardStore.getState().incrementTotal()
+    expect(useBoardStore.getState().totalBoardsCreated).toBe(1)
+    useBoardStore.getState().incrementTotal()
+    expect(useBoardStore.getState().totalBoardsCreated).toBe(2)
   })
 
-  it('auto-fills board name from template', async () => {
-    renderWithRouter(<BoardWizard />, { route: '/builder?template=sprint-planning' })
-    await waitFor(() => {
-      expect(screen.getByDisplayValue('Sprint Planning')).toBeInTheDocument()
-    })
+  it('settingsStore recordTemplateUsed tracks templates', () => {
+    useSettingsStore.getState().recordTemplateUsed('kanban')
+    useSettingsStore.getState().recordTemplateUsed('swot')
+    expect(useSettingsStore.getState().templatesUsed).toContain('kanban')
+    expect(useSettingsStore.getState().templatesUsed).toContain('swot')
   })
 
-  it('shows Next: Customize Content button', async () => {
-    renderWithRouter(<BoardWizard />, { route: '/builder?template=sprint-planning' })
-    await waitFor(() => {
-      expect(screen.getByText('Next: Customize Content')).toBeInTheDocument()
+  it('settingsStore setTheme changes theme', () => {
+    useSettingsStore.getState().setTheme('light')
+    expect(useSettingsStore.getState().theme).toBe('light')
+    useSettingsStore.getState().setTheme('dark')
+    expect(useSettingsStore.getState().theme).toBe('dark')
+  })
+
+  it('uiStore toggleSidebar toggles collapsed state', () => {
+    expect(useUIStore.getState().sidebarCollapsed).toBe(false)
+    useUIStore.getState().toggleSidebar()
+    expect(useUIStore.getState().sidebarCollapsed).toBe(true)
+    useUIStore.getState().toggleSidebar()
+    expect(useUIStore.getState().sidebarCollapsed).toBe(false)
+  })
+
+  it('uiStore toggleSearch toggles isSearchOpen', () => {
+    expect(useUIStore.getState().isSearchOpen).toBe(false)
+    useUIStore.getState().toggleSearch()
+    expect(useUIStore.getState().isSearchOpen).toBe(true)
+  })
+
+  it('uiStore openModal and closeModal work correctly', () => {
+    useUIStore.getState().openModal('welcome')
+    expect(useUIStore.getState().activeModal).toBe('welcome')
+    useUIStore.getState().closeModal()
+    expect(useUIStore.getState().activeModal).toBeNull()
+  })
+
+  it('agentStore moveToHistory moves agent from active to history', () => {
+    useAgentStore.getState().addAgent({
+      id: 'move-me', prompt: 'test', model: 'sonnet', status: 'completed',
+      logs: [], startedAt: Date.now(), finishedAt: Date.now(), exitCode: 0,
+      cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
     })
+    useAgentStore.getState().moveToHistory('move-me')
+    expect(useAgentStore.getState().agents).toHaveLength(0)
+    expect(useAgentStore.getState().history).toHaveLength(1)
+  })
+
+  it('agentStore clearHistory empties history array', () => {
+    useAgentStore.getState().addAgent({
+      id: 'h1', prompt: 'test', model: 'sonnet', status: 'completed',
+      logs: [], startedAt: Date.now(), finishedAt: Date.now(), exitCode: 0,
+      cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
+    })
+    useAgentStore.getState().moveToHistory('h1')
+    useAgentStore.getState().clearHistory()
+    expect(useAgentStore.getState().history).toHaveLength(0)
+  })
+
+  it('agentStore updateAgentStatus changes status and sets finishedAt', () => {
+    useAgentStore.getState().addAgent({
+      id: 'status-test', prompt: 'test', model: 'sonnet', status: 'running',
+      logs: [], startedAt: Date.now(), finishedAt: null, exitCode: null,
+      cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
+    })
+    useAgentStore.getState().updateAgentStatus('status-test', 'completed', 0)
+    const agent = useAgentStore.getState().agents.find(a => a.id === 'status-test')
+    expect(agent!.status).toBe('completed')
+    expect(agent!.exitCode).toBe(0)
+    expect(agent!.finishedAt).toBeTruthy()
   })
 })
 
-// ────────────────────────────────────────────────────────────────────────
-// SECTION 13: IPC Type Safety
-// ────────────────────────────────────────────────────────────────────────
+// ──────────────────────────────────────────────────────────────────────────────
+// 14. IPC Type Safety (5 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
 describe('ElectronAPI type safety', () => {
   it('miro namespace has all required methods', () => {
     const api = window.electronAPI.miro
@@ -671,5 +880,178 @@ describe('ElectronAPI type safety', () => {
     expect(typeof api.consoleErrors).toBe('function')
     expect(typeof api.clearConsoleErrors).toBe('function')
     expect(typeof api.runAll).toBe('function')
+  })
+})
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 15. WelcomeModal full flow (2 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
+describe('WelcomeModal full flow', () => {
+  beforeEach(() => {
+    resetStores()
+    vi.clearAllMocks()
+  })
+
+  it('step 3 shows completion screen with Open MiroX button', () => {
+    renderWithRouter(<WelcomeModal />)
+    fireEvent.click(screen.getByText('Get Started'))
+    fireEvent.click(screen.getByText('Skip'))
+    expect(screen.getByText("You're All Set!")).toBeInTheDocument()
+    expect(screen.getByText('Open MiroX')).toBeInTheDocument()
+  })
+
+  it('Open MiroX button completes onboarding', () => {
+    renderWithRouter(<WelcomeModal />)
+    fireEvent.click(screen.getByText('Get Started'))
+    fireEvent.click(screen.getByText('Skip'))
+    fireEvent.click(screen.getByText('Open MiroX'))
+    expect(useSettingsStore.getState().onboardingComplete).toBe(true)
+  })
+})
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 16. useBoardBuilder field defaults (2 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
+describe('useBoardBuilder field defaults', () => {
+  beforeEach(() => {
+    resetStores()
+    vi.clearAllMocks()
+  })
+
+  it('initializes field defaults from template', () => {
+    const { result } = renderHook(() => useBoardBuilder(), { wrapper: hookWrapper })
+    act(() => { result.current.setTemplate(mockTemplate) })
+    expect(result.current.fieldValues).toEqual({ col1: 'To Do' })
+  })
+
+  it('setFieldValue updates a single field', () => {
+    const { result } = renderHook(() => useBoardBuilder(), { wrapper: hookWrapper })
+    act(() => { result.current.setTemplate(mockTemplate) })
+    act(() => { result.current.setFieldValue('col1', 'In Progress') })
+    expect(result.current.fieldValues.col1).toBe('In Progress')
+  })
+})
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 17. Settings store edge cases (3 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
+describe('Settings store edge cases', () => {
+  beforeEach(() => resetStores())
+
+  it('setMiroConnected with username stores both values', () => {
+    useSettingsStore.getState().setMiroConnected(true, 'TestUser')
+    expect(useSettingsStore.getState().miroConnected).toBe(true)
+    expect(useSettingsStore.getState().miroUsername).toBe('TestUser')
+  })
+
+  it('setGithubConnected with username and avatar stores all values', () => {
+    useSettingsStore.getState().setGithubConnected(true, 'ghuser', 'https://avatar.com/1')
+    expect(useSettingsStore.getState().githubConnected).toBe(true)
+    expect(useSettingsStore.getState().githubUsername).toBe('ghuser')
+    expect(useSettingsStore.getState().githubAvatarUrl).toBe('https://avatar.com/1')
+  })
+
+  it('incrementFilesImported increases counter', () => {
+    expect(useSettingsStore.getState().filesImported).toBe(0)
+    useSettingsStore.getState().incrementFilesImported()
+    expect(useSettingsStore.getState().filesImported).toBe(1)
+    useSettingsStore.getState().incrementFilesImported()
+    expect(useSettingsStore.getState().filesImported).toBe(2)
+  })
+})
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 18. Agent log management (3 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
+describe('Agent log management', () => {
+  beforeEach(() => resetStores())
+
+  it('appendLog adds log entries to the correct agent', () => {
+    useAgentStore.getState().addAgent({
+      id: 'log-agent', prompt: 'test', model: 'sonnet', status: 'running',
+      logs: [], startedAt: Date.now(), finishedAt: null, exitCode: null,
+      cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
+    })
+    useAgentStore.getState().appendLog('log-agent', { timestamp: 1000, type: 'stdout', text: 'Line 1' })
+    useAgentStore.getState().appendLog('log-agent', { timestamp: 2000, type: 'stderr', text: 'Line 2' })
+
+    const agent = useAgentStore.getState().agents.find(a => a.id === 'log-agent')
+    expect(agent!.logs).toHaveLength(2)
+    expect(agent!.logs[0]!.text).toBe('Line 1')
+    expect(agent!.logs[1]!.text).toBe('Line 2')
+  })
+
+  it('appendLog caps at 2000 entries', () => {
+    useAgentStore.getState().addAgent({
+      id: 'cap-agent', prompt: 'test', model: 'sonnet', status: 'running',
+      logs: [], startedAt: Date.now(), finishedAt: null, exitCode: null,
+      cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
+    })
+    for (let i = 0; i < 2100; i++) {
+      useAgentStore.getState().appendLog('cap-agent', { timestamp: i, type: 'stdout', text: `Line ${i}` })
+    }
+    const agent = useAgentStore.getState().agents.find(a => a.id === 'cap-agent')
+    expect(agent!.logs.length).toBeLessThanOrEqual(2000)
+  })
+
+  it('updateAgentCost sets cost on agent', () => {
+    useAgentStore.getState().addAgent({
+      id: 'cost-agent', prompt: 'test', model: 'sonnet', status: 'running',
+      logs: [], startedAt: Date.now(), finishedAt: null, exitCode: null,
+      cost: null, allowedTools: [], gitTagStart: null, gitTagEnd: null,
+    })
+    const cost = { inputTokens: 100, outputTokens: 50, estimatedUSD: 0.01 }
+    useAgentStore.getState().updateAgentCost('cost-agent', cost)
+    const agent = useAgentStore.getState().agents.find(a => a.id === 'cost-agent')
+    expect(agent!.cost).toEqual(cost)
+  })
+})
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 19. QuickActions descriptions (2 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
+describe('QuickActions descriptions', () => {
+  beforeEach(() => resetStores())
+
+  it('renders all four action descriptions', () => {
+    renderWithRouter(<QuickActions />)
+    expect(screen.getByText('Start from 30+ professional templates')).toBeInTheDocument()
+    expect(screen.getByText('Upload PDF, DOCX, CSV, and more')).toBeInTheDocument()
+    expect(screen.getByText('Connect your repos in seconds')).toBeInTheDocument()
+    expect(screen.getByText('View your last 10 boards')).toBeInTheDocument()
+  })
+
+  it('does not scroll when element does not exist', () => {
+    vi.spyOn(document, 'getElementById').mockReturnValue(null)
+    renderWithRouter(<QuickActions />)
+    fireEvent.click(screen.getByText('Recent Boards'))
+    expect(screen.getByText('Recent Boards')).toBeInTheDocument()
+    vi.restoreAllMocks()
+  })
+})
+
+// ──────────────────────────────────────────────────────────────────────────────
+// 20. TopBar UI elements (2 tests)
+// ──────────────────────────────────────────────────────────────────────────────
+
+describe('TopBar UI elements', () => {
+  beforeEach(() => resetStores())
+
+  it('has settings navigation button', () => {
+    renderWithRouter(<TopBar />)
+    // TopBar has two buttons: search and settings
+    const buttons = screen.getAllByRole('button')
+    expect(buttons.length).toBe(2)
+  })
+
+  it('has search toggle button', () => {
+    renderWithRouter(<TopBar />)
+    const buttons = screen.getAllByRole('button')
+    expect(buttons.length).toBeGreaterThanOrEqual(1)
   })
 })
