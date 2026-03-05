@@ -45,6 +45,12 @@ export function registerSelfTestHandlers(mainWindow: BrowserWindow): void {
   if (!app.isPackaged) {
     ipcMain.removeHandler(IPC_CHANNELS.SELFTEST_DOM_CHECK)
     ipcMain.handle(IPC_CHANNELS.SELFTEST_DOM_CHECK, async (_event, code: string) => {
+      if (typeof code !== 'string' || !code.trim()) {
+        return { ok: false, error: 'Code is required' }
+      }
+      if (code.length > 10_000) {
+        return { ok: false, error: 'Code too long (max 10,000 characters)' }
+      }
       try {
         const result = await mainWindow.webContents.executeJavaScript(code)
         return { ok: true, result }

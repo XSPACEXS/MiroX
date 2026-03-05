@@ -75,7 +75,14 @@ function createWindow(): void {
 
   // Prevent new windows — open external links in browser
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
-    shell.openExternal(url)
+    try {
+      const parsed = new URL(url)
+      if (parsed.protocol === 'https:' || parsed.protocol === 'http:') {
+        shell.openExternal(url)
+      }
+    } catch {
+      // Invalid URL — silently deny
+    }
     return { action: 'deny' }
   })
 
@@ -84,7 +91,14 @@ function createWindow(): void {
     const appUrl = isDev ? 'http://localhost:5173' : 'file://'
     if (!url.startsWith(appUrl)) {
       event.preventDefault()
-      shell.openExternal(url)
+      try {
+        const parsed = new URL(url)
+        if (parsed.protocol === 'https:' || parsed.protocol === 'http:') {
+          shell.openExternal(url)
+        }
+      } catch {
+        // Invalid URL — silently block
+      }
     }
   })
 
@@ -157,7 +171,7 @@ function createMenu(): void {
       submenu: [
         { role: 'reload' },
         { role: 'forceReload' },
-        { role: 'toggleDevTools' },
+        ...(isDev ? [{ role: 'toggleDevTools' as const }] : []),
         { type: 'separator' },
         { role: 'resetZoom' },
         { role: 'zoomIn' },

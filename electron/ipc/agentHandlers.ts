@@ -33,6 +33,23 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
   ipcMain.handle(
     IPC_CHANNELS.AGENT_LAUNCH,
     (_event, config: { model: string; prompt: string; allowedTools: string[] }) => {
+      // Validate inputs
+      if (!config || typeof config !== 'object') {
+        return { ok: false, error: 'Invalid agent config' }
+      }
+      if (typeof config.prompt !== 'string' || !config.prompt.trim()) {
+        return { ok: false, error: 'Prompt is required' }
+      }
+      if (config.prompt.length > 100_000) {
+        return { ok: false, error: 'Prompt too long (max 100,000 characters)' }
+      }
+      if (typeof config.model !== 'string') {
+        return { ok: false, error: 'Model must be a string' }
+      }
+      if (!Array.isArray(config.allowedTools) || !config.allowedTools.every((t: unknown) => typeof t === 'string')) {
+        return { ok: false, error: 'allowedTools must be an array of strings' }
+      }
+
       const id = crypto.randomUUID()
       const modelId = MODEL_MAP[config.model] || MODEL_MAP['sonnet']!
 
@@ -53,9 +70,22 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
         args.push('--allowedTools', config.allowedTools.join(','))
       }
 
+      // Only pass safe environment variables to the child process
+      const safeEnv: Record<string, string> = {}
+      const allowedEnvKeys = ['PATH', 'HOME', 'USER', 'SHELL', 'LANG', 'TERM', 'TMPDIR', 'XDG_RUNTIME_DIR', 'NODE_ENV']
+      for (const key of allowedEnvKeys) {
+        if (process.env[key]) {
+          safeEnv[key] = process.env[key]!
+        }
+      }
+      // Pass through ANTHROPIC_API_KEY if set (needed for Claude CLI)
+      if (process.env.ANTHROPIC_API_KEY) {
+        safeEnv.ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY
+      }
+
       const child = spawn('claude', args, {
         cwd: getWorkingDir(),
-        env: { ...process.env },
+        env: safeEnv,
         stdio: ['ignore', 'pipe', 'pipe'],
       })
 

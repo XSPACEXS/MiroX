@@ -78,6 +78,11 @@ export function registerSystemHandlers(mainWindow: BrowserWindow): void {
     const pathErr = validateFilePath(filePath)
     if (pathErr) return { ok: false, error: pathErr }
     try {
+      // Check file size before reading (max 50 MB)
+      const stat = await fs.stat(filePath)
+      if (stat.size > 50 * 1024 * 1024) {
+        return { ok: false, error: 'File too large (max 50 MB)' }
+      }
       const content = await fs.readFile(filePath)
       return {
         ok: true,
@@ -160,6 +165,23 @@ export function registerSystemHandlers(mainWindow: BrowserWindow): void {
       if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') {
         return { ok: false, error: 'Only http/https URLs are supported' }
       }
+      // Block requests to private/internal IPs (SSRF protection)
+      const hostname = parsed.hostname.toLowerCase()
+      if (
+        hostname === 'localhost' ||
+        hostname === '127.0.0.1' ||
+        hostname === '0.0.0.0' ||
+        hostname === '::1' ||
+        hostname === '[::1]' ||
+        hostname.startsWith('10.') ||
+        hostname.startsWith('192.168.') ||
+        hostname.startsWith('169.254.') ||
+        hostname.startsWith('172.') ||
+        hostname.endsWith('.local') ||
+        hostname.endsWith('.internal')
+      ) {
+        return { ok: false, error: 'Requests to private/internal addresses are not allowed' }
+      }
     } catch {
       return { ok: false, error: 'Invalid URL format' }
     }
@@ -168,7 +190,16 @@ export function registerSystemHandlers(mainWindow: BrowserWindow): void {
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       }
+      // Limit response size to 10 MB to prevent memory exhaustion
+      const maxSize = 10 * 1024 * 1024
+      const contentLength = response.headers.get('content-length')
+      if (contentLength && parseInt(contentLength, 10) > maxSize) {
+        return { ok: false, error: 'Response too large (max 10 MB)' }
+      }
       const text = await response.text()
+      if (text.length > maxSize) {
+        return { ok: false, error: 'Response too large (max 10 MB)' }
+      }
       return { ok: true, text, url }
     } catch (err) {
       return { ok: false, error: String(err) }
