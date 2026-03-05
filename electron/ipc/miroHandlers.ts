@@ -77,7 +77,13 @@ export function registerMiroHandlers(): void {
     if (typeof name !== 'string' || !name.trim()) {
       return { ok: false, error: 'Board name is required' }
     }
+    if (name.length > 500) {
+      return { ok: false, error: 'Board name too long (max 500 characters)' }
+    }
     const body: Record<string, unknown> = { name }
+    if (description && typeof description === 'string' && description.length > 5000) {
+      return { ok: false, error: 'Description too long (max 5000 characters)' }
+    }
     if (description) body.description = description
     return miroRequest('POST', '/boards', body)
   })
@@ -104,6 +110,9 @@ export function registerMiroHandlers(): void {
   ipcMain.handle(IPC_CHANNELS.MIRO_SET_TOKEN, async (_event, token: string) => {
     if (typeof token !== 'string' || !token.trim()) {
       return { ok: false, error: 'Token is required' }
+    }
+    if (token.length > 1000) {
+      return { ok: false, error: 'Token too long' }
     }
     try {
       await keytar.setPassword(SERVICE, ACCOUNT_MIRO, token)
@@ -209,6 +218,10 @@ export function registerMiroHandlers(): void {
   }) => {
     const err = validateId(boardId, 'Board ID')
     if (err) return err
+    const startErr = validateId(data.startItemId, 'Start Item ID')
+    if (startErr) return startErr
+    const endErr = validateId(data.endItemId, 'End Item ID')
+    if (endErr) return endErr
     return miroRequest('POST', `/boards/${boardId}/connectors`, {
       startItem: { id: data.startItemId },
       endItem: { id: data.endItemId },
@@ -261,15 +274,16 @@ export function registerMiroHandlers(): void {
           (item.position && Math.abs(item.position.x - 20) < 5 && Math.abs(item.position.y - 20) < 5)
       )
       let deleted = 0
+      let failed = 0
       for (const ghost of ghosts) {
         try {
           await miroRequest('DELETE', `/boards/${boardId}/items/${ghost.id}`)
           deleted++
         } catch {
-          // Skip items that can't be deleted
+          failed++
         }
       }
-      return { ok: true, deleted }
+      return { ok: true, deleted, failed }
     } catch (err) {
       return { ok: false, error: String(err) }
     }

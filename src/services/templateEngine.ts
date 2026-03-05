@@ -170,7 +170,7 @@ function generateTableContent(section: TemplateSection, values: Record<string, s
   const entries = Object.entries(values).filter(([, v]) => v.trim())
   if (entries.length > 0) {
     lines.push('| Field | Value |', '|---|---|')
-    entries.forEach(([k, v]) => lines.push(`| ${k} | ${v} |`))
+    entries.forEach(([k, v]) => lines.push(`| ${k.replace(/\|/g, '\\|')} | ${v.replace(/\|/g, '\\|')} |`))
   } else {
     lines.push(section.description)
   }

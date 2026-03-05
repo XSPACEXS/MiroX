@@ -48,6 +48,9 @@ export function registerGithubHandlers(): void {
     if (typeof token !== 'string' || !token.trim()) {
       return { ok: false, error: 'Token is required' }
     }
+    if (token.length > 1000) {
+      return { ok: false, error: 'Token too long' }
+    }
     try {
       await keytar.setPassword(SERVICE, ACCOUNT_GITHUB, token)
       return { ok: true }
@@ -63,7 +66,11 @@ export function registerGithubHandlers(): void {
       const token = await getGithubToken()
       if (!token) return { ok: false, error: 'No GitHub token configured' }
 
-      const user = (await githubRequest(token, '/user')) as {
+      const data = await githubRequest(token, '/user')
+      if (!data || typeof (data as Record<string, unknown>).login !== 'string') {
+        return { ok: false, error: 'Unexpected API response' }
+      }
+      const user = data as {
         login: string
         avatar_url: string
         name: string | null
@@ -131,6 +138,12 @@ export function registerGithubHandlers(): void {
     }
     if (typeof repo !== 'string' || !repo.trim()) {
       return { ok: false, error: 'Repository name is required' }
+    }
+    if (owner.length > 39) {
+      return { ok: false, error: 'Repository owner too long' }
+    }
+    if (repo.length > 100) {
+      return { ok: false, error: 'Repository name too long' }
     }
     if (!GITHUB_NAME_RE.test(owner)) {
       return { ok: false, error: 'Invalid repository owner' }

@@ -76,7 +76,7 @@ export interface ElectronAPI {
     }) => Promise<MiroItemResponse>
     deleteItem: (boardId: string, itemId: string) => Promise<{ ok: boolean }>
     repositionItem: (boardId: string, itemId: string, x: number, y: number) => Promise<MiroItemResponse>
-    deleteGhosts: (boardId: string) => Promise<{ ok: boolean; deleted?: number; error?: string }>
+    deleteGhosts: (boardId: string) => Promise<{ ok: boolean; deleted?: number; failed?: number; error?: string }>
   }
 
   // GitHub
