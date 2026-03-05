@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Home, LayoutGrid, Upload, Zap, Settings2, PanelLeftClose, PanelLeft } from 'lucide-react'
+import { Home, LayoutGrid, Upload, Zap, Settings2, PanelLeftClose, PanelLeft, Wrench } from 'lucide-react'
 import { useUIStore } from '../../stores/uiStore'
 import { useMiro } from '../../hooks/useMiro'
 import { sidebarVariants } from '../../design-system/animations'
@@ -12,6 +12,7 @@ const navItems = [
   { path: '/import', label: 'Import', icon: Upload },
   { path: '/builder', label: 'Builder', icon: Zap },
   { path: '/settings', label: 'Settings', icon: Settings2 },
+  { path: '/agent-center', label: 'Agent Center', icon: Wrench, separator: true },
 ]
 
 interface SidebarProps {
@@ -72,11 +73,18 @@ export function Sidebar({ collapsed }: SidebarProps) {
             </button>
           )
 
-          return collapsed ? (
-            <Tooltip key={item.path} content={item.label} placement="right">
-              {button}
-            </Tooltip>
-          ) : button
+          return (
+            <div key={item.path}>
+              {'separator' in item && item.separator && (
+                <div className="my-2 mx-3 border-t border-black-600" />
+              )}
+              {collapsed ? (
+                <Tooltip content={item.label} placement="right">
+                  {button}
+                </Tooltip>
+              ) : button}
+            </div>
+          )
         })}
       </nav>
 

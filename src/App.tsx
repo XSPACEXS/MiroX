@@ -9,6 +9,7 @@ const Templates = lazy(() => import('@pages/Templates'))
 const Import = lazy(() => import('@pages/Import'))
 const Builder = lazy(() => import('@pages/Builder'))
 const Settings = lazy(() => import('@pages/Settings'))
+const AgentCenter = lazy(() => import('@pages/AgentCenter'))
 
 export default function App() {
   const location = useLocation()
@@ -42,6 +43,7 @@ export default function App() {
             <Route path="/import" element={<Import />} />
             <Route path="/builder" element={<Builder />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/agent-center" element={<AgentCenter />} />
           </Routes>
         </AnimatePresence>
       </Suspense>
