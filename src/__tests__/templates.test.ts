@@ -70,8 +70,8 @@ describe('Template Registry', () => {
     expect(TEMPLATES_BY_CATEGORY['all']).toBe(ALL_TEMPLATES)
   })
 
-  it('category template counts add up (excluding empty startup)', () => {
-    const categories = Object.values(TemplateCategory).filter(c => c !== 'startup')
+  it('category template counts add up', () => {
+    const categories = Object.values(TemplateCategory)
     let sum = 0
     for (const cat of categories) {
       sum += TEMPLATES_BY_CATEGORY[cat]?.length ?? 0

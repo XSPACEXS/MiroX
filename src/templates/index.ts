@@ -79,12 +79,7 @@ export const TEMPLATES_BY_CATEGORY: Record<TemplateCategory | 'all', TemplateDef
   [TemplateCategory.Research]: [competitiveAnalysis, pestle, rootCause, marketResearch, decisionMatrix],
   [TemplateCategory.Brainstorm]: [brainstormSession, mindMap, affinityDiagram, scamper, moodBoard],
   [TemplateCategory.Meetings]: [sprintRetro, dailyStandup, workshop, teamBuilding, decisionLog],
-  [TemplateCategory.Startup]: [],
 }
-
-export const FEATURED_TEMPLATES: TemplateDefinition[] = [
-  kanban, businessPlan, systemArchitecture, userJourney, brainstormSession, sprintRetro,
-]
 
 export function getTemplate(id: string): TemplateDefinition | undefined {
   return ALL_TEMPLATES.find(t => t.id === id)

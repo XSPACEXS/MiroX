@@ -4,7 +4,6 @@ import type { TemplateCategory } from '../../templates/types'
 
 const categories: { id: TemplateCategory | 'all'; label: string; emoji: string }[] = [
   { id: 'all', label: 'All', emoji: '' },
-  { id: 'startup' as TemplateCategory, label: 'Startup', emoji: '🚀' },
   { id: 'agile' as TemplateCategory, label: 'Agile', emoji: '🏗️' },
   { id: 'strategy' as TemplateCategory, label: 'Strategy', emoji: '🎯' },
   { id: 'research' as TemplateCategory, label: 'Research', emoji: '🔬' },

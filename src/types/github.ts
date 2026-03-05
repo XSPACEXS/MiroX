@@ -25,18 +25,3 @@ export interface GitHubRepo {
   topics: string[]
   private: boolean
 }
-
-export interface GitHubFile {
-  name: string
-  path: string
-  type: 'file' | 'dir'
-  size: number
-  encoding?: string
-  content?: string
-}
-
-export interface GitHubConnectionStatus {
-  ok: boolean
-  user?: GitHubUser
-  error?: string
-}

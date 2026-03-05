@@ -1,5 +1,4 @@
 export enum TemplateCategory {
-  Startup = 'startup',
   Agile = 'agile',
   Strategy = 'strategy',
   Research = 'research',

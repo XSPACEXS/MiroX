@@ -37,9 +37,11 @@ export default {
       backdropBlur: {
         xs: '2px',
       },
+      fontSize: {
+        '2xs': ['10px', { lineHeight: '14px' }],
+      },
       animation: {
         'pulse-yellow': 'pulse-yellow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'spin-slow': 'spin 3s linear infinite',
       },
       keyframes: {
         'pulse-yellow': {
