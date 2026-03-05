@@ -48,6 +48,15 @@ export const useBoardStore = create<BoardStore>()(
       setLastCreated: (board) => set({ lastCreatedBoard: board }),
       incrementTotal: () => set(state => ({ totalBoardsCreated: state.totalBoardsCreated + 1 })),
     }),
-    { name: 'mirox-boards' }
+    {
+      name: 'mirox-boards',
+      version: 1,
+      migrate: (persisted: unknown, version: number) => {
+        if (version === 0) {
+          return persisted as Record<string, unknown>
+        }
+        return persisted as Record<string, unknown>
+      },
+    }
   )
 )

@@ -44,6 +44,15 @@ export const useSettingsStore = create<SettingsStore>()(
         templatesUsed: [templateId, ...state.templatesUsed.filter(t => t !== templateId)].slice(0, 20),
       })),
     }),
-    { name: 'mirox-settings' }
+    {
+      name: 'mirox-settings',
+      version: 1,
+      migrate: (persisted: unknown, version: number) => {
+        if (version === 0) {
+          return persisted as Record<string, unknown>
+        }
+        return persisted as Record<string, unknown>
+      },
+    }
   )
 )

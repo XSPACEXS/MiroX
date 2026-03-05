@@ -26,6 +26,8 @@ interface UIStore {
   toggleSearch: () => void
 }
 
+const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
+
 export const useUIStore = create<UIStore>((set) => ({
   sidebarCollapsed: false,
   activePage: '/',
@@ -40,10 +42,19 @@ export const useUIStore = create<UIStore>((set) => ({
   addToast: (toast) => {
     const id = `toast-${Date.now()}-${Math.random().toString(36).slice(2)}`
     set(state => ({ toasts: [...state.toasts, { ...toast, id }] }))
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       set(state => ({ toasts: state.toasts.filter(t => t.id !== id) }))
+      toastTimeouts.delete(id)
     }, toast.duration || 4000)
+    toastTimeouts.set(id, timeoutId)
   },
-  removeToast: (id) => set(state => ({ toasts: state.toasts.filter(t => t.id !== id) })),
+  removeToast: (id) => {
+    const timeoutId = toastTimeouts.get(id)
+    if (timeoutId) {
+      clearTimeout(timeoutId)
+      toastTimeouts.delete(id)
+    }
+    set(state => ({ toasts: state.toasts.filter(t => t.id !== id) }))
+  },
   toggleSearch: () => set(state => ({ isSearchOpen: !state.isSearchOpen })),
 }))
