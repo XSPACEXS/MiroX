@@ -1,0 +1,132 @@
+import { useEffect, useRef, useState, useMemo } from 'react'
+import { Terminal, Filter } from 'lucide-react'
+import { Card } from '@components/ui/Card'
+import { SimpleSelect } from '@components/ui/Dropdown'
+import { useAgentStore } from '@stores/agentStore'
+
+type LogFilter = 'all' | 'stdout' | 'stderr' | 'system'
+
+const FILTER_OPTIONS = [
+  { value: 'all', label: 'All' },
+  { value: 'stdout', label: 'stdout' },
+  { value: 'stderr', label: 'stderr' },
+  { value: 'system', label: 'system' },
+]
+
+const TYPE_COLORS: Record<string, string> = {
+  stdout: 'text-gray-200',
+  stderr: 'text-red-400',
+  system: 'text-yellow-400/60',
+}
+
+function formatTimestamp(ts: number): string {
+  const d = new Date(ts)
+  return d.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })
+}
+
+export function LiveLogs(): JSX.Element {
+  const agents = useAgentStore((s) => s.agents)
+  const [filter, setFilter] = useState<LogFilter>('all')
+  const [selectedAgentId, setSelectedAgentId] = useState<string>('')
+  const logEndRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [autoScroll, setAutoScroll] = useState(true)
+
+  const agentOptions = useMemo(
+    () => [
+      { value: '', label: 'All Agents' },
+      ...agents.map((a) => ({
+        value: a.id,
+        label: `${a.model} — ${a.prompt.slice(0, 40)}...`,
+      })),
+    ],
+    [agents]
+  )
+
+  const allLogs = useMemo(() => {
+    const source = selectedAgentId
+      ? agents.filter((a) => a.id === selectedAgentId)
+      : agents
+    const merged = source.flatMap((a) =>
+      a.logs.map((l) => ({ ...l, agentId: a.id }))
+    )
+    merged.sort((a, b) => a.timestamp - b.timestamp)
+
+    const filtered =
+      filter === 'all' ? merged : merged.filter((l) => l.type === filter)
+
+    // Max 1000 lines
+    return filtered.slice(-1000)
+  }, [agents, selectedAgentId, filter])
+
+  // Auto-scroll
+  useEffect(() => {
+    if (autoScroll && logEndRef.current) {
+      logEndRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [allLogs.length, autoScroll])
+
+  // Detect manual scroll
+  const handleScroll = () => {
+    const el = containerRef.current
+    if (!el) return
+    const atBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 50
+    setAutoScroll(atBottom)
+  }
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <Terminal size={20} className="text-yellow-400" />
+          <h2 className="font-display font-bold text-xl text-white">Live Logs</h2>
+        </div>
+        <div className="flex items-center gap-2">
+          {agents.length > 1 && (
+            <SimpleSelect
+              options={agentOptions}
+              value={selectedAgentId}
+              onChange={setSelectedAgentId}
+              className="w-52"
+            />
+          )}
+          <div className="flex items-center gap-1">
+            <Filter size={14} className="text-gray-400" />
+            <SimpleSelect
+              options={FILTER_OPTIONS}
+              value={filter}
+              onChange={(v) => setFilter(v as LogFilter)}
+              className="w-28"
+            />
+          </div>
+        </div>
+      </div>
+
+      <Card variant="default" className="overflow-hidden">
+        <div
+          ref={containerRef}
+          onScroll={handleScroll}
+          className="h-80 overflow-y-auto p-4 font-mono text-xs leading-relaxed"
+        >
+          {allLogs.length === 0 ? (
+            <div className="flex items-center justify-center h-full text-gray-600">
+              <p>Waiting for agent output...</p>
+            </div>
+          ) : (
+            allLogs.map((log, i) => (
+              <div key={`${log.timestamp}-${i}`} className="flex gap-2">
+                <span className="text-gray-600 flex-shrink-0 select-none">
+                  {formatTimestamp(log.timestamp)}
+                </span>
+                <span className={TYPE_COLORS[log.type] || 'text-gray-200'}>
+                  {log.text}
+                </span>
+              </div>
+            ))
+          )}
+          <div ref={logEndRef} />
+        </div>
+      </Card>
+    </div>
+  )
+}
