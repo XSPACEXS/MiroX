@@ -165,8 +165,16 @@ function generateDocContent(
   return lines.join('\n')
 }
 
-function generateTableContent(section: TemplateSection, _values: Record<string, string>): string {
-  return `${section.icon} ${section.name}\n\nData table will be populated with your project information.`
+function generateTableContent(section: TemplateSection, values: Record<string, string>): string {
+  const lines = [`${section.icon} ${section.name}`, '']
+  const entries = Object.entries(values).filter(([, v]) => v.trim())
+  if (entries.length > 0) {
+    lines.push('| Field | Value |', '|---|---|')
+    entries.forEach(([k, v]) => lines.push(`| ${k} | ${v} |`))
+  } else {
+    lines.push(section.description)
+  }
+  return lines.join('\n')
 }
 
 function getFieldItems(fieldValues: Record<string, string>, sectionId: string): string[] {

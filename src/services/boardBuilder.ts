@@ -1,5 +1,6 @@
-import type { TemplateDefinition } from '../templates/types'
+import type { TemplateDefinition, BoardSection } from '../templates/types'
 import { generateBoardManifest } from './templateEngine'
+import { logger } from '../utils/logger'
 
 export type ProgressCallback = (step: string, progress: number) => void
 
@@ -13,17 +14,15 @@ export async function buildBoard(
   template: TemplateDefinition,
   fieldValues: Record<string, string>,
   boardName: string,
-  onProgress?: ProgressCallback
+  onProgress?: ProgressCallback,
+  boardDescription?: string
 ): Promise<BuildResult> {
   const api = window.electronAPI
 
   onProgress?.('Creating board workspace...', 5)
 
   // Create the board
-  const board = (await api.miro.createBoard(boardName, `Created with MiroX using ${template.name} template`)) as {
-    id: string
-    viewLink: string
-  }
+  const board = await api.miro.createBoard(boardName, boardDescription || `Created with MiroX using ${template.name} template`)
   const boardId = board.id
   const boardUrl = board.viewLink
 
@@ -45,7 +44,7 @@ export async function buildBoard(
       await createBoardSection(boardId, section, api)
       await delay(200)
     } catch (err) {
-      console.error(`Error creating section ${i}:`, err)
+      logger.error(`Error creating section ${i}:`, err)
     }
   }
 
@@ -62,8 +61,7 @@ export async function buildBoard(
   return { boardId, boardUrl, boardName }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function createBoardSection(boardId: string, section: any, api: typeof window.electronAPI) {
+async function createBoardSection(boardId: string, section: BoardSection, api: typeof window.electronAPI) {
   switch (section.type) {
     case 'shape':
       await api.miro.createShape(boardId, {
@@ -87,7 +85,6 @@ async function createBoardSection(boardId: string, section: any, api: typeof win
       break
 
     case 'card':
-    case 'document':
       await api.miro.createText(boardId, {
         content: section.content,
         x: section.x,

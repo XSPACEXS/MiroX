@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import type { MiroConnectionStatus, MiroBoard } from '../types/miro'
+import { logger } from '../utils/logger'
 
 interface UseMiroReturn {
   token: string | null
@@ -50,7 +51,7 @@ export function useMiro(): UseMiroReturn {
           await testConnectionInternal()
         }
       } catch (err) {
-        console.error('Failed to load Miro token:', err)
+        logger.error('Failed to load Miro token:', err)
       }
     }
     loadToken()
@@ -67,7 +68,7 @@ export function useMiro(): UseMiroReturn {
       const result = (await window.electronAPI.miro.listBoards()) as { data?: MiroBoard[] }
       setBoards(result?.data || [])
     } catch (err) {
-      console.error('Failed to load boards:', err)
+      logger.error('Failed to load boards:', err)
     } finally {
       setIsLoadingBoards(false)
     }
@@ -76,10 +77,18 @@ export function useMiro(): UseMiroReturn {
   const createBoard = useCallback(async (name: string, description?: string): Promise<MiroBoard | null> => {
     if (!isElectronRef.current) return null
     try {
-      const board = (await window.electronAPI.miro.createBoard(name, description)) as MiroBoard
+      const response = await window.electronAPI.miro.createBoard(name, description)
+      const board: MiroBoard = {
+        id: response.id,
+        name: response.name,
+        description: response.description,
+        viewLink: response.viewLink,
+        createdAt: (response.createdAt as string) || new Date().toISOString(),
+        modifiedAt: (response.modifiedAt as string) || new Date().toISOString(),
+      }
       return board
     } catch (err) {
-      console.error('Failed to create board:', err)
+      logger.error('Failed to create board:', err)
       return null
     }
   }, [])

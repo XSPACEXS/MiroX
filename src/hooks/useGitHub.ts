@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import type { GitHubRepo, GitHubUser } from '../types/github'
 import type { ParsedContent } from '../types/import'
+import { logger } from '../utils/logger'
 
 interface UseGitHubReturn {
   token: string | null
@@ -38,7 +39,20 @@ export function useGitHub(): UseGitHubReturn {
     try {
       const result = await window.electronAPI.github.listRepos()
       if (result.ok && result.repos) {
-        setRepos(result.repos as unknown as GitHubRepo[])
+        setRepos(result.repos.map(r => ({
+          id: r.id,
+          name: r.name,
+          full_name: r.fullName,
+          description: r.description,
+          language: r.language,
+          stargazers_count: r.stars,
+          updated_at: r.updatedAt,
+          html_url: r.url,
+          default_branch: '',
+          owner: { login: r.owner.login, avatar_url: r.owner.avatarUrl },
+          topics: [],
+          private: false,
+        })))
       }
     } catch {
       // Repo loading failed silently — user can retry manually
@@ -54,7 +68,14 @@ export function useGitHub(): UseGitHubReturn {
         const status = await window.electronAPI.github.testConnection()
         if (status.ok) {
           setIsConnected(true)
-          setUser(status.user as unknown as GitHubUser || null)
+          setUser(status.user ? {
+            id: 0,
+            login: status.user.login,
+            name: status.user.name || '',
+            avatar_url: status.user.avatarUrl,
+            public_repos: 0,
+            html_url: '',
+          } : null)
           loadReposInternal()
         }
       }
@@ -70,7 +91,14 @@ export function useGitHub(): UseGitHubReturn {
     const status = await window.electronAPI.github.testConnection()
     if (status.ok) {
       setIsConnected(true)
-      setUser(status.user as unknown as GitHubUser || null)
+      setUser(status.user ? {
+        id: 0,
+        login: status.user.login,
+        name: status.user.name || '',
+        avatar_url: status.user.avatarUrl,
+        public_repos: 0,
+        html_url: '',
+      } : null)
       await loadReposInternal()
     } else {
       setIsConnected(false)
@@ -100,10 +128,20 @@ export function useGitHub(): UseGitHubReturn {
     try {
       const result = await window.electronAPI.github.analyzeRepo(repo.owner.login, repo.name)
       if (result.ok && result.analysis) {
-        setAnalysis(result.analysis as unknown as ParsedContent)
+        const a = result.analysis
+        setAnalysis({
+          rawText: a.readme || '',
+          title: a.name,
+          headings: [],
+          keyPhrases: a.topics || [],
+          summary: a.description || '',
+          fileType: 'code',
+          suggestedTemplate: a.suggestedTemplate || '',
+          confidence: 0.8,
+        })
       }
     } catch (err) {
-      console.error('Analyze failed:', err)
+      logger.error('Analyze failed:', err)
     } finally { setIsAnalyzing(false) }
   }, [])
 

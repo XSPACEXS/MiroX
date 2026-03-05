@@ -3,6 +3,19 @@
  * It MUST be kept in sync with the `electronAPI` object in electron/preload.ts.
  * Any method added/changed/removed in preload.ts must be reflected here, and vice versa.
  */
+interface MiroItemResponse {
+  id: string
+  [key: string]: unknown
+}
+
+interface MiroBoardResponse {
+  id: string
+  viewLink: string
+  name: string
+  description?: string
+  [key: string]: unknown
+}
+
 export interface ElectronAPI {
   // System
   getSystemInfo: () => Promise<{
@@ -19,8 +32,8 @@ export interface ElectronAPI {
 
   // Miro
   miro: {
-    createBoard: (name: string, description?: string) => Promise<unknown>
-    listBoards: () => Promise<unknown>
+    createBoard: (name: string, description?: string) => Promise<MiroBoardResponse>
+    listBoards: () => Promise<{ data?: MiroBoardResponse[] }>
     testConnection: () => Promise<{ ok: boolean; status?: number; error?: string }>
     getToken: () => Promise<{ ok: boolean; masked: string; hasToken: boolean }>
     setToken: (token: string) => Promise<{ ok: boolean; error?: string }>
@@ -31,7 +44,7 @@ export interface ElectronAPI {
       width: number
       height: number
       style?: { fillColor?: string }
-    }) => Promise<unknown>
+    }) => Promise<MiroItemResponse>
     createShape: (boardId: string, data: {
       content: string
       shape: string
@@ -40,29 +53,29 @@ export interface ElectronAPI {
       width: number
       height: number
       style?: Record<string, unknown>
-    }) => Promise<unknown>
+    }) => Promise<MiroItemResponse>
     createStickyNote: (boardId: string, data: {
       content: string
       x: number
       y: number
       shape?: string
       style?: Record<string, unknown>
-    }) => Promise<unknown>
+    }) => Promise<MiroItemResponse>
     createText: (boardId: string, data: {
       content: string
       x: number
       y: number
       width?: number
       style?: Record<string, unknown>
-    }) => Promise<unknown>
+    }) => Promise<MiroItemResponse>
     createConnector: (boardId: string, data: {
       startItemId: string
       endItemId: string
       style?: Record<string, unknown>
       captions?: Array<{ content: string }>
-    }) => Promise<unknown>
-    deleteItem: (boardId: string, itemId: string) => Promise<unknown>
-    repositionItem: (boardId: string, itemId: string, x: number, y: number) => Promise<unknown>
+    }) => Promise<MiroItemResponse>
+    deleteItem: (boardId: string, itemId: string) => Promise<{ ok: boolean }>
+    repositionItem: (boardId: string, itemId: string, x: number, y: number) => Promise<MiroItemResponse>
     deleteGhosts: (boardId: string) => Promise<{ ok: boolean; deleted?: number; error?: string }>
   }
 

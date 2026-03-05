@@ -107,7 +107,8 @@ export function useBoardBuilder() {
           }
           if (progress >= 100) updateStep('cleanup', 'complete')
           void step // progress callback provides step name for logging
-        }
+        },
+        boardDescription
       )
 
       setBoardUrl(result.boardUrl)
@@ -129,7 +130,7 @@ export function useBoardBuilder() {
     } finally {
       setIsCreating(false)
     }
-  }, [selectedTemplate, boardName, fieldValues, boardStore, settingsStore, updateStep, setCurrentStep])
+  }, [selectedTemplate, boardName, boardDescription, fieldValues, boardStore, settingsStore, updateStep, setCurrentStep])
 
   const reset = useCallback(() => {
     setCurrentStep(1)
