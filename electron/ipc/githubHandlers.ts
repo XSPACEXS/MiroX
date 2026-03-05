@@ -1,9 +1,13 @@
 import { ipcMain } from 'electron'
 import * as keytar from 'keytar'
+import { IPC_CHANNELS } from './channels'
 
 const SERVICE = 'com.mirox.app'
 const ACCOUNT_GITHUB = 'github-token'
 const GITHUB_BASE_URL = 'https://api.github.com'
+
+// GitHub usernames/repo names: alphanumeric, hyphens, underscores, dots
+const GITHUB_NAME_RE = /^[a-zA-Z0-9._-]+$/
 
 async function getGithubToken(): Promise<string | null> {
   try {
@@ -30,8 +34,8 @@ async function githubRequest(token: string, path: string): Promise<unknown> {
 
 export function registerGithubHandlers(): void {
   // Get token (masked)
-  ipcMain.removeHandler('github:get-token')
-  ipcMain.handle('github:get-token', async () => {
+  ipcMain.removeHandler(IPC_CHANNELS.GITHUB_GET_TOKEN)
+  ipcMain.handle(IPC_CHANNELS.GITHUB_GET_TOKEN, async () => {
     const token = await getGithubToken()
     if (!token) return { ok: true, hasToken: false, masked: '' }
     const masked = token.length > 8 ? '...' + token.slice(-8) : token
@@ -39,8 +43,8 @@ export function registerGithubHandlers(): void {
   })
 
   // Set token
-  ipcMain.removeHandler('github:set-token')
-  ipcMain.handle('github:set-token', async (_event, token: string) => {
+  ipcMain.removeHandler(IPC_CHANNELS.GITHUB_SET_TOKEN)
+  ipcMain.handle(IPC_CHANNELS.GITHUB_SET_TOKEN, async (_event, token: string) => {
     if (typeof token !== 'string' || !token.trim()) {
       return { ok: false, error: 'Token is required' }
     }
@@ -53,8 +57,8 @@ export function registerGithubHandlers(): void {
   })
 
   // Test connection
-  ipcMain.removeHandler('github:test-connection')
-  ipcMain.handle('github:test-connection', async () => {
+  ipcMain.removeHandler(IPC_CHANNELS.GITHUB_TEST_CONNECTION)
+  ipcMain.handle(IPC_CHANNELS.GITHUB_TEST_CONNECTION, async () => {
     try {
       const token = await getGithubToken()
       if (!token) return { ok: false, error: 'No GitHub token configured' }
@@ -79,8 +83,8 @@ export function registerGithubHandlers(): void {
   })
 
   // List repos
-  ipcMain.removeHandler('github:list-repos')
-  ipcMain.handle('github:list-repos', async () => {
+  ipcMain.removeHandler(IPC_CHANNELS.GITHUB_LIST_REPOS)
+  ipcMain.handle(IPC_CHANNELS.GITHUB_LIST_REPOS, async () => {
     try {
       const token = await getGithubToken()
       if (!token) return { ok: false, error: 'No GitHub token configured' }
@@ -120,13 +124,19 @@ export function registerGithubHandlers(): void {
   })
 
   // Analyze repo
-  ipcMain.removeHandler('github:analyze-repo')
-  ipcMain.handle('github:analyze-repo', async (_event, owner: string, repo: string) => {
+  ipcMain.removeHandler(IPC_CHANNELS.GITHUB_ANALYZE_REPO)
+  ipcMain.handle(IPC_CHANNELS.GITHUB_ANALYZE_REPO, async (_event, owner: string, repo: string) => {
     if (typeof owner !== 'string' || !owner.trim()) {
       return { ok: false, error: 'Repository owner is required' }
     }
     if (typeof repo !== 'string' || !repo.trim()) {
       return { ok: false, error: 'Repository name is required' }
+    }
+    if (!GITHUB_NAME_RE.test(owner)) {
+      return { ok: false, error: 'Invalid repository owner' }
+    }
+    if (!GITHUB_NAME_RE.test(repo)) {
+      return { ok: false, error: 'Invalid repository name' }
     }
     try {
       const token = await getGithubToken()

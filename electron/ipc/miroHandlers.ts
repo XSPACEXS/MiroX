@@ -1,22 +1,34 @@
 import { ipcMain } from 'electron'
 import * as keytar from 'keytar'
+import { IPC_CHANNELS } from './channels'
 
 const SERVICE = 'com.mirox.app'
 const ACCOUNT_MIRO = 'miro-token'
-const MIRO_DEFAULT_TOKEN = 'eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_1lHPl4N2tFRPuZK2z6CoFkGTsxU'
 const MIRO_BASE_URL = 'https://api.miro.com/v2'
+
+// Miro IDs are alphanumeric strings (board IDs are numeric, item IDs may have underscores/hyphens)
+const MIRO_ID_RE = /^[a-zA-Z0-9_=-]+$/
+
+function validateId(id: string, label: string): { ok: false; error: string } | null {
+  if (typeof id !== 'string' || !id.trim()) return { ok: false, error: `${label} is required` }
+  if (!MIRO_ID_RE.test(id)) return { ok: false, error: `Invalid ${label} format` }
+  return null
+}
 
 async function getMiroToken(): Promise<string> {
   try {
     const token = await keytar.getPassword(SERVICE, ACCOUNT_MIRO)
-    return token || MIRO_DEFAULT_TOKEN
+    return token || ''
   } catch {
-    return MIRO_DEFAULT_TOKEN
+    return ''
   }
 }
 
 async function miroRequest(method: string, path: string, body?: object): Promise<unknown> {
   const token = await getMiroToken()
+  if (!token) {
+    throw new Error('No Miro API token configured. Add one in Settings.')
+  }
   const response = await fetch(`${MIRO_BASE_URL}${path}`, {
     method,
     headers: {
@@ -37,10 +49,13 @@ async function miroRequest(method: string, path: string, body?: object): Promise
 
 export function registerMiroHandlers(): void {
   // Test connection
-  ipcMain.removeHandler('miro:test-connection')
-  ipcMain.handle('miro:test-connection', async () => {
+  ipcMain.removeHandler(IPC_CHANNELS.MIRO_TEST_CONNECTION)
+  ipcMain.handle(IPC_CHANNELS.MIRO_TEST_CONNECTION, async () => {
     try {
       const token = await getMiroToken()
+      if (!token) {
+        return { ok: false, error: 'No Miro API token configured. Add one in Settings.' }
+      }
       const response = await fetch(`${MIRO_BASE_URL}/boards?limit=1`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -57,8 +72,8 @@ export function registerMiroHandlers(): void {
   })
 
   // Create board
-  ipcMain.removeHandler('miro:create-board')
-  ipcMain.handle('miro:create-board', async (_event, name: string, description?: string) => {
+  ipcMain.removeHandler(IPC_CHANNELS.MIRO_CREATE_BOARD)
+  ipcMain.handle(IPC_CHANNELS.MIRO_CREATE_BOARD, async (_event, name: string, description?: string) => {
     if (typeof name !== 'string' || !name.trim()) {
       return { ok: false, error: 'Board name is required' }
     }
@@ -68,23 +83,25 @@ export function registerMiroHandlers(): void {
   })
 
   // List boards
-  ipcMain.removeHandler('miro:list-boards')
-  ipcMain.handle('miro:list-boards', async () => {
+  ipcMain.removeHandler(IPC_CHANNELS.MIRO_LIST_BOARDS)
+  ipcMain.handle(IPC_CHANNELS.MIRO_LIST_BOARDS, async () => {
     return miroRequest('GET', '/boards?sort=last_modified&limit=50')
   })
 
   // Get token
-  ipcMain.removeHandler('miro:get-token')
-  ipcMain.handle('miro:get-token', async () => {
+  ipcMain.removeHandler(IPC_CHANNELS.MIRO_GET_TOKEN)
+  ipcMain.handle(IPC_CHANNELS.MIRO_GET_TOKEN, async () => {
     const token = await getMiroToken()
-    // Mask the token for display — only show last 8 chars
+    if (!token) {
+      return { ok: true, masked: '', hasToken: false }
+    }
     const masked = token.length > 8 ? '...' + token.slice(-8) : token
-    return { ok: true, masked, hasToken: token !== MIRO_DEFAULT_TOKEN }
+    return { ok: true, masked, hasToken: true }
   })
 
   // Set token
-  ipcMain.removeHandler('miro:set-token')
-  ipcMain.handle('miro:set-token', async (_event, token: string) => {
+  ipcMain.removeHandler(IPC_CHANNELS.MIRO_SET_TOKEN)
+  ipcMain.handle(IPC_CHANNELS.MIRO_SET_TOKEN, async (_event, token: string) => {
     if (typeof token !== 'string' || !token.trim()) {
       return { ok: false, error: 'Token is required' }
     }
@@ -97,8 +114,8 @@ export function registerMiroHandlers(): void {
   })
 
   // Create frame
-  ipcMain.removeHandler('miro:create-frame')
-  ipcMain.handle('miro:create-frame', async (_event, boardId: string, data: {
+  ipcMain.removeHandler(IPC_CHANNELS.MIRO_CREATE_FRAME)
+  ipcMain.handle(IPC_CHANNELS.MIRO_CREATE_FRAME, async (_event, boardId: string, data: {
     title: string
     x: number
     y: number
@@ -106,9 +123,8 @@ export function registerMiroHandlers(): void {
     height: number
     style?: { fillColor?: string }
   }) => {
-    if (typeof boardId !== 'string' || !boardId.trim()) {
-      return { ok: false, error: 'Board ID is required' }
-    }
+    const err = validateId(boardId, 'Board ID')
+    if (err) return err
     return miroRequest('POST', `/boards/${boardId}/frames`, {
       data: { title: data.title, format: 'custom', type: 'freeform' },
       style: data.style || { fillColor: '#1a1a1a' },
@@ -118,8 +134,8 @@ export function registerMiroHandlers(): void {
   })
 
   // Create shape
-  ipcMain.removeHandler('miro:create-shape')
-  ipcMain.handle('miro:create-shape', async (_event, boardId: string, data: {
+  ipcMain.removeHandler(IPC_CHANNELS.MIRO_CREATE_SHAPE)
+  ipcMain.handle(IPC_CHANNELS.MIRO_CREATE_SHAPE, async (_event, boardId: string, data: {
     content: string
     shape: string
     x: number
@@ -128,9 +144,8 @@ export function registerMiroHandlers(): void {
     height: number
     style?: Record<string, unknown>
   }) => {
-    if (typeof boardId !== 'string' || !boardId.trim()) {
-      return { ok: false, error: 'Board ID is required' }
-    }
+    const err = validateId(boardId, 'Board ID')
+    if (err) return err
     return miroRequest('POST', `/boards/${boardId}/shapes`, {
       data: { content: data.content, shape: data.shape },
       style: data.style || {
@@ -148,17 +163,16 @@ export function registerMiroHandlers(): void {
   })
 
   // Create sticky note
-  ipcMain.removeHandler('miro:create-sticky')
-  ipcMain.handle('miro:create-sticky', async (_event, boardId: string, data: {
+  ipcMain.removeHandler(IPC_CHANNELS.MIRO_CREATE_STICKY)
+  ipcMain.handle(IPC_CHANNELS.MIRO_CREATE_STICKY, async (_event, boardId: string, data: {
     content: string
     x: number
     y: number
     shape?: string
     style?: Record<string, unknown>
   }) => {
-    if (typeof boardId !== 'string' || !boardId.trim()) {
-      return { ok: false, error: 'Board ID is required' }
-    }
+    const err = validateId(boardId, 'Board ID')
+    if (err) return err
     return miroRequest('POST', `/boards/${boardId}/sticky_notes`, {
       data: { content: data.content, shape: data.shape || 'square' },
       style: data.style || { fillColor: 'yellow', textAlign: 'center', textAlignVertical: 'middle' },
@@ -167,17 +181,16 @@ export function registerMiroHandlers(): void {
   })
 
   // Create text
-  ipcMain.removeHandler('miro:create-text')
-  ipcMain.handle('miro:create-text', async (_event, boardId: string, data: {
+  ipcMain.removeHandler(IPC_CHANNELS.MIRO_CREATE_TEXT)
+  ipcMain.handle(IPC_CHANNELS.MIRO_CREATE_TEXT, async (_event, boardId: string, data: {
     content: string
     x: number
     y: number
     width?: number
     style?: Record<string, unknown>
   }) => {
-    if (typeof boardId !== 'string' || !boardId.trim()) {
-      return { ok: false, error: 'Board ID is required' }
-    }
+    const err = validateId(boardId, 'Board ID')
+    if (err) return err
     return miroRequest('POST', `/boards/${boardId}/texts`, {
       data: { content: data.content },
       style: data.style || { color: '#ffffff', fontSize: '14', textAlign: 'left' },
@@ -187,16 +200,15 @@ export function registerMiroHandlers(): void {
   })
 
   // Create connector
-  ipcMain.removeHandler('miro:create-connector')
-  ipcMain.handle('miro:create-connector', async (_event, boardId: string, data: {
+  ipcMain.removeHandler(IPC_CHANNELS.MIRO_CREATE_CONNECTOR)
+  ipcMain.handle(IPC_CHANNELS.MIRO_CREATE_CONNECTOR, async (_event, boardId: string, data: {
     startItemId: string
     endItemId: string
     style?: Record<string, unknown>
     captions?: Array<{ content: string }>
   }) => {
-    if (typeof boardId !== 'string' || !boardId.trim()) {
-      return { ok: false, error: 'Board ID is required' }
-    }
+    const err = validateId(boardId, 'Board ID')
+    if (err) return err
     return miroRequest('POST', `/boards/${boardId}/connectors`, {
       startItem: { id: data.startItemId },
       endItem: { id: data.endItemId },
@@ -212,37 +224,32 @@ export function registerMiroHandlers(): void {
   })
 
   // Delete item
-  ipcMain.removeHandler('miro:delete-item')
-  ipcMain.handle('miro:delete-item', async (_event, boardId: string, itemId: string) => {
-    if (typeof boardId !== 'string' || !boardId.trim()) {
-      return { ok: false, error: 'Board ID is required' }
-    }
-    if (typeof itemId !== 'string' || !itemId.trim()) {
-      return { ok: false, error: 'Item ID is required' }
-    }
+  ipcMain.removeHandler(IPC_CHANNELS.MIRO_DELETE_ITEM)
+  ipcMain.handle(IPC_CHANNELS.MIRO_DELETE_ITEM, async (_event, boardId: string, itemId: string) => {
+    const boardErr = validateId(boardId, 'Board ID')
+    if (boardErr) return boardErr
+    const itemErr = validateId(itemId, 'Item ID')
+    if (itemErr) return itemErr
     return miroRequest('DELETE', `/boards/${boardId}/items/${itemId}`)
   })
 
   // Reposition item
-  ipcMain.removeHandler('miro:reposition-item')
-  ipcMain.handle('miro:reposition-item', async (_event, boardId: string, itemId: string, x: number, y: number) => {
-    if (typeof boardId !== 'string' || !boardId.trim()) {
-      return { ok: false, error: 'Board ID is required' }
-    }
-    if (typeof itemId !== 'string' || !itemId.trim()) {
-      return { ok: false, error: 'Item ID is required' }
-    }
+  ipcMain.removeHandler(IPC_CHANNELS.MIRO_REPOSITION_ITEM)
+  ipcMain.handle(IPC_CHANNELS.MIRO_REPOSITION_ITEM, async (_event, boardId: string, itemId: string, x: number, y: number) => {
+    const boardErr = validateId(boardId, 'Board ID')
+    if (boardErr) return boardErr
+    const itemErr = validateId(itemId, 'Item ID')
+    if (itemErr) return itemErr
     return miroRequest('PATCH', `/boards/${boardId}/items/${itemId}`, {
       position: { x, y },
     })
   })
 
   // Delete ghost items (ai_generation_result at position 20,20)
-  ipcMain.removeHandler('miro:delete-ghosts')
-  ipcMain.handle('miro:delete-ghosts', async (_event, boardId: string) => {
-    if (typeof boardId !== 'string' || !boardId.trim()) {
-      return { ok: false, error: 'Board ID is required' }
-    }
+  ipcMain.removeHandler(IPC_CHANNELS.MIRO_DELETE_GHOSTS)
+  ipcMain.handle(IPC_CHANNELS.MIRO_DELETE_GHOSTS, async (_event, boardId: string) => {
+    const err = validateId(boardId, 'Board ID')
+    if (err) return err
     try {
       const result = await miroRequest('GET', `/boards/${boardId}/items?limit=50`) as {
         data?: Array<{ id: string; type?: string; position?: { x: number; y: number } }>
