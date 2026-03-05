@@ -149,21 +149,6 @@ describe('Agent Store', () => {
     expect(useAgentStore.getState().history).toHaveLength(0)
   })
 
-  it('updateAgentCost updates cost in active agents', () => {
-    useAgentStore.getState().addAgent(makeAgent())
-    const cost = { inputTokens: 1000, outputTokens: 500, estimatedUSD: 0.015 }
-    useAgentStore.getState().updateAgentCost('agent-1', cost)
-    expect(useAgentStore.getState().agents[0]!.cost).toEqual(cost)
-  })
-
-  it('updateAgentCost updates cost in history', () => {
-    useAgentStore.getState().addAgent(makeAgent({ status: 'completed' }))
-    useAgentStore.getState().moveToHistory('agent-1')
-    const cost = { inputTokens: 100, outputTokens: 50, estimatedUSD: 0.0015 }
-    useAgentStore.getState().updateAgentCost('agent-1', cost)
-    expect(useAgentStore.getState().history[0]!.cost).toEqual(cost)
-  })
-
   it('setAdmin toggles admin flag', () => {
     useAgentStore.getState().setAdmin(false)
     expect(useAgentStore.getState().isAdmin).toBe(false)

@@ -22,7 +22,6 @@ interface AgentState {
   setLastScreenshot: (dataURL: string | null) => void
   setDomCheckResults: (results: DomCheckResult[] | null) => void
   setAdmin: (isAdmin: boolean) => void
-  updateAgentCost: (id: string, cost: AgentRun['cost']) => void
 }
 
 export const useAgentStore = create<AgentState>()(
@@ -113,20 +112,6 @@ export const useAgentStore = create<AgentState>()(
       setAdmin: (isAdmin) =>
         set((state) => {
           state.isAdmin = isAdmin
-        }),
-
-      // updateAgentCost: call this when cost data is parsed from the agent's
-      // stream-json output (e.g. from a `result` event with usage fields).
-      updateAgentCost: (id, cost) =>
-        set((state) => {
-          const agent = state.agents.find((a) => a.id === id)
-          if (agent) {
-            agent.cost = cost
-          }
-          const histAgent = state.history.find((a) => a.id === id)
-          if (histAgent) {
-            histAgent.cost = cost
-          }
         }),
     })),
     {

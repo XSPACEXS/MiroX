@@ -12,6 +12,7 @@ interface AgentProcess {
   startedAt: number
   status: 'running' | 'completed' | 'failed' | 'killed'
   allowedTools: string[]
+  executionTimeout?: ReturnType<typeof setTimeout>
 }
 
 const MODEL_MAP: Record<string, string> = {
@@ -33,6 +34,12 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
   ipcMain.handle(
     IPC_CHANNELS.AGENT_LAUNCH,
     (_event, config: { model: string; prompt: string; allowedTools: string[] }) => {
+      // E3: Limit concurrent agents
+      const runningCount = [...agents.values()].filter(a => a.status === 'running').length
+      if (runningCount >= 5) {
+        return { ok: false, error: 'Maximum 5 concurrent agents reached' }
+      }
+
       // Validate inputs
       if (!config || typeof config !== 'object') {
         return { ok: false, error: 'Invalid agent config' }
@@ -101,6 +108,20 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
 
       agents.set(id, agent)
 
+      // E1: 30-minute execution timeout
+      agent.executionTimeout = setTimeout(() => {
+        const agentRef = agents.get(id)
+        if (agentRef && agentRef.status === 'running') {
+          agentRef.status = 'killed'
+          sendLog(mainWindow, id, 'system', 'Agent killed — 30-minute execution timeout reached')
+          agentRef.process.kill('SIGTERM')
+          // Escalate to SIGKILL after 10s if still alive
+          setTimeout(() => {
+            try { agentRef.process.kill('SIGKILL') } catch { /* already dead */ }
+          }, 10_000)
+        }
+      }, 30 * 60 * 1000)
+
       sendLog(mainWindow, id, 'system', `Agent ${id.slice(0, 8)} launched with model ${config.model}`)
 
       // Buffer stdout and split by newlines before parsing
@@ -129,6 +150,10 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
       })
 
       child.on('close', (code) => {
+        // Clear execution timeout
+        const closingAgent = agents.get(id)
+        if (closingAgent?.executionTimeout) clearTimeout(closingAgent.executionTimeout)
+
         // Flush remaining buffers
         if (stdoutBuffer.trim()) {
           sendLog(mainWindow, id, 'stdout', stdoutBuffer)
@@ -158,6 +183,7 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
       child.on('error', (err) => {
         const agentRef = agents.get(id)
         if (agentRef) {
+          if (agentRef.executionTimeout) clearTimeout(agentRef.executionTimeout)
           agentRef.status = 'failed'
         }
 
@@ -191,7 +217,12 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
       return { ok: false, error: 'Agent not found' }
     }
     agent.status = 'killed'
+    if (agent.executionTimeout) clearTimeout(agent.executionTimeout)
     agent.process.kill('SIGTERM')
+    // Escalate to SIGKILL after 10s if still alive
+    setTimeout(() => {
+      try { agent.process.kill('SIGKILL') } catch { /* already dead */ }
+    }, 10_000)
     sendLog(mainWindow, id, 'system', 'Agent killed by user')
     return { ok: true }
   })
@@ -202,7 +233,13 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
     const count = agents.size
     for (const [id, agent] of agents) {
       agent.status = 'killed'
+      if (agent.executionTimeout) clearTimeout(agent.executionTimeout)
       agent.process.kill('SIGTERM')
+      // Escalate to SIGKILL after 10s if still alive
+      const proc = agent.process
+      setTimeout(() => {
+        try { proc.kill('SIGKILL') } catch { /* already dead */ }
+      }, 10_000)
       sendLog(mainWindow, id, 'system', 'Agent killed (kill-all)')
     }
     return { ok: true, killed: count }
@@ -213,7 +250,7 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
   ipcMain.handle(IPC_CHANNELS.AGENT_ROLLBACK, (_event, tag: string) => {
     return new Promise<{ ok: boolean; error?: string }>((resolve) => {
       // Validate tag format to prevent shell injection (git refs: alnum, -, ., /, _, ~, ^)
-      if (!/^[a-zA-Z0-9._\-/~^]+$/.test(tag)) {
+      if (!/^[a-zA-Z0-9._\-/]+$/.test(tag)) {
         resolve({ ok: false, error: 'Invalid git ref format' })
         return
       }
