@@ -3,6 +3,7 @@ import fs from 'fs/promises'
 import path from 'path'
 import { store } from '../config'
 import { IPC_CHANNELS } from './channels'
+import { fetchWithTimeout } from '../utils/fetchWithTimeout'
 
 /**
  * Validate a file path is safe to read:
@@ -57,19 +58,51 @@ export function registerSystemHandlers(mainWindow: BrowserWindow): void {
 
   // File open dialog
   ipcMain.removeHandler(IPC_CHANNELS.FILE_OPEN_DIALOG)
-  ipcMain.handle(IPC_CHANNELS.FILE_OPEN_DIALOG, async (_event, options?: Electron.OpenDialogOptions) => {
+  ipcMain.handle(IPC_CHANNELS.FILE_OPEN_DIALOG, async (_event, options?: Record<string, unknown>) => {
+    // Whitelist allowed properties to prevent abuse
+    const allowedProperties: Electron.OpenDialogOptions['properties'] = ['openFile']
+    if (
+      options &&
+      Array.isArray(options.properties) &&
+      options.properties.includes('multiSelections')
+    ) {
+      allowedProperties.push('multiSelections')
+    }
+
+    // Whitelist filters — only allow known safe extensions
+    const allowedExtensions = ['pdf', 'docx', 'doc', 'txt', 'md', 'csv', 'xlsx', 'xls', 'json']
+    let filters: Electron.FileFilter[] = [
+      { name: 'Documents', extensions: allowedExtensions },
+      { name: 'All Files', extensions: ['*'] },
+    ]
+    if (options && Array.isArray(options.filters)) {
+      filters = (options.filters as Array<{ name?: string; extensions?: string[] }>)
+        .filter(
+          (f): f is { name: string; extensions: string[] } =>
+            typeof f.name === 'string' &&
+            Array.isArray(f.extensions) &&
+            f.extensions.every((e: unknown) => typeof e === 'string')
+        )
+        .map((f) => ({
+          name: f.name,
+          extensions: f.extensions.filter((e) => /^[a-zA-Z0-9*]+$/.test(e)),
+        }))
+      if (filters.length === 0) {
+        filters = [
+          { name: 'Documents', extensions: allowedExtensions },
+          { name: 'All Files', extensions: ['*'] },
+        ]
+      }
+    }
+
     const result = await dialog.showOpenDialog(mainWindow, {
-      properties: ['openFile'],
-      filters: [
-        { name: 'Documents', extensions: ['pdf', 'docx', 'doc', 'txt', 'md', 'csv', 'xlsx', 'xls', 'json'] },
-        { name: 'All Files', extensions: ['*'] },
-      ],
-      ...options,
+      properties: allowedProperties,
+      filters,
     })
     if (result.canceled || result.filePaths.length === 0) {
       return null
     }
-    return result.filePaths[0]
+    return result.filePaths
   })
 
   // File read
@@ -106,6 +139,15 @@ export function registerSystemHandlers(mainWindow: BrowserWindow): void {
     }
     if (typeof mimeType !== 'string') {
       return { ok: false, error: 'Invalid MIME type' }
+    }
+    // Check file size before parsing (max 50 MB)
+    try {
+      const stat = await fs.stat(filePath)
+      if (stat.size > 50 * 1024 * 1024) {
+        return { ok: false, error: 'File too large (max 50 MB)' }
+      }
+    } catch (err) {
+      return { ok: false, error: String(err) }
     }
     try {
       const ext = path.extname(fileName).toLowerCase()
@@ -176,7 +218,7 @@ export function registerSystemHandlers(mainWindow: BrowserWindow): void {
         hostname.startsWith('10.') ||
         hostname.startsWith('192.168.') ||
         hostname.startsWith('169.254.') ||
-        hostname.startsWith('172.') ||
+        /^172\.(1[6-9]|2\d|3[01])\./.test(hostname) ||
         hostname.endsWith('.local') ||
         hostname.endsWith('.internal')
       ) {
@@ -186,7 +228,7 @@ export function registerSystemHandlers(mainWindow: BrowserWindow): void {
       return { ok: false, error: 'Invalid URL format' }
     }
     try {
-      const response = await fetch(url)
+      const response = await fetchWithTimeout(url)
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       }

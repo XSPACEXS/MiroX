@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import type { GitHubRepo, GitHubUser } from '../types/github'
 import type { ParsedContent } from '../types/import'
 import { logger } from '../utils/logger'
+import { useUIStore } from '../stores/uiStore'
 
 interface UseGitHubReturn {
   token: string | null
@@ -48,39 +49,49 @@ export function useGitHub(): UseGitHubReturn {
           stargazers_count: r.stars,
           updated_at: r.updatedAt,
           html_url: r.url,
-          default_branch: '',
+          default_branch: r.defaultBranch || '',
           owner: { login: r.owner.login, avatar_url: r.owner.avatarUrl },
-          topics: [],
-          private: false,
+          topics: r.topics || [],
+          private: r.isPrivate ?? false,
         })))
       }
-    } catch {
-      // Repo loading failed silently — user can retry manually
+    } catch (err) {
+      logger.error('Failed to load repos:', err)
+      useUIStore.getState().addToast({ type: 'error', title: 'GitHub Error', message: err instanceof Error ? err.message : String(err) })
     } finally { setIsLoadingRepos(false) }
   }, [])
 
   useEffect(() => {
     if (!isElectronRef.current) return
+    let cancelled = false
     const load = async () => {
-      const t = await window.electronAPI.github.getToken()
-      if (t && t.hasToken) {
-        setTokenState('stored')
-        const status = await window.electronAPI.github.testConnection()
-        if (status.ok) {
-          setIsConnected(true)
-          setUser(status.user ? {
-            id: 0,
-            login: status.user.login,
-            name: status.user.name || '',
-            avatar_url: status.user.avatarUrl,
-            public_repos: 0,
-            html_url: '',
-          } : null)
-          loadReposInternal()
+      try {
+        const t = await window.electronAPI.github.getToken()
+        if (cancelled) return
+        if (t && t.hasToken) {
+          setTokenState('stored')
+          const status = await window.electronAPI.github.testConnection()
+          if (cancelled) return
+          if (status.ok) {
+            setIsConnected(true)
+            setUser(status.user ? {
+              id: 0,
+              login: status.user.login,
+              name: status.user.name || '',
+              avatar_url: status.user.avatarUrl,
+              public_repos: 0,
+              html_url: '',
+            } : null)
+            void loadReposInternal()
+          }
         }
+      } catch (err) {
+        logger.error('Failed to load GitHub state:', err)
+        useUIStore.getState().addToast({ type: 'error', title: 'GitHub Error', message: err instanceof Error ? err.message : String(err) })
       }
     }
-    load()
+    void load()
+    return () => { cancelled = true }
   }, [loadReposInternal])
 
   const setToken = useCallback(async (newToken: string) => {
@@ -142,6 +153,7 @@ export function useGitHub(): UseGitHubReturn {
       }
     } catch (err) {
       logger.error('Analyze failed:', err)
+      useUIStore.getState().addToast({ type: 'error', title: 'GitHub Error', message: err instanceof Error ? err.message : String(err) })
     } finally { setIsAnalyzing(false) }
   }, [])
 

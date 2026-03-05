@@ -6,10 +6,20 @@ import { registerMiroHandlers } from './ipc/miroHandlers'
 import { registerGithubHandlers } from './ipc/githubHandlers'
 import { registerAgentHandlers } from './ipc/agentHandlers'
 import { registerSelfTestHandlers } from './ipc/selfTestHandlers'
+import { IPC_CHANNELS } from './ipc/channels'
 
 let mainWindow: BrowserWindow | null = null
 
 const isDev = !app.isPackaged
+
+// Global error handlers — prevent crash on unhandled errors
+process.on('uncaughtException', (err) => {
+  console.error('[MiroX] Uncaught exception:', err)
+})
+
+process.on('unhandledRejection', (reason) => {
+  console.error('[MiroX] Unhandled rejection:', reason)
+})
 
 function createWindow(): void {
   const savedBounds = store.get('windowBounds')
@@ -60,10 +70,10 @@ function createWindow(): void {
 
   // Load the app
   if (isDev) {
-    mainWindow.loadURL('http://localhost:5173')
+    void mainWindow.loadURL('http://localhost:5173')
     mainWindow.webContents.openDevTools()
   } else {
-    mainWindow.loadFile(path.join(__dirname, '../dist/index.html'))
+    void mainWindow.loadFile(path.join(__dirname, '../dist/index.html'))
   }
 
   // Register IPC handlers
@@ -78,7 +88,7 @@ function createWindow(): void {
     try {
       const parsed = new URL(url)
       if (parsed.protocol === 'https:' || parsed.protocol === 'http:') {
-        shell.openExternal(url)
+        void shell.openExternal(url)
       }
     } catch {
       // Invalid URL — silently deny
@@ -94,7 +104,7 @@ function createWindow(): void {
       try {
         const parsed = new URL(url)
         if (parsed.protocol === 'https:' || parsed.protocol === 'http:') {
-          shell.openExternal(url)
+          void shell.openExternal(url)
         }
       } catch {
         // Invalid URL — silently block
@@ -120,7 +130,7 @@ function createMenu(): void {
           label: 'Settings',
           accelerator: 'Cmd+,',
           click: () => {
-            mainWindow?.webContents.send('navigate', '/settings')
+            mainWindow?.webContents.send(IPC_CHANNELS.NAVIGATE, '/settings')
           },
         },
         { type: 'separator' },
@@ -140,14 +150,14 @@ function createMenu(): void {
           label: 'New Board',
           accelerator: 'Cmd+N',
           click: () => {
-            mainWindow?.webContents.send('navigate', '/templates')
+            mainWindow?.webContents.send(IPC_CHANNELS.NAVIGATE, '/templates')
           },
         },
         {
           label: 'Import...',
           accelerator: 'Cmd+I',
           click: () => {
-            mainWindow?.webContents.send('navigate', '/import')
+            mainWindow?.webContents.send(IPC_CHANNELS.NAVIGATE, '/import')
           },
         },
         { type: 'separator' },
@@ -187,35 +197,35 @@ function createMenu(): void {
           label: 'Home',
           accelerator: 'Cmd+1',
           click: () => {
-            mainWindow?.webContents.send('navigate', '/')
+            mainWindow?.webContents.send(IPC_CHANNELS.NAVIGATE, '/')
           },
         },
         {
           label: 'Templates',
           accelerator: 'Cmd+2',
           click: () => {
-            mainWindow?.webContents.send('navigate', '/templates')
+            mainWindow?.webContents.send(IPC_CHANNELS.NAVIGATE, '/templates')
           },
         },
         {
           label: 'Import',
           accelerator: 'Cmd+3',
           click: () => {
-            mainWindow?.webContents.send('navigate', '/import')
+            mainWindow?.webContents.send(IPC_CHANNELS.NAVIGATE, '/import')
           },
         },
         {
           label: 'Settings',
           accelerator: 'Cmd+4',
           click: () => {
-            mainWindow?.webContents.send('navigate', '/settings')
+            mainWindow?.webContents.send(IPC_CHANNELS.NAVIGATE, '/settings')
           },
         },
         {
           label: 'Agent Center',
           accelerator: 'Cmd+5',
           click: () => {
-            mainWindow?.webContents.send('navigate', '/agent-center')
+            mainWindow?.webContents.send(IPC_CHANNELS.NAVIGATE, '/agent-center')
           },
         },
       ],
@@ -235,13 +245,13 @@ function createMenu(): void {
         {
           label: 'MiroX Documentation',
           click: () => {
-            shell.openExternal('https://github.com/XSPACEXS/MiroX')
+            void shell.openExternal('https://github.com/XSPACEXS/MiroX')
           },
         },
         {
           label: 'Report Issue',
           click: () => {
-            shell.openExternal('https://github.com/XSPACEXS/MiroX/issues')
+            void shell.openExternal('https://github.com/XSPACEXS/MiroX/issues')
           },
         },
       ],
@@ -268,18 +278,31 @@ function setupCSP(): void {
   }
 }
 
-// App lifecycle
-app.whenReady().then(() => {
-  setupCSP()
-  createWindow()
-  createMenu()
+// App lifecycle — ensure only one instance
+const gotLock = app.requestSingleInstanceLock()
 
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow()
+if (!gotLock) {
+  app.quit()
+} else {
+  app.on('second-instance', () => {
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore()
+      mainWindow.focus()
     }
   })
-})
+
+  void app.whenReady().then(() => {
+    setupCSP()
+    createWindow()
+    createMenu()
+
+    app.on('activate', () => {
+      if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow()
+      }
+    })
+  })
+}
 
 // Quit when all windows are closed (except macOS)
 app.on('window-all-closed', () => {

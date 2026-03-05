@@ -1,6 +1,7 @@
 import { ipcMain } from 'electron'
 import * as keytar from 'keytar'
 import { IPC_CHANNELS } from './channels'
+import { fetchWithTimeout } from '../utils/fetchWithTimeout'
 
 const SERVICE = 'com.mirox.app'
 const ACCOUNT_MIRO = 'miro-token'
@@ -24,12 +25,12 @@ async function getMiroToken(): Promise<string> {
   }
 }
 
-async function miroRequest(method: string, path: string, body?: object): Promise<unknown> {
+async function miroRequest(method: string, path: string, body?: object): Promise<Record<string, unknown>> {
   const token = await getMiroToken()
   if (!token) {
     throw new Error('No Miro API token configured. Add one in Settings.')
   }
-  const response = await fetch(`${MIRO_BASE_URL}${path}`, {
+  const response = await fetchWithTimeout(`${MIRO_BASE_URL}${path}`, {
     method,
     headers: {
       Authorization: `Bearer ${token}`,
@@ -56,7 +57,7 @@ export function registerMiroHandlers(): void {
       if (!token) {
         return { ok: false, error: 'No Miro API token configured. Add one in Settings.' }
       }
-      const response = await fetch(`${MIRO_BASE_URL}/boards?limit=1`, {
+      const response = await fetchWithTimeout(`${MIRO_BASE_URL}/boards?limit=1`, {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: 'application/json',
@@ -85,13 +86,25 @@ export function registerMiroHandlers(): void {
       return { ok: false, error: 'Description too long (max 5000 characters)' }
     }
     if (description) body.description = description
-    return miroRequest('POST', '/boards', body)
+    try {
+      return await miroRequest('POST', '/boards', body)
+    } catch (err) {
+      const message = String(err)
+      if (message.includes('401')) return { ok: false, error: 'Miro token expired — please reconnect in Settings' }
+      return { ok: false, error: message }
+    }
   })
 
   // List boards
   ipcMain.removeHandler(IPC_CHANNELS.MIRO_LIST_BOARDS)
   ipcMain.handle(IPC_CHANNELS.MIRO_LIST_BOARDS, async () => {
-    return miroRequest('GET', '/boards?sort=last_modified&limit=50')
+    try {
+      return await miroRequest('GET', '/boards?sort=last_modified&limit=50')
+    } catch (err) {
+      const message = String(err)
+      if (message.includes('401')) return { ok: false, error: 'Miro token expired — please reconnect in Settings' }
+      return { ok: false, error: message }
+    }
   })
 
   // Get token
@@ -134,12 +147,18 @@ export function registerMiroHandlers(): void {
   }) => {
     const err = validateId(boardId, 'Board ID')
     if (err) return err
-    return miroRequest('POST', `/boards/${boardId}/frames`, {
-      data: { title: data.title, format: 'custom', type: 'freeform' },
-      style: data.style || { fillColor: '#1a1a1a' },
-      position: { x: data.x, y: data.y },
-      geometry: { width: data.width, height: data.height },
-    })
+    try {
+      return await miroRequest('POST', `/boards/${boardId}/frames`, {
+        data: { title: data.title, format: 'custom', type: 'freeform' },
+        style: data.style || { fillColor: '#1a1a1a' },
+        position: { x: data.x, y: data.y },
+        geometry: { width: data.width, height: data.height },
+      })
+    } catch (e) {
+      const message = String(e)
+      if (message.includes('401')) return { ok: false, error: 'Miro token expired — please reconnect in Settings' }
+      return { ok: false, error: message }
+    }
   })
 
   // Create shape
@@ -155,20 +174,26 @@ export function registerMiroHandlers(): void {
   }) => {
     const err = validateId(boardId, 'Board ID')
     if (err) return err
-    return miroRequest('POST', `/boards/${boardId}/shapes`, {
-      data: { content: data.content, shape: data.shape },
-      style: data.style || {
-        fillColor: '#1a1a1a',
-        fontColor: '#ffffff',
-        borderColor: '#FFD600',
-        borderWidth: '2.0',
-        fontSize: '14',
-        textAlign: 'center',
-        textAlignVertical: 'middle',
-      },
-      position: { x: data.x, y: data.y },
-      geometry: { width: data.width, height: data.height },
-    })
+    try {
+      return await miroRequest('POST', `/boards/${boardId}/shapes`, {
+        data: { content: data.content, shape: data.shape },
+        style: data.style || {
+          fillColor: '#1a1a1a',
+          fontColor: '#ffffff',
+          borderColor: '#FFD600',
+          borderWidth: '2.0',
+          fontSize: '14',
+          textAlign: 'center',
+          textAlignVertical: 'middle',
+        },
+        position: { x: data.x, y: data.y },
+        geometry: { width: data.width, height: data.height },
+      })
+    } catch (e) {
+      const message = String(e)
+      if (message.includes('401')) return { ok: false, error: 'Miro token expired — please reconnect in Settings' }
+      return { ok: false, error: message }
+    }
   })
 
   // Create sticky note
@@ -182,11 +207,17 @@ export function registerMiroHandlers(): void {
   }) => {
     const err = validateId(boardId, 'Board ID')
     if (err) return err
-    return miroRequest('POST', `/boards/${boardId}/sticky_notes`, {
-      data: { content: data.content, shape: data.shape || 'square' },
-      style: data.style || { fillColor: 'yellow', textAlign: 'center', textAlignVertical: 'middle' },
-      position: { x: data.x, y: data.y },
-    })
+    try {
+      return await miroRequest('POST', `/boards/${boardId}/sticky_notes`, {
+        data: { content: data.content, shape: data.shape || 'square' },
+        style: data.style || { fillColor: 'yellow', textAlign: 'center', textAlignVertical: 'middle' },
+        position: { x: data.x, y: data.y },
+      })
+    } catch (e) {
+      const message = String(e)
+      if (message.includes('401')) return { ok: false, error: 'Miro token expired — please reconnect in Settings' }
+      return { ok: false, error: message }
+    }
   })
 
   // Create text
@@ -200,12 +231,18 @@ export function registerMiroHandlers(): void {
   }) => {
     const err = validateId(boardId, 'Board ID')
     if (err) return err
-    return miroRequest('POST', `/boards/${boardId}/texts`, {
-      data: { content: data.content },
-      style: data.style || { color: '#ffffff', fontSize: '14', textAlign: 'left' },
-      position: { x: data.x, y: data.y },
-      geometry: data.width ? { width: data.width } : undefined,
-    })
+    try {
+      return await miroRequest('POST', `/boards/${boardId}/texts`, {
+        data: { content: data.content },
+        style: data.style || { color: '#ffffff', fontSize: '14', textAlign: 'left' },
+        position: { x: data.x, y: data.y },
+        geometry: data.width ? { width: data.width } : undefined,
+      })
+    } catch (e) {
+      const message = String(e)
+      if (message.includes('401')) return { ok: false, error: 'Miro token expired — please reconnect in Settings' }
+      return { ok: false, error: message }
+    }
   })
 
   // Create connector
@@ -222,18 +259,24 @@ export function registerMiroHandlers(): void {
     if (startErr) return startErr
     const endErr = validateId(data.endItemId, 'End Item ID')
     if (endErr) return endErr
-    return miroRequest('POST', `/boards/${boardId}/connectors`, {
-      startItem: { id: data.startItemId },
-      endItem: { id: data.endItemId },
-      style: data.style || {
-        strokeColor: '#FFD600',
-        strokeWidth: '2.0',
-        strokeStyle: 'normal',
-        startStrokeCap: 'none',
-        endStrokeCap: 'stealth',
-      },
-      captions: data.captions,
-    })
+    try {
+      return await miroRequest('POST', `/boards/${boardId}/connectors`, {
+        startItem: { id: data.startItemId },
+        endItem: { id: data.endItemId },
+        style: data.style || {
+          strokeColor: '#FFD600',
+          strokeWidth: '2.0',
+          strokeStyle: 'normal',
+          startStrokeCap: 'none',
+          endStrokeCap: 'stealth',
+        },
+        captions: data.captions,
+      })
+    } catch (e) {
+      const message = String(e)
+      if (message.includes('401')) return { ok: false, error: 'Miro token expired — please reconnect in Settings' }
+      return { ok: false, error: message }
+    }
   })
 
   // Delete item
@@ -243,7 +286,13 @@ export function registerMiroHandlers(): void {
     if (boardErr) return boardErr
     const itemErr = validateId(itemId, 'Item ID')
     if (itemErr) return itemErr
-    return miroRequest('DELETE', `/boards/${boardId}/items/${itemId}`)
+    try {
+      return await miroRequest('DELETE', `/boards/${boardId}/items/${itemId}`)
+    } catch (e) {
+      const message = String(e)
+      if (message.includes('401')) return { ok: false, error: 'Miro token expired — please reconnect in Settings' }
+      return { ok: false, error: message }
+    }
   })
 
   // Reposition item
@@ -253,9 +302,15 @@ export function registerMiroHandlers(): void {
     if (boardErr) return boardErr
     const itemErr = validateId(itemId, 'Item ID')
     if (itemErr) return itemErr
-    return miroRequest('PATCH', `/boards/${boardId}/items/${itemId}`, {
-      position: { x, y },
-    })
+    try {
+      return await miroRequest('PATCH', `/boards/${boardId}/items/${itemId}`, {
+        position: { x, y },
+      })
+    } catch (e) {
+      const message = String(e)
+      if (message.includes('401')) return { ok: false, error: 'Miro token expired — please reconnect in Settings' }
+      return { ok: false, error: message }
+    }
   })
 
   // Delete ghost items (ai_generation_result at position 20,20)

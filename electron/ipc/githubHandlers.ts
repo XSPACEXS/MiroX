@@ -1,6 +1,7 @@
 import { ipcMain } from 'electron'
 import * as keytar from 'keytar'
 import { IPC_CHANNELS } from './channels'
+import { fetchWithTimeout } from '../utils/fetchWithTimeout'
 
 const SERVICE = 'com.mirox.app'
 const ACCOUNT_GITHUB = 'github-token'
@@ -17,8 +18,8 @@ async function getGithubToken(): Promise<string | null> {
   }
 }
 
-async function githubRequest(token: string, path: string): Promise<unknown> {
-  const response = await fetch(`${GITHUB_BASE_URL}${path}`, {
+async function githubRequest(token: string, path: string): Promise<Record<string, unknown> | Record<string, unknown>[]> {
+  const response = await fetchWithTimeout(`${GITHUB_BASE_URL}${path}`, {
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: 'application/vnd.github.v3+json',
@@ -96,7 +97,11 @@ export function registerGithubHandlers(): void {
       const token = await getGithubToken()
       if (!token) return { ok: false, error: 'No GitHub token configured' }
 
-      const repos = (await githubRequest(token, '/user/repos?sort=updated&per_page=50')) as Array<{
+      const rawRepos = await githubRequest(token, '/user/repos?sort=updated&per_page=50')
+      if (!Array.isArray(rawRepos)) {
+        return { ok: false, error: 'Unexpected API response — expected array of repos' }
+      }
+      const repos = rawRepos as Array<{
         id: number
         name: string
         full_name: string
@@ -105,6 +110,9 @@ export function registerGithubHandlers(): void {
         stargazers_count: number
         updated_at: string
         html_url: string
+        default_branch: string
+        topics: string[]
+        private: boolean
         owner: { login: string; avatar_url: string }
       }>
 
@@ -119,6 +127,9 @@ export function registerGithubHandlers(): void {
           stars: r.stargazers_count,
           updatedAt: r.updated_at,
           url: r.html_url,
+          defaultBranch: r.default_branch,
+          topics: r.topics || [],
+          isPrivate: r.private,
           owner: {
             login: r.owner.login,
             avatarUrl: r.owner.avatar_url,
@@ -156,7 +167,11 @@ export function registerGithubHandlers(): void {
       if (!token) return { ok: false, error: 'No GitHub token configured' }
 
       // Fetch repo info
-      const repoInfo = (await githubRequest(token, `/repos/${owner}/${repo}`)) as {
+      const rawRepoInfo = await githubRequest(token, `/repos/${owner}/${repo}`)
+      if (!rawRepoInfo || typeof rawRepoInfo !== 'object' || !('name' in rawRepoInfo)) {
+        return { ok: false, error: 'Unexpected API response — invalid repo data' }
+      }
+      const repoInfo = rawRepoInfo as {
         name: string
         description: string | null
         language: string | null
