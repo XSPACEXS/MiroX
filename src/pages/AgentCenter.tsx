@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Lock, Wrench } from 'lucide-react'
 import { pageVariants } from '@design-system/animations'
@@ -16,6 +16,9 @@ export default function AgentCenter(): JSX.Element {
   const updateAgentStatus = useAgentStore((s) => s.updateAgentStatus)
   const moveToHistory = useAgentStore((s) => s.moveToHistory)
 
+  // Track pending move-to-history timeouts so we can clear them on unmount
+  const pendingTimeouts = useRef<ReturnType<typeof setTimeout>[]>([])
+
   // Subscribe to IPC events
   useEffect(() => {
     const api = window.electronAPI
@@ -32,14 +35,18 @@ export default function AgentCenter(): JSX.Element {
     const unsubExit = api.agent.onExit((data) => {
       updateAgentStatus(data.id, data.status, data.exitCode)
       // Move to history after a short delay so the user sees the final status
-      setTimeout(() => {
+      const tid = setTimeout(() => {
         moveToHistory(data.id)
+        pendingTimeouts.current = pendingTimeouts.current.filter((t) => t !== tid)
       }, 2000)
+      pendingTimeouts.current.push(tid)
     })
 
     return () => {
       unsubLog()
       unsubExit()
+      pendingTimeouts.current.forEach(clearTimeout)
+      pendingTimeouts.current = []
     }
   }, [appendLog, updateAgentStatus, moveToHistory])
 

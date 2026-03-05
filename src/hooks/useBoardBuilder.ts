@@ -33,8 +33,9 @@ export function useBoardBuilder() {
   const [boardUrl, setBoardUrl] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
-  const boardStore = useBoardStore()
-  const settingsStore = useSettingsStore()
+  const addRecentBoard = useBoardStore((s) => s.addRecentBoard)
+  const incrementTotal = useBoardStore((s) => s.incrementTotal)
+  const recordTemplateUsed = useSettingsStore((s) => s.recordTemplateUsed)
 
   const setTemplate = useCallback((template: TemplateDefinition | null) => {
     setSelectedTemplate(template)
@@ -66,7 +67,7 @@ export function useBoardBuilder() {
   }, [])
 
   const startCreation = useCallback(async () => {
-    if (!selectedTemplate) return
+    if (!selectedTemplate || isCreating) return
     setIsCreating(true)
     setError(null)
     setCurrentStep(4)
@@ -113,7 +114,7 @@ export function useBoardBuilder() {
 
       setBoardUrl(result.boardUrl)
 
-      boardStore.addRecentBoard({
+      addRecentBoard({
         id: result.boardId,
         name: result.boardName,
         url: result.boardUrl,
@@ -121,8 +122,8 @@ export function useBoardBuilder() {
         templateName: selectedTemplate.name,
         createdAt: new Date().toISOString(),
       })
-      boardStore.incrementTotal()
-      settingsStore.recordTemplateUsed(selectedTemplate.id)
+      incrementTotal()
+      recordTemplateUsed(selectedTemplate.id)
 
       setIsComplete(true)
     } catch (err) {
@@ -130,7 +131,7 @@ export function useBoardBuilder() {
     } finally {
       setIsCreating(false)
     }
-  }, [selectedTemplate, boardName, boardDescription, fieldValues, boardStore, settingsStore, updateStep, setCurrentStep])
+  }, [selectedTemplate, boardName, boardDescription, fieldValues, isCreating, addRecentBoard, incrementTotal, recordTemplateUsed, updateStep])
 
   const reset = useCallback(() => {
     setCurrentStep(1)

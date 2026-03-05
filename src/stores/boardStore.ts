@@ -50,6 +50,10 @@ export const useBoardStore = create<BoardStore>()(
     }),
     {
       name: 'mirox-boards',
+      partialize: (state) => ({
+        recentBoards: state.recentBoards,
+        totalBoardsCreated: state.totalBoardsCreated,
+      }),
     }
   )
 )
