@@ -4,8 +4,9 @@ node_modules/
 # Build outputs
 dist/
 dist-electron/
-build/
 release/
+
+# Build resources (icons, DMG background) are tracked — do NOT add build/ here
 
 # Environment
 .env

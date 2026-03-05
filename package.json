@@ -15,14 +15,12 @@
     "build:mac:arm64": "npm run build && electron-builder --mac --arm64",
     "icons": "node scripts/generate-icons.js",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p electron/tsconfig.json",
     "lint": "eslint src electron --ext .ts,.tsx",
     "test": "vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {
-    "axios": "^1.6.0",
-    "csv-parse": "^5.5.3",
     "electron-store": "^8.2.0",
     "framer-motion": "^11.0.0",
     "immer": "^10.0.3",
