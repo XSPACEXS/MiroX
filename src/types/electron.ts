@@ -1,3 +1,8 @@
+/**
+ * IMPORTANT: This interface is the renderer-side source of truth for the IPC bridge.
+ * It MUST be kept in sync with the `electronAPI` object in electron/preload.ts.
+ * Any method added/changed/removed in preload.ts must be reflected here, and vice versa.
+ */
 export interface ElectronAPI {
   // System
   getSystemInfo: () => Promise<{
@@ -134,15 +139,13 @@ export interface ElectronAPI {
 
   // Agent
   agent: {
-    launch: (config: { model: string; prompt: string; allowedTools: string[] }) => Promise<{
-      ok: boolean
-      id?: string
-      model?: string
-      startedAt?: number
-      error?: string
-    }>
+    launch: (config: { model: string; prompt: string; allowedTools: string[] }) => Promise<
+      | { ok: true; id: string; model: string; startedAt: number }
+      | { ok: false; error: string }
+    >
     kill: (id: string) => Promise<{ ok: boolean; error?: string }>
     killAll: () => Promise<{ ok: boolean; killed?: number }>
+    rollback: (tag: string) => Promise<{ ok: boolean; error?: string }>
     onLog: (callback: (data: {
       agentId: string
       timestamp: number
@@ -151,7 +154,7 @@ export interface ElectronAPI {
     }) => void) => () => void
     onExit: (callback: (data: {
       id: string
-      exitCode: number
+      exitCode: number | null
       status: 'completed' | 'failed' | 'killed'
     }) => void) => () => void
   }
@@ -161,6 +164,7 @@ export interface ElectronAPI {
     screenshot: () => Promise<{ ok: boolean; dataURL?: string; filePath?: string; error?: string }>
     domCheck: (code: string) => Promise<{ ok: boolean; result?: unknown; error?: string }>
     consoleErrors: () => Promise<{ ok: boolean; errors?: string[] }>
+    clearConsoleErrors: () => Promise<{ ok: boolean }>
     runAll: () => Promise<{
       ok: boolean
       results?: Array<{ label: string; passed: boolean; detail: string }>

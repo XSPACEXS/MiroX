@@ -115,6 +115,8 @@ export const useAgentStore = create<AgentState>()(
           state.isAdmin = isAdmin
         }),
 
+      // updateAgentCost: call this when cost data is parsed from the agent's
+      // stream-json output (e.g. from a `result` event with usage fields).
       updateAgentCost: (id, cost) =>
         set((state) => {
           const agent = state.agents.find((a) => a.id === id)
@@ -130,7 +132,12 @@ export const useAgentStore = create<AgentState>()(
     {
       name: 'mirox-agent-center',
       partialize: (state) => ({
-        history: state.history,
+        // Persist only the last 100 log lines per history entry to keep
+        // localStorage from growing unbounded (50 entries × 2000 logs = 100MB worst case).
+        history: state.history.map((agent) => ({
+          ...agent,
+          logs: agent.logs.slice(-100),
+        })),
         isAdmin: state.isAdmin,
       }),
     }

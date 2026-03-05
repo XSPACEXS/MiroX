@@ -197,6 +197,13 @@ function createMenu(): void {
             mainWindow?.webContents.send('navigate', '/settings')
           },
         },
+        {
+          label: 'Agent Center',
+          accelerator: 'Cmd+5',
+          click: () => {
+            mainWindow?.webContents.send('navigate', '/agent-center')
+          },
+        },
       ],
     },
     {
@@ -239,7 +246,7 @@ function setupCSP(): void {
         responseHeaders: {
           ...details.responseHeaders,
           'Content-Security-Policy': [
-            "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.miro.com https://api.github.com;"
+            "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.miro.com https://api.github.com;"
           ]
         }
       })

@@ -1,13 +1,14 @@
 import { BrowserWindow, ipcMain, app } from 'electron'
 import path from 'path'
 import fs from 'fs/promises'
+import { IPC_CHANNELS } from './channels'
 
-const consoleErrors: string[] = []
+let consoleErrors: string[] = []
 
 export function registerSelfTestHandlers(mainWindow: BrowserWindow): void {
-  // Start capturing console errors
+  // Capture console errors/warnings from the renderer process
   // Electron 28: console-message params are (event, level, message, line, sourceId)
-  // level: 0=debug, 1=info, 2=warning, 3=error
+  // level is an integer: 0=debug, 1=info, 2=warning, 3=error
   mainWindow.webContents.on('console-message', (_event, level, message) => {
     if (level >= 2) {
       const label = level === 3 ? 'error' : 'warning'
@@ -20,14 +21,13 @@ export function registerSelfTestHandlers(mainWindow: BrowserWindow): void {
   })
 
   // Screenshot
-  ipcMain.removeHandler('selftest:screenshot')
-  ipcMain.handle('selftest:screenshot', async () => {
+  ipcMain.removeHandler(IPC_CHANNELS.SELFTEST_SCREENSHOT)
+  ipcMain.handle(IPC_CHANNELS.SELFTEST_SCREENSHOT, async () => {
     try {
       const image = await mainWindow.webContents.capturePage()
       const pngBuffer = image.toPNG()
       const dataURL = `data:image/png;base64,${pngBuffer.toString('base64')}`
 
-      // Also save to temp file
       const tempDir = path.join(app.getPath('temp'), 'mirox-screenshots')
       await fs.mkdir(tempDir, { recursive: true })
       const fileName = `screenshot-${Date.now()}.png`
@@ -40,9 +40,15 @@ export function registerSelfTestHandlers(mainWindow: BrowserWindow): void {
     }
   })
 
-  // DOM check — run arbitrary JS in renderer
-  ipcMain.removeHandler('selftest:dom-check')
-  ipcMain.handle('selftest:dom-check', async (_event, code: string) => {
+  // DOM check — execute JavaScript in the renderer context.
+  // SECURITY NOTE: This handler runs arbitrary JavaScript sent by the renderer.
+  // This is intentional for a dev/self-test tool and is acceptable because:
+  //   1. contextIsolation is enabled, so renderer cannot escape the sandbox via JS alone.
+  //   2. This app is a single-user local dev tool — there is no remote/untrusted renderer.
+  //   3. The handler is only registered in development-oriented builds.
+  // Do NOT expose this in a multi-user or network-facing context.
+  ipcMain.removeHandler(IPC_CHANNELS.SELFTEST_DOM_CHECK)
+  ipcMain.handle(IPC_CHANNELS.SELFTEST_DOM_CHECK, async (_event, code: string) => {
     try {
       const result = await mainWindow.webContents.executeJavaScript(code)
       return { ok: true, result }
@@ -52,14 +58,21 @@ export function registerSelfTestHandlers(mainWindow: BrowserWindow): void {
   })
 
   // Get console errors
-  ipcMain.removeHandler('selftest:console-errors')
-  ipcMain.handle('selftest:console-errors', () => {
+  ipcMain.removeHandler(IPC_CHANNELS.SELFTEST_CONSOLE_ERRORS)
+  ipcMain.handle(IPC_CHANNELS.SELFTEST_CONSOLE_ERRORS, () => {
     return { ok: true, errors: [...consoleErrors] }
   })
 
+  // Clear console errors
+  ipcMain.removeHandler(IPC_CHANNELS.SELFTEST_CLEAR_CONSOLE_ERRORS)
+  ipcMain.handle(IPC_CHANNELS.SELFTEST_CLEAR_CONSOLE_ERRORS, () => {
+    consoleErrors = []
+    return { ok: true }
+  })
+
   // Run all predefined DOM checks
-  ipcMain.removeHandler('selftest:run-all')
-  ipcMain.handle('selftest:run-all', async () => {
+  ipcMain.removeHandler(IPC_CHANNELS.SELFTEST_RUN_ALL)
+  ipcMain.handle(IPC_CHANNELS.SELFTEST_RUN_ALL, async () => {
     const checks = [
       {
         label: 'Sidebar exists',
@@ -123,7 +136,7 @@ export function registerSelfTestHandlers(mainWindow: BrowserWindow): void {
       {
         label: 'No console errors',
         code: `(() => { return { ok: true }; })()`,
-        evaluate: () =>
+        evaluate: (_r: unknown) =>
           consoleErrors.filter(e => e.startsWith('[error]')).length === 0
             ? { passed: true, detail: 'No console errors detected' }
             : {

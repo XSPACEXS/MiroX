@@ -1,6 +1,8 @@
-import { BrowserWindow, ipcMain } from 'electron'
-import { spawn, type ChildProcess } from 'child_process'
+import { BrowserWindow, ipcMain, app } from 'electron'
+import { spawn, exec, type ChildProcess } from 'child_process'
+import path from 'path'
 import crypto from 'crypto'
+import { IPC_CHANNELS } from './channels'
 
 interface AgentProcess {
   id: string
@@ -20,11 +22,16 @@ const MODEL_MAP: Record<string, string> = {
 
 const agents = new Map<string, AgentProcess>()
 
+/** Returns the best working directory for spawned processes. */
+function getWorkingDir(): string {
+  return app.isPackaged ? path.dirname(app.getAppPath()) : process.cwd()
+}
+
 export function registerAgentHandlers(mainWindow: BrowserWindow): void {
   // Launch agent
-  ipcMain.removeHandler('agent:launch')
+  ipcMain.removeHandler(IPC_CHANNELS.AGENT_LAUNCH)
   ipcMain.handle(
-    'agent:launch',
+    IPC_CHANNELS.AGENT_LAUNCH,
     (_event, config: { model: string; prompt: string; allowedTools: string[] }) => {
       const id = crypto.randomUUID()
       const modelId = MODEL_MAP[config.model] || MODEL_MAP['sonnet']!
@@ -36,6 +43,9 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
         modelId,
         '--output-format',
         'stream-json',
+        // --dangerously-skip-permissions is required for the agent to run autonomously
+        // without interactive confirmation prompts. This is intentional for the dev-tool
+        // use case where the user has explicitly chosen to launch the agent.
         '--dangerously-skip-permissions',
       ]
 
@@ -44,7 +54,7 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
       }
 
       const child = spawn('claude', args, {
-        cwd: process.cwd(),
+        cwd: getWorkingDir(),
         env: { ...process.env },
         stdio: ['ignore', 'pipe', 'pipe'],
       })
@@ -61,15 +71,13 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
 
       agents.set(id, agent)
 
-      // Send system message about launch
       sendLog(mainWindow, id, 'system', `Agent ${id.slice(0, 8)} launched with model ${config.model}`)
 
-      // Buffer stdout and split by newlines
+      // Buffer stdout and split by newlines before parsing
       let stdoutBuffer = ''
       child.stdout?.on('data', (chunk: Buffer) => {
         stdoutBuffer += chunk.toString()
         const lines = stdoutBuffer.split('\n')
-        // Keep last incomplete line in buffer
         stdoutBuffer = lines.pop() || ''
         for (const line of lines) {
           if (line.trim()) {
@@ -100,16 +108,14 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
         }
 
         const agentRef = agents.get(id)
-        if (agentRef) {
-          if (agentRef.status === 'running') {
-            agentRef.status = code === 0 ? 'completed' : 'failed'
-          }
+        if (agentRef && agentRef.status === 'running') {
+          agentRef.status = code === 0 ? 'completed' : 'failed'
         }
 
         sendLog(mainWindow, id, 'system', `Agent exited with code ${code ?? 'unknown'}`)
 
         if (!mainWindow.isDestroyed()) {
-          mainWindow.webContents.send('agent:exit', {
+          mainWindow.webContents.send(IPC_CHANNELS.AGENT_EXIT, {
             id,
             exitCode: code,
             status: agentRef?.status || (code === 0 ? 'completed' : 'failed'),
@@ -124,9 +130,17 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
         if (agentRef) {
           agentRef.status = 'failed'
         }
-        sendLog(mainWindow, id, 'system', `Agent error: ${err.message}`)
+
+        // Provide a helpful message if the claude CLI is not installed
+        const isEnoent = (err as NodeJS.ErrnoException).code === 'ENOENT'
+        const message = isEnoent
+          ? 'Claude CLI not found. Install it from https://claude.ai/download'
+          : `Agent error: ${err.message}`
+
+        sendLog(mainWindow, id, 'system', message)
+
         if (!mainWindow.isDestroyed()) {
-          mainWindow.webContents.send('agent:exit', {
+          mainWindow.webContents.send(IPC_CHANNELS.AGENT_EXIT, {
             id,
             exitCode: -1,
             status: 'failed',
@@ -140,8 +154,8 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
   )
 
   // Kill specific agent
-  ipcMain.removeHandler('agent:kill')
-  ipcMain.handle('agent:kill', (_event, id: string) => {
+  ipcMain.removeHandler(IPC_CHANNELS.AGENT_KILL)
+  ipcMain.handle(IPC_CHANNELS.AGENT_KILL, (_event, id: string) => {
     const agent = agents.get(id)
     if (!agent) {
       return { ok: false, error: 'Agent not found' }
@@ -153,8 +167,8 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
   })
 
   // Kill all agents
-  ipcMain.removeHandler('agent:kill-all')
-  ipcMain.handle('agent:kill-all', () => {
+  ipcMain.removeHandler(IPC_CHANNELS.AGENT_KILL_ALL)
+  ipcMain.handle(IPC_CHANNELS.AGENT_KILL_ALL, () => {
     const count = agents.size
     for (const [id, agent] of agents) {
       agent.status = 'killed'
@@ -162,6 +176,29 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
       sendLog(mainWindow, id, 'system', 'Agent killed (kill-all)')
     }
     return { ok: true, killed: count }
+  })
+
+  // Rollback via git reset — runs directly without a Claude agent to avoid token cost
+  ipcMain.removeHandler(IPC_CHANNELS.AGENT_ROLLBACK)
+  ipcMain.handle(IPC_CHANNELS.AGENT_ROLLBACK, (_event, tag: string) => {
+    return new Promise<{ ok: boolean; error?: string }>((resolve) => {
+      // Validate tag format to prevent shell injection (git refs: alnum, -, ., /, _, ~, ^)
+      if (!/^[a-zA-Z0-9._\-/~^]+$/.test(tag)) {
+        resolve({ ok: false, error: 'Invalid git ref format' })
+        return
+      }
+      exec(
+        `git reset --hard ${tag}`,
+        { cwd: getWorkingDir() },
+        (error) => {
+          if (error) {
+            resolve({ ok: false, error: error.message })
+          } else {
+            resolve({ ok: true })
+          }
+        }
+      )
+    })
   })
 }
 
@@ -172,7 +209,7 @@ function sendLog(
   text: string
 ): void {
   if (!mainWindow.isDestroyed()) {
-    mainWindow.webContents.send('agent:log', {
+    mainWindow.webContents.send(IPC_CHANNELS.AGENT_LOG, {
       agentId,
       timestamp: Date.now(),
       type,

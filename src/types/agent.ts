@@ -17,19 +17,12 @@ export interface AgentConfig {
   model: 'opus' | 'sonnet' | 'haiku'
   prompt: string
   allowedTools: string[]
-  fileScope?: string
 }
 
 export interface DomCheckResult {
   label: string
   passed: boolean
   detail: string
-}
-
-export interface SelfTestResult {
-  screenshot: string | null
-  domChecks: DomCheckResult[]
-  consoleErrors: string[]
 }
 
 export interface QuickAction {
@@ -39,5 +32,5 @@ export interface QuickAction {
   prompt: string
   model: 'opus' | 'sonnet' | 'haiku'
   tools: string[]
-  icon: string
+  icon: 'bug' | 'alert' | 'paintbrush' | 'package' | 'shield' | 'hammer'
 }

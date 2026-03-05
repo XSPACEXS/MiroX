@@ -47,6 +47,7 @@ export const IPC_CHANNELS = {
   AGENT_LAUNCH: 'agent:launch',
   AGENT_KILL: 'agent:kill',
   AGENT_KILL_ALL: 'agent:kill-all',
+  AGENT_ROLLBACK: 'agent:rollback',
   AGENT_LOG: 'agent:log',
   AGENT_EXIT: 'agent:exit',
 
@@ -54,6 +55,7 @@ export const IPC_CHANNELS = {
   SELFTEST_SCREENSHOT: 'selftest:screenshot',
   SELFTEST_DOM_CHECK: 'selftest:dom-check',
   SELFTEST_CONSOLE_ERRORS: 'selftest:console-errors',
+  SELFTEST_CLEAR_CONSOLE_ERRORS: 'selftest:clear-console-errors',
   SELFTEST_RUN_ALL: 'selftest:run-all',
 } as const
 

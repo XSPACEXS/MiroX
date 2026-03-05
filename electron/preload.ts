@@ -1,5 +1,9 @@
 import { contextBridge, ipcRenderer } from 'electron'
 
+// NOTE: This file is the source of implementation for the IPC bridge.
+// The renderer-side TypeScript interface lives in src/types/electron.ts and
+// MUST be kept in sync with the object exposed below.
+
 const electronAPI = {
   // System
   getSystemInfo: () => ipcRenderer.invoke('system:info'),
@@ -68,15 +72,31 @@ const electronAPI = {
       ipcRenderer.invoke('agent:launch', config),
     kill: (id: string) => ipcRenderer.invoke('agent:kill', id),
     killAll: () => ipcRenderer.invoke('agent:kill-all'),
-    onLog: (callback: (data: { agentId: string; timestamp: number; type: 'stdout' | 'stderr' | 'system'; text: string }) => void) => {
-      const handler = (_event: Electron.IpcRendererEvent, data: { agentId: string; timestamp: number; type: 'stdout' | 'stderr' | 'system'; text: string }) => callback(data)
+    rollback: (tag: string) => ipcRenderer.invoke('agent:rollback', tag),
+    onLog: (callback: (data: {
+      agentId: string
+      timestamp: number
+      type: 'stdout' | 'stderr' | 'system'
+      text: string
+    }) => void) => {
+      const handler = (
+        _event: Electron.IpcRendererEvent,
+        data: { agentId: string; timestamp: number; type: 'stdout' | 'stderr' | 'system'; text: string }
+      ) => callback(data)
       ipcRenderer.on('agent:log', handler)
       return () => {
         ipcRenderer.removeListener('agent:log', handler)
       }
     },
-    onExit: (callback: (data: { id: string; exitCode: number; status: 'completed' | 'failed' | 'killed' }) => void) => {
-      const handler = (_event: Electron.IpcRendererEvent, data: { id: string; exitCode: number; status: 'completed' | 'failed' | 'killed' }) => callback(data)
+    onExit: (callback: (data: {
+      id: string
+      exitCode: number | null
+      status: 'completed' | 'failed' | 'killed'
+    }) => void) => {
+      const handler = (
+        _event: Electron.IpcRendererEvent,
+        data: { id: string; exitCode: number | null; status: 'completed' | 'failed' | 'killed' }
+      ) => callback(data)
       ipcRenderer.on('agent:exit', handler)
       return () => {
         ipcRenderer.removeListener('agent:exit', handler)
@@ -89,19 +109,18 @@ const electronAPI = {
     screenshot: () => ipcRenderer.invoke('selftest:screenshot'),
     domCheck: (code: string) => ipcRenderer.invoke('selftest:dom-check', code),
     consoleErrors: () => ipcRenderer.invoke('selftest:console-errors'),
+    clearConsoleErrors: () => ipcRenderer.invoke('selftest:clear-console-errors'),
     runAll: () => ipcRenderer.invoke('selftest:run-all'),
   },
 
   // Navigation listener (from main process menu)
   onNavigate: (callback: (path: string) => void) => {
-    ipcRenderer.on('navigate', (_event, path: string) => callback(path))
+    const handler = (_event: Electron.IpcRendererEvent, path: string) => callback(path)
+    ipcRenderer.on('navigate', handler)
     return () => {
-      ipcRenderer.removeAllListeners('navigate')
+      ipcRenderer.removeListener('navigate', handler)
     }
   },
 }
 
 contextBridge.exposeInMainWorld('electronAPI', electronAPI)
-
-// Export type for use in renderer
-export type ElectronAPI = typeof electronAPI
