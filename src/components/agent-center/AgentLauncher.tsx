@@ -100,7 +100,7 @@ export function AgentLauncher(): JSX.Element {
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                   e.preventDefault()
-                  handleLaunch()
+                  void handleLaunch()
                 }
               }}
               leftIcon={<Send size={16} />}

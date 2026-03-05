@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Button } from '../ui/Button'
 import { Input } from '../ui/Input'
 import { useGitHub } from '../../hooks/useGitHub'
@@ -7,10 +7,13 @@ export function GitHubConfig() {
   const { isConnected, isConnecting, user, setToken, disconnect } = useGitHub()
   const [tokenInput, setTokenInput] = useState('')
   const [maskedToken, setMaskedToken] = useState('')
+  const mountedRef = useRef(true)
+  useEffect(() => () => { mountedRef.current = false }, [])
 
   useEffect(() => {
     if (typeof window === 'undefined' || !window.electronAPI) return
-    window.electronAPI.github.getToken().then(res => {
+    void window.electronAPI.github.getToken().then(res => {
+      if (!mountedRef.current) return
       if (res && res.hasToken) {
         setMaskedToken(res.masked)
       }
@@ -20,6 +23,7 @@ export function GitHubConfig() {
   const handleSave = async () => {
     if (!tokenInput.trim()) return
     await setToken(tokenInput.trim())
+    if (!mountedRef.current) return
     setTokenInput('')
   }
 

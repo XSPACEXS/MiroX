@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Spinner } from '../ui/Spinner'
 import { Button } from '../ui/Button'
 import { Input } from '../ui/Input'
@@ -8,10 +8,13 @@ export function MiroConfig() {
   const { isConnected, isConnecting, setToken, testConnection } = useMiro()
   const [tokenInput, setTokenInput] = useState('')
   const [maskedToken, setMaskedToken] = useState('')
+  const mountedRef = useRef(true)
+  useEffect(() => () => { mountedRef.current = false }, [])
 
   useEffect(() => {
     if (typeof window === 'undefined' || !window.electronAPI) return
-    window.electronAPI.miro.getToken().then(res => {
+    void window.electronAPI.miro.getToken().then(res => {
+      if (!mountedRef.current) return
       if (res && res.hasToken) {
         setMaskedToken(res.masked)
       }
@@ -21,6 +24,7 @@ export function MiroConfig() {
   const handleSave = async () => {
     if (!tokenInput.trim()) return
     await setToken(tokenInput.trim())
+    if (!mountedRef.current) return
     setTokenInput('')
   }
 
