@@ -67,7 +67,6 @@ export function startMissionAdapter(): () => void {
       }
 
       case 'building': {
-        // Replace thinking with plan card if plan exists
         if (mission.plan) {
           chatStore.replaceLastThinking({
             id: makeId(),
@@ -80,7 +79,6 @@ export function startMissionAdapter(): () => void {
           })
         }
 
-        // Add progress card
         const progressId = makeId()
         progressMessageId = progressId
         chatStore.addMessage({

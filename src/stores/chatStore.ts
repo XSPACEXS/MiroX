@@ -11,7 +11,6 @@ interface ChatStoreState {
   configExpanded: boolean
   pendingInput: string
 
-  // Actions
   setMode: (mode: ChatMode) => void
   addMessage: (msg: ChatMessage) => void
   updateMessage: (id: string, partial: Partial<ChatMessage>) => void

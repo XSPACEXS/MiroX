@@ -190,3 +190,8 @@ export const subtaskAppearVariants: Variants = {
     transition: { type: 'spring', stiffness: 200, damping: 20 },
   },
 }
+
+export const chatMessageVariants: Variants = {
+  initial: { opacity: 0, y: 12, scale: 0.97 },
+  animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.2 } },
+}

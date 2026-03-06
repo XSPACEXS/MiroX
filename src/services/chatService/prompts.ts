@@ -47,7 +47,7 @@ After analysis, output a JSON block (wrapped in \`\`\`json ... \`\`\`) with this
       "name": "Type Safety",
       "score": 90,
       "issues": [
-        { "severity": "warning", "message": "...", "file": "src/...", "fixPrompt": "..." }
+        { "severity": "warning", "message": "description", "file": "src/example.ts", "fixPrompt": "Fix the type error in..." }
       ]
     }
   ],

@@ -105,8 +105,7 @@ export const useMissionStore = create<MissionStoreState>()(
           state.characters = {}
           state.fileMap = {}
           state.interactions = []
-          // Store prompt on the mission for history
-          void prompt
+          state.mission.prompt = prompt
         }),
 
       setPhase: (phase) =>

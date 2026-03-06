@@ -81,6 +81,21 @@ const mockElectronAPI = {
     clearConsoleErrors: vi.fn().mockResolvedValue({ ok: true }),
     runAll: vi.fn().mockResolvedValue({ ok: true, results: [] }),
   },
+  gemini: {
+    getToken: vi.fn().mockResolvedValue({ ok: true, token: null }),
+    setToken: vi.fn().mockResolvedValue({ ok: true }),
+    testConnection: vi.fn().mockResolvedValue({ ok: false, error: 'Not configured' }),
+    launch: vi.fn().mockResolvedValue({ ok: true, id: 'gemini-agent-id', model: 'gemini-flash-2', startedAt: 1000 }),
+    launchImagen: vi.fn().mockResolvedValue({ ok: true, id: 'imagen-id', startedAt: 1000 }),
+    launchVeo: vi.fn().mockResolvedValue({ ok: true, id: 'veo-id', startedAt: 1000 }),
+    stop: vi.fn().mockResolvedValue({ ok: true }),
+    onLog: vi.fn().mockReturnValue(() => {}),
+    onExit: vi.fn().mockReturnValue(() => {}),
+  },
+  brain: {
+    loadContext: vi.fn().mockResolvedValue(null),
+    generateBoard: vi.fn().mockResolvedValue(null),
+  },
 }
 
 Object.defineProperty(window, 'electronAPI', {

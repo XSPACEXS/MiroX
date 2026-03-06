@@ -39,6 +39,7 @@ export interface PhaseTransition {
 
 export interface MissionState {
   id: string
+  prompt?: string
   phase: MissionPhase
   plan: MissionPlan | null
   activeAgentIds: string[]
