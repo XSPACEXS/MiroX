@@ -1,5 +1,9 @@
 import { useState, useCallback, useEffect } from 'react'
-import { Rocket, FolderOpen, Clock, Bot, Zap, Target, Sparkles } from 'lucide-react'
+import {
+  Rocket, FolderOpen, Clock, Bot, Zap, Target, Sparkles,
+  Users, Search, Wrench, FlaskConical, ShieldCheck, Layers,
+  ArrowRight, Lightbulb,
+} from 'lucide-react'
 import { Button } from '@components/ui/Button'
 import { SimpleSelect } from '@components/ui/Dropdown'
 import { useAgentStore } from '@stores/agentStore'
@@ -183,11 +187,24 @@ export function MissionLauncher(): JSX.Element {
       <TabBar tab={tab} onTabChange={setTab} />
 
       <div className="rounded-2xl bg-black-800/60 border border-black-600 p-6 space-y-5">
+        {/* Pipeline overview */}
+        <PipelineStrip />
+
+        {/* Capability badges */}
+        <div className="flex flex-wrap gap-2">
+          <CapBadge icon={<Users size={12} />} label="Multi-Agent Team" />
+          <CapBadge icon={<Layers size={12} />} label="Auto Planning" />
+          <CapBadge icon={<Search size={12} />} label="Codebase Scout" />
+          <CapBadge icon={<Wrench size={12} />} label="Parallel Builders" />
+          <CapBadge icon={<FlaskConical size={12} />} label="Test Runner" />
+          <CapBadge icon={<ShieldCheck size={12} />} label="Auto Verify" />
+        </div>
+
         {/* Prompt textarea */}
         <div>
           <textarea
             rows={3}
-            placeholder="Describe your mission..."
+            placeholder={"e.g. Build a dark-themed settings page with profile editing, theme toggle, and notification preferences"}
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             onKeyDown={(e) => {
@@ -196,9 +213,15 @@ export function MissionLauncher(): JSX.Element {
                 void handleLaunchMission()
               }
             }}
-            className="w-full bg-black-700 border border-black-500 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 resize-none focus:outline-none focus:ring-2 focus:ring-yellow-400/50 font-body"
+            className="w-full bg-black-700 border border-black-500 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 resize-none focus:outline-none focus:ring-2 focus:ring-yellow-400/50 font-body"
           />
+          <p className="text-[11px] text-gray-600 mt-1.5">
+            Be specific — agents read your codebase, plan subtasks, build in parallel, run tests, and verify. Press <kbd className="px-1 py-0.5 bg-black-700 rounded text-gray-500 text-[10px]">⌘ Enter</kbd> to launch.
+          </p>
         </div>
+
+        {/* Example prompts */}
+        <ExamplePrompts onSelect={(text) => setPrompt(text)} />
 
         {/* Project directory */}
         <div>
@@ -328,6 +351,9 @@ export function MissionLauncher(): JSX.Element {
 
       {/* Quick launch presets */}
       <QuickLaunchPresets onSelect={handlePresetSelect} />
+
+      {/* What can I do section */}
+      <WhatCanIDo />
     </div>
   )
 }
@@ -367,6 +393,129 @@ function TabBar({
         <Zap size={14} />
         Simple Launch
       </button>
+    </div>
+  )
+}
+
+// --- Pipeline strip ---
+
+const PIPELINE_STEPS = [
+  { label: 'Plan', desc: 'Break into subtasks' },
+  { label: 'Scout', desc: 'Analyze codebase' },
+  { label: 'Build', desc: 'Parallel agents code' },
+  { label: 'Test', desc: 'Run & fix tests' },
+  { label: 'Verify', desc: 'Quality check' },
+]
+
+function PipelineStrip(): JSX.Element {
+  return (
+    <div className="flex items-center gap-1 overflow-x-auto pb-1">
+      {PIPELINE_STEPS.map((step, i) => (
+        <div key={step.label} className="flex items-center gap-1 shrink-0">
+          <div className="flex flex-col items-center px-2.5 py-1.5 rounded-lg bg-yellow-400/5 border border-yellow-400/10">
+            <span className="text-[11px] font-semibold text-yellow-400">{step.label}</span>
+            <span className="text-[9px] text-gray-500">{step.desc}</span>
+          </div>
+          {i < PIPELINE_STEPS.length - 1 && (
+            <ArrowRight size={10} className="text-gray-600 shrink-0" />
+          )}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// --- Capability badge ---
+
+function CapBadge({ icon, label }: { icon: React.ReactNode; label: string }): JSX.Element {
+  return (
+    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black-700 border border-black-500 text-[11px] text-gray-400">
+      {icon}
+      {label}
+    </div>
+  )
+}
+
+// --- Example prompts ---
+
+const EXAMPLE_PROMPTS = [
+  'Add dark mode toggle with system preference detection and smooth transitions',
+  'Build a REST API client with retry logic, caching, and TypeScript types',
+  'Refactor the auth flow to use JWT with refresh tokens and secure storage',
+  'Create an onboarding wizard with progress tracking, validation, and animations',
+  'Add comprehensive error boundaries with user-friendly fallback screens',
+  'Build a real-time notification system with WebSocket and toast UI',
+]
+
+function ExamplePrompts({ onSelect }: { onSelect: (text: string) => void }): JSX.Element {
+  // Show 3 random examples, stable per mount
+  const [examples] = useState(() => {
+    const shuffled = [...EXAMPLE_PROMPTS].sort(() => Math.random() - 0.5)
+    return shuffled.slice(0, 3)
+  })
+
+  return (
+    <div className="flex flex-col gap-1.5">
+      <div className="flex items-center gap-1.5 text-[11px] text-gray-500">
+        <Lightbulb size={11} />
+        <span>Try something like:</span>
+      </div>
+      {examples.map((text) => (
+        <button
+          key={text}
+          type="button"
+          onClick={() => onSelect(text)}
+          className="text-left text-xs text-gray-500 hover:text-yellow-400 transition-colors px-3 py-1.5 rounded-lg hover:bg-yellow-400/5 truncate"
+        >
+          &ldquo;{text}&rdquo;
+        </button>
+      ))}
+    </div>
+  )
+}
+
+// --- What can I do section ---
+
+const CAPABILITIES = [
+  {
+    title: 'Build features end-to-end',
+    desc: 'Describe what you want — agents plan, scaffold, implement, and test it across multiple files.',
+    icon: <Rocket size={16} className="text-yellow-400" />,
+  },
+  {
+    title: 'Fix bugs across your codebase',
+    desc: 'Point to a bug or paste an error — agents trace the root cause, fix it, and verify the fix.',
+    icon: <Wrench size={16} className="text-orange-400" />,
+  },
+  {
+    title: 'Refactor with confidence',
+    desc: 'Request architectural changes — agents refactor safely with test coverage and type checking.',
+    icon: <Layers size={16} className="text-blue-400" />,
+  },
+  {
+    title: 'Run security audits',
+    desc: 'Scan for vulnerabilities — agents find OWASP issues, hardcode leaks, and patch them.',
+    icon: <ShieldCheck size={16} className="text-green-400" />,
+  },
+]
+
+function WhatCanIDo(): JSX.Element {
+  return (
+    <div className="rounded-2xl bg-black-800/40 border border-black-600/50 p-5">
+      <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+        What can missions do?
+      </h3>
+      <div className="grid grid-cols-2 gap-3">
+        {CAPABILITIES.map((cap) => (
+          <div key={cap.title} className="flex gap-3 p-3 rounded-xl bg-black-800/60">
+            <div className="mt-0.5 shrink-0">{cap.icon}</div>
+            <div>
+              <p className="text-sm font-medium text-white">{cap.title}</p>
+              <p className="text-[11px] text-gray-500 mt-0.5 leading-relaxed">{cap.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
