@@ -1,8 +1,10 @@
-import { BrowserWindow, ipcMain, app } from 'electron'
+import { BrowserWindow, ipcMain, app, dialog } from 'electron'
 import { spawn, exec, type ChildProcess } from 'child_process'
 import path from 'path'
+import fs from 'fs'
 import crypto from 'crypto'
 import { IPC_CHANNELS } from './channels'
+import { store } from '../config'
 
 interface AgentProcess {
   id: string
@@ -24,7 +26,15 @@ const MODEL_MAP: Record<string, string> = {
 const agents = new Map<string, AgentProcess>()
 
 /** Returns the best working directory for spawned processes. */
-function getWorkingDir(): string {
+export function getWorkingDir(): string {
+  const stored = store.get('projectPath')
+  if (stored && typeof stored === 'string' && stored.trim()) {
+    try {
+      if (fs.existsSync(stored) && fs.statSync(stored).isDirectory()) {
+        return stored
+      }
+    } catch { /* fall through to default */ }
+  }
   return app.isPackaged ? path.dirname(app.getAppPath()) : process.cwd()
 }
 
@@ -274,6 +284,44 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
         }
       )
     })
+  })
+
+  // Get current project directory
+  ipcMain.removeHandler(IPC_CHANNELS.AGENT_GET_PROJECT_DIR)
+  ipcMain.handle(IPC_CHANNELS.AGENT_GET_PROJECT_DIR, () => {
+    return {
+      ok: true,
+      projectPath: getWorkingDir(),
+      isCustom: !!store.get('projectPath'),
+    }
+  })
+
+  // Set project directory via native folder picker
+  ipcMain.removeHandler(IPC_CHANNELS.AGENT_SET_PROJECT_DIR)
+  ipcMain.handle(IPC_CHANNELS.AGENT_SET_PROJECT_DIR, async () => {
+    const result = await dialog.showOpenDialog(mainWindow, {
+      properties: ['openDirectory', 'createDirectory'],
+      title: 'Select Project Directory',
+      buttonLabel: 'Select',
+    })
+
+    if (result.canceled || result.filePaths.length === 0) {
+      return { ok: false, canceled: true }
+    }
+
+    const dirPath = result.filePaths[0]!
+
+    try {
+      const stat = fs.statSync(dirPath)
+      if (!stat.isDirectory()) {
+        return { ok: false, error: 'Selected path is not a directory' }
+      }
+    } catch {
+      return { ok: false, error: 'Selected directory does not exist' }
+    }
+
+    store.set('projectPath', dirPath)
+    return { ok: true, projectPath: dirPath }
   })
 }
 

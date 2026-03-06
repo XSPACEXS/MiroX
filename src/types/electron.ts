@@ -165,6 +165,8 @@ export interface ElectronAPI {
     kill: (id: string) => Promise<{ ok: boolean; error?: string }>
     killAll: () => Promise<{ ok: boolean; killed?: number }>
     rollback: (tag: string) => Promise<{ ok: boolean; error?: string }>
+    getProjectDir: () => Promise<{ ok: boolean; projectPath?: string; isCustom?: boolean }>
+    setProjectDir: () => Promise<{ ok: boolean; projectPath?: string; canceled?: boolean; error?: string }>
     onLog: (callback: (data: {
       agentId: string
       timestamp: number

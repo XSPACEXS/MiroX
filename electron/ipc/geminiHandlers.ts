@@ -1,9 +1,10 @@
-import { ipcMain, BrowserWindow, app } from 'electron'
+import { ipcMain, BrowserWindow } from 'electron'
 import * as keytar from 'keytar'
 import { IPC_CHANNELS } from './channels'
 import { fetchWithTimeout } from '../utils/fetchWithTimeout'
 import fs from 'fs'
 import path from 'path'
+import { getWorkingDir } from './agentHandlers'
 
 const SERVICE = 'com.mirox.app'
 const GEMINI_ACCOUNT = 'gemini-token'
@@ -129,9 +130,7 @@ export function registerGeminiHandlers(mainWindow: BrowserWindow): void {
 
         // Build context from project files
         let contextText = ''
-        const workDir = app.isPackaged
-          ? path.dirname(app.getAppPath())
-          : process.cwd()
+        const workDir = getWorkingDir()
 
         if (config.contextFiles && Array.isArray(config.contextFiles)) {
           for (const filePath of config.contextFiles.slice(0, 20)) {

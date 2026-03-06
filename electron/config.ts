@@ -15,6 +15,7 @@ interface AppSettings {
     templateId: string
   }>
   totalBoardsCreated?: number
+  projectPath?: string
 }
 
 const defaults: AppSettings = {

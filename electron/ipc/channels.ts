@@ -48,6 +48,8 @@ export const IPC_CHANNELS = {
   AGENT_KILL: 'agent:kill',
   AGENT_KILL_ALL: 'agent:kill-all',
   AGENT_ROLLBACK: 'agent:rollback',
+  AGENT_GET_PROJECT_DIR: 'agent:get-project-dir',
+  AGENT_SET_PROJECT_DIR: 'agent:set-project-dir',
   AGENT_LOG: 'agent:log',
   AGENT_EXIT: 'agent:exit',
 

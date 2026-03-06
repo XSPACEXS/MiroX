@@ -56,6 +56,8 @@ const mockElectronAPI = {
     kill: vi.fn().mockResolvedValue({ ok: true }),
     killAll: vi.fn().mockResolvedValue({ ok: true, killed: 0 }),
     rollback: vi.fn().mockResolvedValue({ ok: true }),
+    getProjectDir: vi.fn().mockResolvedValue({ ok: true, projectPath: '/mock/project', isCustom: false }),
+    setProjectDir: vi.fn().mockResolvedValue({ ok: true, projectPath: '/mock/new-project' }),
     onLog: vi.fn().mockReturnValue(() => {}),
     onExit: vi.fn().mockReturnValue(() => {}),
   },

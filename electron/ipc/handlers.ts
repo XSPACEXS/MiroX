@@ -260,7 +260,7 @@ export function registerSystemHandlers(mainWindow: BrowserWindow): void {
       return { ok: false, error: 'Invalid settings object' }
     }
     // Whitelist allowed keys to prevent config pollution
-    const allowedKeys = new Set(['theme', 'accentColor', 'onboardingComplete', 'windowBounds', 'windowMaximized', 'recentBoards', 'totalBoardsCreated'])
+    const allowedKeys = new Set(['theme', 'accentColor', 'onboardingComplete', 'windowBounds', 'windowMaximized', 'recentBoards', 'totalBoardsCreated', 'projectPath'])
     for (const [key, value] of Object.entries(settings)) {
       if (allowedKeys.has(key)) {
         store.set(key as keyof typeof store.store, value)

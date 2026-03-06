@@ -74,6 +74,8 @@ const electronAPI = {
     kill: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.AGENT_KILL, id),
     killAll: () => ipcRenderer.invoke(IPC_CHANNELS.AGENT_KILL_ALL),
     rollback: (tag: string) => ipcRenderer.invoke(IPC_CHANNELS.AGENT_ROLLBACK, tag),
+    getProjectDir: () => ipcRenderer.invoke(IPC_CHANNELS.AGENT_GET_PROJECT_DIR),
+    setProjectDir: () => ipcRenderer.invoke(IPC_CHANNELS.AGENT_SET_PROJECT_DIR),
     onLog: (callback: (data: {
       agentId: string
       timestamp: number

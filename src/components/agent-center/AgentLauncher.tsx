@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react'
-import { Rocket, Send, Bot, Plus, X, Clock, Sparkles } from 'lucide-react'
+import { useState, useCallback, useEffect } from 'react'
+import { Rocket, Send, Bot, Plus, X, Clock, Sparkles, FolderOpen } from 'lucide-react'
 import { Card } from '@components/ui/Card'
 import { Button } from '@components/ui/Button'
 import { Input } from '@components/ui/Input'
@@ -199,6 +199,39 @@ export function AgentLauncher(): JSX.Element {
   const addAgent = useAgentStore((s) => s.addAgent)
   const addToast = useUIStore((s) => s.addToast)
   const openRestyle = useRestyleStore((s) => s.openWizard)
+
+  const [projectDir, setProjectDir] = useState<string | null>(null)
+  const [isDirLoading, setIsDirLoading] = useState(false)
+
+  useEffect(() => {
+    void (async () => {
+      try {
+        const result = await window.electronAPI.agent.getProjectDir()
+        if (result.ok && result.projectPath) {
+          setProjectDir(result.projectPath)
+        }
+      } catch {
+        // Silent fallback
+      }
+    })()
+  }, [])
+
+  const handleChangeProjectDir = useCallback(async () => {
+    setIsDirLoading(true)
+    try {
+      const result = await window.electronAPI.agent.setProjectDir()
+      if (result.ok && result.projectPath) {
+        setProjectDir(result.projectPath)
+        addToast({ type: 'success', title: 'Project directory set', message: result.projectPath })
+      } else if (result.error) {
+        addToast({ type: 'error', title: 'Invalid directory', message: result.error })
+      }
+    } catch (err) {
+      addToast({ type: 'error', title: 'Directory picker failed', message: String(err) })
+    } finally {
+      setIsDirLoading(false)
+    }
+  }, [addToast])
 
   const handleAddCollaborator = useCallback(
     (modelId: string) => {
@@ -445,6 +478,33 @@ export function AgentLauncher(): JSX.Element {
             }}
             leftIcon={<Send size={16} />}
           />
+        </div>
+
+        {/* Project Directory */}
+        <div>
+          <div className="flex items-center gap-2 mb-2">
+            <FolderOpen size={14} className="text-yellow-400" />
+            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+              Project Directory
+            </span>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="flex-1 bg-black-700 border border-black-500 rounded-xl px-4 py-2.5 text-sm text-gray-300 font-mono truncate" title={projectDir || ''}>
+              {projectDir || 'Loading...'}
+            </div>
+            <Button
+              variant="secondary"
+              size="sm"
+              leftIcon={<FolderOpen size={14} />}
+              onClick={handleChangeProjectDir}
+              isLoading={isDirLoading}
+            >
+              Change
+            </Button>
+          </div>
+          <p className="text-xs text-gray-500 mt-1.5">
+            Working directory for all spawned agents
+          </p>
         </div>
 
         {/* Primary Model (Claude) */}
