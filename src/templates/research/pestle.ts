@@ -9,6 +9,8 @@ export const pestle: TemplateDefinition = {
   emoji: '\u{1F30D}',
   estimatedTime: '~5 min',
   blueprintId: 'pestle-analysis',
+  brainCategory: 'strategy-planning',
+  brainBlueprint: 'competitive-analysis',
   complexity: 'medium',
   color: '#F59E0B',
   tags: ['pestle', 'macro', 'environment', 'analysis', 'strategy', 'external'],

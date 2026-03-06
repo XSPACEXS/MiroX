@@ -9,6 +9,8 @@ export const productRoadmap: TemplateDefinition = {
   emoji: '\u{1F5FA}\uFE0F',
   estimatedTime: '~5 min',
   blueprintId: 'product-roadmap',
+  brainCategory: 'product-development',
+  brainBlueprint: 'product-roadmap',
   complexity: 'medium',
   color: '#FFD600',
   tags: ['roadmap', 'product', 'timeline', 'milestones', 'features', 'planning'],

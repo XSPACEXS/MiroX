@@ -9,6 +9,8 @@ export const sprintPlanning: TemplateDefinition = {
   emoji: '\u{1F3C3}',
   estimatedTime: '~4 min',
   blueprintId: 'sprint-planning',
+  brainCategory: 'project-management',
+  brainBlueprint: 'sprint-planning',
   complexity: 'medium',
   color: '#7C3AED',
   tags: ['sprint', 'scrum', 'planning', 'agile', 'backlog', 'user stories'],

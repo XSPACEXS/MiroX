@@ -9,6 +9,8 @@ export const competitiveAnalysis: TemplateDefinition = {
   emoji: '\u{1F50D}',
   estimatedTime: '~4 min',
   blueprintId: 'competitive-analysis',
+  brainCategory: 'strategy-planning',
+  brainBlueprint: 'competitive-analysis',
   complexity: 'medium',
   color: '#F59E0B',
   tags: ['competitive', 'analysis', 'market', 'positioning', 'comparison'],

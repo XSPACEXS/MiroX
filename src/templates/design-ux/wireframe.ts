@@ -9,6 +9,8 @@ export const wireframe: TemplateDefinition = {
   emoji: '\u{1F4D0}',
   estimatedTime: '~4 min',
   blueprintId: 'wireframe-board',
+  brainCategory: 'design-ux',
+  brainBlueprint: 'wireframe-board',
   complexity: 'medium',
   color: '#F472B6',
   tags: ['wireframe', 'ui', 'ux', 'screens', 'user flow', 'design'],

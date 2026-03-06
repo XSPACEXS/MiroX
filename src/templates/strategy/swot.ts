@@ -9,6 +9,8 @@ export const swot: TemplateDefinition = {
   emoji: '\u{1F3AF}',
   estimatedTime: '~3 min',
   blueprintId: 'swot-analysis',
+  brainCategory: 'strategy-planning',
+  brainBlueprint: 'swot-analysis',
   complexity: 'simple',
   color: '#FFD600',
   tags: ['swot', 'strategy', 'analysis', 'competitive', 'planning'],

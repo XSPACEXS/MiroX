@@ -1,0 +1,76 @@
+{
+  "category": "Education",
+  "description": "Templates for learning design, curriculum visualization, research organization, study planning, and educational frameworks — from K-12 lesson plans to doctoral research boards",
+  "icon": "\ud83c\udf93",
+  "colorTheme": {
+    "primary": "#1565C0",
+    "secondary": "#EF6C00",
+    "accent": "#6A1B9A"
+  },
+  "templates": [
+    {
+      "file": "lesson-plan",
+      "name": "Lesson Plan Board",
+      "description": "Structured lesson planning board for designing a single class session with clear learning objectives, a timed activity sequence, required materials, assessment criteria, and differentiation strategies for diverse learners",
+      "tags": [
+        "lesson",
+        "teaching",
+        "objectives",
+        "activities",
+        "differentiation",
+        "bloom"
+      ],
+      "complexity": "Medium"
+    },
+    {
+      "file": "research-board",
+      "name": "Research Board",
+      "description": "Comprehensive visual map of a research project from question through literature review, methodology, findings, and implications — designed for academic rigor and clear communication",
+      "tags": [
+        "research",
+        "academic",
+        "literature-review",
+        "methodology",
+        "dissertation"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "study-map",
+      "name": "Study Map",
+      "description": "Student-facing visual map of a topic showing concepts, relationships, resources, and mastery checkpoints — designed to support self-directed learning and review",
+      "tags": [
+        "study",
+        "concept-map",
+        "student",
+        "review",
+        "mastery",
+        "self-assessment"
+      ],
+      "complexity": "Medium"
+    },
+    {
+      "file": "course-curriculum",
+      "name": "Course Curriculum Board",
+      "description": "Semester-long or year-long course overview showing weekly topics, cumulative objectives, major assignments, Bloom's progression, and the full arc of the learning journey",
+      "tags": [
+        "curriculum",
+        "semester",
+        "syllabus",
+        "course-design",
+        "bloom",
+        "assessment"
+      ],
+      "complexity": "Advanced"
+    }
+  ],
+  "knowledgeFiles": [
+    "design-philosophy.md",
+    "layout-patterns.md",
+    "visual-guide.md",
+    "content-guide.md",
+    "build-process.md",
+    "examples-reference.md",
+    "variations.md"
+  ]
+}

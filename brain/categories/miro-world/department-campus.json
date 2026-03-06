@@ -1,0 +1,677 @@
+{
+  "metadata": {
+    "name": "Department Campus",
+    "description": "An organizational map styled as a university campus where each building represents a department — Engineering, Product, Marketing, Sales, Operations — with an HQ admin center, cross-functional courtyard, and campus directory footer.",
+    "category": "Miro World Product Showcase",
+    "tags": [
+      "org-chart",
+      "department",
+      "campus",
+      "organizational",
+      "teams",
+      "headcount",
+      "collaboration",
+      "onboarding"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#E8F5E9",
+    "gridEnabled": false
+  },
+  "items": [
+    {
+      "id": "welcome-gate",
+      "type": "frame",
+      "title": "Welcome Gate — NovaTech Campus Map",
+      "x": 100,
+      "y": 50,
+      "width": 4800,
+      "height": 400,
+      "style": { "fillColor": "#1A237E" }
+    },
+    {
+      "id": "welcome-title",
+      "type": "text",
+      "content": "NovaTech Department Campus",
+      "x": 200,
+      "y": 80,
+      "width": 1500,
+      "style": { "fontSize": 56, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "welcome-subtitle",
+      "type": "text",
+      "content": "320 employees across 6 departments | Series C at $1.2B | Remote-first across 45 countries",
+      "x": 200,
+      "y": 190,
+      "width": 1800,
+      "style": { "fontSize": 22, "color": "#FFD166" }
+    },
+    {
+      "id": "welcome-stats",
+      "type": "shape",
+      "content": "$42M ARR | 67% YoY growth | 320 employees | 28 open roles",
+      "shape": "rectangle",
+      "x": 3200,
+      "y": 100,
+      "width": 1500,
+      "height": 60,
+      "style": { "fillColor": "#283593", "fontColor": "#FFD166" }
+    },
+    {
+      "id": "engineering-frame",
+      "type": "frame",
+      "title": "Engineering Building",
+      "x": 100,
+      "y": 500,
+      "width": 1500,
+      "height": 1000,
+      "style": { "fillColor": "#ECEFF1" }
+    },
+    {
+      "id": "eng-header",
+      "type": "text",
+      "content": "Engineering Building",
+      "x": 150,
+      "y": 520,
+      "width": 600,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#37474F" }
+    },
+    {
+      "id": "eng-backend",
+      "type": "shape",
+      "content": "Backend Team\n22 engineers | Rust + Go\nAPI, microservices, data layer",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 610,
+      "width": 650,
+      "height": 130,
+      "style": { "fillColor": "#37474F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "eng-frontend",
+      "type": "shape",
+      "content": "Frontend Team\n18 engineers | React + TypeScript\nDashboard, design system, a11y",
+      "shape": "rectangle",
+      "x": 850,
+      "y": 610,
+      "width": 650,
+      "height": 130,
+      "style": { "fillColor": "#455A64", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "eng-platform",
+      "type": "shape",
+      "content": "Platform Team\n15 engineers | AWS, K8s, Terraform\nInfra, CI/CD, observability",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 790,
+      "width": 650,
+      "height": 130,
+      "style": { "fillColor": "#546E7A", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "eng-mobile",
+      "type": "shape",
+      "content": "Mobile Team\n10 engineers | Swift + Kotlin\niOS & Android apps (new Q1)",
+      "shape": "rectangle",
+      "x": 850,
+      "y": 790,
+      "width": 650,
+      "height": 130,
+      "style": { "fillColor": "#607D8B", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "eng-aiml",
+      "type": "shape",
+      "content": "AI/ML Team\n12 engineers | PyTorch, Python\nChurn prediction, smart features",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 970,
+      "width": 650,
+      "height": 130,
+      "style": { "fillColor": "#78909C", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "eng-meta",
+      "type": "text",
+      "content": "VP Engineering: Raj Patel | Budget: $18M | 120 total | Sprint velocity: 42 pts/sprint",
+      "x": 150,
+      "y": 1150,
+      "width": 1200,
+      "style": { "fontSize": 12, "color": "#37474F" }
+    },
+    {
+      "id": "product-frame",
+      "type": "frame",
+      "title": "Product Building",
+      "x": 1750,
+      "y": 500,
+      "width": 1300,
+      "height": 1000,
+      "style": { "fillColor": "#E0F2F1" }
+    },
+    {
+      "id": "prod-header",
+      "type": "text",
+      "content": "Product Building",
+      "x": 1800,
+      "y": 520,
+      "width": 500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#00796B" }
+    },
+    {
+      "id": "prod-pms",
+      "type": "shape",
+      "content": "Core PMs\n6 product managers\nCore, Growth, Platform, AI, Mobile, Enterprise",
+      "shape": "rectangle",
+      "x": 1800,
+      "y": 610,
+      "width": 550,
+      "height": 130,
+      "style": { "fillColor": "#00796B", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "prod-design",
+      "type": "shape",
+      "content": "Design Team\n8 designers\nUI/UX, research, design system",
+      "shape": "rectangle",
+      "x": 2400,
+      "y": 610,
+      "width": 550,
+      "height": 130,
+      "style": { "fillColor": "#00897B", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "prod-research",
+      "type": "shape",
+      "content": "User Research\n4 researchers\nInterviews, surveys, usability testing",
+      "shape": "rectangle",
+      "x": 1800,
+      "y": 790,
+      "width": 550,
+      "height": 130,
+      "style": { "fillColor": "#009688", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "prod-analytics",
+      "type": "shape",
+      "content": "Product Analytics\n5 analysts\nMetrics, dashboards, A/B tests",
+      "shape": "rectangle",
+      "x": 2400,
+      "y": 790,
+      "width": 550,
+      "height": 130,
+      "style": { "fillColor": "#26A69A", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "prod-meta",
+      "type": "text",
+      "content": "CPO: Yuki Tanaka | Budget: $4.5M | 32 people",
+      "x": 1800,
+      "y": 970,
+      "width": 800,
+      "style": { "fontSize": 12, "color": "#00796B" }
+    },
+    {
+      "id": "marketing-frame",
+      "type": "frame",
+      "title": "Marketing Building",
+      "x": 3200,
+      "y": 500,
+      "width": 1300,
+      "height": 1000,
+      "style": { "fillColor": "#FFF8E1" }
+    },
+    {
+      "id": "mktg-header",
+      "type": "text",
+      "content": "Marketing Building",
+      "x": 3250,
+      "y": 520,
+      "width": 500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#F9A825" }
+    },
+    {
+      "id": "mktg-growth",
+      "type": "shape",
+      "content": "Growth Marketing\n10 marketers | Paid, SEO, CRO\n$2.4M quarterly budget",
+      "shape": "rectangle",
+      "x": 3250,
+      "y": 610,
+      "width": 550,
+      "height": 130,
+      "style": { "fillColor": "#F9A825", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "mktg-pmm",
+      "type": "shape",
+      "content": "Product Marketing\n6 PMMs | Positioning, launches\nBattle cards, enablement",
+      "shape": "rectangle",
+      "x": 3850,
+      "y": 610,
+      "width": 550,
+      "height": 130,
+      "style": { "fillColor": "#FBC02D", "fontColor": "#212121" }
+    },
+    {
+      "id": "mktg-brand",
+      "type": "shape",
+      "content": "Brand & Content\n8 creators | Blog, video, social\n340K website visitors/mo",
+      "shape": "rectangle",
+      "x": 3250,
+      "y": 790,
+      "width": 550,
+      "height": 130,
+      "style": { "fillColor": "#F9A825", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "mktg-demandgen",
+      "type": "shape",
+      "content": "Demand Gen\n5 specialists | Events, webinars\n420 MQLs/month target",
+      "shape": "rectangle",
+      "x": 3850,
+      "y": 790,
+      "width": 550,
+      "height": 130,
+      "style": { "fillColor": "#FBC02D", "fontColor": "#212121" }
+    },
+    {
+      "id": "mktg-meta",
+      "type": "text",
+      "content": "CMO: Sofia Nguyen | Budget: $8M | 45 people",
+      "x": 3250,
+      "y": 970,
+      "width": 800,
+      "style": { "fontSize": 12, "color": "#F9A825" }
+    },
+    {
+      "id": "hq-frame",
+      "type": "frame",
+      "title": "HQ / Admin Building",
+      "x": 1750,
+      "y": 1600,
+      "width": 1200,
+      "height": 800,
+      "style": { "fillColor": "#E8EAF6" }
+    },
+    {
+      "id": "hq-header",
+      "type": "text",
+      "content": "HQ — Admin Building",
+      "x": 1800,
+      "y": 1620,
+      "width": 500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "hq-vision",
+      "type": "shape",
+      "content": "Company Vision\nBecome the #1 collaborative workspace\nfor distributed teams by 2027",
+      "shape": "diamond",
+      "x": 1900,
+      "y": 1700,
+      "width": 450,
+      "height": 300,
+      "style": { "fillColor": "#1A237E", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "hq-exec",
+      "type": "shape",
+      "content": "Executive Team\nCEO: Lin Wei | CTO | CPO | CMO | COO | CFO\nBoard meets quarterly",
+      "shape": "rectangle",
+      "x": 2400,
+      "y": 1750,
+      "width": 450,
+      "height": 150,
+      "style": { "fillColor": "#283593", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "hq-allhands",
+      "type": "shape",
+      "content": "All-Hands\nMonthly company meeting\nNext: March 15, 2026",
+      "shape": "circle",
+      "x": 2400,
+      "y": 1950,
+      "width": 250,
+      "height": 250,
+      "style": { "fillColor": "#3949AB", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "sales-frame",
+      "type": "frame",
+      "title": "Sales Building",
+      "x": 100,
+      "y": 1600,
+      "width": 1400,
+      "height": 900,
+      "style": { "fillColor": "#FBE9E7" }
+    },
+    {
+      "id": "sales-header",
+      "type": "text",
+      "content": "Sales Building",
+      "x": 150,
+      "y": 1620,
+      "width": 500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#E64A19" }
+    },
+    {
+      "id": "sales-enterprise",
+      "type": "shape",
+      "content": "Enterprise AEs\n15 account executives\n$85K avg deal size | Q1: 108% quota",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1710,
+      "width": 600,
+      "height": 130,
+      "style": { "fillColor": "#E64A19", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "sales-midmarket",
+      "type": "shape",
+      "content": "Mid-Market AEs\n12 account executives\n$24K avg deal size",
+      "shape": "rectangle",
+      "x": 800,
+      "y": 1710,
+      "width": 600,
+      "height": 130,
+      "style": { "fillColor": "#F4511E", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "sales-sdr",
+      "type": "shape",
+      "content": "SDR Team\n18 reps | Outbound + inbound\n340 qualified meetings/mo",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1890,
+      "width": 600,
+      "height": 130,
+      "style": { "fillColor": "#FF5722", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "sales-se",
+      "type": "shape",
+      "content": "Sales Engineering\n6 SEs | Demo, POC, technical eval\n92% POC win rate",
+      "shape": "rectangle",
+      "x": 800,
+      "y": 1890,
+      "width": 600,
+      "height": 130,
+      "style": { "fillColor": "#FF7043", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "sales-meta",
+      "type": "text",
+      "content": "CRO: Alex Thompson | Q1: 108% of quota | 58 total headcount",
+      "x": 150,
+      "y": 2070,
+      "width": 800,
+      "style": { "fontSize": 12, "color": "#E64A19" }
+    },
+    {
+      "id": "operations-frame",
+      "type": "frame",
+      "title": "Operations Building",
+      "x": 3200,
+      "y": 1600,
+      "width": 1400,
+      "height": 900,
+      "style": { "fillColor": "#F3E5F5" }
+    },
+    {
+      "id": "ops-header",
+      "type": "text",
+      "content": "Operations Building",
+      "x": 3250,
+      "y": 1620,
+      "width": 500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#6A1B9A" }
+    },
+    {
+      "id": "ops-cs",
+      "type": "shape",
+      "content": "Customer Success\n20 CSMs | NRR: 118%\nManaging 1,200 accounts",
+      "shape": "rectangle",
+      "x": 3250,
+      "y": 1710,
+      "width": 600,
+      "height": 130,
+      "style": { "fillColor": "#6A1B9A", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "ops-support",
+      "type": "shape",
+      "content": "Support Team\n15 agents | <4hr first response\nCSAT: 94%",
+      "shape": "rectangle",
+      "x": 3900,
+      "y": 1710,
+      "width": 600,
+      "height": 130,
+      "style": { "fillColor": "#7B1FA2", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "ops-finance",
+      "type": "shape",
+      "content": "Finance & Legal\n10 team members\nFP&A, accounting, legal counsel",
+      "shape": "rectangle",
+      "x": 3250,
+      "y": 1890,
+      "width": 600,
+      "height": 130,
+      "style": { "fillColor": "#8E24AA", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "ops-hr",
+      "type": "shape",
+      "content": "People & HR\n8 team members | Recruiting, L&D\nDEIB programs",
+      "shape": "rectangle",
+      "x": 3900,
+      "y": 1890,
+      "width": 600,
+      "height": 130,
+      "style": { "fillColor": "#9C27B0", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "ops-meta",
+      "type": "text",
+      "content": "COO: Priya Sharma | NRR: 118% | 65 total headcount",
+      "x": 3250,
+      "y": 2070,
+      "width": 800,
+      "style": { "fontSize": 12, "color": "#6A1B9A" }
+    },
+    {
+      "id": "courtyard-frame",
+      "type": "frame",
+      "title": "Cross-Functional Courtyard",
+      "x": 1750,
+      "y": 2500,
+      "width": 1000,
+      "height": 600,
+      "style": { "fillColor": "#E8F5E9" }
+    },
+    {
+      "id": "courtyard-header",
+      "type": "text",
+      "content": "Cross-Functional Courtyard",
+      "x": 1800,
+      "y": 2520,
+      "width": 600,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1565C0" }
+    },
+    {
+      "id": "courtyard-gtm",
+      "type": "sticky_note",
+      "content": "GTM Launch Team\nProduct + Marketing + Sales\nAI Assist v2 launch (12 people)",
+      "x": 1800,
+      "y": 2590,
+      "width": 250,
+      "height": 200,
+      "style": { "fillColor": "#BBDEFB" }
+    },
+    {
+      "id": "courtyard-tiger",
+      "type": "sticky_note",
+      "content": "Tiger Team\nEngineering + Support\nPerformance crisis response (6 people)",
+      "x": 2100,
+      "y": 2590,
+      "width": 250,
+      "height": 200,
+      "style": { "fillColor": "#FFCDD2" }
+    },
+    {
+      "id": "courtyard-hackathon",
+      "type": "sticky_note",
+      "content": "Quarterly Hackathon\nAll departments welcome\nNext: April 8-9, 2026",
+      "x": 1800,
+      "y": 2830,
+      "width": 250,
+      "height": 200,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "courtyard-deib",
+      "type": "sticky_note",
+      "content": "DEIB Council\nCross-department ERGs\n8 active groups",
+      "x": 2100,
+      "y": 2830,
+      "width": 250,
+      "height": 200,
+      "style": { "fillColor": "#E1BEE7" }
+    },
+    {
+      "id": "directory-frame",
+      "type": "frame",
+      "title": "Campus Directory",
+      "x": 100,
+      "y": 3150,
+      "width": 4800,
+      "height": 300,
+      "style": { "fillColor": "#ECEFF1" }
+    },
+    {
+      "id": "directory-content",
+      "type": "shape",
+      "content": "Engineering: 120 | Product: 32 | Marketing: 45 | Sales: 58 | Operations: 65 | Total: 320 | Open Roles: 28 | careers.novatech.com",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 3200,
+      "width": 4600,
+      "height": 70,
+      "style": { "fillColor": "#37474F", "fontColor": "#FFD166" }
+    },
+    {
+      "type": "connector",
+      "startItem": "engineering-frame",
+      "endItem": "hq-frame",
+      "style": {
+        "strokeColor": "#D4845A",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "product-frame",
+      "endItem": "hq-frame",
+      "style": {
+        "strokeColor": "#D4845A",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "marketing-frame",
+      "endItem": "hq-frame",
+      "style": {
+        "strokeColor": "#D4845A",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "sales-frame",
+      "endItem": "hq-frame",
+      "style": {
+        "strokeColor": "#D4845A",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "operations-frame",
+      "endItem": "hq-frame",
+      "style": {
+        "strokeColor": "#D4845A",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "engineering-frame",
+      "endItem": "product-frame",
+      "style": {
+        "strokeColor": "#1565C0",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "product-frame",
+      "endItem": "marketing-frame",
+      "style": {
+        "strokeColor": "#1565C0",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "marketing-frame",
+      "endItem": "sales-frame",
+      "style": {
+        "strokeColor": "#1565C0",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "engineering-frame",
+      "endItem": "courtyard-frame",
+      "style": {
+        "strokeColor": "#1565C0",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "sales-frame",
+      "endItem": "courtyard-frame",
+      "style": {
+        "strokeColor": "#1565C0",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "operations-frame",
+      "endItem": "courtyard-frame",
+      "style": {
+        "strokeColor": "#1565C0",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    }
+  ]
+}

@@ -9,6 +9,8 @@ export const decisionMatrix: TemplateDefinition = {
   emoji: '\u2696\uFE0F',
   estimatedTime: '~3 min',
   blueprintId: 'decision-matrix',
+  brainCategory: 'data-analytics',
+  brainBlueprint: 'data-dashboard',
   complexity: 'medium',
   color: '#F59E0B',
   tags: ['decision', 'matrix', 'scoring', 'evaluation', 'comparison', 'weighted'],

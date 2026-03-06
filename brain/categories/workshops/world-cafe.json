@@ -1,0 +1,1062 @@
+{
+  "metadata": {
+    "name": "World Cafe Workshop",
+    "description": "4-table World Cafe discussion format covering Culture, Growth, Product, and People topics with 3 rotation rounds, rotation guide, harvest wall for insights, and facilitator guides",
+    "category": "Workshops",
+    "tags": [
+      "world-cafe",
+      "discussion",
+      "collaboration",
+      "team-alignment",
+      "culture",
+      "strategy"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#FFF8E1",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_header",
+      "type": "frame",
+      "title": "World Cafe Header",
+      "x": 50,
+      "y": 50,
+      "width": 4900,
+      "height": 250,
+      "style": { "fillColor": "#4A148C" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "World Cafe: Shaping Our Future Together",
+      "x": 100,
+      "y": 70,
+      "width": 2500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_meta",
+      "type": "text",
+      "content": "Facilitator: Jake R. | Date: March 6, 2026 | Duration: 90 min | Participants: 24 (6 per table) | Format: 3 rounds x 20 min + harvest",
+      "x": 100,
+      "y": 130,
+      "width": 4500,
+      "style": { "fontSize": 14, "color": "#CE93D8" }
+    },
+    {
+      "id": "text_overview",
+      "type": "text",
+      "content": "4 tables, 4 big questions. Each round, groups rotate. Table Hosts stay to carry context forward. After 3 rounds, everyone gathers for a Harvest — sharing the best insights with the full room.",
+      "x": 100,
+      "y": 170,
+      "width": 4500,
+      "style": { "fontSize": 14, "color": "#CE93D8" }
+    },
+    {
+      "id": "text_schedule",
+      "type": "text",
+      "content": "Schedule: Intro (5 min) → Round 1 (20 min) → Rotate → Round 2 (20 min) → Rotate → Round 3 (20 min) → Harvest (20 min) → Close (5 min)",
+      "x": 100,
+      "y": 210,
+      "width": 4500,
+      "style": { "fontSize": 14, "color": "#CE93D8" }
+    },
+    {
+      "id": "frame_culture",
+      "type": "frame",
+      "title": "Table 1: Culture",
+      "x": 50,
+      "y": 350,
+      "width": 1150,
+      "height": 1200,
+      "style": { "fillColor": "#FCE4EC" }
+    },
+    {
+      "id": "text_culture_header",
+      "type": "text",
+      "content": "Table 1: Culture",
+      "x": 80,
+      "y": 370,
+      "width": 500,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#AD1457" }
+    },
+    {
+      "id": "text_culture_question",
+      "type": "text",
+      "content": "Question: 'What kind of team culture do we want to be known for in 2 years, and what is one thing we should start doing tomorrow to get there?'",
+      "x": 80,
+      "y": 410,
+      "width": 1050,
+      "style": { "fontSize": 13, "fontWeight": "bold", "color": "#AD1457" }
+    },
+    {
+      "id": "text_culture_host",
+      "type": "text",
+      "content": "Table Host: Aisha K.",
+      "x": 80,
+      "y": 470,
+      "width": 400,
+      "style": { "fontSize": 12, "color": "#607D8B" }
+    },
+    {
+      "id": "text_culture_r1",
+      "type": "text",
+      "content": "Round 1",
+      "x": 80,
+      "y": 500,
+      "width": 200,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_c1r1_1",
+      "type": "sticky_note",
+      "content": "We want to be known for trust and transparency — people can disagree openly without fear.",
+      "x": 80,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_c1r1_2",
+      "type": "sticky_note",
+      "content": "Start: Monthly 'Ask Me Anything' with leadership. No questions off-limits.",
+      "x": 350,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_c1r1_3",
+      "type": "sticky_note",
+      "content": "Innovation time — 10% time for side projects like Google used to do.",
+      "x": 620,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_c1r1_4",
+      "type": "sticky_note",
+      "content": "Celebrate failures, not just wins. 'Failure Friday' demos of what we tried and learned.",
+      "x": 890,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_culture_r2",
+      "type": "text",
+      "content": "Round 2",
+      "x": 80,
+      "y": 620,
+      "width": 200,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_c1r2_1",
+      "type": "sticky_note",
+      "content": "Cross-team pairing: rotate engineers between teams for 1 sprint/quarter to spread knowledge.",
+      "x": 80,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#F48FB1", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_c1r2_2",
+      "type": "sticky_note",
+      "content": "Async-first culture. Default to written communication. Meetings need agendas or they get cancelled.",
+      "x": 350,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#F48FB1", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_c1r2_3",
+      "type": "sticky_note",
+      "content": "Onboarding buddy system — every new hire gets a peer buddy (not their manager) for first 90 days.",
+      "x": 620,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#F48FB1", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_c1r2_4",
+      "type": "sticky_note",
+      "content": "Psychological safety survey every quarter. Act on results visibly.",
+      "x": 890,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#F48FB1", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_culture_r3",
+      "type": "text",
+      "content": "Round 3",
+      "x": 80,
+      "y": 740,
+      "width": 200,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_c1r3_1",
+      "type": "sticky_note",
+      "content": "Recognition should be peer-driven, not just top-down. Shout-out channel in Slack with monthly highlights.",
+      "x": 80,
+      "y": 770,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_c1r3_2",
+      "type": "sticky_note",
+      "content": "Work-life boundaries: no Slack after 6 PM as a team norm. Lead by example from management.",
+      "x": 350,
+      "y": 770,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_c1r3_3",
+      "type": "sticky_note",
+      "content": "The 'tomorrow' answer: start with a weekly 15-min culture check-in during retros.",
+      "x": 620,
+      "y": 770,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_c1r3_4",
+      "type": "sticky_note",
+      "content": "Document team values explicitly. Vote on top 5. Print and post them.",
+      "x": 890,
+      "y": 770,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "frame_growth",
+      "type": "frame",
+      "title": "Table 2: Growth",
+      "x": 1250,
+      "y": 350,
+      "width": 1150,
+      "height": 1200,
+      "style": { "fillColor": "#E3F2FD" }
+    },
+    {
+      "id": "text_growth_header",
+      "type": "text",
+      "content": "Table 2: Growth",
+      "x": 1280,
+      "y": 370,
+      "width": 500,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#1565C0" }
+    },
+    {
+      "id": "text_growth_question",
+      "type": "text",
+      "content": "Question: 'How should we invest in our team's professional growth? What skills will matter most in 2 years?'",
+      "x": 1280,
+      "y": 410,
+      "width": 1050,
+      "style": { "fontSize": 13, "fontWeight": "bold", "color": "#1565C0" }
+    },
+    {
+      "id": "text_growth_host",
+      "type": "text",
+      "content": "Table Host: Leo C.",
+      "x": 1280,
+      "y": 470,
+      "width": 400,
+      "style": { "fontSize": 12, "color": "#607D8B" }
+    },
+    {
+      "id": "text_growth_r1",
+      "type": "text",
+      "content": "Round 1",
+      "x": 1280,
+      "y": 500,
+      "width": 200,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_g1r1_1",
+      "type": "sticky_note",
+      "content": "AI/ML literacy for all engineers — not just the ML team. Everyone should understand how our AI features work.",
+      "x": 1280,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_g1r1_2",
+      "type": "sticky_note",
+      "content": "Annual learning budget ($2K/person) for courses, conferences, books.",
+      "x": 1550,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_g1r1_3",
+      "type": "sticky_note",
+      "content": "Internal tech talks — monthly, by team members teaching each other.",
+      "x": 1820,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_g1r1_4",
+      "type": "sticky_note",
+      "content": "Mentorship program: pair senior + junior across teams, not just within teams.",
+      "x": 2090,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_growth_r2",
+      "type": "text",
+      "content": "Round 2",
+      "x": 1280,
+      "y": 620,
+      "width": 200,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_g1r2_1",
+      "type": "sticky_note",
+      "content": "Career ladders need updating — the IC (individual contributor) track should go as high as the management track.",
+      "x": 1280,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_g1r2_2",
+      "type": "sticky_note",
+      "content": "Hackathon every quarter. Two days, cross-functional teams, ship something real.",
+      "x": 1550,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_g1r2_3",
+      "type": "sticky_note",
+      "content": "Skills that will matter: system design, AI prompting, data literacy, product thinking for engineers.",
+      "x": 1820,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_g1r2_4",
+      "type": "sticky_note",
+      "content": "360 feedback twice a year (not just annual). More frequent input = better growth.",
+      "x": 2090,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_growth_r3",
+      "type": "text",
+      "content": "Round 3",
+      "x": 1280,
+      "y": 740,
+      "width": 200,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_g1r3_1",
+      "type": "sticky_note",
+      "content": "Book club: one book/quarter, team discusses. Start with 'Team Topologies.'",
+      "x": 1280,
+      "y": 770,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#64B5F6", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_g1r3_2",
+      "type": "sticky_note",
+      "content": "Open-source contribution time — 4 hours/month to contribute to projects we depend on.",
+      "x": 1550,
+      "y": 770,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#64B5F6", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_g1r3_3",
+      "type": "sticky_note",
+      "content": "Measure growth: track skill assessments before/after each quarter. Make progress visible.",
+      "x": 1820,
+      "y": 770,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#64B5F6", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_g1r3_4",
+      "type": "sticky_note",
+      "content": "Create a 'learning backlog' alongside the product backlog. Prioritize growth like features.",
+      "x": 2090,
+      "y": 770,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#64B5F6", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "frame_product",
+      "type": "frame",
+      "title": "Table 3: Product",
+      "x": 2450,
+      "y": 350,
+      "width": 1150,
+      "height": 1200,
+      "style": { "fillColor": "#E8F5E9" }
+    },
+    {
+      "id": "text_product_header",
+      "type": "text",
+      "content": "Table 3: Product",
+      "x": 2480,
+      "y": 370,
+      "width": 500,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#2E7D32" }
+    },
+    {
+      "id": "text_product_question",
+      "type": "text",
+      "content": "Question: 'What should AutoPilot be famous for? If a customer describes us in one sentence, what should that sentence be?'",
+      "x": 2480,
+      "y": 410,
+      "width": 1050,
+      "style": { "fontSize": 13, "fontWeight": "bold", "color": "#2E7D32" }
+    },
+    {
+      "id": "text_product_host",
+      "type": "text",
+      "content": "Table Host: Jake R.",
+      "x": 2480,
+      "y": 470,
+      "width": 400,
+      "style": { "fontSize": 12, "color": "#607D8B" }
+    },
+    {
+      "id": "text_product_r1",
+      "type": "text",
+      "content": "Round 1",
+      "x": 2480,
+      "y": 500,
+      "width": 200,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_p1r1_1",
+      "type": "sticky_note",
+      "content": "'AutoPilot is the project management tool that actually thinks for you.'",
+      "x": 2480,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_p1r1_2",
+      "type": "sticky_note",
+      "content": "AI should be the differentiator. Every feature should have an 'AI-powered' angle.",
+      "x": 2750,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_p1r1_3",
+      "type": "sticky_note",
+      "content": "Speed matters. If our tool is not faster than the alternatives, AI does not matter.",
+      "x": 3020,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_p1r1_4",
+      "type": "sticky_note",
+      "content": "Focus on 10-50 person teams. Don't chase enterprise yet. Win the mid-market first.",
+      "x": 3290,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_product_r2",
+      "type": "text",
+      "content": "Round 2",
+      "x": 2480,
+      "y": 620,
+      "width": 200,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_p1r2_1",
+      "type": "sticky_note",
+      "content": "Integrations are key. If we don't connect to Slack, GitHub, and Figma, we lose.",
+      "x": 2480,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#81C784", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_p1r2_2",
+      "type": "sticky_note",
+      "content": "Mobile experience is underinvested. PMs check tasks on their phone constantly.",
+      "x": 2750,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#81C784", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_p1r2_3",
+      "type": "sticky_note",
+      "content": "'It's the tool that reduces meetings.' That's the sentence. Fewer meetings = more work done.",
+      "x": 3020,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#81C784", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_p1r2_4",
+      "type": "sticky_note",
+      "content": "Templates and quick-start guides for every team type. First value in under 5 minutes.",
+      "x": 3290,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#81C784", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_product_r3",
+      "type": "text",
+      "content": "Round 3",
+      "x": 2480,
+      "y": 740,
+      "width": 200,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_p1r3_1",
+      "type": "sticky_note",
+      "content": "Consensus sentence: 'AutoPilot is the AI-powered project tool that thinks ahead so your team can move faster.'",
+      "x": 2480,
+      "y": 770,
+      "width": 520,
+      "height": 70,
+      "style": { "fillColor": "#66BB6A", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_p1r3_2",
+      "type": "sticky_note",
+      "content": "Key product pillars: AI Intelligence, Speed, Integrations, Beautiful simplicity.",
+      "x": 3020,
+      "y": 770,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#66BB6A", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "frame_people",
+      "type": "frame",
+      "title": "Table 4: People",
+      "x": 3650,
+      "y": 350,
+      "width": 1200,
+      "height": 1200,
+      "style": { "fillColor": "#FFF3E0" }
+    },
+    {
+      "id": "text_people_header",
+      "type": "text",
+      "content": "Table 4: People",
+      "x": 3680,
+      "y": 370,
+      "width": 500,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#E65100" }
+    },
+    {
+      "id": "text_people_question",
+      "type": "text",
+      "content": "Question: 'How do we attract, retain, and energize the best people? What makes someone choose us over a FAANG offer?'",
+      "x": 3680,
+      "y": 410,
+      "width": 1100,
+      "style": { "fontSize": 13, "fontWeight": "bold", "color": "#E65100" }
+    },
+    {
+      "id": "text_people_host",
+      "type": "text",
+      "content": "Table Host: Priya T.",
+      "x": 3680,
+      "y": 470,
+      "width": 400,
+      "style": { "fontSize": 12, "color": "#607D8B" }
+    },
+    {
+      "id": "text_people_r1",
+      "type": "text",
+      "content": "Round 1",
+      "x": 3680,
+      "y": 500,
+      "width": 200,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_pe1r1_1",
+      "type": "sticky_note",
+      "content": "Impact. At a startup, your code ships to real users this week. At FAANG, it ships in 6 months.",
+      "x": 3680,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_pe1r1_2",
+      "type": "sticky_note",
+      "content": "Flexibility: fully remote, async-first, no 'return to office' mandate.",
+      "x": 3950,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_pe1r1_3",
+      "type": "sticky_note",
+      "content": "Equity that matters. Clear path to liquidity, not just paper wealth.",
+      "x": 4220,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_pe1r1_4",
+      "type": "sticky_note",
+      "content": "Small team energy. Everyone knows everyone. No bureaucracy to get things done.",
+      "x": 4490,
+      "y": 530,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_people_r2",
+      "type": "text",
+      "content": "Round 2",
+      "x": 3680,
+      "y": 620,
+      "width": 200,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_pe1r2_1",
+      "type": "sticky_note",
+      "content": "Retention = growth opportunities. People leave when they stop learning.",
+      "x": 3680,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#FFB74D", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_pe1r2_2",
+      "type": "sticky_note",
+      "content": "Competitive pay transparency. Publish salary bands. No guessing games.",
+      "x": 3950,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#FFB74D", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_pe1r2_3",
+      "type": "sticky_note",
+      "content": "In-person offsites 2x/year for bonding. Remote daily, together quarterly.",
+      "x": 4220,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#FFB74D", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_pe1r2_4",
+      "type": "sticky_note",
+      "content": "Burnout prevention: mandatory PTO minimums. Managers track and encourage time off.",
+      "x": 4490,
+      "y": 650,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#FFB74D", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_people_r3",
+      "type": "text",
+      "content": "Round 3",
+      "x": 3680,
+      "y": 740,
+      "width": 200,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_pe1r3_1",
+      "type": "sticky_note",
+      "content": "Our pitch: 'Join us for impact, stay for the people.' Make that real, not just a tagline.",
+      "x": 3680,
+      "y": 770,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#FFA726", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_pe1r3_2",
+      "type": "sticky_note",
+      "content": "Hire for curiosity and kindness, train for skills. Culture fit matters more than tech stack fit.",
+      "x": 3950,
+      "y": 770,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#FFA726", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_pe1r3_3",
+      "type": "sticky_note",
+      "content": "Alumni network: stay connected with people who leave. They may come back or refer great people.",
+      "x": 4220,
+      "y": 770,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#FFA726", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_pe1r3_4",
+      "type": "sticky_note",
+      "content": "Diversity: proactive outreach to underrepresented communities. Diverse teams build better products.",
+      "x": 4490,
+      "y": 770,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#FFA726", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "frame_rotation",
+      "type": "frame",
+      "title": "Rotation Guide",
+      "x": 50,
+      "y": 1600,
+      "width": 1150,
+      "height": 400,
+      "style": { "fillColor": "#F3E5F5" }
+    },
+    {
+      "id": "text_rotation_header",
+      "type": "text",
+      "content": "Rotation Guide",
+      "x": 80,
+      "y": 1620,
+      "width": 400,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "shape_rotation_table",
+      "type": "shape",
+      "content": "Round | Group A | Group B | Group C | Group D\n──────────────────────────────────────\nRound 1 | Culture | Growth | Product | People\nRound 2 | Growth | Product | People | Culture\nRound 3 | Product | People | Culture | Growth\n\nTable Hosts STAY at their table.\nAll other participants rotate clockwise.",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 1670,
+      "width": 1050,
+      "height": 250,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#4A148C",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "frame_harvest",
+      "type": "frame",
+      "title": "Harvest Wall",
+      "x": 1250,
+      "y": 1600,
+      "width": 3600,
+      "height": 700,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_harvest_header",
+      "type": "text",
+      "content": "Harvest Wall — Top Insights from All Tables",
+      "x": 1280,
+      "y": 1620,
+      "width": 800,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "text_harvest_desc",
+      "type": "text",
+      "content": "Each Table Host presents their top 2-3 insights. Full group discusses patterns and connections.",
+      "x": 1280,
+      "y": 1660,
+      "width": 2000,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_insights_label",
+      "type": "text",
+      "content": "Key Insights",
+      "x": 1280,
+      "y": 1700,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#2E7D32" }
+    },
+    {
+      "id": "sticky_insight1",
+      "type": "sticky_note",
+      "content": "Trust and transparency came up at EVERY table. It is the foundation for culture, growth, product quality, and retention.",
+      "x": 1280,
+      "y": 1740,
+      "width": 400,
+      "height": 80,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_insight2",
+      "type": "sticky_note",
+      "content": "AI as differentiator is unanimous. The product sentence crystallized our positioning better than any strategy doc.",
+      "x": 1700,
+      "y": 1740,
+      "width": 400,
+      "height": 80,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "text_patterns_label",
+      "type": "text",
+      "content": "Patterns",
+      "x": 2200,
+      "y": 1700,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#FF8F00" }
+    },
+    {
+      "id": "sticky_pattern1",
+      "type": "sticky_note",
+      "content": "Learning + Growth appeared in Culture, Growth, AND People tables. Investment in learning = retention + culture + better product.",
+      "x": 2200,
+      "y": 1740,
+      "width": 400,
+      "height": 80,
+      "style": { "fillColor": "#FFE082", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_pattern2",
+      "type": "sticky_note",
+      "content": "Async-first came up repeatedly. The team strongly prefers written communication over meetings.",
+      "x": 2620,
+      "y": 1740,
+      "width": 400,
+      "height": 80,
+      "style": { "fillColor": "#FFE082", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "text_surprises_label",
+      "type": "text",
+      "content": "Surprises",
+      "x": 3100,
+      "y": 1700,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#D32F2F" }
+    },
+    {
+      "id": "sticky_surprise1",
+      "type": "sticky_note",
+      "content": "Nobody mentioned salary as the top retention factor. Impact, learning, and flexibility ranked higher.",
+      "x": 3100,
+      "y": 1740,
+      "width": 400,
+      "height": 80,
+      "style": { "fillColor": "#FFCDD2", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "text_actions_label",
+      "type": "text",
+      "content": "Action Seeds",
+      "x": 3600,
+      "y": 1700,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_action1",
+      "type": "sticky_note",
+      "content": "Launch monthly AMA with leadership (Culture)",
+      "x": 3600,
+      "y": 1740,
+      "width": 400,
+      "height": 60,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_action2",
+      "type": "sticky_note",
+      "content": "Establish $2K/person learning budget (Growth)",
+      "x": 3600,
+      "y": 1820,
+      "width": 400,
+      "height": 60,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_action3",
+      "type": "sticky_note",
+      "content": "Finalize and publish product positioning sentence (Product)",
+      "x": 3600,
+      "y": 1900,
+      "width": 400,
+      "height": 60,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_action4",
+      "type": "sticky_note",
+      "content": "Publish salary bands transparently (People)",
+      "x": 3600,
+      "y": 1980,
+      "width": 400,
+      "height": 60,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_facilitator",
+      "type": "frame",
+      "title": "Facilitator & Table Host Guides",
+      "x": 50,
+      "y": 2350,
+      "width": 4800,
+      "height": 350,
+      "style": { "fillColor": "#F3E5F5" }
+    },
+    {
+      "id": "text_fac_header",
+      "type": "text",
+      "content": "Facilitator Guide",
+      "x": 80,
+      "y": 2370,
+      "width": 400,
+      "style": { "fontSize": 20, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_fac1",
+      "type": "sticky_note",
+      "content": "Set the tone: 'This is a conversation, not a presentation. Every voice matters equally. There are no wrong answers.'",
+      "x": 80,
+      "y": 2410,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_fac2",
+      "type": "sticky_note",
+      "content": "Time the rounds strictly. Ring a bell or play a sound at the 2-min warning and at the end. Transitions should be under 2 minutes.",
+      "x": 600,
+      "y": 2410,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_fac3",
+      "type": "sticky_note",
+      "content": "During harvest: capture insights on the wall live. Ask 'What surprised you?' to prompt deeper reflection.",
+      "x": 1120,
+      "y": 2410,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "text_host_header",
+      "type": "text",
+      "content": "Table Host Guide",
+      "x": 2500,
+      "y": 2370,
+      "width": 400,
+      "style": { "fontSize": 20, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_host1",
+      "type": "sticky_note",
+      "content": "At the start of each new round, spend 2 minutes summarizing what previous groups discussed. Build on prior ideas.",
+      "x": 2500,
+      "y": 2410,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#B39DDB", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_host2",
+      "type": "sticky_note",
+      "content": "Encourage quiet participants. If someone has not spoken, ask 'What do you think about that?' directly but warmly.",
+      "x": 3020,
+      "y": 2410,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#B39DDB", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_host3",
+      "type": "sticky_note",
+      "content": "Write key points on sticky notes as the conversation happens. Do not rely on memory for the harvest presentation.",
+      "x": 3540,
+      "y": 2410,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#B39DDB", "textAlign": "left", "fontSize": 11 }
+    }
+  ]
+}

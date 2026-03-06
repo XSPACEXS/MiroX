@@ -9,6 +9,8 @@ export const bmc: TemplateDefinition = {
   emoji: '\u{1F9E9}',
   estimatedTime: '~5 min',
   blueprintId: 'business-model-canvas',
+  brainCategory: 'strategy-planning',
+  brainBlueprint: 'business-model-canvas',
   complexity: 'medium',
   color: '#FFD600',
   tags: ['bmc', 'business model', 'canvas', 'startup', 'lean', 'osterwalder'],

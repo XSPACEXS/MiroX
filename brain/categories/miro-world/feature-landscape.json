@@ -1,0 +1,698 @@
+{
+  "metadata": {
+    "name": "Feature Landscape",
+    "description": "A topographic terrain-style map of the entire product feature set where mountains represent flagship features, hills are secondary capabilities, valleys hold supporting infrastructure, rivers show data flow, forests represent ecosystem depth, and deserts mark deprecated items.",
+    "category": "Miro World Product Showcase",
+    "tags": [
+      "feature-map",
+      "terrain",
+      "topographic",
+      "portfolio",
+      "product-landscape",
+      "capability",
+      "ecosystem"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#D4E8F7",
+    "gridEnabled": false
+  },
+  "items": [
+    {
+      "id": "legend-frame",
+      "type": "frame",
+      "title": "Map Legend & Title",
+      "x": 100,
+      "y": 50,
+      "width": 1200,
+      "height": 500,
+      "style": { "fillColor": "#F2E6D9" }
+    },
+    {
+      "id": "legend-title",
+      "type": "text",
+      "content": "Feature Landscape",
+      "x": 150,
+      "y": 80,
+      "width": 600,
+      "style": { "fontSize": 48, "fontWeight": "bold", "color": "#3A5683" }
+    },
+    {
+      "id": "legend-subtitle",
+      "type": "text",
+      "content": "ACME Platform — Capability Terrain Map — Q1 2026",
+      "x": 150,
+      "y": 160,
+      "width": 1000,
+      "style": { "fontSize": 20, "color": "#212121" }
+    },
+    {
+      "id": "legend-desc",
+      "type": "text",
+      "content": "Mountains = Flagship | Hills = Secondary | Valleys = Supporting | Rivers = Data Flow | Forests = Ecosystem",
+      "x": 150,
+      "y": 220,
+      "width": 1000,
+      "style": { "fontSize": 13, "color": "#212121" }
+    },
+    {
+      "id": "legend-flagship",
+      "type": "shape",
+      "content": "Flagship",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 300,
+      "width": 120,
+      "height": 35,
+      "style": { "fillColor": "#3A5683", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "legend-secondary",
+      "type": "shape",
+      "content": "Secondary",
+      "shape": "rectangle",
+      "x": 290,
+      "y": 300,
+      "width": 120,
+      "height": 35,
+      "style": { "fillColor": "#6B8F71", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "legend-supporting",
+      "type": "shape",
+      "content": "Supporting",
+      "shape": "rectangle",
+      "x": 430,
+      "y": 300,
+      "width": 120,
+      "height": 35,
+      "style": { "fillColor": "#F2E6D9", "fontColor": "#212121" }
+    },
+    {
+      "id": "legend-dataflow",
+      "type": "shape",
+      "content": "Data Flow",
+      "shape": "rectangle",
+      "x": 570,
+      "y": 300,
+      "width": 120,
+      "height": 35,
+      "style": { "fillColor": "#4DA6FF", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "legend-ecosystem",
+      "type": "shape",
+      "content": "Ecosystem",
+      "shape": "rectangle",
+      "x": 710,
+      "y": 300,
+      "width": 120,
+      "height": 35,
+      "style": { "fillColor": "#2D6A4F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "legend-legacy",
+      "type": "shape",
+      "content": "Legacy",
+      "shape": "rectangle",
+      "x": 850,
+      "y": 300,
+      "width": 120,
+      "height": 35,
+      "style": { "fillColor": "#C9B99A", "fontColor": "#212121" }
+    },
+    {
+      "id": "legend-meta",
+      "type": "sticky_note",
+      "content": "Last surveyed: March 6, 2026 | Cartographer: Product Team | 52 features mapped",
+      "x": 150,
+      "y": 370,
+      "width": 500,
+      "height": 120,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "mountains-frame",
+      "type": "frame",
+      "title": "Mountain Peaks — Flagship Features",
+      "x": 1500,
+      "y": 50,
+      "width": 2000,
+      "height": 1000,
+      "style": { "fillColor": "#E8EDF2" }
+    },
+    {
+      "id": "mountains-header",
+      "type": "text",
+      "content": "Mountain Peaks — Flagship Features",
+      "x": 1550,
+      "y": 70,
+      "width": 900,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#3A5683" }
+    },
+    {
+      "id": "peak1-collab",
+      "type": "shape",
+      "content": "Peak 1: Real-Time Collaboration\nMulti-user editing, cursors, comments, reactions\n94% of users engage | Signature feature",
+      "shape": "rectangle",
+      "x": 1550,
+      "y": 150,
+      "width": 450,
+      "height": 200,
+      "style": { "fillColor": "#3A5683", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "peak2-canvas",
+      "type": "shape",
+      "content": "Peak 2: Visual Canvas Engine\nInfinite canvas, zoom, frames, grids\n60fps rendering | Core IP",
+      "shape": "rectangle",
+      "x": 2050,
+      "y": 150,
+      "width": 450,
+      "height": 200,
+      "style": { "fillColor": "#4A6693", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "peak3-ai",
+      "type": "shape",
+      "content": "Peak 3: AI Assist\nNatural language to board, smart layout\nNewest peak | Growing fast",
+      "shape": "rectangle",
+      "x": 2550,
+      "y": 150,
+      "width": 450,
+      "height": 200,
+      "style": { "fillColor": "#3A76A3", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "peak4-templates",
+      "type": "shape",
+      "content": "Peak 4: Template Library\n342 templates, community-created\n78% activation rate",
+      "shape": "rectangle",
+      "x": 3050,
+      "y": 150,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#5A86B3", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "mountain-note1",
+      "type": "sticky_note",
+      "content": "NEW: AI Assist gained 35% height (adoption) this quarter — fastest growing peak",
+      "x": 1550,
+      "y": 400,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#FFE0B2" }
+    },
+    {
+      "id": "mountain-note2",
+      "type": "sticky_note",
+      "content": "Real-Time Collaboration remains the tallest — NPS 72, industry-leading",
+      "x": 1900,
+      "y": 400,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "mountain-note3",
+      "type": "sticky_note",
+      "content": "Canvas Engine: 60fps with 1000+ objects — competitors average 30fps",
+      "x": 2250,
+      "y": 400,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "mountain-note4",
+      "type": "sticky_note",
+      "content": "Summit goal: AI Assist to become tallest peak by Q4 — measuring by daily active usage",
+      "x": 2600,
+      "y": 400,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#BBDEFB" }
+    },
+    {
+      "id": "hills-frame",
+      "type": "frame",
+      "title": "Rolling Hills — Secondary Features",
+      "x": 100,
+      "y": 600,
+      "width": 1400,
+      "height": 900,
+      "style": { "fillColor": "#ECF2ED" }
+    },
+    {
+      "id": "hills-header",
+      "type": "text",
+      "content": "Rolling Hills — Secondary Features",
+      "x": 150,
+      "y": 620,
+      "width": 800,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#6B8F71" }
+    },
+    {
+      "id": "hill-presentation",
+      "type": "shape",
+      "content": "Presentation Mode\nWalk-through boards as slides\nUsed by 42% of teams weekly",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 710,
+      "width": 600,
+      "height": 130,
+      "style": { "fillColor": "#6B8F71", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "hill-permissions",
+      "type": "shape",
+      "content": "Board Sharing & Permissions\nPublic links, team spaces, guest access\nEnterprise-grade",
+      "shape": "rectangle",
+      "x": 800,
+      "y": 710,
+      "width": 600,
+      "height": 130,
+      "style": { "fillColor": "#7B9F81", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "hill-import",
+      "type": "shape",
+      "content": "Import/Export Engine\nCSV, JSON, PDF, PNG, Visio, Jira import\n89 formats supported",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 890,
+      "width": 600,
+      "height": 130,
+      "style": { "fillColor": "#5B7F61", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "hill-voting",
+      "type": "shape",
+      "content": "Voting & Reactions\nDot voting, emoji reactions, timer\nWorkshop essential",
+      "shape": "rectangle",
+      "x": 800,
+      "y": 890,
+      "width": 600,
+      "height": 130,
+      "style": { "fillColor": "#8BAF91", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "hills-note1",
+      "type": "sticky_note",
+      "content": "Presentation mode climbing toward peak status — 42% weekly usage, up from 28%",
+      "x": 150,
+      "y": 1080,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "hills-note2",
+      "type": "sticky_note",
+      "content": "Import engine: Added Notion import this quarter — 12K boards imported in week 1",
+      "x": 500,
+      "y": 1080,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#B2DFDB" }
+    },
+    {
+      "id": "valley-frame",
+      "type": "frame",
+      "title": "Fertile Valley — Supporting Capabilities",
+      "x": 3600,
+      "y": 50,
+      "width": 1400,
+      "height": 900,
+      "style": { "fillColor": "#F2E6D9" }
+    },
+    {
+      "id": "valley-header",
+      "type": "text",
+      "content": "Fertile Valley — Supporting Capabilities",
+      "x": 3650,
+      "y": 70,
+      "width": 900,
+      "style": { "fontSize": 30, "fontWeight": "bold", "color": "#212121" }
+    },
+    {
+      "id": "valley-notify",
+      "type": "shape",
+      "content": "Notification Center\nIn-app, email, Slack, mobile push\n89% open rate",
+      "shape": "rectangle",
+      "x": 3650,
+      "y": 150,
+      "width": 600,
+      "height": 100,
+      "style": { "fillColor": "#D4C4A9", "fontColor": "#212121" }
+    },
+    {
+      "id": "valley-search",
+      "type": "shape",
+      "content": "Search & Discovery\nFull-text across boards, filters\nRecent, favorites",
+      "shape": "rectangle",
+      "x": 3650,
+      "y": 280,
+      "width": 600,
+      "height": 100,
+      "style": { "fillColor": "#C4B499", "fontColor": "#212121" }
+    },
+    {
+      "id": "valley-audit",
+      "type": "shape",
+      "content": "Audit Log\nEnterprise: action tracking, compliance, export",
+      "shape": "rectangle",
+      "x": 3650,
+      "y": 410,
+      "width": 600,
+      "height": 100,
+      "style": { "fillColor": "#A49479", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "valley-billing",
+      "type": "shape",
+      "content": "Billing & Subscription\nSelf-serve billing, usage metering\nInvoice generation",
+      "shape": "rectangle",
+      "x": 3650,
+      "y": 540,
+      "width": 600,
+      "height": 100,
+      "style": { "fillColor": "#948469", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "valley-note",
+      "type": "sticky_note",
+      "content": "Billing system: 3rd most common support ticket topic — needs UX refresh",
+      "x": 3650,
+      "y": 680,
+      "width": 300,
+      "height": 180,
+      "style": { "fillColor": "#F8BBD0" }
+    },
+    {
+      "id": "river-frame",
+      "type": "frame",
+      "title": "Azure River — Data Flow & Integrations",
+      "x": 100,
+      "y": 1550,
+      "width": 4200,
+      "height": 400,
+      "style": { "fillColor": "#D4E8F7" }
+    },
+    {
+      "id": "river-header",
+      "type": "text",
+      "content": "Azure River — Data Flow & Integrations",
+      "x": 150,
+      "y": 1570,
+      "width": 900,
+      "style": { "fontSize": 30, "fontWeight": "bold", "color": "#4DA6FF" }
+    },
+    {
+      "id": "river-source",
+      "type": "sticky_note",
+      "content": "Source: 24 native integrations flowing data into ACME",
+      "x": 150,
+      "y": 1640,
+      "width": 300,
+      "height": 150,
+      "style": { "fillColor": "#BBDEFB" }
+    },
+    {
+      "id": "river-current",
+      "type": "sticky_note",
+      "content": "Current: 12M events/day processed through event pipeline",
+      "x": 500,
+      "y": 1640,
+      "width": 300,
+      "height": 150,
+      "style": { "fillColor": "#BBDEFB" }
+    },
+    {
+      "id": "river-tributaries",
+      "type": "sticky_note",
+      "content": "Tributaries: Slack, Jira, GitHub, Figma, Notion, Salesforce (new)",
+      "x": 850,
+      "y": 1640,
+      "width": 300,
+      "height": 150,
+      "style": { "fillColor": "#BBDEFB" }
+    },
+    {
+      "id": "river-delta",
+      "type": "sticky_note",
+      "content": "Delta: Webhooks, API, Zapier — data flows outward to 420+ connected tools",
+      "x": 1200,
+      "y": 1640,
+      "width": 300,
+      "height": 150,
+      "style": { "fillColor": "#BBDEFB" }
+    },
+    {
+      "id": "river-health",
+      "type": "sticky_note",
+      "content": "River health: 99.9% data delivery SLA | avg latency 340ms | 0 data loss incidents in 2026",
+      "x": 1550,
+      "y": 1640,
+      "width": 400,
+      "height": 150,
+      "style": { "fillColor": "#E3F2FD" }
+    },
+    {
+      "id": "forest-frame",
+      "type": "frame",
+      "title": "Dense Forest — Ecosystem & Platform",
+      "x": 100,
+      "y": 2000,
+      "width": 1400,
+      "height": 800,
+      "style": { "fillColor": "#E0EDE4" }
+    },
+    {
+      "id": "forest-header",
+      "type": "text",
+      "content": "Dense Forest — Ecosystem & Platform",
+      "x": 150,
+      "y": 2020,
+      "width": 800,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#2D6A4F" }
+    },
+    {
+      "id": "forest-marketplace",
+      "type": "shape",
+      "content": "App Marketplace\n67 published apps | 2,300 developers\nSDK: JS, Python, Go",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 2100,
+      "width": 600,
+      "height": 120,
+      "style": { "fillColor": "#2D6A4F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "forest-community",
+      "type": "shape",
+      "content": "Community Forum\n14K members | 890 posts/month\n92% response in 24h",
+      "shape": "rectangle",
+      "x": 800,
+      "y": 2100,
+      "width": 600,
+      "height": 120,
+      "style": { "fillColor": "#3D7A5F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "forest-academy",
+      "type": "shape",
+      "content": "Academy & Certification\n8 learning paths | 2,340 certified users",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 2260,
+      "width": 600,
+      "height": 120,
+      "style": { "fillColor": "#4D8A6F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "forest-partners",
+      "type": "shape",
+      "content": "Partner Network\n12 certified partners\nSI, consulting, training",
+      "shape": "rectangle",
+      "x": 800,
+      "y": 2260,
+      "width": 600,
+      "height": 120,
+      "style": { "fillColor": "#5D9A7F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "forest-note",
+      "type": "sticky_note",
+      "content": "Forest growing rapidly: developer community up 180% YoY",
+      "x": 150,
+      "y": 2430,
+      "width": 300,
+      "height": 180,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "desert-frame",
+      "type": "frame",
+      "title": "Dusty Desert — Legacy & Deprecated",
+      "x": 1700,
+      "y": 2000,
+      "width": 1200,
+      "height": 800,
+      "style": { "fillColor": "#F0E8D8" }
+    },
+    {
+      "id": "desert-header",
+      "type": "text",
+      "content": "Dusty Desert — Legacy & Deprecated",
+      "x": 1750,
+      "y": 2020,
+      "width": 900,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#C9B99A" }
+    },
+    {
+      "id": "desert-export",
+      "type": "shape",
+      "content": "Legacy Export v1\nDeprecated: Removal June 2026\nMigration tool available",
+      "shape": "rectangle",
+      "x": 1750,
+      "y": 2100,
+      "width": 500,
+      "height": 120,
+      "style": { "fillColor": "#C9B99A", "fontColor": "#212121" }
+    },
+    {
+      "id": "desert-editor",
+      "type": "shape",
+      "content": "Classic Editor\nSunset: Fully removed Q4 2025\n0 active users remain",
+      "shape": "rectangle",
+      "x": 1750,
+      "y": 2260,
+      "width": 500,
+      "height": 120,
+      "style": { "fillColor": "#B9A98A", "fontColor": "#212121" }
+    },
+    {
+      "id": "desert-webhook",
+      "type": "shape",
+      "content": "Old Webhook Format\nDeprecated: Event-driven webhooks replace polling",
+      "shape": "rectangle",
+      "x": 1750,
+      "y": 2420,
+      "width": 500,
+      "height": 120,
+      "style": { "fillColor": "#A9997A", "fontColor": "#212121" }
+    },
+    {
+      "id": "desert-note",
+      "type": "sticky_note",
+      "content": "Migration priority: 340 accounts still on Legacy Export v1 — email campaign started",
+      "x": 2300,
+      "y": 2100,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "compass-frame",
+      "type": "frame",
+      "title": "Compass Rose & Scale",
+      "x": 100,
+      "y": 2900,
+      "width": 4800,
+      "height": 300,
+      "style": { "fillColor": "#F2E6D9" }
+    },
+    {
+      "id": "compass-scale",
+      "type": "text",
+      "content": "Scale: Each grid square = ~1 feature cluster | Elevation = adoption maturity | Color depth = strategic importance",
+      "x": 600,
+      "y": 2930,
+      "width": 1800,
+      "style": { "fontSize": 14, "color": "#212121" }
+    },
+    {
+      "id": "compass-meta",
+      "type": "text",
+      "content": "Total features mapped: 52 | Teams: 8 | Last updated: March 6, 2026 | Next terrain survey: April 1, 2026",
+      "x": 600,
+      "y": 2990,
+      "width": 1800,
+      "style": { "fontSize": 12, "color": "#666666" }
+    },
+    {
+      "type": "connector",
+      "startItem": "legend-frame",
+      "endItem": "mountains-frame",
+      "style": {
+        "strokeColor": "#B0A99F",
+        "strokeWidth": 3,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "mountains-frame",
+      "endItem": "hills-frame",
+      "style": {
+        "strokeColor": "#B0A99F",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "hills-frame",
+      "endItem": "valley-frame",
+      "style": {
+        "strokeColor": "#B0A99F",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "mountains-frame",
+      "endItem": "river-frame",
+      "style": {
+        "strokeColor": "#4DA6FF",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "river-frame",
+      "endItem": "forest-frame",
+      "style": {
+        "strokeColor": "#2D6A4F",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "valley-frame",
+      "endItem": "desert-frame",
+      "style": {
+        "strokeColor": "#C9B99A",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "forest-frame",
+      "endItem": "mountains-frame",
+      "style": {
+        "strokeColor": "#6B8F71",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    }
+  ]
+}

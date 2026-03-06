@@ -1,0 +1,53 @@
+{
+  "category": "Workshops",
+  "description": "Ready-to-use Miro board templates for facilitating interactive team sessions — from sprint retrospectives and brainstorming workshops to design thinking exercises and team icebreakers.",
+  "icon": "🧩",
+  "colorTheme": {
+    "primary": "#4A148C",
+    "secondary": "#FF5252",
+    "accent": "#2979FF"
+  },
+  "templates": [
+    {
+      "file": "retrospective",
+      "name": "Sprint Retrospective — Sailboat Metaphor",
+      "description": "Structured sprint retro using the Sailboat metaphor with reflection and action items",
+      "tags": ["retrospective", "agile", "scrum", "sailboat", "reflection"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "brainstorm-session",
+      "name": "Brainstorm Session",
+      "description": "Structured brainstorming with silent ideation, voting, and action planning",
+      "tags": ["brainstorm", "ideation", "voting", "facilitation", "ideas"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "design-thinking",
+      "name": "Design Thinking Workshop",
+      "description": "Full 5-phase design thinking workshop: Empathize, Define, Ideate, Prototype, Test",
+      "tags": [
+        "design-thinking",
+        "empathy",
+        "ideation",
+        "prototype",
+        "innovation"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "icebreaker",
+      "name": "Icebreaker Activities",
+      "description": "Team icebreaker activities for building rapport and psychological safety",
+      "tags": ["icebreaker", "team-building", "warm-up", "fun", "onboarding"],
+      "complexity": "Simple"
+    },
+    {
+      "file": "world-cafe",
+      "name": "World Cafe Discussion",
+      "description": "World Cafe discussion format with rotating tables and collective insight harvesting",
+      "tags": ["world-cafe", "discussion", "rotation", "dialogue", "insights"],
+      "complexity": "Advanced"
+    }
+  ]
+}

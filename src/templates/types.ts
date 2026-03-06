@@ -6,6 +6,24 @@ export enum TemplateCategory {
   Technical = 'technical',
   Brainstorm = 'brainstorm',
   Meetings = 'meetings',
+  Marketing = 'marketing',
+  ProductDevelopment = 'product-development',
+  EventPlanning = 'event-planning',
+  Workshops = 'workshops',
+  CustomerJourney = 'customer-journey',
+  Finance = 'finance',
+  Education = 'education',
+  TeamHR = 'team-hr',
+  Sales = 'sales',
+  DataAnalytics = 'data-analytics',
+  Startup = 'startup',
+  LaunchGTM = 'launch-gtm',
+  MiroWorld = 'miro-world',
+  MarketingEnablement = 'marketing-enablement',
+  EventIsometric = 'event-isometric',
+  MindMapCollab = 'mind-map-collab',
+  TechnicalArchitecture = 'technical-architecture',
+  CompanyBuilding = 'company-building',
 }
 
 export type FieldType = 'text' | 'textarea' | 'select' | 'multiselect' | 'number' | 'date'
@@ -41,6 +59,8 @@ export interface TemplateDefinition {
   previewAscii: string
   estimatedTime: string
   blueprintId: string
+  brainCategory: string
+  brainBlueprint: string
   fields: TemplateField[]
   tags: string[]
   complexity: 'simple' | 'medium' | 'complex'

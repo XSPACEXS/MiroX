@@ -9,6 +9,8 @@ export const brainstormSession: TemplateDefinition = {
   emoji: '\u{1F4A1}',
   estimatedTime: '~2 min',
   blueprintId: 'brainstorm-session',
+  brainCategory: 'mind-maps',
+  brainBlueprint: 'brainstorming-board',
   complexity: 'simple',
   color: '#EC4899',
   tags: ['brainstorm', 'ideas', 'ideation', 'workshop', 'creativity'],

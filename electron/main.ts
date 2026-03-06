@@ -7,6 +7,7 @@ import { registerGithubHandlers } from './ipc/githubHandlers'
 import { registerAgentHandlers } from './ipc/agentHandlers'
 import { registerSelfTestHandlers } from './ipc/selfTestHandlers'
 import { registerGeminiHandlers } from './ipc/geminiHandlers'
+import { registerBrainHandlers } from './ipc/brainHandlers'
 import { IPC_CHANNELS } from './ipc/channels'
 
 let mainWindow: BrowserWindow | null = null
@@ -84,6 +85,7 @@ function createWindow(): void {
   registerAgentHandlers(mainWindow)
   registerSelfTestHandlers(mainWindow)
   registerGeminiHandlers(mainWindow)
+  registerBrainHandlers()
 
   // Prevent new windows — open external links in browser
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {

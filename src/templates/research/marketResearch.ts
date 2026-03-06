@@ -9,6 +9,8 @@ export const marketResearch: TemplateDefinition = {
   emoji: '\u{1F4CB}',
   estimatedTime: '~4 min',
   blueprintId: 'market-research',
+  brainCategory: 'strategy-planning',
+  brainBlueprint: 'competitive-analysis',
   complexity: 'medium',
   color: '#F59E0B',
   tags: ['market', 'research', 'insights', 'data', 'survey', 'findings'],

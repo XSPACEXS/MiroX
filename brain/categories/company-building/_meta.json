@@ -1,0 +1,61 @@
+{
+  "category": "Company Building",
+  "description": "Strategic company-level templates for defining vision, codifying culture, planning organizational growth, and communicating progress to investors through structured, scannable visual boards",
+  "icon": "🏢",
+  "colorTheme": {
+    "primary": "#1A237E",
+    "secondary": "#37474F",
+    "accent": "#FF6B6B"
+  },
+  "templates": [
+    {
+      "file": "company-vision-board",
+      "name": "Company Vision Board",
+      "description": "Strategic cascade board capturing company vision, mission, values, strategic pillars with key results, headline metrics, and milestone timeline",
+      "tags": [
+        "vision",
+        "mission",
+        "strategy",
+        "values",
+        "metrics",
+        "milestones"
+      ],
+      "complexity": "Medium"
+    },
+    {
+      "file": "culture-canvas",
+      "name": "Culture Canvas",
+      "description": "Cultural constitution board with behavioral values, anti-values, decision-making framework, communication norms, and team rituals",
+      "tags": ["culture", "values", "norms", "rituals", "onboarding", "team"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "org-growth-plan",
+      "name": "Org Growth Plan",
+      "description": "Organizational scaling roadmap with timeline grid showing department growth, hiring priorities, cost projections, and team topology evolution",
+      "tags": [
+        "org-chart",
+        "hiring",
+        "scaling",
+        "headcount",
+        "team-topology",
+        "growth"
+      ],
+      "complexity": "Medium"
+    },
+    {
+      "file": "investor-update-board",
+      "name": "Investor Update Board",
+      "description": "Structured investor communication dashboard with TL;DR, headline metrics, wins, challenges, product and team updates, financials, and specific asks",
+      "tags": [
+        "investor",
+        "update",
+        "metrics",
+        "fundraising",
+        "board-meeting",
+        "financial"
+      ],
+      "complexity": "Medium"
+    }
+  ]
+}

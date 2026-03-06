@@ -9,6 +9,8 @@ export const okrTracker: TemplateDefinition = {
   emoji: '\u{1F3AF}',
   estimatedTime: '~4 min',
   blueprintId: 'okr-tracker',
+  brainCategory: 'strategy-planning',
+  brainBlueprint: 'okr-planning',
   complexity: 'medium',
   color: '#FFD600',
   tags: ['okr', 'objectives', 'key results', 'goals', 'tracking', 'quarterly'],

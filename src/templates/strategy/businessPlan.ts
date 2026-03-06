@@ -9,6 +9,8 @@ export const businessPlan: TemplateDefinition = {
   emoji: '\u{1F4CA}',
   estimatedTime: '~8 min',
   blueprintId: 'business-plan',
+  brainCategory: 'strategy-planning',
+  brainBlueprint: 'vision-board',
   complexity: 'complex',
   color: '#FFD600',
   tags: ['business', 'startup', 'planning', 'strategy', 'financials'],

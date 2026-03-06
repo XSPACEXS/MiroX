@@ -1,0 +1,58 @@
+{
+  "category": "Customer Journey",
+  "description": "Templates for understanding, mapping, and improving the end-to-end experience customers have with your product or service — from first awareness through advocacy",
+  "icon": "\ud83d\udeb6",
+  "colorTheme": {
+    "primary": "#0D47A1",
+    "secondary": "#FF7043",
+    "accent": "#FFB300"
+  },
+  "templates": [
+    {
+      "file": "journey-map",
+      "name": "Customer Journey Map",
+      "description": "Full end-to-end customer journey with stages, touchpoints, emotions, pain points, and opportunities",
+      "tags": [
+        "journey",
+        "customer-experience",
+        "touchpoints",
+        "emotions",
+        "cx"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "empathy-map",
+      "name": "Empathy Map",
+      "description": "Classic 4-quadrant empathy map (Says, Thinks, Does, Feels) centered around a specific persona",
+      "tags": ["empathy", "persona", "user-research", "qualitative", "ux"],
+      "complexity": "Simple"
+    },
+    {
+      "file": "persona-board",
+      "name": "Persona Board",
+      "description": "Comprehensive user persona including demographics, goals, frustrations, behaviors, and day-in-the-life narrative",
+      "tags": [
+        "persona",
+        "user-profile",
+        "demographics",
+        "behaviors",
+        "research"
+      ],
+      "complexity": "Medium"
+    },
+    {
+      "file": "touchpoint-analysis",
+      "name": "Touchpoint Analysis",
+      "description": "Channel-by-stage touchpoint matrix with satisfaction scores and improvement opportunities",
+      "tags": [
+        "touchpoints",
+        "channels",
+        "satisfaction",
+        "analysis",
+        "optimization"
+      ],
+      "complexity": "Advanced"
+    }
+  ]
+}

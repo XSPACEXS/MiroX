@@ -9,6 +9,8 @@ export const moodBoard: TemplateDefinition = {
   emoji: '\u{1F3A8}',
   estimatedTime: '~2 min',
   blueprintId: 'mood-board',
+  brainCategory: 'design-ux',
+  brainBlueprint: 'mood-board',
   complexity: 'simple',
   color: '#EC4899',
   tags: ['mood board', 'design', 'inspiration', 'brand', 'visual', 'creative'],

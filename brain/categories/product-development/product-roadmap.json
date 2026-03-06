@@ -1,0 +1,400 @@
+{
+  "metadata": {
+    "name": "Product Roadmap Board",
+    "description": "Now/Next/Later product roadmap for AutoPilot 3.0 with 4 themes (AI, Collaboration, Enterprise, Platform), feature cards, and milestone timeline",
+    "category": "Product Development",
+    "tags": ["roadmap", "now-next-later", "themes", "milestones", "strategy"],
+    "complexity": "Medium",
+    "boardSize": { "width": 5400, "height": 3000 }
+  },
+  "settings": {
+    "backgroundColor": "#F3E5F5",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_header",
+      "type": "frame",
+      "title": "Roadmap Header",
+      "x": 50,
+      "y": 50,
+      "width": 5300,
+      "height": 250,
+      "style": { "fillColor": "#6200EA" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "Product Roadmap: AutoPilot 3.0",
+      "x": 100,
+      "y": 70,
+      "width": 2500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_vision",
+      "type": "text",
+      "content": "Vision: The AI-powered project management tool that thinks ahead so your team can move faster.",
+      "x": 100,
+      "y": 130,
+      "width": 4000,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#FFD54F" }
+    },
+    {
+      "id": "text_meta",
+      "type": "text",
+      "content": "Owner: Jake R. (VP Product) | Updated: March 6, 2026 | Framework: Now / Next / Later | Themes: AI, Collaboration, Enterprise, Platform",
+      "x": 100,
+      "y": 170,
+      "width": 5000,
+      "style": { "fontSize": 14, "color": "#D1C4E9" }
+    },
+    {
+      "id": "frame_now",
+      "type": "frame",
+      "title": "NOW (Q2 2026)",
+      "x": 50,
+      "y": 350,
+      "width": 1700,
+      "height": 1600,
+      "style": { "fillColor": "#E8F5E9" }
+    },
+    {
+      "id": "text_now_header",
+      "type": "text",
+      "content": "NOW — Q2 2026 (In Progress)",
+      "x": 80,
+      "y": 370,
+      "width": 600,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#2E7D32" }
+    },
+    {
+      "id": "sticky_now1",
+      "type": "sticky_note",
+      "content": "AI Task Routing\nAuto-suggest best assignee based on skills + capacity\nTheme: AI | 6 weeks | RICE: 1,600",
+      "x": 80,
+      "y": 420,
+      "width": 500,
+      "height": 100,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_now2",
+      "type": "sticky_note",
+      "content": "Smart Notifications\nContext-aware alerts that reduce noise\nTheme: Collaboration | 2 weeks | RICE: 5,400",
+      "x": 80,
+      "y": 540,
+      "width": 500,
+      "height": 100,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_now3",
+      "type": "sticky_note",
+      "content": "Kanban WIP Limits\nColumn limits to reduce bottlenecks\nTheme: Platform | 1 week | RICE: 4,500",
+      "x": 80,
+      "y": 660,
+      "width": 500,
+      "height": 100,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_now4",
+      "type": "sticky_note",
+      "content": "Sprint Goal Field\nFocused sprint objectives\nTheme: Collaboration | 3 days | RICE: 14,400",
+      "x": 80,
+      "y": 780,
+      "width": 500,
+      "height": 100,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_next",
+      "type": "frame",
+      "title": "NEXT (Q3 2026)",
+      "x": 1800,
+      "y": 350,
+      "width": 1700,
+      "height": 1600,
+      "style": { "fillColor": "#E3F2FD" }
+    },
+    {
+      "id": "text_next_header",
+      "type": "text",
+      "content": "NEXT — Q3 2026 (Planned)",
+      "x": 1830,
+      "y": 370,
+      "width": 600,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1565C0" }
+    },
+    {
+      "id": "sticky_next1",
+      "type": "sticky_note",
+      "content": "Time Tracking\nNative time logging on tasks\nTheme: Platform | 5 weeks | RICE: 960",
+      "x": 1830,
+      "y": 420,
+      "width": 500,
+      "height": 100,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_next2",
+      "type": "sticky_note",
+      "content": "Timeline / Gantt View\nVisual project timeline for enterprise\nTheme: Enterprise | 6 weeks | RICE: 467",
+      "x": 1830,
+      "y": 540,
+      "width": 500,
+      "height": 100,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_next3",
+      "type": "sticky_note",
+      "content": "AI Workload Predictions\nPredict capacity issues 2 sprints ahead\nTheme: AI | 4 weeks",
+      "x": 1830,
+      "y": 660,
+      "width": 500,
+      "height": 100,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_next4",
+      "type": "sticky_note",
+      "content": "Slack + GitHub Integrations\nBi-directional sync with tools teams use\nTheme: Collaboration | 4 weeks",
+      "x": 1830,
+      "y": 780,
+      "width": 500,
+      "height": 100,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_later",
+      "type": "frame",
+      "title": "LATER (Q4 2026+)",
+      "x": 3550,
+      "y": 350,
+      "width": 1700,
+      "height": 1600,
+      "style": { "fillColor": "#FFF3E0" }
+    },
+    {
+      "id": "text_later_header",
+      "type": "text",
+      "content": "LATER — Q4 2026+ (Exploring)",
+      "x": 3580,
+      "y": 370,
+      "width": 600,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#E65100" }
+    },
+    {
+      "id": "sticky_later1",
+      "type": "sticky_note",
+      "content": "AI Sprint Planning\nAuto-generate sprint plans from backlog\nTheme: AI",
+      "x": 3580,
+      "y": 420,
+      "width": 500,
+      "height": 100,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_later2",
+      "type": "sticky_note",
+      "content": "Custom Workflows\nConfigurable board columns and automation rules\nTheme: Enterprise",
+      "x": 3580,
+      "y": 540,
+      "width": 500,
+      "height": 100,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_later3",
+      "type": "sticky_note",
+      "content": "Advanced Reporting\nCustom dashboards with export to PDF/CSV\nTheme: Enterprise",
+      "x": 3580,
+      "y": 660,
+      "width": 500,
+      "height": 100,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_later4",
+      "type": "sticky_note",
+      "content": "API & Webhooks\nPublic API for custom integrations\nTheme: Platform",
+      "x": 3580,
+      "y": 780,
+      "width": 500,
+      "height": 100,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_milestones",
+      "type": "frame",
+      "title": "Milestones",
+      "x": 50,
+      "y": 2000,
+      "width": 5300,
+      "height": 400,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_milestone_header",
+      "type": "text",
+      "content": "Key Milestones",
+      "x": 80,
+      "y": 2020,
+      "width": 400,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "shape_m1",
+      "type": "shape",
+      "content": "Apr 14\nAI Routing GA",
+      "shape": "diamond",
+      "x": 200,
+      "y": 2080,
+      "width": 160,
+      "height": 100,
+      "style": {
+        "fillColor": "#6200EA",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#6200EA",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_m2",
+      "type": "shape",
+      "content": "May 1\nv3.0 Launch",
+      "shape": "diamond",
+      "x": 900,
+      "y": 2080,
+      "width": 160,
+      "height": 100,
+      "style": {
+        "fillColor": "#2E7D32",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#2E7D32",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_m3",
+      "type": "shape",
+      "content": "Jul 15\nEnterprise Beta",
+      "shape": "diamond",
+      "x": 1600,
+      "y": 2080,
+      "width": 160,
+      "height": 100,
+      "style": {
+        "fillColor": "#1565C0",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#1565C0",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_m4",
+      "type": "shape",
+      "content": "Sep 30\n100K Users",
+      "shape": "diamond",
+      "x": 2300,
+      "y": 2080,
+      "width": 160,
+      "height": 100,
+      "style": {
+        "fillColor": "#FF8F00",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#FF8F00",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_m5",
+      "type": "shape",
+      "content": "Nov 15\nPublic API",
+      "shape": "diamond",
+      "x": 3000,
+      "y": 2080,
+      "width": 160,
+      "height": 100,
+      "style": {
+        "fillColor": "#E65100",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#E65100",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_m6",
+      "type": "shape",
+      "content": "Dec 31\nQ4 Release",
+      "shape": "diamond",
+      "x": 3700,
+      "y": 2080,
+      "width": 160,
+      "height": 100,
+      "style": {
+        "fillColor": "#AD1457",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#AD1457",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "conn_m1_m2",
+      "type": "connector",
+      "startItem": "shape_m1",
+      "endItem": "shape_m2",
+      "style": {
+        "strokeColor": "#BDBDBD",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      }
+    },
+    {
+      "id": "conn_m2_m3",
+      "type": "connector",
+      "startItem": "shape_m2",
+      "endItem": "shape_m3",
+      "style": {
+        "strokeColor": "#BDBDBD",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      }
+    },
+    {
+      "id": "conn_m3_m4",
+      "type": "connector",
+      "startItem": "shape_m3",
+      "endItem": "shape_m4",
+      "style": {
+        "strokeColor": "#BDBDBD",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      }
+    },
+    {
+      "id": "conn_m4_m5",
+      "type": "connector",
+      "startItem": "shape_m4",
+      "endItem": "shape_m5",
+      "style": {
+        "strokeColor": "#BDBDBD",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      }
+    },
+    {
+      "id": "conn_m5_m6",
+      "type": "connector",
+      "startItem": "shape_m5",
+      "endItem": "shape_m6",
+      "style": {
+        "strokeColor": "#BDBDBD",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      }
+    }
+  ]
+}

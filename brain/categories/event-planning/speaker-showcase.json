@@ -1,0 +1,810 @@
+{
+  "metadata": {
+    "name": "Speaker Showcase Board",
+    "description": "Visual speaker directory for InnovateTech Summit 2026 with keynote, featured, and lightning talk speaker cards, topic tags sidebar, schedule cross-reference, and logistics footer",
+    "category": "Event Planning",
+    "tags": ["speakers", "profiles", "conference", "topic-tags", "showcase"],
+    "complexity": "Medium",
+    "boardSize": { "width": 4000, "height": 3000 }
+  },
+  "settings": {
+    "backgroundColor": "#FAFAFA",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_title",
+      "type": "frame",
+      "title": "Title Section",
+      "x": 50,
+      "y": 50,
+      "width": 3900,
+      "height": 350,
+      "style": { "fillColor": "#1A237E" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "Speaker Showcase",
+      "x": 600,
+      "y": 80,
+      "width": 2800,
+      "style": { "fontSize": 56, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_subtitle",
+      "type": "text",
+      "content": "InnovateTech Summit 2026 | 42 Speakers | 3 Days",
+      "x": 800,
+      "y": 190,
+      "width": 2400,
+      "style": { "fontSize": 22, "color": "#E8EAF6" }
+    },
+    {
+      "id": "text_tracks",
+      "type": "text",
+      "content": "Keynotes | Featured Sessions | Lightning Talks | Panels",
+      "x": 900,
+      "y": 240,
+      "width": 2200,
+      "style": { "fontSize": 16, "color": "#FF8F00" }
+    },
+    {
+      "id": "frame_keynotes",
+      "type": "frame",
+      "title": "Keynote Speakers",
+      "x": 50,
+      "y": 450,
+      "width": 3000,
+      "height": 700,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_keynote_header",
+      "type": "text",
+      "content": "Keynote Speakers",
+      "x": 80,
+      "y": 470,
+      "width": 400,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "shape_card1_bg",
+      "type": "shape",
+      "content": "",
+      "shape": "round_rectangle",
+      "x": 80,
+      "y": 520,
+      "width": 900,
+      "height": 580,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_card1_photo",
+      "type": "shape",
+      "content": "Photo",
+      "shape": "circle",
+      "x": 350,
+      "y": 540,
+      "width": 100,
+      "height": 100,
+      "style": {
+        "fillColor": "#E0E0E0",
+        "fontColor": "#9E9E9E",
+        "borderColor": "#BDBDBD",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_card1_name",
+      "type": "text",
+      "content": "Dr. Amara Chen",
+      "x": 100,
+      "y": 660,
+      "width": 860,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#212121" }
+    },
+    {
+      "id": "text_card1_role",
+      "type": "text",
+      "content": "VP of Product, NovaTech",
+      "x": 100,
+      "y": 695,
+      "width": 860,
+      "style": { "fontSize": 14, "color": "#757575" }
+    },
+    {
+      "id": "text_card1_talk",
+      "type": "text",
+      "content": "Talk: 'AI-Native Product Design: Beyond the Hype'",
+      "x": 100,
+      "y": 725,
+      "width": 860,
+      "style": { "fontSize": 14, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "text_card1_time",
+      "type": "text",
+      "content": "Day 1 | 9:00 AM | Main Stage (Hall 1)",
+      "x": 100,
+      "y": 755,
+      "width": 860,
+      "style": { "fontSize": 12, "color": "#00897B" }
+    },
+    {
+      "id": "text_card1_bio",
+      "type": "text",
+      "content": "15 years at the intersection of AI and product development. Previously at DeepMind and Meta AI, she now leads product strategy at NovaTech, shipping 3 AI-native products reaching 50M+ users.",
+      "x": 100,
+      "y": 785,
+      "width": 860,
+      "style": { "fontSize": 11, "color": "#424242" }
+    },
+    {
+      "id": "sticky_card1_tag1",
+      "type": "sticky_note",
+      "content": "#AI",
+      "x": 100,
+      "y": 850,
+      "width": 80,
+      "height": 30,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_card1_tag2",
+      "type": "sticky_note",
+      "content": "#Product",
+      "x": 200,
+      "y": 850,
+      "width": 100,
+      "height": 30,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_card1_tag3",
+      "type": "sticky_note",
+      "content": "#Strategy",
+      "x": 320,
+      "y": 850,
+      "width": 100,
+      "height": 30,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "text_card1_social",
+      "type": "text",
+      "content": "@amarachen | linkedin.com/in/amarachen",
+      "x": 100,
+      "y": 900,
+      "width": 500,
+      "style": { "fontSize": 11, "color": "#9E9E9E" }
+    },
+    {
+      "id": "shape_card2_bg",
+      "type": "shape",
+      "content": "",
+      "shape": "round_rectangle",
+      "x": 1030,
+      "y": 520,
+      "width": 900,
+      "height": 580,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_card2_photo",
+      "type": "shape",
+      "content": "Photo",
+      "shape": "circle",
+      "x": 1300,
+      "y": 540,
+      "width": 100,
+      "height": 100,
+      "style": {
+        "fillColor": "#E0E0E0",
+        "fontColor": "#9E9E9E",
+        "borderColor": "#BDBDBD",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_card2_name",
+      "type": "text",
+      "content": "Marcus Rivera",
+      "x": 1050,
+      "y": 660,
+      "width": 860,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#212121" }
+    },
+    {
+      "id": "text_card2_role",
+      "type": "text",
+      "content": "CTO, BuildScale",
+      "x": 1050,
+      "y": 695,
+      "width": 860,
+      "style": { "fontSize": 14, "color": "#757575" }
+    },
+    {
+      "id": "text_card2_talk",
+      "type": "text",
+      "content": "Talk: 'Scaling Engineering Culture: People, Process, Platform'",
+      "x": 1050,
+      "y": 725,
+      "width": 860,
+      "style": { "fontSize": 14, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "text_card2_time",
+      "type": "text",
+      "content": "Day 2 | 9:00 AM | Main Stage (Hall 1)",
+      "x": 1050,
+      "y": 755,
+      "width": 860,
+      "style": { "fontSize": 12, "color": "#00897B" }
+    },
+    {
+      "id": "text_card2_bio",
+      "type": "text",
+      "content": "Grew BuildScale's engineering org from 12 to 400 in 3 years while maintaining a 4.8/5 Glassdoor rating. Former Staff Engineer at Netflix, known for frameworks on engineering leadership and IC growth paths.",
+      "x": 1050,
+      "y": 785,
+      "width": 860,
+      "style": { "fontSize": 11, "color": "#424242" }
+    },
+    {
+      "id": "sticky_card2_tag1",
+      "type": "sticky_note",
+      "content": "#Engineering",
+      "x": 1050,
+      "y": 850,
+      "width": 120,
+      "height": 30,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_card2_tag2",
+      "type": "sticky_note",
+      "content": "#Leadership",
+      "x": 1190,
+      "y": 850,
+      "width": 110,
+      "height": 30,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_card2_tag3",
+      "type": "sticky_note",
+      "content": "#Culture",
+      "x": 1320,
+      "y": 850,
+      "width": 100,
+      "height": 30,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "shape_card3_bg",
+      "type": "shape",
+      "content": "",
+      "shape": "round_rectangle",
+      "x": 1980,
+      "y": 520,
+      "width": 900,
+      "height": 580,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_card3_photo",
+      "type": "shape",
+      "content": "Photo",
+      "shape": "circle",
+      "x": 2250,
+      "y": 540,
+      "width": 100,
+      "height": 100,
+      "style": {
+        "fillColor": "#E0E0E0",
+        "fontColor": "#9E9E9E",
+        "borderColor": "#BDBDBD",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_card3_name",
+      "type": "text",
+      "content": "Sofia Nguyen",
+      "x": 2000,
+      "y": 660,
+      "width": 860,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#212121" }
+    },
+    {
+      "id": "text_card3_role",
+      "type": "text",
+      "content": "CEO & Co-founder, DataMesh",
+      "x": 2000,
+      "y": 695,
+      "width": 860,
+      "style": { "fontSize": 14, "color": "#757575" }
+    },
+    {
+      "id": "text_card3_talk",
+      "type": "text",
+      "content": "Talk: 'Real-Time Analytics at Petabyte Scale'",
+      "x": 2000,
+      "y": 725,
+      "width": 860,
+      "style": { "fontSize": 14, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "text_card3_time",
+      "type": "text",
+      "content": "Day 2 | 1:00 PM | Main Stage (Hall 1)",
+      "x": 2000,
+      "y": 755,
+      "width": 860,
+      "style": { "fontSize": 12, "color": "#00897B" }
+    },
+    {
+      "id": "text_card3_bio",
+      "type": "text",
+      "content": "Founded DataMesh after a decade at Snowflake and Databricks. Processes 2PB of real-time data daily for Fortune 100 clients. Stanford CS PhD bridging data science theory and production reality.",
+      "x": 2000,
+      "y": 785,
+      "width": 860,
+      "style": { "fontSize": 11, "color": "#424242" }
+    },
+    {
+      "id": "sticky_card3_tag1",
+      "type": "sticky_note",
+      "content": "#Data",
+      "x": 2000,
+      "y": 850,
+      "width": 80,
+      "height": 30,
+      "style": { "fillColor": "#E1BEE7", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_card3_tag2",
+      "type": "sticky_note",
+      "content": "#Analytics",
+      "x": 2100,
+      "y": 850,
+      "width": 110,
+      "height": 30,
+      "style": { "fillColor": "#E1BEE7", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "frame_featured",
+      "type": "frame",
+      "title": "Featured Speakers",
+      "x": 50,
+      "y": 1200,
+      "width": 3000,
+      "height": 700,
+      "style": { "fillColor": "#F3E5F5" }
+    },
+    {
+      "id": "text_featured_header",
+      "type": "text",
+      "content": "Featured Speakers",
+      "x": 80,
+      "y": 1220,
+      "width": 400,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "sticky_feat1",
+      "type": "sticky_note",
+      "content": "Yuki Tanaka\nDesign Director, Figma\n'Design Systems at Scale: From Tokens to Components'\nDay 1, 10:30 AM, Room 201\n#Design #Systems #Figma",
+      "x": 80,
+      "y": 1270,
+      "width": 450,
+      "height": 140,
+      "style": { "fillColor": "#FFFFFF", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_feat2",
+      "type": "sticky_note",
+      "content": "Fatima Al-Rashid\nHead of UX Research, Google\n'Designing for 1 Billion Users'\nDay 1, 1:00 PM, Main Stage\n#UXR #Research #Inclusive",
+      "x": 560,
+      "y": 1270,
+      "width": 450,
+      "height": 140,
+      "style": { "fillColor": "#FFFFFF", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_feat3",
+      "type": "sticky_note",
+      "content": "James O'Brien\nStaff Engineer, Stripe\n'Platform Engineering: Build vs. Buy in 2026'\nDay 1, 1:00 PM, Room 202\n#Platform #Engineering #DevEx",
+      "x": 1040,
+      "y": 1270,
+      "width": 450,
+      "height": 140,
+      "style": { "fillColor": "#FFFFFF", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_feat4",
+      "type": "sticky_note",
+      "content": "Raj Patel\nPrincipal Engineer, Vercel\n'Why We Ditched Microservices' (Lightning)\nDay 1, 2:50 PM, Main Stage\n#Architecture #Monolith #DevOps",
+      "x": 80,
+      "y": 1430,
+      "width": 450,
+      "height": 140,
+      "style": { "fillColor": "#FFFFFF", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_feat5",
+      "type": "sticky_note",
+      "content": "Nadia Ibrahim\nAccessibility Lead, Microsoft\n'Accessible by Default' + Accessibility Audit Workshop\nDay 2, 1:00 PM, Room 201\n#A11y #Inclusive #Workshop",
+      "x": 560,
+      "y": 1430,
+      "width": 450,
+      "height": 140,
+      "style": { "fillColor": "#FFFFFF", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_feat6",
+      "type": "sticky_note",
+      "content": "Derek Cho\nVP Growth, Amplitude\n'The One Metric That Matters' (Lightning)\nDay 1 & 2\n#Growth #Metrics #Hiring",
+      "x": 1040,
+      "y": 1430,
+      "width": 450,
+      "height": 140,
+      "style": { "fillColor": "#FFFFFF", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "frame_lightning",
+      "type": "frame",
+      "title": "Lightning Talk Speakers",
+      "x": 50,
+      "y": 1950,
+      "width": 3000,
+      "height": 400,
+      "style": { "fillColor": "#FFF8E1" }
+    },
+    {
+      "id": "text_lightning_header",
+      "type": "text",
+      "content": "Lightning Talk Speakers",
+      "x": 80,
+      "y": 1970,
+      "width": 500,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "text_lightning_subtitle",
+      "type": "text",
+      "content": "5-minute rapid-fire presentations | Day 1 & 2, 2:50 PM",
+      "x": 80,
+      "y": 2010,
+      "width": 600,
+      "style": { "fontSize": 14, "color": "#757575" }
+    },
+    {
+      "id": "sticky_lt1",
+      "type": "sticky_note",
+      "content": "Lin Wei\nFrontend Eng, Shopify\n'CSS Container Queries Changed Everything'\nDay 1 | #CSS #Frontend",
+      "x": 80,
+      "y": 2050,
+      "width": 450,
+      "height": 100,
+      "style": { "fillColor": "#FFFFFF", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_lt2",
+      "type": "sticky_note",
+      "content": "Alex Kim\nDevOps Lead, Notion\n'From Figma to Production in 4 Hours'\nDay 1 | #DevOps #Workflow",
+      "x": 560,
+      "y": 2050,
+      "width": 450,
+      "height": 100,
+      "style": { "fillColor": "#FFFFFF", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_lt3",
+      "type": "sticky_note",
+      "content": "Maria Santos\nSRE Manager, Datadog\n'Observability for Startups'\nDay 2 | #SRE #Observability",
+      "x": 1040,
+      "y": 2050,
+      "width": 450,
+      "height": 100,
+      "style": { "fillColor": "#FFFFFF", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_lt4",
+      "type": "sticky_note",
+      "content": "Priya Mehta\nPM, Atlassian\n'Async-First: Killing Meetings'\nDay 2 | #Process #Remote",
+      "x": 1520,
+      "y": 2050,
+      "width": 450,
+      "height": 100,
+      "style": { "fillColor": "#FFFFFF", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_lt5",
+      "type": "sticky_note",
+      "content": "Tom Kowalski\nBackend Eng, Cloudflare\n'Edge Computing for the Rest of Us'\nDay 2 | #Edge #Infra",
+      "x": 2000,
+      "y": 2050,
+      "width": 450,
+      "height": 100,
+      "style": { "fillColor": "#FFFFFF", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_lt6",
+      "type": "sticky_note",
+      "content": "Aisha Johnson\nDesign Researcher, Duolingo\n'Gamification That Actually Works'\nDay 2 | #Gamification #UX",
+      "x": 2480,
+      "y": 2050,
+      "width": 450,
+      "height": 100,
+      "style": { "fillColor": "#FFFFFF", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "frame_tags",
+      "type": "frame",
+      "title": "Topic Tags",
+      "x": 3100,
+      "y": 450,
+      "width": 800,
+      "height": 900,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_tags_header",
+      "type": "text",
+      "content": "Browse by Topic",
+      "x": 3130,
+      "y": 470,
+      "width": 400,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "sticky_tag_ai",
+      "type": "sticky_note",
+      "content": "#AI -- 8 speakers",
+      "x": 3130,
+      "y": 520,
+      "width": 200,
+      "height": 50,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "center", "fontSize": 12 }
+    },
+    {
+      "id": "sticky_tag_eng",
+      "type": "sticky_note",
+      "content": "#Engineering -- 12 speakers",
+      "x": 3360,
+      "y": 520,
+      "width": 250,
+      "height": 50,
+      "style": { "fillColor": "#C5CAE9", "textAlign": "center", "fontSize": 12 }
+    },
+    {
+      "id": "sticky_tag_design",
+      "type": "sticky_note",
+      "content": "#Design -- 7 speakers",
+      "x": 3130,
+      "y": 590,
+      "width": 220,
+      "height": 50,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "center", "fontSize": 12 }
+    },
+    {
+      "id": "sticky_tag_lead",
+      "type": "sticky_note",
+      "content": "#Leadership -- 5 speakers",
+      "x": 3380,
+      "y": 590,
+      "width": 230,
+      "height": 50,
+      "style": { "fillColor": "#E1BEE7", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_tag_data",
+      "type": "sticky_note",
+      "content": "#Data -- 4 speakers",
+      "x": 3130,
+      "y": 660,
+      "width": 180,
+      "height": 40,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_tag_product",
+      "type": "sticky_note",
+      "content": "#Product -- 6 speakers",
+      "x": 3340,
+      "y": 660,
+      "width": 200,
+      "height": 40,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_tag_a11y",
+      "type": "sticky_note",
+      "content": "#A11y -- 3",
+      "x": 3130,
+      "y": 720,
+      "width": 120,
+      "height": 35,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_tag_devops",
+      "type": "sticky_note",
+      "content": "#DevOps -- 4",
+      "x": 3270,
+      "y": 720,
+      "width": 130,
+      "height": 35,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_tag_uxr",
+      "type": "sticky_note",
+      "content": "#UXR -- 3",
+      "x": 3420,
+      "y": 720,
+      "width": 120,
+      "height": 35,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_tag_growth",
+      "type": "sticky_note",
+      "content": "#Growth -- 2",
+      "x": 3130,
+      "y": 775,
+      "width": 120,
+      "height": 35,
+      "style": { "fillColor": "#ECEFF1", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "text_tag_hint",
+      "type": "text",
+      "content": "Click a tag to filter speakers",
+      "x": 3130,
+      "y": 830,
+      "width": 400,
+      "style": { "fontSize": 12, "color": "#9E9E9E" }
+    },
+    {
+      "id": "frame_schedule",
+      "type": "frame",
+      "title": "Schedule Quick Reference",
+      "x": 3100,
+      "y": 1400,
+      "width": 800,
+      "height": 600,
+      "style": { "fillColor": "#E8EAF6" }
+    },
+    {
+      "id": "text_sched_header",
+      "type": "text",
+      "content": "Schedule Quick Ref",
+      "x": 3130,
+      "y": 1420,
+      "width": 400,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "shape_sched_table",
+      "type": "shape",
+      "content": "Day 1, 9:00 AM -- Keynote: Dr. Amara Chen\nDay 1, 10:30 AM -- Yuki, Fatima (panel), James, Marcus\nDay 1, 1:00 PM -- Fatima, Yuki, James, Roundtable\nDay 1, 2:50 PM -- Lightning: Raj, Lin, Alex + 3 more\nDay 2, 9:00 AM -- Keynote: Marcus Rivera\nDay 2, 10:30 AM -- Yuki, Sofia, Mentorship Circles\nDay 2, 1:00 PM -- Sofia, Nadia, Alex, CEO Roundtable\nDay 2, 2:50 PM -- Lightning: Maria, Derek + 4 more\nDay 3, 9:00 AM -- Masterclass + Hackathon",
+      "shape": "rectangle",
+      "x": 3130,
+      "y": 1460,
+      "width": 720,
+      "height": 400,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#1A237E",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "frame_logistics",
+      "type": "frame",
+      "title": "Speaker Logistics Footer",
+      "x": 50,
+      "y": 2400,
+      "width": 3900,
+      "height": 350,
+      "style": { "fillColor": "#1A237E" }
+    },
+    {
+      "id": "text_logistics_header",
+      "type": "text",
+      "content": "Speaker Information",
+      "x": 80,
+      "y": 2420,
+      "width": 400,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "sticky_log1",
+      "type": "sticky_note",
+      "content": "Green Room: Room 105, open 7:30 AM - 6:00 PM | Coffee, snacks, quiet space",
+      "x": 80,
+      "y": 2470,
+      "width": 550,
+      "height": 60,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_log2",
+      "type": "sticky_note",
+      "content": "AV Check: Speakers must check in with AV team 30 min before their slot",
+      "x": 660,
+      "y": 2470,
+      "width": 550,
+      "height": 60,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_log3",
+      "type": "sticky_note",
+      "content": "Slide Upload: Submit decks to speakers@innovatetech.com by March 15",
+      "x": 1240,
+      "y": 2470,
+      "width": 550,
+      "height": 60,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_log4",
+      "type": "sticky_note",
+      "content": "Speaker Dinner: March 17, 7:00 PM, The Waterfront Restaurant -- RSVP required",
+      "x": 1820,
+      "y": 2470,
+      "width": 550,
+      "height": 60,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_log5",
+      "type": "sticky_note",
+      "content": "Travel Reimbursement: Submit receipts within 30 days to finance@innovatetech.com",
+      "x": 80,
+      "y": 2550,
+      "width": 550,
+      "height": 60,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_log6",
+      "type": "sticky_note",
+      "content": "Hotel: Hilton SF Union Square -- use code INNOVATE2026 for group rate",
+      "x": 660,
+      "y": 2550,
+      "width": 550,
+      "height": 60,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_liaison",
+      "type": "text",
+      "content": "Speaker Liaison: Jordan Maxwell | jordan@innovatetech.com | +1 (415) 555-0192",
+      "x": 80,
+      "y": 2640,
+      "width": 1500,
+      "style": { "fontSize": 14, "color": "#FFFFFF" }
+    }
+  ]
+}

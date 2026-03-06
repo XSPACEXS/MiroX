@@ -9,6 +9,8 @@ export const designSprint: TemplateDefinition = {
   emoji: '\u26A1',
   estimatedTime: '~6 min',
   blueprintId: 'design-sprint',
+  brainCategory: 'workshops',
+  brainBlueprint: 'design-thinking',
   complexity: 'complex',
   color: '#F472B6',
   tags: ['design sprint', 'gv', 'prototype', 'testing', 'innovation', 'workshop'],

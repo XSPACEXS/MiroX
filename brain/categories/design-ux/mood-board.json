@@ -1,0 +1,784 @@
+{
+  "metadata": {
+    "name": "Mood Board",
+    "description": "Visual inspiration board establishing aesthetic direction for AutoPilot 3.0 with color palettes, reference images, texture samples, font pairings, competitive positioning, and mood descriptors",
+    "category": "Design & UX",
+    "tags": [
+      "mood-board",
+      "visual-direction",
+      "colors",
+      "typography",
+      "inspiration",
+      "branding"
+    ],
+    "complexity": "Simple",
+    "boardSize": { "width": 4000, "height": 3000 }
+  },
+  "settings": {
+    "backgroundColor": "#FFF8F0",
+    "gridEnabled": false
+  },
+  "items": [
+    {
+      "id": "frame_title",
+      "type": "frame",
+      "title": "Board Title",
+      "x": 50,
+      "y": 50,
+      "width": 3900,
+      "height": 200,
+      "style": { "fillColor": "#263238" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "Mood Board: AutoPilot 3.0 Visual Direction",
+      "x": 100,
+      "y": 70,
+      "width": 2500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_meta",
+      "type": "text",
+      "content": "Establishing the visual tone for the AutoPilot 3.0 product refresh and marketing campaign | Lead: Priya Tandon | Date: Feb 25, 2026",
+      "x": 100,
+      "y": 140,
+      "width": 3500,
+      "style": { "fontSize": 14, "color": "#B0BEC5" }
+    },
+    {
+      "id": "frame_colors",
+      "type": "frame",
+      "title": "Color Palette Exploration",
+      "x": 50,
+      "y": 300,
+      "width": 1200,
+      "height": 1000,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_colors_header",
+      "type": "text",
+      "content": "Color Palette",
+      "x": 80,
+      "y": 320,
+      "width": 400,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "text_colors_direction",
+      "type": "text",
+      "content": "Direction: Confident and modern, grounded by deep blues, activated by vibrant accents",
+      "x": 80,
+      "y": 360,
+      "width": 1100,
+      "style": { "fontSize": 14, "color": "#607D8B" }
+    },
+    {
+      "id": "text_primary_palette_label",
+      "type": "text",
+      "content": "Primary Palette",
+      "x": 80,
+      "y": 400,
+      "width": 300,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "shape_swatch_blue",
+      "type": "shape",
+      "content": "Brand Blue\n#2962FF",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 440,
+      "width": 180,
+      "height": 180,
+      "style": {
+        "fillColor": "#2962FF",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#2962FF",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "text_swatch_blue_desc",
+      "type": "text",
+      "content": "Authority, trust, technology",
+      "x": 80,
+      "y": 625,
+      "width": 200,
+      "style": { "fontSize": 11, "color": "#607D8B" }
+    },
+    {
+      "id": "shape_swatch_black",
+      "type": "shape",
+      "content": "Near Black\n#1B1B1B",
+      "shape": "rectangle",
+      "x": 290,
+      "y": 440,
+      "width": 180,
+      "height": 180,
+      "style": {
+        "fillColor": "#1B1B1B",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#1B1B1B",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "text_swatch_black_desc",
+      "type": "text",
+      "content": "Sophistication, clarity",
+      "x": 290,
+      "y": 625,
+      "width": 200,
+      "style": { "fontSize": 11, "color": "#607D8B" }
+    },
+    {
+      "id": "shape_swatch_white",
+      "type": "shape",
+      "content": "Off White\n#FAFAFA",
+      "shape": "rectangle",
+      "x": 500,
+      "y": 440,
+      "width": 180,
+      "height": 180,
+      "style": {
+        "fillColor": "#FAFAFA",
+        "fontColor": "#1B1B1B",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_swatch_white_desc",
+      "type": "text",
+      "content": "Breathing room, clean canvas",
+      "x": 500,
+      "y": 625,
+      "width": 200,
+      "style": { "fontSize": 11, "color": "#607D8B" }
+    },
+    {
+      "id": "text_accent_label",
+      "type": "text",
+      "content": "Accent Options (choose 1-2)",
+      "x": 80,
+      "y": 660,
+      "width": 400,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "shape_accent_green",
+      "type": "shape",
+      "content": "Mint\n#00C853",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 700,
+      "width": 120,
+      "height": 120,
+      "style": {
+        "fillColor": "#00C853",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#00C853",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_accent_orange",
+      "type": "shape",
+      "content": "Tangerine\n#FF6D00",
+      "shape": "rectangle",
+      "x": 220,
+      "y": 700,
+      "width": 120,
+      "height": 120,
+      "style": {
+        "fillColor": "#FF6D00",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#FF6D00",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_accent_purple",
+      "type": "shape",
+      "content": "Electric Purple\n#7C4DFF",
+      "shape": "rectangle",
+      "x": 360,
+      "y": 700,
+      "width": 120,
+      "height": 120,
+      "style": {
+        "fillColor": "#7C4DFF",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#7C4DFF",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_accent_teal",
+      "type": "shape",
+      "content": "Teal\n#00BFA5",
+      "shape": "rectangle",
+      "x": 500,
+      "y": 700,
+      "width": 120,
+      "height": 120,
+      "style": {
+        "fillColor": "#00BFA5",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#00BFA5",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "sticky_priya_color",
+      "type": "sticky_note",
+      "content": "Priya's note: Leaning toward Electric Purple as the AI accent color — differentiates us from competitors who all use green.",
+      "x": 80,
+      "y": 850,
+      "width": 500,
+      "height": 80,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_david_color",
+      "type": "sticky_note",
+      "content": "David's feedback: Avoid orange — too close to competitor Monday.com's brand. Purple feels right.",
+      "x": 600,
+      "y": 850,
+      "width": 500,
+      "height": 80,
+      "style": { "fillColor": "#FCE4EC", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_images",
+      "type": "frame",
+      "title": "Visual References",
+      "x": 1200,
+      "y": 280,
+      "width": 1600,
+      "height": 1400,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_images_header",
+      "type": "text",
+      "content": "Visual References",
+      "x": 1230,
+      "y": 300,
+      "width": 400,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "shape_ref1",
+      "type": "shape",
+      "content": "[Image Reference 1]\n\nClean dashboard UI with generous whitespace, card-based layout, subtle shadows.\nSource: Linear app.",
+      "shape": "round_rectangle",
+      "x": 1230,
+      "y": 350,
+      "width": 480,
+      "height": 320,
+      "style": {
+        "fillColor": "#E3F2FD",
+        "fontColor": "#263238",
+        "borderColor": "#BBDEFB",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_ref2",
+      "type": "shape",
+      "content": "[Image Reference 2]\n\nAI-themed illustration: abstract neural network pattern in purple/blue gradient. Organic lines meeting geometric shapes.",
+      "shape": "round_rectangle",
+      "x": 1730,
+      "y": 350,
+      "width": 480,
+      "height": 320,
+      "style": {
+        "fillColor": "#EDE7F6",
+        "fontColor": "#263238",
+        "borderColor": "#D1C4E9",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_ref3",
+      "type": "shape",
+      "content": "[Image Reference 3]\n\nData visualization: minimal chart design with single-color fills and clean axis labels. No 3D effects.\nSource: Stripe dashboard.",
+      "shape": "round_rectangle",
+      "x": 1230,
+      "y": 690,
+      "width": 480,
+      "height": 320,
+      "style": {
+        "fillColor": "#E8F5E9",
+        "fontColor": "#263238",
+        "borderColor": "#C8E6C9",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_ref4",
+      "type": "shape",
+      "content": "[Image Reference 4]\n\nPhotography: diverse team in bright, modern office space. Natural lighting, candid (not posed). Warm undertones.",
+      "shape": "round_rectangle",
+      "x": 1730,
+      "y": 690,
+      "width": 480,
+      "height": 320,
+      "style": {
+        "fillColor": "#FFF3E0",
+        "fontColor": "#263238",
+        "borderColor": "#FFE0B2",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_ref5",
+      "type": "shape",
+      "content": "[Image Reference 5]\n\nOnboarding UI: step-by-step wizard with progress indicator, large illustrations, minimal text per step.\nSource: Notion.",
+      "shape": "round_rectangle",
+      "x": 1230,
+      "y": 1030,
+      "width": 480,
+      "height": 320,
+      "style": {
+        "fillColor": "#FCE4EC",
+        "fontColor": "#263238",
+        "borderColor": "#F8BBD0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_ref6",
+      "type": "shape",
+      "content": "[Image Reference 6]\n\nMobile task card: compact design with color-coded priority badges, avatar, and swipe gestures.\nSource: Things 3 app.",
+      "shape": "round_rectangle",
+      "x": 1730,
+      "y": 1030,
+      "width": 480,
+      "height": 320,
+      "style": {
+        "fillColor": "#E0F2F1",
+        "fontColor": "#263238",
+        "borderColor": "#B2DFDB",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "sticky_ref_note",
+      "type": "sticky_note",
+      "content": "These references capture the 'premium but approachable' vibe we want. Not sterile like enterprise software, not playful like consumer apps.",
+      "x": 1230,
+      "y": 1370,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_textures",
+      "type": "frame",
+      "title": "Textures & Patterns",
+      "x": 2850,
+      "y": 300,
+      "width": 1000,
+      "height": 1000,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_textures_header",
+      "type": "text",
+      "content": "Textures & Patterns",
+      "x": 2880,
+      "y": 320,
+      "width": 400,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "shape_texture1",
+      "type": "shape",
+      "content": "Subtle dot grid pattern\n(#F5F5F5 dots on #FAFAFA)",
+      "shape": "rectangle",
+      "x": 2880,
+      "y": 370,
+      "width": 400,
+      "height": 150,
+      "style": {
+        "fillColor": "#FAFAFA",
+        "fontColor": "#9E9E9E",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_texture1_desc",
+      "type": "text",
+      "content": "Background texture: fine dot grid at 20px intervals. Adds subtle depth without distraction.",
+      "x": 2880,
+      "y": 525,
+      "width": 900,
+      "style": { "fontSize": 11, "color": "#607D8B" }
+    },
+    {
+      "id": "shape_texture2",
+      "type": "shape",
+      "content": "Hero Gradient\n#2962FF → #7C4DFF\n(15-degree angle)",
+      "shape": "rectangle",
+      "x": 2880,
+      "y": 560,
+      "width": 400,
+      "height": 150,
+      "style": {
+        "fillColor": "#7C4DFF",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#5E35B1",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "text_texture2_desc",
+      "type": "text",
+      "content": "Hero gradient: blue to purple diagonal. Used for marketing hero sections and feature highlight backgrounds.",
+      "x": 2880,
+      "y": 715,
+      "width": 900,
+      "style": { "fontSize": 11, "color": "#607D8B" }
+    },
+    {
+      "id": "shape_texture3",
+      "type": "shape",
+      "content": "Geometric Line Pattern\n(interconnected nodes and lines)",
+      "shape": "rectangle",
+      "x": 2880,
+      "y": 750,
+      "width": 400,
+      "height": 150,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#BDBDBD",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_texture3_desc",
+      "type": "text",
+      "content": "AI pattern: interconnected nodes suggesting a neural network. Use as decorative background, not content overlay.",
+      "x": 2880,
+      "y": 905,
+      "width": 900,
+      "style": { "fontSize": 11, "color": "#607D8B" }
+    },
+    {
+      "id": "sticky_texture_note",
+      "type": "sticky_note",
+      "content": "Priya's note: The neural network line pattern could be our signature visual element. Use sparingly — in hero sections and empty states only.",
+      "x": 2880,
+      "y": 940,
+      "width": 500,
+      "height": 80,
+      "style": { "fillColor": "#FCE4EC", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_fonts",
+      "type": "frame",
+      "title": "Font Pairings",
+      "x": 50,
+      "y": 1350,
+      "width": 1200,
+      "height": 800,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_fonts_header",
+      "type": "text",
+      "content": "Font Pairings",
+      "x": 80,
+      "y": 1370,
+      "width": 400,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "text_optionA_label",
+      "type": "text",
+      "content": "Option A (Recommended)",
+      "x": 80,
+      "y": 1410,
+      "width": 500,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#E91E63" }
+    },
+    {
+      "id": "text_optionA_display",
+      "type": "text",
+      "content": "Inter for Everything",
+      "x": 80,
+      "y": 1450,
+      "width": 800,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_optionA_desc",
+      "type": "text",
+      "content": "Inter is our workhorse. It covers headings, body, and UI text. Clean, highly legible, modern without being trendy.",
+      "x": 80,
+      "y": 1500,
+      "width": 1000,
+      "style": { "fontSize": 14, "color": "#607D8B" }
+    },
+    {
+      "id": "text_optionA_code",
+      "type": "text",
+      "content": "const autopilot = new AI();",
+      "x": 80,
+      "y": 1540,
+      "width": 600,
+      "style": { "fontSize": 14, "color": "#263238" }
+    },
+    {
+      "id": "text_optionA_code_desc",
+      "type": "text",
+      "content": "JetBrains Mono for code and data. Monospace with programming ligatures.",
+      "x": 80,
+      "y": 1570,
+      "width": 1000,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_optionB_label",
+      "type": "text",
+      "content": "Option B (Considered, Rejected)",
+      "x": 80,
+      "y": 1620,
+      "width": 500,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#607D8B" }
+    },
+    {
+      "id": "text_optionB_display",
+      "type": "text",
+      "content": "General Sans for Headings",
+      "x": 80,
+      "y": 1660,
+      "width": 800,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#9E9E9E" }
+    },
+    {
+      "id": "text_optionB_desc",
+      "type": "text",
+      "content": "Paired with Inter for body text. Slightly more personality in headings, but adds a second font to load. Team decided against due to performance concern.",
+      "x": 80,
+      "y": 1700,
+      "width": 1000,
+      "style": { "fontSize": 14, "color": "#BDBDBD" }
+    },
+    {
+      "id": "text_optionC_label",
+      "type": "text",
+      "content": "Option C (Considered, Rejected)",
+      "x": 80,
+      "y": 1750,
+      "width": 500,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#607D8B" }
+    },
+    {
+      "id": "text_optionC_display",
+      "type": "text",
+      "content": "Space Grotesk for Headings",
+      "x": 80,
+      "y": 1790,
+      "width": 800,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#9E9E9E" }
+    },
+    {
+      "id": "text_optionC_desc",
+      "type": "text",
+      "content": "More geometric and techy. Strong AI vibe but felt too cold for a productivity tool. Team wanted warmth.",
+      "x": 80,
+      "y": 1830,
+      "width": 1000,
+      "style": { "fontSize": 14, "color": "#BDBDBD" }
+    },
+    {
+      "id": "sticky_font_decision",
+      "type": "sticky_note",
+      "content": "Final decision: Inter + JetBrains Mono. One typeface for all UI text keeps things simple and loads fast.",
+      "x": 80,
+      "y": 1880,
+      "width": 500,
+      "height": 80,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_competitors",
+      "type": "frame",
+      "title": "Competitive Visual References",
+      "x": 1300,
+      "y": 1700,
+      "width": 1200,
+      "height": 800,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_comp_header",
+      "type": "text",
+      "content": "Competitive Landscape (Visual)",
+      "x": 1330,
+      "y": 1720,
+      "width": 600,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "text_comp_desc",
+      "type": "text",
+      "content": "Where we want to position our visual identity relative to competitors",
+      "x": 1330,
+      "y": 1760,
+      "width": 1000,
+      "style": { "fontSize": 14, "color": "#607D8B" }
+    },
+    {
+      "id": "shape_positioning_map",
+      "type": "shape",
+      "content": "Playful ←────────────→ Professional\n         ↑ Complex\n\n    ClickUp    Jira\n        Monday    Linear\n           Asana  ★ AutoPilot\n        Notion\n\n         ↓ Simple\n\nX-axis: Playful to Professional\nY-axis: Simple to Complex\n★ = Our target position",
+      "shape": "rectangle",
+      "x": 1330,
+      "y": 1800,
+      "width": 1100,
+      "height": 450,
+      "style": {
+        "fillColor": "#FAFAFA",
+        "fontColor": "#263238",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "sticky_comp_note",
+      "type": "sticky_note",
+      "content": "We want to be between Linear (too minimal) and Asana (too generic). More polished than Monday, less intimidating than Jira. The AI element should visually set us apart.",
+      "x": 1330,
+      "y": 2280,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_descriptors",
+      "type": "frame",
+      "title": "Mood Descriptors",
+      "x": 2600,
+      "y": 1400,
+      "width": 1300,
+      "height": 1000,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_desc_header",
+      "type": "text",
+      "content": "Mood Descriptors",
+      "x": 2630,
+      "y": 1420,
+      "width": 400,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "text_desc_sub",
+      "type": "text",
+      "content": "How AutoPilot 3.0 should FEEL",
+      "x": 2630,
+      "y": 1460,
+      "width": 500,
+      "style": { "fontSize": 16, "color": "#607D8B" }
+    },
+    {
+      "id": "sticky_mood_intelligent",
+      "type": "sticky_note",
+      "content": "INTELLIGENT\nSmart without being intimidating. The AI should feel like a capable assistant, not a black box.",
+      "x": 2630,
+      "y": 1500,
+      "width": 380,
+      "height": 100,
+      "style": { "fillColor": "#FCE4EC", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_mood_clean",
+      "type": "sticky_note",
+      "content": "CLEAN\nGenerous whitespace, clear hierarchy, no visual noise. Every element earns its place.",
+      "x": 3050,
+      "y": 1500,
+      "width": 380,
+      "height": 100,
+      "style": { "fillColor": "#EDE7F6", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_mood_confident",
+      "type": "sticky_note",
+      "content": "CONFIDENT\nBold typography, decisive color choices, strong CTAs. We know what we are and we show it.",
+      "x": 2630,
+      "y": 1620,
+      "width": 380,
+      "height": 100,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_mood_warm",
+      "type": "sticky_note",
+      "content": "WARM\nNot sterile. Rounded corners, friendly photography, conversational microcopy. Approachable professionalism.",
+      "x": 3050,
+      "y": 1620,
+      "width": 380,
+      "height": 100,
+      "style": { "fillColor": "#E8F5E9", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_mood_fast",
+      "type": "sticky_note",
+      "content": "FAST\nThe UI should feel fast. Snappy transitions, instant feedback, no unnecessary loading states. Speed is a design choice.",
+      "x": 2630,
+      "y": 1740,
+      "width": 380,
+      "height": 100,
+      "style": { "fillColor": "#FFF8E1", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "text_not_these",
+      "type": "text",
+      "content": "NOT These:",
+      "x": 2630,
+      "y": 1870,
+      "width": 300,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#D32F2F" }
+    },
+    {
+      "id": "sticky_not1",
+      "type": "sticky_note",
+      "content": "Not corporate or sterile (no gray enterprise dashboards)",
+      "x": 2630,
+      "y": 1910,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#FFEBEE", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_not2",
+      "type": "sticky_note",
+      "content": "Not childish or gimmicky (no mascots, no gamification badges)",
+      "x": 3050,
+      "y": 1910,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#FFEBEE", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_not3",
+      "type": "sticky_note",
+      "content": "Not cluttered or overwhelming (no feature dump interfaces)",
+      "x": 2630,
+      "y": 1990,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#FFEBEE", "textAlign": "left", "fontSize": 11 }
+    }
+  ]
+}

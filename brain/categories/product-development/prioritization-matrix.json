@@ -1,0 +1,398 @@
+{
+  "metadata": {
+    "name": "Prioritization Matrix",
+    "description": "2x2 Impact vs Effort matrix with plotted features and RICE scoring table for data-driven prioritization decisions",
+    "category": "Product Development",
+    "tags": ["prioritization", "RICE", "impact-effort", "matrix", "scoring"],
+    "complexity": "Simple",
+    "boardSize": { "width": 4000, "height": 2800 }
+  },
+  "settings": {
+    "backgroundColor": "#F5F0FF",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_header",
+      "type": "frame",
+      "title": "Board Header",
+      "x": 50,
+      "y": 50,
+      "width": 3900,
+      "height": 200,
+      "style": { "fillColor": "#6200EA" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "Prioritization Matrix — Q2 2026 Feature Candidates",
+      "x": 100,
+      "y": 70,
+      "width": 3000,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_subtitle",
+      "type": "text",
+      "content": "Evaluate and rank 12 feature candidates for the next quarter | Updated: March 6, 2026 | Owner: Jake Reynolds (PM)",
+      "x": 100,
+      "y": 140,
+      "width": 3000,
+      "style": { "fontSize": 14, "color": "#D1C4E9" }
+    },
+    {
+      "id": "frame_matrix",
+      "type": "frame",
+      "title": "Impact vs Effort Matrix",
+      "x": 50,
+      "y": 300,
+      "width": 2000,
+      "height": 1800,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_matrix_header",
+      "type": "text",
+      "content": "Impact vs Effort Matrix",
+      "x": 80,
+      "y": 320,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "shape_quickwins",
+      "type": "shape",
+      "content": "QUICK WINS\nDo First",
+      "shape": "rectangle",
+      "x": 100,
+      "y": 400,
+      "width": 900,
+      "height": 650,
+      "style": {
+        "fillColor": "#E8F5E9",
+        "fontColor": "#2E7D32",
+        "borderColor": "#C8E6C9",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_major",
+      "type": "shape",
+      "content": "MAJOR PROJECTS\nPlan Carefully",
+      "shape": "rectangle",
+      "x": 1050,
+      "y": 400,
+      "width": 900,
+      "height": 650,
+      "style": {
+        "fillColor": "#E3F2FD",
+        "fontColor": "#1565C0",
+        "borderColor": "#BBDEFB",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_fillins",
+      "type": "shape",
+      "content": "FILL-INS\nDo If Time Allows",
+      "shape": "rectangle",
+      "x": 100,
+      "y": 1100,
+      "width": 900,
+      "height": 650,
+      "style": {
+        "fillColor": "#FFF8E1",
+        "fontColor": "#F57F17",
+        "borderColor": "#FFF9C4",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_avoid",
+      "type": "shape",
+      "content": "AVOID\nDeprioritize",
+      "shape": "rectangle",
+      "x": 1050,
+      "y": 1100,
+      "width": 900,
+      "height": 650,
+      "style": {
+        "fillColor": "#FFEBEE",
+        "fontColor": "#C62828",
+        "borderColor": "#FFCDD2",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "sticky_qw1",
+      "type": "sticky_note",
+      "content": "Smart Notifications\n2 weeks, high user demand",
+      "x": 150,
+      "y": 500,
+      "width": 180,
+      "height": 80,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_qw2",
+      "type": "sticky_note",
+      "content": "Kanban WIP Limits\n1 week, reduces bottlenecks",
+      "x": 380,
+      "y": 550,
+      "width": 180,
+      "height": 80,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_qw3",
+      "type": "sticky_note",
+      "content": "Sprint Goal Field\n3 days, improves focus",
+      "x": 600,
+      "y": 480,
+      "width": 180,
+      "height": 80,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_mp1",
+      "type": "sticky_note",
+      "content": "AI Task Routing\n6 weeks, core differentiator",
+      "x": 1100,
+      "y": 480,
+      "width": 180,
+      "height": 80,
+      "style": { "fillColor": "#90CAF9", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_mp2",
+      "type": "sticky_note",
+      "content": "Time Tracking\n5 weeks, top customer request",
+      "x": 1350,
+      "y": 550,
+      "width": 180,
+      "height": 80,
+      "style": { "fillColor": "#90CAF9", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_mp3",
+      "type": "sticky_note",
+      "content": "Timeline/Gantt View\n6 weeks, enterprise need",
+      "x": 1600,
+      "y": 500,
+      "width": 180,
+      "height": 80,
+      "style": { "fillColor": "#90CAF9", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_fi1",
+      "type": "sticky_note",
+      "content": "Card Aging\n2 days",
+      "x": 150,
+      "y": 1200,
+      "width": 180,
+      "height": 70,
+      "style": { "fillColor": "#FFE082", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_fi2",
+      "type": "sticky_note",
+      "content": "Dark Mode\n1 week",
+      "x": 380,
+      "y": 1250,
+      "width": 180,
+      "height": 70,
+      "style": { "fillColor": "#FFE082", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_av1",
+      "type": "sticky_note",
+      "content": "White-Label\n8 weeks, niche",
+      "x": 1100,
+      "y": 1200,
+      "width": 180,
+      "height": 70,
+      "style": { "fillColor": "#EF9A9A", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_av2",
+      "type": "sticky_note",
+      "content": "Built-In Video Chat\n10 weeks",
+      "x": 1350,
+      "y": 1250,
+      "width": 180,
+      "height": 70,
+      "style": { "fillColor": "#EF9A9A", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "frame_rice",
+      "type": "frame",
+      "title": "RICE Scoring Table",
+      "x": 2100,
+      "y": 300,
+      "width": 1800,
+      "height": 1800,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_rice_header",
+      "type": "text",
+      "content": "RICE Scoring",
+      "x": 2130,
+      "y": 320,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "text_rice_formula",
+      "type": "text",
+      "content": "RICE = (Reach x Impact x Confidence) / Effort",
+      "x": 2130,
+      "y": 370,
+      "width": 600,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#00897B" }
+    },
+    {
+      "id": "shape_rice_table",
+      "type": "shape",
+      "content": "Feature | Reach | Impact | Conf | Effort | Score | Rank\n─────────────────────────────────────────────\nAI Task Routing | 8K | 3 | 80% | 12 | 1,600 | 1\nSmart Notifs | 12K | 2 | 90% | 4 | 5,400 | 2\nTime Tracking | 6K | 2 | 80% | 10 | 960 | 3\nKanban WIP | 10K | 1 | 90% | 2 | 4,500 | 4\nGantt View | 4K | 2 | 70% | 12 | 467 | 5\nSprint Goal | 8K | 1 | 90% | 0.5 | 14,400 | 6\nDark Mode | 15K | 0.5 | 80% | 2 | 3,000 | 7\nWhite-Label | 200 | 2 | 40% | 16 | 10 | 10\nVideo Chat | 3K | 1 | 30% | 20 | 45 | 11\nOffline Mode | 1.5K | 1 | 50% | 12 | 63 | 12",
+      "shape": "rectangle",
+      "x": 2130,
+      "y": 420,
+      "width": 1650,
+      "height": 600,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#00897B",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "sticky_rice_note",
+      "type": "sticky_note",
+      "content": "RICE scores are a starting point for discussion, not a final answer. Adjust rankings based on strategic alignment and dependencies.",
+      "x": 2130,
+      "y": 1060,
+      "width": 700,
+      "height": 80,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 12 }
+    },
+    {
+      "id": "frame_summary",
+      "type": "frame",
+      "title": "Priority Summary",
+      "x": 50,
+      "y": 2150,
+      "width": 3900,
+      "height": 600,
+      "style": { "fillColor": "#F5F0FF" }
+    },
+    {
+      "id": "text_summary_header",
+      "type": "text",
+      "content": "Priority Summary — Q2 2026",
+      "x": 80,
+      "y": 2170,
+      "width": 600,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "text_tier1",
+      "type": "text",
+      "content": "Tier 1: Commit (must ship this quarter)",
+      "x": 80,
+      "y": 2230,
+      "width": 500,
+      "style": { "fontSize": 20, "fontWeight": "bold", "color": "#00897B" }
+    },
+    {
+      "id": "sticky_t1_1",
+      "type": "sticky_note",
+      "content": "AI Task Routing (RICE #1, core differentiator)",
+      "x": 80,
+      "y": 2280,
+      "width": 350,
+      "height": 60,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_t1_2",
+      "type": "sticky_note",
+      "content": "Smart Notifications (RICE #2, quick win)",
+      "x": 450,
+      "y": 2280,
+      "width": 350,
+      "height": 60,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_t1_3",
+      "type": "sticky_note",
+      "content": "Kanban WIP Limits (RICE #4, quick win)",
+      "x": 820,
+      "y": 2280,
+      "width": 350,
+      "height": 60,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "text_tier2",
+      "type": "text",
+      "content": "Tier 2: Target (ship if capacity allows)",
+      "x": 80,
+      "y": 2370,
+      "width": 500,
+      "style": { "fontSize": 20, "fontWeight": "bold", "color": "#FF8F00" }
+    },
+    {
+      "id": "sticky_t2_1",
+      "type": "sticky_note",
+      "content": "Time Tracking (RICE #3)",
+      "x": 80,
+      "y": 2420,
+      "width": 350,
+      "height": 60,
+      "style": { "fillColor": "#FFE082", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_t2_2",
+      "type": "sticky_note",
+      "content": "Gantt View (RICE #5)",
+      "x": 450,
+      "y": 2420,
+      "width": 350,
+      "height": 60,
+      "style": { "fillColor": "#FFE082", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "text_tier3",
+      "type": "text",
+      "content": "Tier 3: Deprioritize — White-Label, Video Chat, Offline Mode (low RICE, high effort)",
+      "x": 80,
+      "y": 2510,
+      "width": 1500,
+      "style": { "fontSize": 14, "color": "#D32F2F" }
+    },
+    {
+      "id": "text_decision",
+      "type": "text",
+      "content": "Decision made: March 6, 2026 | Approved by: Jake R. (PM), Marcus W. (Eng), David K. (VP Product)",
+      "x": 80,
+      "y": 2560,
+      "width": 2000,
+      "style": { "fontSize": 14, "color": "#607D8B" }
+    },
+    {
+      "id": "conn_rice_summary",
+      "type": "connector",
+      "startItem": "frame_rice",
+      "endItem": "frame_summary",
+      "style": {
+        "strokeColor": "#6200EA",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Scores inform decisions" }]
+    }
+  ]
+}

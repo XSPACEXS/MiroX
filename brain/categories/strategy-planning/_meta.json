@@ -1,0 +1,90 @@
+{
+  "category": "Strategy & Planning",
+  "description": "Strategic frameworks for business analysis, goal setting, competitive positioning, and long-term vision development",
+  "icon": "🎯",
+  "colorTheme": {
+    "primary": "#4A148C",
+    "secondary": "#00695C",
+    "accent": "#E65100"
+  },
+  "knowledge": [
+    {
+      "file": "design-philosophy",
+      "name": "Design Philosophy",
+      "description": "Why strategy boards exist, cognitive principles (Structured Analysis, Prospect Theory, Anchoring, Spatial Reasoning), visual design principles, and core tensions"
+    },
+    {
+      "file": "layout-patterns",
+      "name": "Layout Patterns",
+      "description": "Five patterns (Four-Quadrant/SWOT, Nine-Block/BMC, Hierarchical Cascade/OKR, Positioning Map, Vision-to-Execution Bridge) with ASCII diagrams and spatial rules"
+    },
+    {
+      "file": "visual-guide",
+      "name": "Visual Guide",
+      "description": "Four palettes (Executive Authority, Strategic Clarity, Competitive Fire, Balanced Wisdom), strategy typography, connector types, and quality checklist"
+    },
+    {
+      "file": "content-guide",
+      "name": "Content Guide",
+      "description": "Content by framework (SWOT, BMC, OKR, Competitive Analysis, Vision Board) with real examples, writing guidelines, and volume guidelines"
+    },
+    {
+      "file": "build-process",
+      "name": "Build Process",
+      "description": "Six-phase workflow with strategy-specific Miro API code, SWOT/BMC/OKR construction, implications zone, and validation checklists"
+    },
+    {
+      "file": "examples-reference",
+      "name": "Examples Reference",
+      "description": "Six detailed examples (Enterprise SWOT, Startup BMC, OKR Cascade, Competitive Map, Vision Bridge, Non-Profit Hybrid), anti-patterns, and transformations"
+    },
+    {
+      "file": "variations",
+      "name": "Variations",
+      "description": "Industry adaptations (SaaS, Healthcare, Fintech, Education, Agency), team sizes, complexity levels, cultural considerations, and cross-board integrations"
+    }
+  ],
+  "templates": [
+    {
+      "file": "swot-analysis",
+      "name": "SWOT Analysis",
+      "description": "Four-quadrant analysis board mapping Strengths, Weaknesses, Opportunities, and Threats",
+      "tags": ["swot", "analysis", "strategy", "assessment", "competitive"],
+      "complexity": "Simple"
+    },
+    {
+      "file": "business-model-canvas",
+      "name": "Business Model Canvas",
+      "description": "Nine-block canvas for designing and iterating on business models following the Osterwalder framework",
+      "tags": ["business-model", "canvas", "startup", "strategy", "lean"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "okr-planning",
+      "name": "OKR Planning",
+      "description": "Objectives and Key Results planning board with company, team, and individual goal alignment",
+      "tags": ["okr", "objectives", "goals", "alignment", "key-results"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "vision-board",
+      "name": "Vision Board",
+      "description": "Inspirational strategic vision board combining mission, values, long-term goals, and aspirational imagery",
+      "tags": ["vision", "mission", "values", "strategy", "inspiration"],
+      "complexity": "Simple"
+    },
+    {
+      "file": "competitive-analysis",
+      "name": "Competitive Analysis",
+      "description": "Multi-competitor comparison board with feature matrices, positioning maps, and strategic insights",
+      "tags": [
+        "competitive",
+        "analysis",
+        "comparison",
+        "positioning",
+        "market"
+      ],
+      "complexity": "Advanced"
+    }
+  ]
+}

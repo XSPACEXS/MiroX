@@ -1,0 +1,366 @@
+{
+  "company-vision-board": {
+    "category": "company-building",
+    "file": "company-vision-board"
+  },
+  "culture-canvas": {
+    "category": "company-building",
+    "file": "culture-canvas"
+  },
+  "investor-update-board": {
+    "category": "company-building",
+    "file": "investor-update-board"
+  },
+  "org-growth-plan": {
+    "category": "company-building",
+    "file": "org-growth-plan"
+  },
+  "empathy-map": {
+    "category": "customer-journey",
+    "file": "empathy-map"
+  },
+  "journey-map": {
+    "category": "customer-journey",
+    "file": "journey-map"
+  },
+  "persona-board": {
+    "category": "customer-journey",
+    "file": "persona-board"
+  },
+  "touchpoint-analysis": {
+    "category": "customer-journey",
+    "file": "touchpoint-analysis"
+  },
+  "data-dashboard": {
+    "category": "data-analytics",
+    "file": "data-dashboard"
+  },
+  "kpi-tracker": {
+    "category": "data-analytics",
+    "file": "kpi-tracker"
+  },
+  "research-synthesis": {
+    "category": "data-analytics",
+    "file": "research-synthesis"
+  },
+  "survey-analysis": {
+    "category": "data-analytics",
+    "file": "survey-analysis"
+  },
+  "design-system": {
+    "category": "design-ux",
+    "file": "design-system"
+  },
+  "mood-board": {
+    "category": "design-ux",
+    "file": "mood-board"
+  },
+  "ui-review": {
+    "category": "design-ux",
+    "file": "ui-review"
+  },
+  "user-flow": {
+    "category": "design-ux",
+    "file": "user-flow"
+  },
+  "wireframe-board": {
+    "category": "design-ux",
+    "file": "wireframe-board"
+  },
+  "course-curriculum": {
+    "category": "education",
+    "file": "course-curriculum"
+  },
+  "lesson-plan": {
+    "category": "education",
+    "file": "lesson-plan"
+  },
+  "research-board": {
+    "category": "education",
+    "file": "research-board"
+  },
+  "study-map": {
+    "category": "education",
+    "file": "study-map"
+  },
+  "distributed-event-world": {
+    "category": "event-isometric",
+    "file": "distributed-event-world"
+  },
+  "festival-campus": {
+    "category": "event-isometric",
+    "file": "festival-campus"
+  },
+  "hybrid-event-layout": {
+    "category": "event-isometric",
+    "file": "hybrid-event-layout"
+  },
+  "immersive-conference-map": {
+    "category": "event-isometric",
+    "file": "immersive-conference-map"
+  },
+  "agenda-board": {
+    "category": "event-planning",
+    "file": "agenda-board"
+  },
+  "event-guide": {
+    "category": "event-planning",
+    "file": "event-guide"
+  },
+  "speaker-showcase": {
+    "category": "event-planning",
+    "file": "speaker-showcase"
+  },
+  "venue-layout": {
+    "category": "event-planning",
+    "file": "venue-layout"
+  },
+  "budget-planning": {
+    "category": "finance",
+    "file": "budget-planning"
+  },
+  "financial-dashboard": {
+    "category": "finance",
+    "file": "financial-dashboard"
+  },
+  "investment-analysis": {
+    "category": "finance",
+    "file": "investment-analysis"
+  },
+  "revenue-model": {
+    "category": "finance",
+    "file": "revenue-model"
+  },
+  "launch-gtm-overview": {
+    "category": "launch-gtm",
+    "file": "launch-gtm-overview"
+  },
+  "brand-guidelines": {
+    "category": "marketing",
+    "file": "brand-guidelines"
+  },
+  "campaign-planning": {
+    "category": "marketing",
+    "file": "campaign-planning"
+  },
+  "content-calendar": {
+    "category": "marketing",
+    "file": "content-calendar"
+  },
+  "funnel-mapping": {
+    "category": "marketing",
+    "file": "funnel-mapping"
+  },
+  "gtm-strategy": {
+    "category": "marketing",
+    "file": "gtm-strategy"
+  },
+  "enablement-war-room": {
+    "category": "marketing-enablement",
+    "file": "enablement-war-room"
+  },
+  "feature-bundle-board": {
+    "category": "marketing-enablement",
+    "file": "feature-bundle-board"
+  },
+  "landing-page-tracker": {
+    "category": "marketing-enablement",
+    "file": "landing-page-tracker"
+  },
+  "traction-funnel": {
+    "category": "marketing-enablement",
+    "file": "traction-funnel"
+  },
+  "collaborative-brainstorm": {
+    "category": "mind-map-collab",
+    "file": "collaborative-brainstorm"
+  },
+  "decision-tree": {
+    "category": "mind-map-collab",
+    "file": "decision-tree"
+  },
+  "product-mind-map": {
+    "category": "mind-map-collab",
+    "file": "product-mind-map"
+  },
+  "research-cluster-map": {
+    "category": "mind-map-collab",
+    "file": "research-cluster-map"
+  },
+  "brainstorming-board": {
+    "category": "mind-maps",
+    "file": "brainstorming-board"
+  },
+  "concept-map": {
+    "category": "mind-maps",
+    "file": "concept-map"
+  },
+  "idea-exploration": {
+    "category": "mind-maps",
+    "file": "idea-exploration"
+  },
+  "topic-clustering": {
+    "category": "mind-maps",
+    "file": "topic-clustering"
+  },
+  "department-campus": {
+    "category": "miro-world",
+    "file": "department-campus"
+  },
+  "feature-landscape": {
+    "category": "miro-world",
+    "file": "feature-landscape"
+  },
+  "product-world-map": {
+    "category": "miro-world",
+    "file": "product-world-map"
+  },
+  "whats-new-showcase": {
+    "category": "miro-world",
+    "file": "whats-new-showcase"
+  },
+  "feature-planning": {
+    "category": "product-development",
+    "file": "feature-planning"
+  },
+  "prioritization-matrix": {
+    "category": "product-development",
+    "file": "prioritization-matrix"
+  },
+  "product-roadmap": {
+    "category": "product-development",
+    "file": "product-roadmap"
+  },
+  "release-planning": {
+    "category": "product-development",
+    "file": "release-planning"
+  },
+  "user-story-mapping": {
+    "category": "product-development",
+    "file": "user-story-mapping"
+  },
+  "gantt-timeline": {
+    "category": "project-management",
+    "file": "gantt-timeline"
+  },
+  "kanban-board": {
+    "category": "project-management",
+    "file": "kanban-board"
+  },
+  "project-overview": {
+    "category": "project-management",
+    "file": "project-overview"
+  },
+  "roadmap": {
+    "category": "project-management",
+    "file": "roadmap"
+  },
+  "sprint-planning": {
+    "category": "project-management",
+    "file": "sprint-planning"
+  },
+  "account-planning": {
+    "category": "sales",
+    "file": "account-planning"
+  },
+  "deal-tracker": {
+    "category": "sales",
+    "file": "deal-tracker"
+  },
+  "sales-pipeline": {
+    "category": "sales",
+    "file": "sales-pipeline"
+  },
+  "sales-playbook": {
+    "category": "sales",
+    "file": "sales-playbook"
+  },
+  "investor-board": {
+    "category": "startup",
+    "file": "investor-board"
+  },
+  "lean-canvas": {
+    "category": "startup",
+    "file": "lean-canvas"
+  },
+  "mvp-planning": {
+    "category": "startup",
+    "file": "mvp-planning"
+  },
+  "pitch-deck-plan": {
+    "category": "startup",
+    "file": "pitch-deck-plan"
+  },
+  "business-model-canvas": {
+    "category": "strategy-planning",
+    "file": "business-model-canvas"
+  },
+  "competitive-analysis": {
+    "category": "strategy-planning",
+    "file": "competitive-analysis"
+  },
+  "okr-planning": {
+    "category": "strategy-planning",
+    "file": "okr-planning"
+  },
+  "swot-analysis": {
+    "category": "strategy-planning",
+    "file": "swot-analysis"
+  },
+  "vision-board": {
+    "category": "strategy-planning",
+    "file": "vision-board"
+  },
+  "onboarding-board": {
+    "category": "team-hr",
+    "file": "onboarding-board"
+  },
+  "org-chart": {
+    "category": "team-hr",
+    "file": "org-chart"
+  },
+  "performance-review": {
+    "category": "team-hr",
+    "file": "performance-review"
+  },
+  "team-building": {
+    "category": "team-hr",
+    "file": "team-building"
+  },
+  "api-map": {
+    "category": "technical-architecture",
+    "file": "api-map"
+  },
+  "database-schema": {
+    "category": "technical-architecture",
+    "file": "database-schema"
+  },
+  "infrastructure-overview": {
+    "category": "technical-architecture",
+    "file": "infrastructure-overview"
+  },
+  "system-diagram": {
+    "category": "technical-architecture",
+    "file": "system-diagram"
+  },
+  "brainstorm-session": {
+    "category": "workshops",
+    "file": "brainstorm-session"
+  },
+  "design-thinking": {
+    "category": "workshops",
+    "file": "design-thinking"
+  },
+  "icebreaker": {
+    "category": "workshops",
+    "file": "icebreaker"
+  },
+  "retrospective": {
+    "category": "workshops",
+    "file": "retrospective"
+  },
+  "world-cafe": {
+    "category": "workshops",
+    "file": "world-cafe"
+  }
+}

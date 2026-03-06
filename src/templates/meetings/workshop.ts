@@ -9,6 +9,8 @@ export const workshop: TemplateDefinition = {
   emoji: '\u{1F3AF}',
   estimatedTime: '~4 min',
   blueprintId: 'workshop-board',
+  brainCategory: 'workshops',
+  brainBlueprint: 'world-cafe',
   complexity: 'medium',
   color: '#10B981',
   tags: ['workshop', 'facilitation', 'activities', 'agenda', 'outcomes'],

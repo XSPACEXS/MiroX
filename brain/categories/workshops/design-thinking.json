@@ -1,0 +1,736 @@
+{
+  "metadata": {
+    "name": "Design Thinking Workshop",
+    "description": "5-phase Design Thinking workshop for reimagining the patient check-in experience — Empathize, Define, Ideate, Prototype, and Test with activities, persona, empathy map, and storyboard",
+    "category": "Workshops",
+    "tags": [
+      "design-thinking",
+      "empathy",
+      "ideation",
+      "prototype",
+      "UX-workshop",
+      "healthcare"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3000 }
+  },
+  "settings": {
+    "backgroundColor": "#FFF8E1",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_header",
+      "type": "frame",
+      "title": "Workshop Header",
+      "x": 50,
+      "y": 50,
+      "width": 4900,
+      "height": 200,
+      "style": { "fillColor": "#4A148C" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "Design Thinking Workshop: Reimagining Patient Check-In",
+      "x": 100,
+      "y": 70,
+      "width": 3000,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_meta",
+      "type": "text",
+      "content": "Facilitator: Priya Tandon | Date: March 6, 2026 | Duration: 3 hours | Participants: 12 | Client: GreenValley Health System",
+      "x": 100,
+      "y": 130,
+      "width": 4000,
+      "style": { "fontSize": 14, "color": "#CE93D8" }
+    },
+    {
+      "id": "text_phases",
+      "type": "text",
+      "content": "Phases: Empathize (45 min) → Define (30 min) → Ideate (30 min) → Prototype (45 min) → Test (30 min)",
+      "x": 100,
+      "y": 165,
+      "width": 4000,
+      "style": { "fontSize": 14, "color": "#CE93D8" }
+    },
+    {
+      "id": "frame_empathize",
+      "type": "frame",
+      "title": "Phase 1: Empathize",
+      "x": 50,
+      "y": 300,
+      "width": 1800,
+      "height": 1200,
+      "style": { "fillColor": "#FCE4EC" }
+    },
+    {
+      "id": "text_empathize_header",
+      "type": "text",
+      "content": "Phase 1: Empathize (45 min)",
+      "x": 80,
+      "y": 320,
+      "width": 600,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#AD1457" }
+    },
+    {
+      "id": "text_interviews_label",
+      "type": "text",
+      "content": "Interview Insights (from 6 patient interviews)",
+      "x": 80,
+      "y": 370,
+      "width": 600,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_interview1",
+      "type": "sticky_note",
+      "content": "'I always fill out the same forms every visit. Don't they have my info already?' — Patient, age 67",
+      "x": 80,
+      "y": 410,
+      "width": 350,
+      "height": 80,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_interview2",
+      "type": "sticky_note",
+      "content": "'The tablet they gave me was confusing. The font was tiny and I kept hitting the wrong button.' — Patient, age 72",
+      "x": 450,
+      "y": 410,
+      "width": 350,
+      "height": 80,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_interview3",
+      "type": "sticky_note",
+      "content": "'I waited 20 minutes before anyone noticed I had arrived. There was no clear way to check in.' — Patient, age 45",
+      "x": 80,
+      "y": 510,
+      "width": 350,
+      "height": 80,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_observation_label",
+      "type": "text",
+      "content": "Observation Notes (clinic visit shadowing)",
+      "x": 80,
+      "y": 610,
+      "width": 600,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_obs1",
+      "type": "sticky_note",
+      "content": "Reception desk is understaffed during morning rush (8-10 AM). 3 staff, 15+ patients in queue.",
+      "x": 80,
+      "y": 650,
+      "width": 350,
+      "height": 80,
+      "style": { "fillColor": "#E1BEE7", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_obs2",
+      "type": "sticky_note",
+      "content": "Older patients avoid the kiosk. Younger patients prefer it but abandon when it crashes.",
+      "x": 450,
+      "y": 650,
+      "width": 350,
+      "height": 80,
+      "style": { "fillColor": "#E1BEE7", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_empathy_map_label",
+      "type": "text",
+      "content": "Empathy Map",
+      "x": 80,
+      "y": 750,
+      "width": 300,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "shape_empathy_map",
+      "type": "shape",
+      "content": "THINKS: 'Why do I have to do this every time?' | 'Am I in the right place?'\nFEELS: Anxious about wait time | Frustrated with repetitive forms | Overwhelmed by technology\nSAYS: 'Can someone help me with this?' | 'I already gave you this information'\nDOES: Asks receptionist for help | Skips optional fields | Arrives 30 min early out of anxiety",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 790,
+      "width": 1700,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#AD1457",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "frame_define",
+      "type": "frame",
+      "title": "Phase 2: Define",
+      "x": 1900,
+      "y": 300,
+      "width": 1200,
+      "height": 1200,
+      "style": { "fillColor": "#E3F2FD" }
+    },
+    {
+      "id": "text_define_header",
+      "type": "text",
+      "content": "Phase 2: Define (30 min)",
+      "x": 1930,
+      "y": 320,
+      "width": 500,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1565C0" }
+    },
+    {
+      "id": "text_persona_label",
+      "type": "text",
+      "content": "Primary Persona",
+      "x": 1930,
+      "y": 370,
+      "width": 300,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "shape_persona",
+      "type": "shape",
+      "content": "Maria Gonzalez, 67\n\nRetired teacher | Visits clinic monthly for chronic condition management\nTech comfort: Low (uses phone for calls/photos only)\nPain points: Repetitive paperwork, small text on screens, unclear wayfinding\nGoal: 'I just want to see my doctor without the hassle'\nQuote: 'Every visit feels like starting from scratch.'",
+      "shape": "round_rectangle",
+      "x": 1930,
+      "y": 410,
+      "width": 1100,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#1565C0",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "text_pov_label",
+      "type": "text",
+      "content": "Point of View Statement",
+      "x": 1930,
+      "y": 640,
+      "width": 400,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "shape_pov",
+      "type": "shape",
+      "content": "Maria, a 67-year-old returning patient, needs a way to check in that remembers her information and guides her clearly, because she feels frustrated repeating the same data every visit and anxious when technology doesn't work as expected.",
+      "shape": "round_rectangle",
+      "x": 1930,
+      "y": 680,
+      "width": 1100,
+      "height": 100,
+      "style": {
+        "fillColor": "#2979FF",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#1565C0",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "text_hmw_label",
+      "type": "text",
+      "content": "How Might We...?",
+      "x": 1930,
+      "y": 810,
+      "width": 300,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_hmw1",
+      "type": "sticky_note",
+      "content": "HMW make check-in feel like arriving at a friend's house — recognized and welcome?",
+      "x": 1930,
+      "y": 850,
+      "width": 350,
+      "height": 80,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_hmw2",
+      "type": "sticky_note",
+      "content": "HMW eliminate repetitive form-filling for returning patients?",
+      "x": 2300,
+      "y": 850,
+      "width": 350,
+      "height": 80,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_hmw3",
+      "type": "sticky_note",
+      "content": "HMW create a check-in experience that works for all ages and tech comfort levels?",
+      "x": 1930,
+      "y": 950,
+      "width": 350,
+      "height": 80,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_ideate",
+      "type": "frame",
+      "title": "Phase 3: Ideate",
+      "x": 3150,
+      "y": 300,
+      "width": 1700,
+      "height": 1200,
+      "style": { "fillColor": "#E8F5E9" }
+    },
+    {
+      "id": "text_ideate_header",
+      "type": "text",
+      "content": "Phase 3: Ideate (30 min)",
+      "x": 3180,
+      "y": 320,
+      "width": 500,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#2E7D32" }
+    },
+    {
+      "id": "text_crazy8_label",
+      "type": "text",
+      "content": "Crazy Eights (8 ideas in 8 minutes)",
+      "x": 3180,
+      "y": 370,
+      "width": 600,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_crazy1",
+      "type": "sticky_note",
+      "content": "QR code mailed before visit — scan on arrival for instant check-in",
+      "x": 3180,
+      "y": 410,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_crazy2",
+      "type": "sticky_note",
+      "content": "Greeter with tablet who walks patients through check-in",
+      "x": 3450,
+      "y": 410,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_crazy3",
+      "type": "sticky_note",
+      "content": "Geofence: phone detects arrival, auto-sends notification to reception",
+      "x": 3720,
+      "y": 410,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_crazy4",
+      "type": "sticky_note",
+      "content": "Pre-visit app that lets patient confirm 'nothing changed' or update info",
+      "x": 3180,
+      "y": 500,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_crazy5",
+      "type": "sticky_note",
+      "content": "Large-screen kiosk with face ID — no typing required",
+      "x": 3450,
+      "y": 500,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_crazy6",
+      "type": "sticky_note",
+      "content": "Voice check-in: 'Hi, I'm Maria Gonzalez for Dr. Patel at 10 AM'",
+      "x": 3720,
+      "y": 500,
+      "width": 250,
+      "height": 70,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_gallery_label",
+      "type": "text",
+      "content": "Gallery Walk + Dot Vote Results",
+      "x": 3180,
+      "y": 600,
+      "width": 500,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_vote1",
+      "type": "sticky_note",
+      "content": "WINNER (9 votes): QR code + pre-visit confirmation app combo",
+      "x": 3180,
+      "y": 640,
+      "width": 400,
+      "height": 70,
+      "style": { "fillColor": "#FFD54F", "textAlign": "center", "fontSize": 12 }
+    },
+    {
+      "id": "sticky_vote2",
+      "type": "sticky_note",
+      "content": "Runner-up (6 votes): Greeter with tablet for low-tech patients",
+      "x": 3600,
+      "y": 640,
+      "width": 400,
+      "height": 70,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "center", "fontSize": 12 }
+    },
+    {
+      "id": "frame_prototype",
+      "type": "frame",
+      "title": "Phase 4: Prototype",
+      "x": 50,
+      "y": 1550,
+      "width": 2500,
+      "height": 900,
+      "style": { "fillColor": "#FFF3E0" }
+    },
+    {
+      "id": "text_proto_header",
+      "type": "text",
+      "content": "Phase 4: Prototype (45 min)",
+      "x": 80,
+      "y": 1570,
+      "width": 600,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#E65100" }
+    },
+    {
+      "id": "text_storyboard_label",
+      "type": "text",
+      "content": "Storyboard: Maria's New Check-In Experience",
+      "x": 80,
+      "y": 1620,
+      "width": 600,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "shape_story1",
+      "type": "shape",
+      "content": "Scene 1: DAY BEFORE\n\nMaria gets a text: 'Your appointment with Dr. Patel is tomorrow at 10 AM. Tap to confirm your info.'",
+      "shape": "round_rectangle",
+      "x": 80,
+      "y": 1660,
+      "width": 380,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E65100",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_story2",
+      "type": "shape",
+      "content": "Scene 2: PRE-VISIT APP\n\nMaria taps link, sees her info pre-filled. Taps 'Nothing changed' or updates address. Done in 30 seconds.",
+      "shape": "round_rectangle",
+      "x": 480,
+      "y": 1660,
+      "width": 380,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E65100",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_story3",
+      "type": "shape",
+      "content": "Scene 3: ARRIVAL\n\nMaria walks in, scans QR code from her text at the entrance kiosk. Screen says: 'Welcome back, Maria! Have a seat — we'll call you shortly.'",
+      "shape": "round_rectangle",
+      "x": 880,
+      "y": 1660,
+      "width": 380,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E65100",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_story4",
+      "type": "shape",
+      "content": "Scene 4: ALTERNATIVE\n\nFor patients without phones: greeter at desk asks name, confirms on tablet. Same 'Welcome back' experience, human-assisted.",
+      "shape": "round_rectangle",
+      "x": 1280,
+      "y": 1660,
+      "width": 380,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E65100",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_story5",
+      "type": "shape",
+      "content": "Scene 5: WAITING\n\nMaria sits down. Her phone shows: 'Estimated wait: 8 minutes. Dr. Patel is finishing with another patient.' She feels informed and calm.",
+      "shape": "round_rectangle",
+      "x": 1680,
+      "y": 1660,
+      "width": 380,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E65100",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_paper_proto_label",
+      "type": "text",
+      "content": "Paper Prototype Screens",
+      "x": 80,
+      "y": 1890,
+      "width": 400,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "shape_proto_screen1",
+      "type": "shape",
+      "content": "[Pre-Visit SMS]\n\nHi Maria!\nAppt: Dr. Patel\n3/7 at 10:00 AM\n\n[Confirm Info]\n[Reschedule]",
+      "shape": "round_rectangle",
+      "x": 80,
+      "y": 1930,
+      "width": 200,
+      "height": 300,
+      "style": {
+        "fillColor": "#F5F5F5",
+        "fontColor": "#212121",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_proto_screen2",
+      "type": "shape",
+      "content": "[Info Confirmation]\n\nName: Maria Gonzalez\nDOB: 6/15/1958\nInsurance: BlueCross\nAddress: 123 Oak St\n\n[Nothing Changed]\n[Update Info]",
+      "shape": "round_rectangle",
+      "x": 310,
+      "y": 1930,
+      "width": 200,
+      "height": 300,
+      "style": {
+        "fillColor": "#F5F5F5",
+        "fontColor": "#212121",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_proto_screen3",
+      "type": "shape",
+      "content": "[Kiosk Welcome]\n\n[QR SCAN HERE]\n\nWelcome back, Maria!\nDr. Patel is ready\nfor you shortly.\n\nPlease have a seat.",
+      "shape": "round_rectangle",
+      "x": 540,
+      "y": 1930,
+      "width": 200,
+      "height": 300,
+      "style": {
+        "fillColor": "#F5F5F5",
+        "fontColor": "#212121",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "frame_test",
+      "type": "frame",
+      "title": "Phase 5: Test",
+      "x": 2600,
+      "y": 1550,
+      "width": 2300,
+      "height": 900,
+      "style": { "fillColor": "#EDE7F6" }
+    },
+    {
+      "id": "text_test_header",
+      "type": "text",
+      "content": "Phase 5: Test (30 min)",
+      "x": 2630,
+      "y": 1570,
+      "width": 500,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "text_test_script",
+      "type": "text",
+      "content": "Test Script: 'Imagine you have a doctor's appointment tomorrow. You receive this text. Walk us through what you would do.'",
+      "x": 2630,
+      "y": 1620,
+      "width": 2000,
+      "style": { "fontSize": 14, "color": "#607D8B" }
+    },
+    {
+      "id": "text_feedback_label",
+      "type": "text",
+      "content": "Feedback from 4 Test Participants",
+      "x": 2630,
+      "y": 1670,
+      "width": 500,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_test1",
+      "type": "sticky_note",
+      "content": "Participant 1 (age 70): 'I love that it remembers me. But what if I lose the text? Can I still check in at the desk?'",
+      "x": 2630,
+      "y": 1710,
+      "width": 500,
+      "height": 80,
+      "style": { "fillColor": "#D1C4E9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_test2",
+      "type": "sticky_note",
+      "content": "Participant 2 (age 34): 'This is great. I'd want to do all of this from the app, not just SMS. Add an app version.'",
+      "x": 3160,
+      "y": 1710,
+      "width": 500,
+      "height": 80,
+      "style": { "fillColor": "#D1C4E9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_test3",
+      "type": "sticky_note",
+      "content": "Participant 3 (age 55): 'The estimated wait time is the best part. I always wonder how long I'll be sitting there.'",
+      "x": 2630,
+      "y": 1810,
+      "width": 500,
+      "height": 80,
+      "style": { "fillColor": "#D1C4E9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_test4",
+      "type": "sticky_note",
+      "content": "Participant 4 (age 78): 'I don't scan QR codes. But if the greeter can look me up by name, that works perfectly.'",
+      "x": 3160,
+      "y": 1810,
+      "width": 500,
+      "height": 80,
+      "style": { "fillColor": "#D1C4E9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_iterations_label",
+      "type": "text",
+      "content": "Iterations Based on Testing",
+      "x": 2630,
+      "y": 1920,
+      "width": 500,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_iter1",
+      "type": "sticky_note",
+      "content": "ADD: Fallback flow — name lookup at desk for patients without phones/QR codes",
+      "x": 2630,
+      "y": 1960,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#B39DDB", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_iter2",
+      "type": "sticky_note",
+      "content": "ADD: Native app version for tech-savvy patients (Phase 2 of rollout)",
+      "x": 3160,
+      "y": 1960,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#B39DDB", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_iter3",
+      "type": "sticky_note",
+      "content": "KEEP: Estimated wait time on phone — universally loved",
+      "x": 2630,
+      "y": 2040,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#B39DDB", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_iter4",
+      "type": "sticky_note",
+      "content": "CHANGE: Make 'Nothing Changed' button bigger and more prominent on confirmation screen",
+      "x": 3160,
+      "y": 2040,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#B39DDB", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "conn_empathize_define",
+      "type": "connector",
+      "startItem": "frame_empathize",
+      "endItem": "frame_define",
+      "style": {
+        "strokeColor": "#4A148C",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Define" }]
+    },
+    {
+      "id": "conn_define_ideate",
+      "type": "connector",
+      "startItem": "frame_define",
+      "endItem": "frame_ideate",
+      "style": {
+        "strokeColor": "#4A148C",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Ideate" }]
+    },
+    {
+      "id": "conn_ideate_prototype",
+      "type": "connector",
+      "startItem": "frame_ideate",
+      "endItem": "frame_prototype",
+      "style": {
+        "strokeColor": "#4A148C",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Build" }]
+    },
+    {
+      "id": "conn_prototype_test",
+      "type": "connector",
+      "startItem": "frame_prototype",
+      "endItem": "frame_test",
+      "style": {
+        "strokeColor": "#4A148C",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Test" }]
+    }
+  ]
+}

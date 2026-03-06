@@ -1,0 +1,690 @@
+{
+  "metadata": {
+    "name": "Product World Map",
+    "description": "An isometric city-style product ecosystem map where each district represents a product area — Core Platform, Growth, Analytics, Integrations, and Community — connected by golden pathway roads through a central product hub.",
+    "category": "Miro World Product Showcase",
+    "tags": [
+      "product",
+      "ecosystem",
+      "isometric",
+      "city-map",
+      "portfolio",
+      "roadmap",
+      "strategy",
+      "teams"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#1A1A2E",
+    "gridEnabled": false
+  },
+  "items": [
+    {
+      "id": "title-banner",
+      "type": "frame",
+      "title": "Product World Map",
+      "x": 100,
+      "y": 50,
+      "width": 4800,
+      "height": 450,
+      "style": { "fillColor": "#1A1A2E" }
+    },
+    {
+      "id": "title-text",
+      "type": "text",
+      "content": "Product World Map",
+      "x": 200,
+      "y": 80,
+      "width": 1500,
+      "style": { "fontSize": 64, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "subtitle-text",
+      "type": "text",
+      "content": "ACME Platform — Q1 2026 Product Ecosystem",
+      "x": 200,
+      "y": 190,
+      "width": 1500,
+      "style": { "fontSize": 28, "color": "#FFD166" }
+    },
+    {
+      "id": "description-text",
+      "type": "text",
+      "content": "Navigate the entire product landscape. Each district = a product area. Click any building to explore.",
+      "x": 200,
+      "y": 260,
+      "width": 1800,
+      "style": { "fontSize": 18, "color": "#06D6A0" }
+    },
+    {
+      "id": "board-stats",
+      "type": "sticky_note",
+      "content": "Board Owner: Product Team | 47 features mapped | 6 teams represented",
+      "x": 3800,
+      "y": 100,
+      "width": 500,
+      "height": 150,
+      "style": { "fillColor": "#2D2D44" }
+    },
+    {
+      "id": "core-platform-frame",
+      "type": "frame",
+      "title": "Core Platform District",
+      "x": 100,
+      "y": 550,
+      "width": 1500,
+      "height": 1000,
+      "style": { "fillColor": "#1A2F42" }
+    },
+    {
+      "id": "core-header",
+      "type": "text",
+      "content": "Core Platform District",
+      "x": 150,
+      "y": 570,
+      "width": 600,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#118AB2" }
+    },
+    {
+      "id": "core-auth",
+      "type": "shape",
+      "content": "Authentication Tower\nSSO, MFA, OAuth 2.0\nTeam: Identity | Status: Stable",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 650,
+      "width": 650,
+      "height": 160,
+      "style": { "fillColor": "#118AB2", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "core-api",
+      "type": "shape",
+      "content": "API Gateway\nREST + GraphQL | 12ms avg latency\n99.97% uptime",
+      "shape": "rectangle",
+      "x": 850,
+      "y": 650,
+      "width": 650,
+      "height": 160,
+      "style": { "fillColor": "#1B98A8", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "core-dashboard",
+      "type": "shape",
+      "content": "Admin Dashboard\nUser management, billing, audit logs\nv3.2 released",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 860,
+      "width": 650,
+      "height": 160,
+      "style": { "fillColor": "#1590A8", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "core-db",
+      "type": "shape",
+      "content": "Database Layer\nPostgreSQL primary, Redis cache, Elasticsearch\nTeam: Infra",
+      "shape": "rectangle",
+      "x": 850,
+      "y": 860,
+      "width": 650,
+      "height": 160,
+      "style": { "fillColor": "#0E7490", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "core-priority",
+      "type": "sticky_note",
+      "content": "Q2 Priority: Migrate to connection pooling — 40% latency reduction expected",
+      "x": 150,
+      "y": 1070,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#BBDEFB" }
+    },
+    {
+      "id": "core-shipped",
+      "type": "sticky_note",
+      "content": "Shipped: Dashboard redesign — NPS jumped from 32 to 58",
+      "x": 500,
+      "y": 1070,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "core-risk",
+      "type": "sticky_note",
+      "content": "Risk: Auth service single point of failure — HA cluster planned Q2",
+      "x": 850,
+      "y": 1070,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "growth-frame",
+      "type": "frame",
+      "title": "Growth & Marketing District",
+      "x": 1750,
+      "y": 550,
+      "width": 1400,
+      "height": 1000,
+      "style": { "fillColor": "#2E1A22" }
+    },
+    {
+      "id": "growth-header",
+      "type": "text",
+      "content": "Growth & Marketing District",
+      "x": 1800,
+      "y": 570,
+      "width": 700,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#EF476F" }
+    },
+    {
+      "id": "growth-onboard",
+      "type": "shape",
+      "content": "Onboarding Flow\n7-step wizard | 67% completion rate\nTarget: 80%",
+      "shape": "rectangle",
+      "x": 1800,
+      "y": 650,
+      "width": 600,
+      "height": 150,
+      "style": { "fillColor": "#EF476F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "growth-email",
+      "type": "shape",
+      "content": "Email Engine\nDrip campaigns, transactional, newsletters\n340K monthly sends",
+      "shape": "rectangle",
+      "x": 2450,
+      "y": 650,
+      "width": 600,
+      "height": 150,
+      "style": { "fillColor": "#E0456F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "growth-experiments",
+      "type": "shape",
+      "content": "Growth Experiments\nA/B testing framework\n12 active experiments",
+      "shape": "rectangle",
+      "x": 1800,
+      "y": 850,
+      "width": 600,
+      "height": 150,
+      "style": { "fillColor": "#D63A5F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "growth-referral",
+      "type": "shape",
+      "content": "Referral Program\n2-sided rewards | 18% of new signups\nfrom referrals",
+      "shape": "rectangle",
+      "x": 2450,
+      "y": 850,
+      "width": 600,
+      "height": 150,
+      "style": { "fillColor": "#CC2F4F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "growth-note1",
+      "type": "sticky_note",
+      "content": "Experiment winner: Social proof on pricing page +14% conversion",
+      "x": 1800,
+      "y": 1070,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#F8BBD0" }
+    },
+    {
+      "id": "growth-blocked",
+      "type": "sticky_note",
+      "content": "Blocked: Email deliverability issues with Gmail — investigating SPF/DKIM",
+      "x": 2150,
+      "y": 1070,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "central-plaza",
+      "type": "frame",
+      "title": "Central Plaza — Product Hub",
+      "x": 1900,
+      "y": 1650,
+      "width": 1200,
+      "height": 800,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "plaza-header",
+      "type": "text",
+      "content": "Central Plaza",
+      "x": 1950,
+      "y": 1670,
+      "width": 500,
+      "style": { "fontSize": 42, "fontWeight": "bold", "color": "#1A1A2E" }
+    },
+    {
+      "id": "plaza-vision",
+      "type": "shape",
+      "content": "Product Vision\nBecome the #1 collaborative workspace\nfor distributed teams by 2027",
+      "shape": "diamond",
+      "x": 2050,
+      "y": 1760,
+      "width": 500,
+      "height": 300,
+      "style": { "fillColor": "#FFD166", "fontColor": "#212121" }
+    },
+    {
+      "id": "plaza-roadmap",
+      "type": "shape",
+      "content": "Roadmap Tower\nQ1: 8 shipped | Q2: 14 planned | Q3: 9 in discovery",
+      "shape": "rectangle",
+      "x": 2600,
+      "y": 1800,
+      "width": 420,
+      "height": 120,
+      "style": { "fillColor": "#06D6A0", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "plaza-northstar",
+      "type": "shape",
+      "content": "North Star Metric\nWeekly Active Collaborators: 124,000 (+22% QoQ)",
+      "shape": "rectangle",
+      "x": 2600,
+      "y": 1960,
+      "width": 420,
+      "height": 120,
+      "style": { "fillColor": "#FFD166", "fontColor": "#212121" }
+    },
+    {
+      "id": "plaza-okr",
+      "type": "sticky_note",
+      "content": "OKR Status: 3 of 5 key results on track | 1 at risk | 1 behind",
+      "x": 1950,
+      "y": 2120,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "analytics-frame",
+      "type": "frame",
+      "title": "Analytics & Intelligence District",
+      "x": 3300,
+      "y": 550,
+      "width": 1400,
+      "height": 900,
+      "style": { "fillColor": "#1A2E2A" }
+    },
+    {
+      "id": "analytics-header",
+      "type": "text",
+      "content": "Analytics & Intelligence District",
+      "x": 3350,
+      "y": 570,
+      "width": 800,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#0DB39E" }
+    },
+    {
+      "id": "analytics-pipeline",
+      "type": "shape",
+      "content": "Data Pipeline\nETL: Airflow + dbt | 2.3TB daily processed\n99.9% SLA",
+      "shape": "rectangle",
+      "x": 3350,
+      "y": 650,
+      "width": 600,
+      "height": 150,
+      "style": { "fillColor": "#0DB39E", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "analytics-bi",
+      "type": "shape",
+      "content": "BI Dashboard\nLooker + custom dashboards\n340 daily active users",
+      "shape": "rectangle",
+      "x": 3350,
+      "y": 850,
+      "width": 600,
+      "height": 150,
+      "style": { "fillColor": "#0CA38E", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "analytics-ml",
+      "type": "shape",
+      "content": "ML Models\nChurn prediction (87% acc)\nLead scoring (72% acc)\nUsage anomaly detection",
+      "shape": "rectangle",
+      "x": 4000,
+      "y": 650,
+      "width": 600,
+      "height": 150,
+      "style": { "fillColor": "#0B937E", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "analytics-note",
+      "type": "sticky_note",
+      "content": "Q2 Priority: Real-time analytics dashboard — <5 second data freshness",
+      "x": 4000,
+      "y": 850,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#B2DFDB" }
+    },
+    {
+      "id": "integrations-frame",
+      "type": "frame",
+      "title": "Integrations Bridge District",
+      "x": 100,
+      "y": 1650,
+      "width": 1500,
+      "height": 900,
+      "style": { "fillColor": "#1E1A2E" }
+    },
+    {
+      "id": "integrations-header",
+      "type": "text",
+      "content": "Integrations Bridge District",
+      "x": 150,
+      "y": 1670,
+      "width": 700,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#7B2CBF" }
+    },
+    {
+      "id": "integ-slack",
+      "type": "shape",
+      "content": "Slack Integration\nReal-time notifications, /acme commands\n8,200 workspaces connected",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1760,
+      "width": 650,
+      "height": 140,
+      "style": { "fillColor": "#7B2CBF", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "integ-jira",
+      "type": "shape",
+      "content": "Jira Sync\n2-way sync: tickets, statuses, comments\n3,100 projects linked",
+      "shape": "rectangle",
+      "x": 850,
+      "y": 1760,
+      "width": 650,
+      "height": 140,
+      "style": { "fillColor": "#6B1CAF", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "integ-github",
+      "type": "shape",
+      "content": "GitHub Bridge\nPR previews, commit linking, deploy status\n1,900 repos connected",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1950,
+      "width": 650,
+      "height": 140,
+      "style": { "fillColor": "#5B0C9F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "integ-zapier",
+      "type": "shape",
+      "content": "Zapier & Webhooks\n420 Zap templates\nCustom webhooks: 12K active",
+      "shape": "rectangle",
+      "x": 850,
+      "y": 1950,
+      "width": 650,
+      "height": 140,
+      "style": { "fillColor": "#4B008F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "integ-salesforce",
+      "type": "sticky_note",
+      "content": "Q2 Priority: Salesforce integration — top requested feature (340 votes)",
+      "x": 150,
+      "y": 2140,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#E1BEE7" }
+    },
+    {
+      "id": "community-frame",
+      "type": "frame",
+      "title": "Community & Ecosystem Park",
+      "x": 3300,
+      "y": 1650,
+      "width": 1400,
+      "height": 900,
+      "style": { "fillColor": "#2E1E1A" }
+    },
+    {
+      "id": "community-header",
+      "type": "text",
+      "content": "Community & Ecosystem Park",
+      "x": 3350,
+      "y": 1670,
+      "width": 700,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#F78C6B" }
+    },
+    {
+      "id": "community-templates",
+      "type": "shape",
+      "content": "Template Library\n342 templates | 28 new this quarter\nTop: Project Kickoff (12K uses)",
+      "shape": "rectangle",
+      "x": 3350,
+      "y": 1760,
+      "width": 600,
+      "height": 140,
+      "style": { "fillColor": "#F78C6B", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "community-forum",
+      "type": "shape",
+      "content": "Community Forum\n14,000 members | 890 posts/month\n92% response rate within 24h",
+      "shape": "rectangle",
+      "x": 3350,
+      "y": 1950,
+      "width": 600,
+      "height": 140,
+      "style": { "fillColor": "#E77C5B", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "community-academy",
+      "type": "shape",
+      "content": "Academy\nLearning paths: 8 | Certified users: 2,340\nCourse completion: 74%",
+      "shape": "rectangle",
+      "x": 4000,
+      "y": 1760,
+      "width": 600,
+      "height": 140,
+      "style": { "fillColor": "#D76C4B", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "community-devhub",
+      "type": "shape",
+      "content": "Developer Hub\nAPI docs, SDKs (JS, Python, Go)\nSandbox environment",
+      "shape": "rectangle",
+      "x": 4000,
+      "y": 1950,
+      "width": 600,
+      "height": 140,
+      "style": { "fillColor": "#C75C3B", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "community-event",
+      "type": "sticky_note",
+      "content": "Event: ACMEconf 2026 — June 12-14, Austin TX — 2,000 expected attendees",
+      "x": 3350,
+      "y": 2140,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#FFE0B2" }
+    },
+    {
+      "id": "legend-frame",
+      "type": "frame",
+      "title": "Legend & Meta",
+      "x": 100,
+      "y": 2700,
+      "width": 4800,
+      "height": 300,
+      "style": { "fillColor": "#E8E8E8" }
+    },
+    {
+      "id": "legend-header",
+      "type": "text",
+      "content": "Legend",
+      "x": 150,
+      "y": 2720,
+      "width": 200,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#212121" }
+    },
+    {
+      "id": "legend-status",
+      "type": "text",
+      "content": "Status colors: Green = Shipped | Yellow = At Risk | Pink = Blocked | Blue = In Progress",
+      "x": 150,
+      "y": 2800,
+      "width": 1500,
+      "style": { "fontSize": 14, "color": "#212121" }
+    },
+    {
+      "id": "legend-core",
+      "type": "shape",
+      "content": "Core Platform",
+      "shape": "rectangle",
+      "x": 400,
+      "y": 2730,
+      "width": 150,
+      "height": 40,
+      "style": { "fillColor": "#118AB2", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "legend-growth",
+      "type": "shape",
+      "content": "Growth",
+      "shape": "rectangle",
+      "x": 600,
+      "y": 2730,
+      "width": 150,
+      "height": 40,
+      "style": { "fillColor": "#EF476F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "legend-analytics",
+      "type": "shape",
+      "content": "Analytics",
+      "shape": "rectangle",
+      "x": 800,
+      "y": 2730,
+      "width": 150,
+      "height": 40,
+      "style": { "fillColor": "#0DB39E", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "legend-integ",
+      "type": "shape",
+      "content": "Integrations",
+      "shape": "rectangle",
+      "x": 1000,
+      "y": 2730,
+      "width": 150,
+      "height": 40,
+      "style": { "fillColor": "#7B2CBF", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "legend-community",
+      "type": "shape",
+      "content": "Community",
+      "shape": "rectangle",
+      "x": 1200,
+      "y": 2730,
+      "width": 150,
+      "height": 40,
+      "style": { "fillColor": "#F78C6B", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "legend-version",
+      "type": "text",
+      "content": "Version: Q1 2026 | Last updated: March 6, 2026 | Next review: March 20, 2026",
+      "x": 150,
+      "y": 2870,
+      "width": 1200,
+      "style": { "fontSize": 12, "color": "#666666" }
+    },
+    {
+      "type": "connector",
+      "startItem": "core-platform-frame",
+      "endItem": "central-plaza",
+      "style": {
+        "strokeColor": "#FFD166",
+        "strokeWidth": 5,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "growth-frame",
+      "endItem": "central-plaza",
+      "style": {
+        "strokeColor": "#FFD166",
+        "strokeWidth": 5,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "central-plaza",
+      "endItem": "analytics-frame",
+      "style": {
+        "strokeColor": "#FFD166",
+        "strokeWidth": 5,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "central-plaza",
+      "endItem": "integrations-frame",
+      "style": {
+        "strokeColor": "#FFD166",
+        "strokeWidth": 5,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "integrations-frame",
+      "endItem": "community-frame",
+      "style": {
+        "strokeColor": "#FFD166",
+        "strokeWidth": 5,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "analytics-frame",
+      "endItem": "growth-frame",
+      "style": {
+        "strokeColor": "#FFD166",
+        "strokeWidth": 5,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "core-api",
+      "endItem": "integ-zapier",
+      "style": {
+        "strokeColor": "#06D6A0",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "growth-onboard",
+      "endItem": "community-templates",
+      "style": {
+        "strokeColor": "#06D6A0",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    }
+  ]
+}

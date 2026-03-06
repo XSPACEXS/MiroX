@@ -1,0 +1,596 @@
+{
+  "metadata": {
+    "name": "Festival Campus",
+    "description": "A multi-day festival campus map with stages, tents, food villages, wellness zones, and activity areas spread across a park-like landscape with walking pathways and themed programming.",
+    "category": "Event Guide Immersive Isometric",
+    "tags": [
+      "festival",
+      "campus",
+      "outdoor",
+      "multi-day",
+      "stages",
+      "wellness",
+      "food",
+      "hackathon"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#E8F5E9",
+    "gridEnabled": false
+  },
+  "items": [
+    {
+      "id": "title-banner",
+      "type": "frame",
+      "title": "NovaTech Festival 2026",
+      "x": 100,
+      "y": 50,
+      "width": 4800,
+      "height": 400,
+      "style": { "fillColor": "#1B5E20" }
+    },
+    {
+      "id": "title-text",
+      "type": "text",
+      "content": "NovaTech Festival 2026",
+      "x": 200,
+      "y": 80,
+      "width": 1500,
+      "style": { "fontSize": 56, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "subtitle-text",
+      "type": "text",
+      "content": "3 Days of Innovation, Connection, and Celebration",
+      "x": 200,
+      "y": 170,
+      "width": 1400,
+      "style": { "fontSize": 24, "color": "#81C784" }
+    },
+    {
+      "id": "event-details",
+      "type": "text",
+      "content": "September 15-17, 2026 | Golden Gate Park, San Francisco",
+      "x": 200,
+      "y": 220,
+      "width": 800,
+      "style": { "fontSize": 18, "color": "#FFFFFF" }
+    },
+    {
+      "id": "stats-bar",
+      "type": "shape",
+      "content": "5,000 attendees | 6 zones | 80 sessions | 40 food vendors | 3 headline acts",
+      "shape": "rectangle",
+      "x": 2800,
+      "y": 100,
+      "width": 1900,
+      "height": 70,
+      "style": {
+        "fillColor": "#2E7D32",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#81C784"
+      }
+    },
+    {
+      "id": "main-stage",
+      "type": "frame",
+      "title": "Main Stage — The Amphitheater",
+      "x": 100,
+      "y": 500,
+      "width": 1800,
+      "height": 900,
+      "style": { "fillColor": "#E3F2FD" }
+    },
+    {
+      "id": "stage-header",
+      "type": "text",
+      "content": "Main Stage — The Amphitheater",
+      "x": 150,
+      "y": 520,
+      "width": 800,
+      "style": { "fontSize": 32, "fontWeight": "bold", "color": "#1565C0" }
+    },
+    {
+      "id": "stage-capacity",
+      "type": "text",
+      "content": "Capacity: 2,000 standing + 500 seated VIP | 60ft LED screen | Surround sound",
+      "x": 150,
+      "y": 580,
+      "width": 1600,
+      "style": { "fontSize": 14, "color": "#3E2723" }
+    },
+    {
+      "id": "stage-day1",
+      "type": "shape",
+      "content": "DAY 1\nOpening ceremony + CEO keynote\nInnovation Awards\nEvening: Headliner band",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 630,
+      "width": 520,
+      "height": 200,
+      "style": { "fillColor": "#1565C0", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "stage-day2",
+      "type": "shape",
+      "content": "DAY 2\n\"Future of Work\" panel (8 speakers)\nProduct launches\nEvening: DJ set",
+      "shape": "rectangle",
+      "x": 700,
+      "y": 630,
+      "width": 520,
+      "height": 200,
+      "style": { "fillColor": "#1565C0", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "stage-day3",
+      "type": "shape",
+      "content": "DAY 3\nCommunity stories + closing keynote\n\"Time Capsule\" ceremony\nEvening: Fireworks!",
+      "shape": "rectangle",
+      "x": 1250,
+      "y": 630,
+      "width": 520,
+      "height": 200,
+      "style": { "fillColor": "#E91E63", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "stage-note",
+      "type": "sticky_note",
+      "content": "Arrive 30min early for headliner — last year was packed! VIP elevated viewing area available.",
+      "x": 150,
+      "y": 870,
+      "width": 500,
+      "height": 180,
+      "style": { "fillColor": "#FF6F00" }
+    },
+    {
+      "id": "tech-tent",
+      "type": "frame",
+      "title": "Tech Tent — Hands-On Discovery",
+      "x": 2100,
+      "y": 500,
+      "width": 1500,
+      "height": 800,
+      "style": { "fillColor": "#E8F5E9" }
+    },
+    {
+      "id": "tech-header",
+      "type": "text",
+      "content": "Tech Tent — Hands-On Discovery",
+      "x": 2150,
+      "y": 520,
+      "width": 800,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#00E676" }
+    },
+    {
+      "id": "tech-demos",
+      "type": "shape",
+      "content": "20 Demo Stations\nInteractive product demos\nGuided experiences\nAR/VR zone\nMaker space: 3D printers, soldering",
+      "shape": "rectangle",
+      "x": 2150,
+      "y": 590,
+      "width": 650,
+      "height": 250,
+      "style": { "fillColor": "#00E676", "fontColor": "#1B5E20" }
+    },
+    {
+      "id": "tech-hackathon",
+      "type": "shape",
+      "content": "Hackathon Arena\n48-hour challenge\n50 teams max\nMentors circulating\n$50K prize pool",
+      "shape": "rectangle",
+      "x": 2850,
+      "y": 590,
+      "width": 650,
+      "height": 250,
+      "style": { "fillColor": "#2E7D32", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "tech-lightning",
+      "type": "sticky_note",
+      "content": "Lightning Talks: 10min rapid-fire, 30 slots over 3 days. Sign up at Info Booth!",
+      "x": 2150,
+      "y": 880,
+      "width": 500,
+      "height": 150,
+      "style": { "fillColor": "#00E676" }
+    },
+    {
+      "id": "workshop-village",
+      "type": "frame",
+      "title": "Workshop Village",
+      "x": 100,
+      "y": 1500,
+      "width": 1500,
+      "height": 600,
+      "style": { "fillColor": "#FFF3E0" }
+    },
+    {
+      "id": "workshop-header",
+      "type": "text",
+      "content": "Workshop Village — Learn by Doing",
+      "x": 150,
+      "y": 1520,
+      "width": 800,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#FF8F00" }
+    },
+    {
+      "id": "workshop-a",
+      "type": "sticky_note",
+      "content": "Tent A: AI for Everyone\nNo-code AI tools\n60 seats",
+      "x": 150,
+      "y": 1590,
+      "width": 220,
+      "height": 160,
+      "style": { "fillColor": "#FF8F00" }
+    },
+    {
+      "id": "workshop-b",
+      "type": "sticky_note",
+      "content": "Tent B: Design Thinking Sprint\n2hr rapid prototyping\n60 seats",
+      "x": 400,
+      "y": 1590,
+      "width": 220,
+      "height": 160,
+      "style": { "fillColor": "#FFB74D" }
+    },
+    {
+      "id": "workshop-c",
+      "type": "sticky_note",
+      "content": "Tent C: Leadership Lab\nManagement skills\n60 seats",
+      "x": 650,
+      "y": 1590,
+      "width": 220,
+      "height": 160,
+      "style": { "fillColor": "#FF8F00" }
+    },
+    {
+      "id": "workshop-d",
+      "type": "sticky_note",
+      "content": "Tent D: Open Source\nFirst-time contributions\n60 seats",
+      "x": 900,
+      "y": 1590,
+      "width": 220,
+      "height": 160,
+      "style": { "fillColor": "#FFB74D" }
+    },
+    {
+      "id": "workshop-ef",
+      "type": "sticky_note",
+      "content": "Tent E: Startup Bootcamp (pitch + investors)\nTent F: Creative Coding (generative art)\nPre-registration required!",
+      "x": 1150,
+      "y": 1590,
+      "width": 300,
+      "height": 160,
+      "style": { "fillColor": "#FF8F00" }
+    },
+    {
+      "id": "food-court",
+      "type": "frame",
+      "title": "Food Court — Festival Eats",
+      "x": 1700,
+      "y": 1400,
+      "width": 1500,
+      "height": 500,
+      "style": { "fillColor": "#FCE4EC" }
+    },
+    {
+      "id": "food-header",
+      "type": "text",
+      "content": "Food Court — Festival Eats",
+      "x": 1750,
+      "y": 1420,
+      "width": 700,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#880E4F" }
+    },
+    {
+      "id": "food-vendors",
+      "type": "shape",
+      "content": "40 Food Vendors\nStreet Food Alley (12 trucks)\nGlobal Kitchen (8) | Healthy Bites (6)\nSweets & Treats (6) | Beverage Garden (8)\nAll dietary labels: V, GF, H, K",
+      "shape": "rectangle",
+      "x": 1750,
+      "y": 1490,
+      "width": 700,
+      "height": 230,
+      "style": { "fillColor": "#880E4F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "food-beer",
+      "type": "sticky_note",
+      "content": "Beer Garden: Local craft breweries\n21+ with wristband\nFree water stations at every zone",
+      "x": 2500,
+      "y": 1490,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#E91E63" }
+    },
+    {
+      "id": "food-tip",
+      "type": "sticky_note",
+      "content": "Pro tip: Peak lunch is 12:30-1:30. Eat early or late to avoid lines!",
+      "x": 2500,
+      "y": 1700,
+      "width": 400,
+      "height": 120,
+      "style": { "fillColor": "#F8BBD0" }
+    },
+    {
+      "id": "wellness-garden",
+      "type": "frame",
+      "title": "Wellness Garden",
+      "x": 3300,
+      "y": 1400,
+      "width": 1400,
+      "height": 500,
+      "style": { "fillColor": "#E8F5E9" }
+    },
+    {
+      "id": "wellness-header",
+      "type": "text",
+      "content": "Wellness Garden — Recharge & Reflect",
+      "x": 3350,
+      "y": 1420,
+      "width": 800,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#81C784" }
+    },
+    {
+      "id": "wellness-content",
+      "type": "shape",
+      "content": "Morning yoga (7:30 AM daily)\n4 meditation pods (15min guided)\n8 nap pods (30min bookings)\n10 massage chairs (free 10min)\nDigital detox zone (no phones!)\nJournaling station",
+      "shape": "rectangle",
+      "x": 3350,
+      "y": 1490,
+      "width": 1250,
+      "height": 220,
+      "style": { "fillColor": "#81C784", "fontColor": "#1B5E20" }
+    },
+    {
+      "id": "wellness-note",
+      "type": "sticky_note",
+      "content": "Don't skip this zone — festival fatigue is real on Day 3!",
+      "x": 3350,
+      "y": 1740,
+      "width": 400,
+      "height": 120,
+      "style": { "fillColor": "#A5D6A7" }
+    },
+    {
+      "id": "innovation-lab",
+      "type": "frame",
+      "title": "Innovation Lab",
+      "x": 100,
+      "y": 2200,
+      "width": 1400,
+      "height": 500,
+      "style": { "fillColor": "#F3E5F5" }
+    },
+    {
+      "id": "innovation-header",
+      "type": "text",
+      "content": "Innovation Lab — Experimental Zone",
+      "x": 150,
+      "y": 2220,
+      "width": 800,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#7B1FA2" }
+    },
+    {
+      "id": "innovation-content",
+      "type": "shape",
+      "content": "12 prototype showcases from NovaTech Labs\n\"Shark Tank\" stage: Startup pitches ($100K prize)\nFuture tech: Robotics, BCI, quantum\nInteractive digital mural (evolves over 3 days)\nResearch poster session",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 2290,
+      "width": 1250,
+      "height": 220,
+      "style": { "fillColor": "#7B1FA2", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "innovation-vote",
+      "type": "sticky_note",
+      "content": "Vote for your favorite startup — winner gets $100K investment!",
+      "x": 150,
+      "y": 2540,
+      "width": 400,
+      "height": 120,
+      "style": { "fillColor": "#CE93D8" }
+    },
+    {
+      "id": "chill-lounge",
+      "type": "frame",
+      "title": "Chill Lounge",
+      "x": 1600,
+      "y": 2000,
+      "width": 1200,
+      "height": 400,
+      "style": { "fillColor": "#EFEBE9" }
+    },
+    {
+      "id": "chill-content",
+      "type": "shape",
+      "content": "Bean bags & hammocks under shade\nAcoustic music: Local artists unplugged\n50+ board games | Solar phone charging\nFamily area: Kids activities (ages 4-12)\nLost & Found station",
+      "shape": "rectangle",
+      "x": 1650,
+      "y": 2050,
+      "width": 1050,
+      "height": 200,
+      "style": { "fillColor": "#D7CCC8", "fontColor": "#3E2723" }
+    },
+    {
+      "id": "schedule-frame",
+      "type": "frame",
+      "title": "Daily Schedule",
+      "x": 100,
+      "y": 2800,
+      "width": 2400,
+      "height": 350,
+      "style": { "fillColor": "#F1F8E9" }
+    },
+    {
+      "id": "sched-day1",
+      "type": "shape",
+      "content": "DAY 1 — Sep 15\nGates 8AM | Opening 10AM\nSessions 11-5 | Dinner 6PM\nHeadliner 8PM",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 2850,
+      "width": 700,
+      "height": 200,
+      "style": { "fillColor": "#1565C0", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "sched-day2",
+      "type": "shape",
+      "content": "DAY 2 — Sep 16\nYoga 7:30AM | Sessions 9-5\nHackathon continues\nDinner 6PM | DJ 8PM",
+      "shape": "rectangle",
+      "x": 900,
+      "y": 2850,
+      "width": 700,
+      "height": 200,
+      "style": { "fillColor": "#00E676", "fontColor": "#1B5E20" }
+    },
+    {
+      "id": "sched-day3",
+      "type": "shape",
+      "content": "DAY 3 — Sep 17\nYoga 7:30AM | Sessions 9-3\nClosing 4PM | Farewell 6PM\nFireworks 9PM",
+      "shape": "rectangle",
+      "x": 1650,
+      "y": 2850,
+      "width": 700,
+      "height": 200,
+      "style": { "fillColor": "#E91E63", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "info-frame",
+      "type": "frame",
+      "title": "Festival Info & Safety",
+      "x": 2600,
+      "y": 2800,
+      "width": 2300,
+      "height": 350,
+      "style": { "fillColor": "#E8F5E9" }
+    },
+    {
+      "id": "info-content",
+      "type": "shape",
+      "content": "Wi-Fi: NovaTechFest2026 / PW: Innovate2026\nFirst Aid: 3 stations (marked with red cross)\nSecurity: Text HELP to 55555\nParking: Lot A (general), Lot B (VIP)\nShuttle: Every 15min from downtown hotels",
+      "shape": "rectangle",
+      "x": 2650,
+      "y": 2850,
+      "width": 1000,
+      "height": 200,
+      "style": { "fillColor": "#1B5E20", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "info-sustainability",
+      "type": "sticky_note",
+      "content": "Zero-waste festival! Compost, recycle, reuse stations at every zone. Layers recommended — fog clears by 11 AM.",
+      "x": 3700,
+      "y": 2850,
+      "width": 500,
+      "height": 180,
+      "style": { "fillColor": "#81C784" }
+    },
+    {
+      "id": "first-aid-1",
+      "type": "shape",
+      "content": "First Aid",
+      "shape": "circle",
+      "x": 1000,
+      "y": 1350,
+      "width": 80,
+      "height": 80,
+      "style": { "fillColor": "#D32F2F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "first-aid-2",
+      "type": "shape",
+      "content": "First Aid",
+      "shape": "circle",
+      "x": 2500,
+      "y": 1950,
+      "width": 80,
+      "height": 80,
+      "style": { "fillColor": "#D32F2F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "first-aid-3",
+      "type": "shape",
+      "content": "First Aid",
+      "shape": "circle",
+      "x": 4000,
+      "y": 1950,
+      "width": 80,
+      "height": 80,
+      "style": { "fillColor": "#D32F2F", "fontColor": "#FFFFFF" }
+    },
+    {
+      "type": "connector",
+      "startItem": "main-stage",
+      "endItem": "tech-tent",
+      "style": {
+        "strokeColor": "#D7CCC8",
+        "strokeWidth": 5,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "main-stage",
+      "endItem": "workshop-village",
+      "style": {
+        "strokeColor": "#D7CCC8",
+        "strokeWidth": 5,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "workshop-village",
+      "endItem": "food-court",
+      "style": {
+        "strokeColor": "#D7CCC8",
+        "strokeWidth": 5,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "food-court",
+      "endItem": "wellness-garden",
+      "style": {
+        "strokeColor": "#D7CCC8",
+        "strokeWidth": 5,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "tech-tent",
+      "endItem": "innovation-lab",
+      "style": {
+        "strokeColor": "#D7CCC8",
+        "strokeWidth": 5,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "innovation-lab",
+      "endItem": "chill-lounge",
+      "style": {
+        "strokeColor": "#D7CCC8",
+        "strokeWidth": 5,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "food-court",
+      "endItem": "chill-lounge",
+      "style": {
+        "strokeColor": "#D7CCC8",
+        "strokeWidth": 3,
+        "strokeStyle": "dashed"
+      }
+    }
+  ]
+}

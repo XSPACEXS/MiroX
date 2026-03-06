@@ -1,0 +1,89 @@
+{
+  "category": "Mind Maps",
+  "description": "Visual thinking tools for brainstorming, organizing ideas, exploring concepts, and clustering topics using radial and hierarchical layouts",
+  "icon": "🧠",
+  "colorTheme": {
+    "primary": "#1A237E",
+    "secondary": "#00796B",
+    "accent": "#F9A825"
+  },
+  "knowledge": [
+    {
+      "file": "design-philosophy",
+      "name": "Design Philosophy",
+      "description": "Why mind maps exist, cognitive principles (Dual Coding, Gestalt, Von Restorff, Cognitive Load), visual design principles, and the designer's mindset"
+    },
+    {
+      "file": "layout-patterns",
+      "name": "Layout Patterns",
+      "description": "Five layout patterns (Classic Radial, Hemispheric, Cluster Cloud, Vertical Cascade, Dual-Core) with ASCII diagrams, spatial rules, and scaling guidelines"
+    },
+    {
+      "file": "visual-guide",
+      "name": "Visual Guide",
+      "description": "Four color palettes with hex codes, typography scale, element selection guide, icon system, dark/light mode, and WCAG accessibility guidelines"
+    },
+    {
+      "file": "content-guide",
+      "name": "Content Guide",
+      "description": "Essential sections, content volume guidelines, real-world examples, copywriting rules, and content templates per mind map type"
+    },
+    {
+      "file": "build-process",
+      "name": "Build Process",
+      "description": "Six-phase workflow (Discovery, Structure, Skeleton, Content, Polish, Review) with Miro API pseudo-code and quality checklists"
+    },
+    {
+      "file": "examples-reference",
+      "name": "Examples Reference",
+      "description": "Six detailed example breakdowns, four anti-patterns, before/after transformations, and design elements to steal"
+    },
+    {
+      "file": "variations",
+      "name": "Variations",
+      "description": "Industry adaptations, team size scaling, complexity levels, cultural considerations, and cross-board integration mappings"
+    }
+  ],
+  "templates": [
+    {
+      "file": "brainstorming-board",
+      "name": "Brainstorming Board",
+      "description": "Radial ideation board with six branches for generating and voting on ideas around a central topic",
+      "tags": ["brainstorming", "ideation", "creativity", "team", "voting"],
+      "complexity": "Simple"
+    },
+    {
+      "file": "concept-map",
+      "name": "Concept Map",
+      "description": "Hierarchical knowledge map connecting concepts with labeled relationships for deep understanding",
+      "tags": [
+        "concepts",
+        "relationships",
+        "knowledge",
+        "learning",
+        "hierarchy"
+      ],
+      "complexity": "Medium"
+    },
+    {
+      "file": "idea-exploration",
+      "name": "Idea Exploration",
+      "description": "Structured canvas for expanding a single idea through lenses of feasibility, impact, risks, and next steps",
+      "tags": [
+        "ideas",
+        "exploration",
+        "evaluation",
+        "feasibility",
+        "deep-dive"
+      ],
+      "complexity": "Medium"
+    },
+    {
+      "file": "topic-clustering",
+      "name": "Topic Clustering",
+      "description": "Affinity mapping board for grouping related items into themed clusters with priority ranking",
+      "tags": ["clustering", "affinity", "grouping", "themes", "organization"],
+      "complexity": "Simple"
+    }
+  ]
+}

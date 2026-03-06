@@ -9,6 +9,8 @@ export const valueProposition: TemplateDefinition = {
   emoji: '\u{1F48E}',
   estimatedTime: '~4 min',
   blueprintId: 'value-proposition-canvas',
+  brainCategory: 'strategy-planning',
+  brainBlueprint: 'vision-board',
   complexity: 'medium',
   color: '#FFD600',
   tags: ['value proposition', 'product-market fit', 'customer', 'canvas', 'jobs to be done'],

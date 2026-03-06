@@ -23,6 +23,9 @@
       { "x": 390, "y": 185, "type": "link", "path": "/Applications" }
     ]
   },
+  "extraResources": [
+    { "from": "brain", "to": "brain" }
+  ],
   "files": [
     "dist/**/*",
     "dist-electron/**/*",

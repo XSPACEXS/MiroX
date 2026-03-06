@@ -1,0 +1,46 @@
+{
+  "category": "Technical Architecture",
+  "description": "Engineering-focused templates for diagramming system architectures, API endpoints, database schemas, and cloud infrastructure layouts to align development teams around clear technical blueprints",
+  "icon": "🏗️",
+  "colorTheme": {
+    "primary": "#0D47A1",
+    "secondary": "#1565C0",
+    "accent": "#00BFA5"
+  },
+  "templates": [
+    {
+      "file": "system-diagram",
+      "name": "System Architecture Diagram",
+      "description": "Full system architecture diagram with microservices, databases, message queues, load balancers, and data flow connectors",
+      "tags": [
+        "architecture",
+        "microservices",
+        "system-design",
+        "infrastructure",
+        "distributed"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "api-map",
+      "name": "API Endpoint Map",
+      "description": "API endpoint mapping with routes, HTTP methods, request/response schemas, authentication flows, and versioning",
+      "tags": ["api", "endpoints", "rest", "routes", "schema"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "database-schema",
+      "name": "Database Schema Diagram",
+      "description": "Entity-relationship diagram with tables, columns, data types, relationships, indexes, and migration notes",
+      "tags": ["database", "erd", "schema", "tables", "relationships"],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "infrastructure-overview",
+      "name": "Infrastructure Overview",
+      "description": "Cloud infrastructure layout with compute, storage, networking, CDN, CI/CD pipeline, and monitoring services",
+      "tags": ["infrastructure", "cloud", "aws", "devops", "deployment"],
+      "complexity": "Advanced"
+    }
+  ]
+}

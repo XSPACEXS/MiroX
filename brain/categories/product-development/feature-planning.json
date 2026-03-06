@@ -1,0 +1,578 @@
+{
+  "metadata": {
+    "name": "Feature Planning Board",
+    "description": "Comprehensive feature specification for AI Task Routing with user stories, wireframe sketches, technical requirements, dependencies, risks, edge cases, and delivery timeline",
+    "category": "Product Development",
+    "tags": [
+      "feature-planning",
+      "user-stories",
+      "wireframes",
+      "requirements",
+      "delivery"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3600 }
+  },
+  "settings": {
+    "backgroundColor": "#F3E5F5",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_header",
+      "type": "frame",
+      "title": "Feature Header",
+      "x": 50,
+      "y": 50,
+      "width": 4900,
+      "height": 250,
+      "style": { "fillColor": "#6200EA" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "Feature Planning: AI Task Routing",
+      "x": 100,
+      "y": 70,
+      "width": 2500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_meta",
+      "type": "text",
+      "content": "Product: AutoPilot 3.0 | PM: Jake Reynolds | Eng Lead: Marcus Williams | Designer: Priya Tandon | Sprint: 14-16 | Status: In Development",
+      "x": 100,
+      "y": 130,
+      "width": 4000,
+      "style": { "fontSize": 14, "color": "#D1C4E9" }
+    },
+    {
+      "id": "text_dates",
+      "type": "text",
+      "content": "Start: March 3, 2026 | Target Ship: April 11, 2026 | Last Updated: March 6, 2026",
+      "x": 100,
+      "y": 165,
+      "width": 4000,
+      "style": { "fontSize": 14, "color": "#D1C4E9" }
+    },
+    {
+      "id": "frame_overview",
+      "type": "frame",
+      "title": "Feature Overview",
+      "x": 50,
+      "y": 350,
+      "width": 2400,
+      "height": 600,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_overview_header",
+      "type": "text",
+      "content": "Feature Overview",
+      "x": 80,
+      "y": 370,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "shape_problem",
+      "type": "shape",
+      "content": "Problem: Teams waste 3+ hours/week manually assigning tasks. Managers lack visibility into team capacity, leading to overload and missed deadlines.",
+      "shape": "round_rectangle",
+      "x": 80,
+      "y": 420,
+      "width": 1100,
+      "height": 80,
+      "style": {
+        "fillColor": "#FFEBEE",
+        "fontColor": "#C62828",
+        "borderColor": "#EF9A9A",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_solution",
+      "type": "shape",
+      "content": "Solution: AI-powered task routing that automatically suggests the best team member for unassigned tasks based on skills, current workload, availability, and past performance.",
+      "shape": "round_rectangle",
+      "x": 80,
+      "y": 520,
+      "width": 1100,
+      "height": 80,
+      "style": {
+        "fillColor": "#E8F5E9",
+        "fontColor": "#2E7D32",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_metrics",
+      "type": "shape",
+      "content": "Success Metrics:\n- Reduce avg task assignment time from 3h to <5 min\n- AI suggestion acceptance rate >70% within 30 days\n- Reduce team overload incidents by 40%",
+      "shape": "round_rectangle",
+      "x": 80,
+      "y": 620,
+      "width": 1100,
+      "height": 100,
+      "style": {
+        "fillColor": "#E3F2FD",
+        "fontColor": "#1565C0",
+        "borderColor": "#90CAF9",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_scope",
+      "type": "shape",
+      "content": "Scope:\nIN: Skill matching, workload balancing, suggestion UI (desktop + mobile), approve/dismiss flow, confidence scoring\nOUT: Auto-assignment (always human-approved), cross-project routing, Slack bot integration (v2)",
+      "shape": "round_rectangle",
+      "x": 80,
+      "y": 740,
+      "width": 1100,
+      "height": 100,
+      "style": {
+        "fillColor": "#FFF3E0",
+        "fontColor": "#E65100",
+        "borderColor": "#FFCC80",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "frame_stories",
+      "type": "frame",
+      "title": "User Stories",
+      "x": 2500,
+      "y": 350,
+      "width": 2400,
+      "height": 600,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_stories_header",
+      "type": "text",
+      "content": "User Stories",
+      "x": 2530,
+      "y": 370,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "sticky_story1",
+      "type": "sticky_note",
+      "content": "US-1: As a PM, I want to see AI-suggested assignees on unassigned tasks so I can quickly assign work without checking everyone's calendar.",
+      "x": 2530,
+      "y": 420,
+      "width": 700,
+      "height": 80,
+      "style": { "fillColor": "#E8F5E9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_story2",
+      "type": "sticky_note",
+      "content": "US-2: As a PM, I want to approve or dismiss AI suggestions with one click so the workflow stays fast and non-disruptive.",
+      "x": 3280,
+      "y": 420,
+      "width": 700,
+      "height": 80,
+      "style": { "fillColor": "#E8F5E9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_story3",
+      "type": "sticky_note",
+      "content": "US-3: As an engineer, I want to see why I was suggested (skill match, capacity) so I can understand and trust the system.",
+      "x": 2530,
+      "y": 520,
+      "width": 700,
+      "height": 80,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_story4",
+      "type": "sticky_note",
+      "content": "US-4: As a team lead, I want to see my team's workload distribution so I can spot overload before it causes burnout.",
+      "x": 3280,
+      "y": 520,
+      "width": 700,
+      "height": 80,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_story5",
+      "type": "sticky_note",
+      "content": "US-5: As a PM, I want the AI to learn from my approve/dismiss decisions over time so suggestions improve with usage.",
+      "x": 2530,
+      "y": 620,
+      "width": 700,
+      "height": 80,
+      "style": { "fillColor": "#FFF3E0", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_wireframes",
+      "type": "frame",
+      "title": "Wireframe Sketches",
+      "x": 50,
+      "y": 1000,
+      "width": 4900,
+      "height": 700,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_wireframes_header",
+      "type": "text",
+      "content": "Wireframe Sketches",
+      "x": 80,
+      "y": 1020,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "shape_wire_d1",
+      "type": "shape",
+      "content": "Screen: Sprint Board + AI Overlay\n\nKanban: TO DO | IN PROGRESS | DONE\nUnassigned task card -> hover -> AI overlay:\n'Suggested: Aisha K. (92% match)'\nSkills: React, TypeScript | Capacity: 65%\n[Approve] [Next Suggestion]",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 1070,
+      "width": 1500,
+      "height": 400,
+      "style": {
+        "fillColor": "#F5F5F5",
+        "fontColor": "#212121",
+        "borderColor": "#6200EA",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_wire_d2",
+      "type": "shape",
+      "content": "Screen: Workload Dashboard\n\nTeam capacity bars:\nAisha K. [========] 85% | 6 tasks\nLeo C.   [======] 65% | 4 tasks\nMarcus W.[==========] 100% RED\nNoor A.  [====] 45% | 3 tasks\n\nBurndown + Velocity charts",
+      "shape": "rectangle",
+      "x": 1630,
+      "y": 1070,
+      "width": 1500,
+      "height": 400,
+      "style": {
+        "fillColor": "#F5F5F5",
+        "fontColor": "#212121",
+        "borderColor": "#6200EA",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_wire_m1",
+      "type": "shape",
+      "content": "Mobile: Task Detail\n\nHeader: < Back | Task Detail\nFix login timeout bug\nPriority: High\n\nAI Suggestion Card:\nAisha K. — 92% match\n[Approve] [See Others]",
+      "shape": "round_rectangle",
+      "x": 3200,
+      "y": 1070,
+      "width": 375,
+      "height": 400,
+      "style": {
+        "fillColor": "#F5F5F5",
+        "fontColor": "#212121",
+        "borderColor": "#6200EA",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "frame_technical",
+      "type": "frame",
+      "title": "Technical Requirements",
+      "x": 50,
+      "y": 1750,
+      "width": 2400,
+      "height": 600,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_tech_header",
+      "type": "text",
+      "content": "Technical Requirements",
+      "x": 80,
+      "y": 1770,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "sticky_tech1",
+      "type": "sticky_note",
+      "content": "ML Model: Skill-to-task matching using NLP on task descriptions + team skill profiles. Python/FastAPI microservice.",
+      "x": 80,
+      "y": 1820,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#EDE7F6", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_tech2",
+      "type": "sticky_note",
+      "content": "Workload API: Real-time capacity calculation from task assignments, estimated hours, and sprint boundaries.",
+      "x": 800,
+      "y": 1820,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#EDE7F6", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_tech3",
+      "type": "sticky_note",
+      "content": "Confidence Score: Weighted average of skill match (40%), capacity fit (30%), past assignment success (20%), availability (10%).",
+      "x": 80,
+      "y": 1910,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#EDE7F6", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_tech4",
+      "type": "sticky_note",
+      "content": "Latency: Suggestion must appear within 500ms of hover/tap. Pre-compute suggestions on task creation.",
+      "x": 800,
+      "y": 1910,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#EDE7F6", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_tech5",
+      "type": "sticky_note",
+      "content": "Privacy: Workload data visible only to team leads and PMs. Engineers see only their own capacity.",
+      "x": 80,
+      "y": 2000,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#EDE7F6", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_tech6",
+      "type": "sticky_note",
+      "content": "Fallback: If AI service is down, graceful degradation to manual assignment with 'AI unavailable' message.",
+      "x": 800,
+      "y": 2000,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#EDE7F6", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_deps_risks",
+      "type": "frame",
+      "title": "Dependencies & Risks",
+      "x": 2500,
+      "y": 1750,
+      "width": 2400,
+      "height": 600,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_deps_header",
+      "type": "text",
+      "content": "Dependencies & Risks",
+      "x": 2530,
+      "y": 1770,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "sticky_dep1",
+      "type": "sticky_note",
+      "content": "DEP: Skill profile data — requires team members to set up skill tags (onboarding task needed)",
+      "x": 2530,
+      "y": 1820,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_dep2",
+      "type": "sticky_note",
+      "content": "DEP: Design handoff for AI overlay and workload dashboard — due Sprint 14 Day 5",
+      "x": 3280,
+      "y": 1820,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_dep3",
+      "type": "sticky_note",
+      "content": "DEP: External ML vendor API for NLP model — SLA under review",
+      "x": 2530,
+      "y": 1910,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_risk1",
+      "type": "sticky_note",
+      "content": "RISK: Low suggestion accuracy in first weeks due to limited training data. Mitigation: Start with rule-based fallback.",
+      "x": 2530,
+      "y": 2000,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#FFEBEE", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_risk2",
+      "type": "sticky_note",
+      "content": "RISK: User trust — managers may ignore suggestions initially. Mitigation: Show confidence reasoning.",
+      "x": 3280,
+      "y": 2000,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#FFEBEE", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_edge_cases",
+      "type": "frame",
+      "title": "Edge Cases & Open Questions",
+      "x": 50,
+      "y": 2400,
+      "width": 2400,
+      "height": 500,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_edge_header",
+      "type": "text",
+      "content": "Edge Cases & Open Questions",
+      "x": 80,
+      "y": 2420,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "sticky_edge1",
+      "type": "sticky_note",
+      "content": "EDGE: All team members at 100% capacity — show 'Team at capacity. Consider deferring this task or adding resources.'",
+      "x": 80,
+      "y": 2470,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_edge2",
+      "type": "sticky_note",
+      "content": "EDGE: No skill match found — show 'No strong match. Assign manually?' with team list sorted by capacity.",
+      "x": 800,
+      "y": 2470,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_edge3",
+      "type": "sticky_note",
+      "content": "EDGE: Team of 1 — skip suggestion UI entirely, auto-assign to sole member.",
+      "x": 80,
+      "y": 2560,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_question1",
+      "type": "sticky_note",
+      "content": "OPEN: Should AI suggestions persist or recalculate each time the task is viewed?",
+      "x": 800,
+      "y": 2560,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#E0F7FA", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_question2",
+      "type": "sticky_note",
+      "content": "OPEN: Do we show suggestions for tasks that already have an assignee? (Reassignment suggestions?)",
+      "x": 80,
+      "y": 2650,
+      "width": 700,
+      "height": 70,
+      "style": { "fillColor": "#E0F7FA", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_timeline",
+      "type": "frame",
+      "title": "Delivery Timeline",
+      "x": 2500,
+      "y": 2400,
+      "width": 2400,
+      "height": 500,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_timeline_header",
+      "type": "text",
+      "content": "Delivery Timeline",
+      "x": 2530,
+      "y": 2420,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "shape_timeline_table",
+      "type": "shape",
+      "content": "Phase | Sprint | Dates | Owner | Status\n──────────────────────────────────────────\nDesign + Spec | Sprint 14 | Mar 3-14 | Priya T. | In Progress\nBackend: ML Model + API | Sprint 14-15 | Mar 3-28 | Marcus W. | In Progress\nFrontend: Overlay + Dashboard | Sprint 15 | Mar 17-28 | Leo C. + Noor A. | Not Started\nIntegration + QA | Sprint 16 | Mar 31-Apr 11 | Full team | Not Started\nBeta Release (5% rollout) | Sprint 16 Day 8 | Apr 8 | Jake R. | Not Started\nGA Release | Sprint 17 | Apr 14 | Jake R. | Not Started",
+      "shape": "rectangle",
+      "x": 2530,
+      "y": 2470,
+      "width": 2300,
+      "height": 300,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#6200EA",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "conn_overview_stories",
+      "type": "connector",
+      "startItem": "frame_overview",
+      "endItem": "frame_stories",
+      "style": {
+        "strokeColor": "#6200EA",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Drives stories" }]
+    },
+    {
+      "id": "conn_stories_wireframes",
+      "type": "connector",
+      "startItem": "frame_stories",
+      "endItem": "frame_wireframes",
+      "style": {
+        "strokeColor": "#6200EA",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Visualized in" }]
+    },
+    {
+      "id": "conn_wireframes_tech",
+      "type": "connector",
+      "startItem": "frame_wireframes",
+      "endItem": "frame_technical",
+      "style": {
+        "strokeColor": "#6200EA",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Requires" }]
+    },
+    {
+      "id": "conn_tech_timeline",
+      "type": "connector",
+      "startItem": "frame_technical",
+      "endItem": "frame_timeline",
+      "style": {
+        "strokeColor": "#6200EA",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Scheduled in" }]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "category": "Design & UX",
+  "description": "Visual boards for the entire design process — from inspiration and user research through wireframing, component systems, user flows, and design review.",
+  "icon": "🎨",
+  "colorTheme": {
+    "primary": "#E91E63",
+    "secondary": "#0288D1",
+    "accent": "#00BFA5"
+  },
+  "templates": [
+    {
+      "file": "wireframe-board",
+      "name": "Wireframe Board",
+      "description": "Low-fidelity wireframing for mobile and desktop screens with annotations",
+      "tags": ["wireframe", "layout", "screens", "mobile", "desktop", "lo-fi"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "user-flow",
+      "name": "User Flow Diagram",
+      "description": "Map user journeys with decision points, screens, and branching paths",
+      "tags": ["user-flow", "journey", "decisions", "navigation", "ux"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "design-system",
+      "name": "Design System Board",
+      "description": "Document a component library with tokens, typography, spacing, and patterns",
+      "tags": [
+        "design-system",
+        "components",
+        "tokens",
+        "typography",
+        "patterns"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "mood-board",
+      "name": "Mood Board",
+      "description": "Gather visual inspiration: colors, images, textures, fonts, and descriptors",
+      "tags": [
+        "mood-board",
+        "inspiration",
+        "colors",
+        "visual-direction",
+        "branding"
+      ],
+      "complexity": "Simple"
+    },
+    {
+      "file": "ui-review",
+      "name": "UI Review Board",
+      "description": "Structured design review with screenshots, feedback stickies, and approval tracking",
+      "tags": ["review", "feedback", "approval", "critique", "iteration"],
+      "complexity": "Medium"
+    }
+  ]
+}

@@ -64,6 +64,10 @@ export const IPC_CHANNELS = {
   GEMINI_LOG: 'gemini:log',
   GEMINI_EXIT: 'gemini:exit',
 
+  // Brain
+  BRAIN_LOAD_CONTEXT: 'brain:load-context',
+  BRAIN_GENERATE_BOARD: 'brain:generate-board',
+
   // Navigation
   NAVIGATE: 'navigate',
 

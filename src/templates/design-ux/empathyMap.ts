@@ -9,6 +9,8 @@ export const empathyMap: TemplateDefinition = {
   emoji: '\u{1F9E0}',
   estimatedTime: '~3 min',
   blueprintId: 'empathy-map',
+  brainCategory: 'customer-journey',
+  brainBlueprint: 'empathy-map',
   complexity: 'simple',
   color: '#F472B6',
   tags: ['empathy', 'ux', 'design thinking', 'user research', 'workshop'],

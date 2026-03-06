@@ -1,0 +1,646 @@
+{
+  "metadata": {
+    "name": "Icebreaker Activities Board",
+    "description": "4 interactive icebreaker activities for team meetings — Fun Question Prompts, Personal Fact Cards, Two Truths and a Lie, and Photo Sharing Gallery with facilitator guide and welcome banner",
+    "category": "Workshops",
+    "tags": [
+      "icebreaker",
+      "team-building",
+      "fun",
+      "introductions",
+      "warm-up",
+      "activities"
+    ],
+    "complexity": "Simple",
+    "boardSize": { "width": 3000, "height": 2500 }
+  },
+  "settings": {
+    "backgroundColor": "#FFF8E1",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_welcome",
+      "type": "frame",
+      "title": "Welcome Banner",
+      "x": 50,
+      "y": 50,
+      "width": 2900,
+      "height": 200,
+      "style": { "fillColor": "#4A148C" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "Icebreaker Activities",
+      "x": 100,
+      "y": 70,
+      "width": 1500,
+      "style": { "fontSize": 40, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_meta",
+      "type": "text",
+      "content": "Pick an activity to kick off your meeting! | Duration: 5-10 min each | Works for 3-20 people | No prep needed",
+      "x": 100,
+      "y": 130,
+      "width": 2500,
+      "style": { "fontSize": 14, "color": "#CE93D8" }
+    },
+    {
+      "id": "text_instructions",
+      "type": "text",
+      "content": "Tip: Choose ONE activity per meeting. Rotate through them over the quarter so they stay fresh.",
+      "x": 100,
+      "y": 165,
+      "width": 2500,
+      "style": { "fontSize": 14, "color": "#CE93D8" }
+    },
+    {
+      "id": "frame_questions",
+      "type": "frame",
+      "title": "Activity 1: Fun Question Prompts",
+      "x": 50,
+      "y": 300,
+      "width": 1400,
+      "height": 900,
+      "style": { "fillColor": "#FCE4EC" }
+    },
+    {
+      "id": "text_q_header",
+      "type": "text",
+      "content": "Activity 1: Fun Question Prompts",
+      "x": 80,
+      "y": 320,
+      "width": 600,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#AD1457" }
+    },
+    {
+      "id": "text_q_desc",
+      "type": "text",
+      "content": "How it works: Pick a random question. Everyone answers in 1-2 sentences. Go around the room or use popcorn style (you pick who goes next).",
+      "x": 80,
+      "y": 360,
+      "width": 1300,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "sticky_q1",
+      "type": "sticky_note",
+      "content": "If you could have dinner with anyone, living or dead, who would it be and why?",
+      "x": 80,
+      "y": 410,
+      "width": 300,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_q2",
+      "type": "sticky_note",
+      "content": "What is the most unusual skill you have that your coworkers don't know about?",
+      "x": 400,
+      "y": 410,
+      "width": 300,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_q3",
+      "type": "sticky_note",
+      "content": "If you could instantly become an expert in something, what would it be?",
+      "x": 720,
+      "y": 410,
+      "width": 300,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_q4",
+      "type": "sticky_note",
+      "content": "What was the last thing that made you laugh out loud?",
+      "x": 80,
+      "y": 500,
+      "width": 300,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_q5",
+      "type": "sticky_note",
+      "content": "If your life had a theme song, what would it be right now?",
+      "x": 400,
+      "y": 500,
+      "width": 300,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_q6",
+      "type": "sticky_note",
+      "content": "What is the best piece of advice you have ever received?",
+      "x": 720,
+      "y": 500,
+      "width": 300,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_q7",
+      "type": "sticky_note",
+      "content": "If you could travel to any time period for a day, when would you go?",
+      "x": 80,
+      "y": 590,
+      "width": 300,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_q8",
+      "type": "sticky_note",
+      "content": "What is something on your bucket list you have not done yet?",
+      "x": 400,
+      "y": 590,
+      "width": 300,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_q9",
+      "type": "sticky_note",
+      "content": "If you could swap jobs with anyone on the team for a day, who and why?",
+      "x": 720,
+      "y": 590,
+      "width": 300,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_q10",
+      "type": "sticky_note",
+      "content": "What is your go-to comfort food after a long day?",
+      "x": 80,
+      "y": 680,
+      "width": 300,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "text_q_examples",
+      "type": "text",
+      "content": "Example Answers:",
+      "x": 80,
+      "y": 780,
+      "width": 300,
+      "style": { "fontSize": 14, "fontWeight": "bold", "color": "#AD1457" }
+    },
+    {
+      "id": "sticky_qex1",
+      "type": "sticky_note",
+      "content": "Aisha: 'I can solve a Rubik's cube in under 2 minutes. Learned during lockdown!'",
+      "x": 80,
+      "y": 810,
+      "width": 400,
+      "height": 60,
+      "style": { "fillColor": "#FFFFFF", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_qex2",
+      "type": "sticky_note",
+      "content": "Leo: 'Time travel to 1969 Moon landing. I'd watch from mission control.'",
+      "x": 500,
+      "y": 810,
+      "width": 400,
+      "height": 60,
+      "style": { "fillColor": "#FFFFFF", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_qex3",
+      "type": "sticky_note",
+      "content": "Marcus: 'Theme song right now: 'Under Pressure' by Queen. Sprint deadlines, enough said.'",
+      "x": 80,
+      "y": 890,
+      "width": 400,
+      "height": 60,
+      "style": { "fillColor": "#FFFFFF", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "frame_fact_cards",
+      "type": "frame",
+      "title": "Activity 2: Personal Fact Cards",
+      "x": 1500,
+      "y": 300,
+      "width": 1400,
+      "height": 900,
+      "style": { "fillColor": "#E3F2FD" }
+    },
+    {
+      "id": "text_fc_header",
+      "type": "text",
+      "content": "Activity 2: Personal Fact Cards",
+      "x": 1530,
+      "y": 320,
+      "width": 600,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#1565C0" }
+    },
+    {
+      "id": "text_fc_desc",
+      "type": "text",
+      "content": "How it works: Each person fills out a fact card (2 min). Then shuffle and read them aloud — team guesses who wrote each one!",
+      "x": 1530,
+      "y": 360,
+      "width": 1300,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "shape_fc_template",
+      "type": "shape",
+      "content": "FACT CARD TEMPLATE\n\nName: _______________\nRole: _______________\nFun Fact: _______________\nHidden Talent: _______________\nFavorite Snack: _______________\nIf I Won the Lottery: _______________",
+      "shape": "round_rectangle",
+      "x": 1530,
+      "y": 410,
+      "width": 350,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#1565C0",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "shape_fc_example1",
+      "type": "shape",
+      "content": "Name: Aisha K.\nRole: Scrum Master\nFun Fact: Lived in 4 countries before age 18\nHidden Talent: Speed-cubing (Rubik's in <2 min)\nFavorite Snack: Dark chocolate almonds\nLottery: Open a cat cafe in Lisbon",
+      "shape": "round_rectangle",
+      "x": 1530,
+      "y": 640,
+      "width": 350,
+      "height": 200,
+      "style": {
+        "fillColor": "#BBDEFB",
+        "fontColor": "#212121",
+        "borderColor": "#90CAF9",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_fc_example2",
+      "type": "shape",
+      "content": "Name: Leo C.\nRole: Frontend Dev\nFun Fact: Built my first website at age 11\nHidden Talent: Play ukulele (badly, but with enthusiasm)\nFavorite Snack: Spicy ramen (the instant kind)\nLottery: Fund a public coding school for kids",
+      "shape": "round_rectangle",
+      "x": 1920,
+      "y": 640,
+      "width": 350,
+      "height": 200,
+      "style": {
+        "fillColor": "#BBDEFB",
+        "fontColor": "#212121",
+        "borderColor": "#90CAF9",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_fc_example3",
+      "type": "shape",
+      "content": "Name: Noor A.\nRole: Backend Dev\nFun Fact: Completed a marathon last year\nHidden Talent: Can identify any bird by its call\nFavorite Snack: Hummus with everything\nLottery: Buy a small farm and grow vegetables",
+      "shape": "round_rectangle",
+      "x": 2310,
+      "y": 640,
+      "width": 350,
+      "height": 200,
+      "style": {
+        "fillColor": "#BBDEFB",
+        "fontColor": "#212121",
+        "borderColor": "#90CAF9",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "frame_truths",
+      "type": "frame",
+      "title": "Activity 3: Two Truths and a Lie",
+      "x": 50,
+      "y": 1250,
+      "width": 1400,
+      "height": 700,
+      "style": { "fillColor": "#E8F5E9" }
+    },
+    {
+      "id": "text_tt_header",
+      "type": "text",
+      "content": "Activity 3: Two Truths and a Lie",
+      "x": 80,
+      "y": 1270,
+      "width": 600,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#2E7D32" }
+    },
+    {
+      "id": "text_tt_desc",
+      "type": "text",
+      "content": "How it works: Each person shares 3 statements — 2 true, 1 false. Team votes on which is the lie. Reveal the answer!",
+      "x": 80,
+      "y": 1310,
+      "width": 1300,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "shape_tt_player1",
+      "type": "shape",
+      "content": "Aisha K.\n1. I have a pilot's license\n2. I once met the Queen of England\n3. I can speak 4 languages\n\nAnswer: #1 is the lie!",
+      "shape": "round_rectangle",
+      "x": 80,
+      "y": 1360,
+      "width": 300,
+      "height": 180,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#212121",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_tt_player2",
+      "type": "shape",
+      "content": "Leo C.\n1. I have been to all 50 US states\n2. I built an app that hit #1 on Product Hunt\n3. I once ate 30 tacos in one sitting\n\nAnswer: #3 is the lie!",
+      "shape": "round_rectangle",
+      "x": 400,
+      "y": 1360,
+      "width": 300,
+      "height": 180,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#212121",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_tt_player3",
+      "type": "shape",
+      "content": "Marcus W.\n1. I taught myself to code from a library book\n2. I have a twin sibling\n3. I have never broken a bone\n\nAnswer: #2 is the lie!",
+      "shape": "round_rectangle",
+      "x": 720,
+      "y": 1360,
+      "width": 300,
+      "height": 180,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#212121",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_tt_player4",
+      "type": "shape",
+      "content": "Noor A.\n1. I ran a marathon in under 4 hours\n2. I once accidentally deleted a production database\n3. I can name every capital city in the world\n\nAnswer: #3 is the lie!",
+      "shape": "round_rectangle",
+      "x": 1040,
+      "y": 1360,
+      "width": 300,
+      "height": 180,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#212121",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "frame_photos",
+      "type": "frame",
+      "title": "Activity 4: Photo Sharing Gallery",
+      "x": 1500,
+      "y": 1250,
+      "width": 1400,
+      "height": 700,
+      "style": { "fillColor": "#FFF3E0" }
+    },
+    {
+      "id": "text_ph_header",
+      "type": "text",
+      "content": "Activity 4: Photo Sharing Gallery",
+      "x": 1530,
+      "y": 1270,
+      "width": 600,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#E65100" }
+    },
+    {
+      "id": "text_ph_desc",
+      "type": "text",
+      "content": "How it works: Pick a prompt below. Everyone shares a photo from their phone and tells the story behind it (30 sec each).",
+      "x": 1530,
+      "y": 1310,
+      "width": 1300,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_prompts_label",
+      "type": "text",
+      "content": "Photo Prompts:",
+      "x": 1530,
+      "y": 1360,
+      "width": 300,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#E65100" }
+    },
+    {
+      "id": "sticky_prompt1",
+      "type": "sticky_note",
+      "content": "Your workspace right now (home office, desk setup, coffee shop)",
+      "x": 1530,
+      "y": 1400,
+      "width": 300,
+      "height": 60,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_prompt2",
+      "type": "sticky_note",
+      "content": "Last meal you cooked (or ordered) that you were proud of",
+      "x": 1850,
+      "y": 1400,
+      "width": 300,
+      "height": 60,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_prompt3",
+      "type": "sticky_note",
+      "content": "A view from your last vacation or trip",
+      "x": 2170,
+      "y": 1400,
+      "width": 300,
+      "height": 60,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_prompt4",
+      "type": "sticky_note",
+      "content": "Your pet (or a pet you wish you had)",
+      "x": 1530,
+      "y": 1480,
+      "width": 300,
+      "height": 60,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_prompt5",
+      "type": "sticky_note",
+      "content": "Something that is making you happy this week",
+      "x": 1850,
+      "y": 1480,
+      "width": 300,
+      "height": 60,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "text_examples_label",
+      "type": "text",
+      "content": "Example Shares:",
+      "x": 1530,
+      "y": 1570,
+      "width": 300,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#E65100" }
+    },
+    {
+      "id": "shape_photo_ex1",
+      "type": "shape",
+      "content": "[Photo placeholder]\n\nAisha: 'This is my workspace — I have 3 monitors and a cat who insists on sitting on my keyboard.'",
+      "shape": "round_rectangle",
+      "x": 1530,
+      "y": 1610,
+      "width": 250,
+      "height": 180,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#FFCC80",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_photo_ex2",
+      "type": "shape",
+      "content": "[Photo placeholder]\n\nLeo: 'I made this ramen from scratch last weekend. Took 6 hours. Worth every minute.'",
+      "shape": "round_rectangle",
+      "x": 1800,
+      "y": 1610,
+      "width": 250,
+      "height": 180,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#FFCC80",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_photo_ex3",
+      "type": "shape",
+      "content": "[Photo placeholder]\n\nMarcus: 'View from a hike in Patagonia last month. Best decision I made all year.'",
+      "shape": "round_rectangle",
+      "x": 2070,
+      "y": 1610,
+      "width": 250,
+      "height": 180,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#FFCC80",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_photo_ex4",
+      "type": "shape",
+      "content": "[Photo placeholder]\n\nNoor: 'My cat Luna, who joins every standup and judges our sprint velocity.'",
+      "shape": "round_rectangle",
+      "x": 2340,
+      "y": 1610,
+      "width": 250,
+      "height": 180,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#FFCC80",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_photo_ex5",
+      "type": "shape",
+      "content": "[Photo placeholder]\n\nPriya: 'My daughter drew this picture of me 'at work.' Apparently I look like a robot with headphones.'",
+      "shape": "round_rectangle",
+      "x": 2610,
+      "y": 1610,
+      "width": 250,
+      "height": 180,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#FFCC80",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "frame_facilitator",
+      "type": "frame",
+      "title": "Facilitator Guide",
+      "x": 50,
+      "y": 2000,
+      "width": 2900,
+      "height": 250,
+      "style": { "fillColor": "#F3E5F5" }
+    },
+    {
+      "id": "text_fac_header",
+      "type": "text",
+      "content": "Facilitator Guide",
+      "x": 80,
+      "y": 2020,
+      "width": 300,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_fac1",
+      "type": "sticky_note",
+      "content": "Go first yourself to set the tone and show vulnerability. If you share something genuine, everyone else will too.",
+      "x": 80,
+      "y": 2070,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_fac2",
+      "type": "sticky_note",
+      "content": "Keep it to 5-10 minutes max. Icebreakers should warm people up, not replace the meeting agenda.",
+      "x": 600,
+      "y": 2070,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_fac3",
+      "type": "sticky_note",
+      "content": "Never force participation. 'Anyone want to share?' is better than going around the room in order. Some people need a moment.",
+      "x": 1120,
+      "y": 2070,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_fac4",
+      "type": "sticky_note",
+      "content": "Avoid questions about family, relationships, or finances. Keep prompts universally comfortable and inclusive.",
+      "x": 1640,
+      "y": 2070,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 11 }
+    }
+  ]
+}

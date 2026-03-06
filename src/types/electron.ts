@@ -219,6 +219,12 @@ export interface ElectronAPI {
     }>
   }
 
+  // Brain
+  brain: {
+    loadContext: (blueprintId: string) => Promise<import('./brain').BrainContext | null>
+    generateBoard: (params: import('./brain').BrainGenerateParams) => Promise<unknown>
+  }
+
   // Navigation listener
   onNavigate: (callback: (path: string) => void) => () => void
 }

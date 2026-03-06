@@ -1,0 +1,464 @@
+{
+  "metadata": {
+    "name": "Feature Bundle Board",
+    "description": "A product marketing workspace for organizing features into value bundles mapped to buyer personas, with messaging frameworks, competitive feature maps, and win/loss intelligence for positioning against rivals.",
+    "category": "Marketing Enablement Board",
+    "tags": [
+      "product-marketing",
+      "feature-bundles",
+      "personas",
+      "messaging",
+      "competitive",
+      "positioning",
+      "pricing",
+      "value-prop"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#F5F6FA",
+    "gridEnabled": false
+  },
+  "items": [
+    {
+      "id": "title-banner",
+      "type": "frame",
+      "title": "Feature Bundle Board",
+      "x": 100,
+      "y": 50,
+      "width": 4800,
+      "height": 350,
+      "style": { "fillColor": "#192A56" }
+    },
+    {
+      "id": "title-text",
+      "type": "text",
+      "content": "Feature Bundle Board",
+      "x": 200,
+      "y": 80,
+      "width": 1200,
+      "style": { "fontSize": 56, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "subtitle-text",
+      "type": "text",
+      "content": "From Features to Value Narratives",
+      "x": 200,
+      "y": 190,
+      "width": 1000,
+      "style": { "fontSize": 24, "color": "#F6B93B" }
+    },
+    {
+      "id": "stats-bar",
+      "type": "shape",
+      "content": "42 features mapped | 4 buyer personas | 6 value bundles | 3 competitors tracked",
+      "shape": "rectangle",
+      "x": 2500,
+      "y": 100,
+      "width": 2200,
+      "height": 60,
+      "style": { "fillColor": "#1E3A5F", "fontColor": "#00D2D3" }
+    },
+    {
+      "id": "product-tag",
+      "type": "text",
+      "content": "NovaTech Platform — Q1 2026 Feature Portfolio",
+      "x": 200,
+      "y": 270,
+      "width": 800,
+      "style": { "fontSize": 14, "color": "#FFFFFF" }
+    },
+    {
+      "id": "inventory-frame",
+      "type": "frame",
+      "title": "Feature Inventory",
+      "x": 100,
+      "y": 450,
+      "width": 1500,
+      "height": 1100,
+      "style": { "fillColor": "#ECEFF1" }
+    },
+    {
+      "id": "inventory-header",
+      "type": "text",
+      "content": "Feature Inventory",
+      "x": 150,
+      "y": 470,
+      "width": 500,
+      "style": { "fontSize": 32, "fontWeight": "bold", "color": "#546E7A" }
+    },
+    {
+      "id": "inv-core",
+      "type": "shape",
+      "content": "Core Platform\nReal-time collaboration (GA) | Version history (GA)\nSSO/SAML (GA) | Audit logs (Beta) | Custom roles (Planned)",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 550,
+      "width": 1300,
+      "height": 130,
+      "style": { "fillColor": "#546E7A", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "inv-ai",
+      "type": "shape",
+      "content": "AI Suite\nSmart suggestions (GA) | Auto-summarize (Beta)\nPredictive analytics (Beta) | Natural language query (Planned)",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 720,
+      "width": 1300,
+      "height": 130,
+      "style": { "fillColor": "#546E7A", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "inv-integrations",
+      "type": "shape",
+      "content": "Integrations\nSlack (GA) | Jira sync (GA) | Salesforce (GA)\nSAP bridge (Beta) | Custom webhooks (GA)",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 890,
+      "width": 1300,
+      "height": 130,
+      "style": { "fillColor": "#546E7A", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "inv-analytics",
+      "type": "shape",
+      "content": "Analytics\nUsage dashboards (GA) | Custom reports (GA)\nEmbedded analytics (Beta) | Data export API (GA)",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1060,
+      "width": 1300,
+      "height": 130,
+      "style": { "fillColor": "#546E7A", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "maturity-legend",
+      "type": "shape",
+      "content": "GA (green) | Beta (amber) | Planned (gray)",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1230,
+      "width": 500,
+      "height": 40,
+      "style": { "fillColor": "#2ECC71", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "personas-frame",
+      "type": "frame",
+      "title": "Buyer Personas & Segments",
+      "x": 1750,
+      "y": 450,
+      "width": 3100,
+      "height": 1100,
+      "style": { "fillColor": "#F3EAF8" }
+    },
+    {
+      "id": "personas-header",
+      "type": "text",
+      "content": "Buyer Personas",
+      "x": 1800,
+      "y": 470,
+      "width": 500,
+      "style": { "fontSize": 32, "fontWeight": "bold", "color": "#8E44AD" }
+    },
+    {
+      "id": "persona-tina",
+      "type": "shape",
+      "content": "\"Technical Tina\" — Engineering Leader\nVP/Director of Engineering\nCares: API quality, security, scalability, DX\nBudget: $50K-$200K | Cycle: 60 days\nPain: \"My team wastes 8hrs/week on tool switching\"",
+      "shape": "rectangle",
+      "x": 1800,
+      "y": 550,
+      "width": 700,
+      "height": 220,
+      "style": { "fillColor": "#8E44AD", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "persona-oliver",
+      "type": "shape",
+      "content": "\"Operations Oliver\" — COO/Ops Leader\nCOO or VP Operations\nCares: Workflow automation, audit, compliance, ROI\nBudget: $100K-$500K | Cycle: 90 days\nPain: \"I can't see across all departments\"",
+      "shape": "rectangle",
+      "x": 2550,
+      "y": 550,
+      "width": 700,
+      "height": 220,
+      "style": { "fillColor": "#9B59B6", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "persona-gina",
+      "type": "shape",
+      "content": "\"Growth Gina\" — Marketing/Growth Leader\nCMO or VP Growth\nCares: Analytics, campaigns, insights, speed\nBudget: $30K-$100K | Cycle: 45 days\nPain: \"We're data-rich but insight-poor\"",
+      "shape": "rectangle",
+      "x": 3300,
+      "y": 550,
+      "width": 700,
+      "height": 220,
+      "style": { "fillColor": "#8E44AD", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "persona-sam",
+      "type": "shape",
+      "content": "\"Startup Sam\" — Founder/CEO\nStartup CEO or CTO\nCares: Speed, price, all-in-one, easy onboarding\nBudget: $5K-$20K | Cycle: 14 days\nPain: \"I need one tool that does everything\"",
+      "shape": "rectangle",
+      "x": 4050,
+      "y": 550,
+      "width": 700,
+      "height": 220,
+      "style": { "fillColor": "#9B59B6", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "bundles-frame",
+      "type": "frame",
+      "title": "Value Bundles — Feature Packages by Persona",
+      "x": 100,
+      "y": 1650,
+      "width": 4400,
+      "height": 900,
+      "style": { "fillColor": "#E8F8F5" }
+    },
+    {
+      "id": "bundles-header",
+      "type": "text",
+      "content": "Value Bundles — Feature Packages by Persona",
+      "x": 150,
+      "y": 1670,
+      "width": 1200,
+      "style": { "fontSize": 32, "fontWeight": "bold", "color": "#27AE60" }
+    },
+    {
+      "id": "bundle-dev",
+      "type": "shape",
+      "content": "Developer Velocity Pack\nFor: Technical Tina | Tier: Pro\nReal-time collab + Webhooks + Jira + API + SSO\n\"Ship 2x faster with seamless dev workflow\"",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1760,
+      "width": 650,
+      "height": 200,
+      "style": { "fillColor": "#27AE60", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "bundle-enterprise",
+      "type": "shape",
+      "content": "Enterprise Command Center\nFor: Operations Oliver | Tier: Enterprise\nAudit + Custom roles + Dashboards + Reports + SAP + SSO\n\"Complete visibility and control at scale\"",
+      "shape": "rectangle",
+      "x": 850,
+      "y": 1760,
+      "width": 650,
+      "height": 200,
+      "style": { "fillColor": "#27AE60", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "bundle-growth",
+      "type": "shape",
+      "content": "Growth Intelligence Suite\nFor: Growth Gina | Tier: Business\nSmart suggestions + Predictive + Embedded + Salesforce\n\"Turn data into growth decisions in real-time\"",
+      "shape": "rectangle",
+      "x": 1550,
+      "y": 1760,
+      "width": 650,
+      "height": 200,
+      "style": { "fillColor": "#2ECC71", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "bundle-startup",
+      "type": "shape",
+      "content": "Startup Essential Kit\nFor: Startup Sam | Tier: Free/Starter\nCollab + Slack + Dashboards + Version history\n\"Everything you need, nothing you don't\"",
+      "shape": "rectangle",
+      "x": 2250,
+      "y": 1760,
+      "width": 650,
+      "height": 200,
+      "style": { "fillColor": "#2ECC71", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "bundle-ai",
+      "type": "shape",
+      "content": "AI Power Pack (add-on)\nCross-persona upsell | $15/user/mo\nAll AI features bundled\n\"Let AI do the heavy lifting\"",
+      "shape": "rectangle",
+      "x": 2950,
+      "y": 1760,
+      "width": 650,
+      "height": 200,
+      "style": { "fillColor": "#F6B93B", "fontColor": "#192A56" }
+    },
+    {
+      "id": "bundle-security",
+      "type": "shape",
+      "content": "Compliance & Security Shield (add-on)\nEnterprise add-on | $8/user/mo\nAudit + Custom roles + SSO + SCIM + SOC2\n\"Enterprise security, zero friction\"",
+      "shape": "rectangle",
+      "x": 3650,
+      "y": 1760,
+      "width": 650,
+      "height": 200,
+      "style": { "fillColor": "#F6B93B", "fontColor": "#192A56" }
+    },
+    {
+      "id": "messaging-frame",
+      "type": "frame",
+      "title": "Messaging Framework",
+      "x": 100,
+      "y": 2650,
+      "width": 2100,
+      "height": 800,
+      "style": { "fillColor": "#FFF0EC" }
+    },
+    {
+      "id": "messaging-header",
+      "type": "text",
+      "content": "Messaging Framework",
+      "x": 150,
+      "y": 2670,
+      "width": 600,
+      "style": { "fontSize": 32, "fontWeight": "bold", "color": "#E55039" }
+    },
+    {
+      "id": "msg-tina",
+      "type": "sticky_note",
+      "content": "For Technical Tina:\n\"NovaTech is the only platform that gives engineering teams real-time collaboration with enterprise-grade security, so you can move fast without breaking compliance.\"\nScore: 8.4/10",
+      "x": 150,
+      "y": 2740,
+      "width": 450,
+      "height": 250,
+      "style": { "fillColor": "#FFCDD2" }
+    },
+    {
+      "id": "msg-oliver",
+      "type": "sticky_note",
+      "content": "For Operations Oliver:\n\"NovaTech replaces 6 disconnected tools with one command center, giving you complete visibility from CEO dashboard to individual team performance.\"\nScore: 7.9/10",
+      "x": 650,
+      "y": 2740,
+      "width": 450,
+      "height": 250,
+      "style": { "fillColor": "#FFCDD2" }
+    },
+    {
+      "id": "msg-gina",
+      "type": "sticky_note",
+      "content": "For Growth Gina:\n\"NovaTech's AI-powered analytics turn your marketing data into actionable growth strategies 10x faster than building reports manually.\"",
+      "x": 1150,
+      "y": 2740,
+      "width": 450,
+      "height": 250,
+      "style": { "fillColor": "#FFE0B2" }
+    },
+    {
+      "id": "msg-sam",
+      "type": "sticky_note",
+      "content": "For Startup Sam:\n\"NovaTech gives you the same platform Fortune 500 companies use, at a price that makes sense for a 10-person team.\"",
+      "x": 150,
+      "y": 3040,
+      "width": 450,
+      "height": 200,
+      "style": { "fillColor": "#FFE0B2" }
+    },
+    {
+      "id": "competitive-frame",
+      "type": "frame",
+      "title": "Competitive Feature Map",
+      "x": 2350,
+      "y": 2650,
+      "width": 2100,
+      "height": 800,
+      "style": { "fillColor": "#E0F4F4" }
+    },
+    {
+      "id": "competitive-header",
+      "type": "text",
+      "content": "Competitive Feature Map",
+      "x": 2400,
+      "y": 2670,
+      "width": 600,
+      "style": { "fontSize": 32, "fontWeight": "bold", "color": "#00D2D3" }
+    },
+    {
+      "id": "comp-grid",
+      "type": "shape",
+      "content": "NovaTech vs Comp A vs Comp B vs Comp C\nAI Suite: NovaTech SUPERIOR | Comp A partial | Comp B/C none\nIntegrations: NovaTech 24 native | Comp A 12 | Comp B 18 | Comp C 8\nMobile: NovaTech PLANNED | Comp A native | Comp B web | Comp C none\nPricing: NovaTech competitive | Comp A premium | Comp B budget | Comp C mid",
+      "shape": "rectangle",
+      "x": 2400,
+      "y": 2740,
+      "width": 1900,
+      "height": 250,
+      "style": { "fillColor": "#006266", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "comp-win",
+      "type": "sticky_note",
+      "content": "Win rates:\nvs Comp A: 65% — AI and pricing cited\nvs Comp B: 45% — mobile and brand recognition\nvs Comp C: 78% — integrations and ease of use",
+      "x": 2400,
+      "y": 3040,
+      "width": 500,
+      "height": 200,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "comp-gap",
+      "type": "sticky_note",
+      "content": "Key gap: Mobile app — Comp A has native mobile. We are web-only. Mobile planned Q2 2026.",
+      "x": 2950,
+      "y": 3040,
+      "width": 500,
+      "height": 200,
+      "style": { "fillColor": "#FFCDD2" }
+    },
+    {
+      "type": "connector",
+      "startItem": "inventory-frame",
+      "endItem": "bundles-frame",
+      "style": {
+        "strokeColor": "#27AE60",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "personas-frame",
+      "endItem": "bundles-frame",
+      "style": {
+        "strokeColor": "#8E44AD",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "bundles-frame",
+      "endItem": "messaging-frame",
+      "style": {
+        "strokeColor": "#E55039",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "competitive-frame",
+      "endItem": "bundles-frame",
+      "style": {
+        "strokeColor": "#006266",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "competitive-frame",
+      "endItem": "messaging-frame",
+      "style": {
+        "strokeColor": "#E55039",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "messaging-frame",
+      "endItem": "inventory-frame",
+      "style": {
+        "strokeColor": "#546E7A",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    }
+  ]
+}

@@ -9,6 +9,8 @@ export const userJourney: TemplateDefinition = {
   emoji: '\u{1F5FA}\uFE0F',
   estimatedTime: '~5 min',
   blueprintId: 'user-journey-map',
+  brainCategory: 'customer-journey',
+  brainBlueprint: 'journey-map',
   complexity: 'medium',
   color: '#F472B6',
   tags: ['journey', 'ux', 'customer experience', 'touchpoints', 'service design'],

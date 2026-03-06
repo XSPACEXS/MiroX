@@ -9,6 +9,8 @@ export const projectDashboard: TemplateDefinition = {
   emoji: '\u{1F4CA}',
   estimatedTime: '~3 min',
   blueprintId: 'project-dashboard',
+  brainCategory: 'project-management',
+  brainBlueprint: 'project-overview',
   complexity: 'medium',
   color: '#7C3AED',
   tags: ['dashboard', 'project', 'status', 'kpi', 'tracking', 'reporting'],

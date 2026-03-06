@@ -9,6 +9,8 @@ export const scamper: TemplateDefinition = {
   emoji: '\u{1F504}',
   estimatedTime: '~4 min',
   blueprintId: 'scamper',
+  brainCategory: 'mind-maps',
+  brainBlueprint: 'idea-exploration',
   complexity: 'medium',
   color: '#EC4899',
   tags: ['scamper', 'innovation', 'creative thinking', 'ideation', 'product'],

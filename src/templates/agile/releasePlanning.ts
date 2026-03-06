@@ -9,6 +9,8 @@ export const releasePlanning: TemplateDefinition = {
   emoji: '\u{1F6A2}',
   estimatedTime: '~4 min',
   blueprintId: 'release-planning',
+  brainCategory: 'product-development',
+  brainBlueprint: 'release-planning',
   complexity: 'medium',
   color: '#7C3AED',
   tags: ['release', 'planning', 'versions', 'features', 'timeline', 'coordination'],

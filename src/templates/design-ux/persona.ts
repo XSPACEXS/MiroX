@@ -9,6 +9,8 @@ export const persona: TemplateDefinition = {
   emoji: '\u{1F464}',
   estimatedTime: '~3 min',
   blueprintId: 'user-persona',
+  brainCategory: 'customer-journey',
+  brainBlueprint: 'persona-board',
   complexity: 'simple',
   color: '#F472B6',
   tags: ['persona', 'ux', 'user research', 'design', 'customer'],

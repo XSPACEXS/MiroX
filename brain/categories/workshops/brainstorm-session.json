@@ -1,0 +1,543 @@
+{
+  "metadata": {
+    "name": "Brainstorm Session Board",
+    "description": "5-phase structured brainstorming session to reduce onboarding drop-off — Problem Statement, Silent Ideation, Clustering, Voting/Prioritization, and Action Plan with facilitator timeline",
+    "category": "Workshops",
+    "tags": [
+      "brainstorm",
+      "ideation",
+      "clustering",
+      "voting",
+      "action-plan",
+      "workshop"
+    ],
+    "complexity": "Medium",
+    "boardSize": { "width": 4000, "height": 2500 }
+  },
+  "settings": {
+    "backgroundColor": "#FFF8E1",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_header",
+      "type": "frame",
+      "title": "Session Header",
+      "x": 50,
+      "y": 50,
+      "width": 3900,
+      "height": 200,
+      "style": { "fillColor": "#4A148C" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "Brainstorm Session: Reducing Onboarding Drop-Off",
+      "x": 100,
+      "y": 70,
+      "width": 2500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_meta",
+      "type": "text",
+      "content": "Facilitator: Jake R. | Date: March 6, 2026 | Duration: 60 min | Participants: 10 | Format: 5-Phase Structured Brainstorm",
+      "x": 100,
+      "y": 130,
+      "width": 3500,
+      "style": { "fontSize": 14, "color": "#CE93D8" }
+    },
+    {
+      "id": "text_timeline",
+      "type": "text",
+      "content": "Timeline: Problem (5 min) → Silent Ideation (10 min) → Clustering (10 min) → Voting (10 min) → Action Plan (15 min) → Wrap-Up (10 min)",
+      "x": 100,
+      "y": 165,
+      "width": 3500,
+      "style": { "fontSize": 14, "color": "#CE93D8" }
+    },
+    {
+      "id": "frame_rules",
+      "type": "frame",
+      "title": "Ground Rules",
+      "x": 50,
+      "y": 300,
+      "width": 600,
+      "height": 200,
+      "style": { "fillColor": "#F3E5F5" }
+    },
+    {
+      "id": "text_rules_header",
+      "type": "text",
+      "content": "Ground Rules",
+      "x": 80,
+      "y": 320,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "text_rules",
+      "type": "text",
+      "content": "1. No idea is too wild\n2. Build on others' ideas\n3. One sticky = one idea\n4. Quantity over quality (for now)\n5. No judgment during ideation",
+      "x": 80,
+      "y": 360,
+      "width": 500,
+      "style": { "fontSize": 13, "color": "#4A148C" }
+    },
+    {
+      "id": "frame_problem",
+      "type": "frame",
+      "title": "Phase 1: Problem Statement",
+      "x": 700,
+      "y": 300,
+      "width": 800,
+      "height": 350,
+      "style": { "fillColor": "#FFEBEE" }
+    },
+    {
+      "id": "text_problem_header",
+      "type": "text",
+      "content": "Phase 1: Problem Statement (5 min)",
+      "x": 730,
+      "y": 320,
+      "width": 600,
+      "style": { "fontSize": 20, "fontWeight": "bold", "color": "#C62828" }
+    },
+    {
+      "id": "shape_hmw",
+      "type": "shape",
+      "content": "How Might We reduce onboarding drop-off from 40% to under 15% within the first 7 days of signup?",
+      "shape": "round_rectangle",
+      "x": 730,
+      "y": 370,
+      "width": 700,
+      "height": 80,
+      "style": {
+        "fillColor": "#FF5252",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#D32F2F",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "text_context",
+      "type": "text",
+      "content": "Context: 40% of new signups never complete onboarding. Biggest drop-off is between email verification (Step 2) and creating first project (Step 4). Data from Jan-Feb 2026.",
+      "x": 730,
+      "y": 470,
+      "width": 700,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_constraints",
+      "type": "text",
+      "content": "Constraints: No changes to pricing. Must work within current tech stack. Must be shippable within Q2.",
+      "x": 730,
+      "y": 530,
+      "width": 700,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "frame_ideation",
+      "type": "frame",
+      "title": "Phase 2: Silent Ideation",
+      "x": 1550,
+      "y": 300,
+      "width": 1100,
+      "height": 700,
+      "style": { "fillColor": "#E3F2FD" }
+    },
+    {
+      "id": "text_ideation_header",
+      "type": "text",
+      "content": "Phase 2: Silent Ideation (10 min)",
+      "x": 1580,
+      "y": 320,
+      "width": 600,
+      "style": { "fontSize": 20, "fontWeight": "bold", "color": "#1565C0" }
+    },
+    {
+      "id": "text_ideation_desc",
+      "type": "text",
+      "content": "Everyone writes ideas silently. One idea per sticky note. Aim for 3+ ideas each.",
+      "x": 1580,
+      "y": 360,
+      "width": 900,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "sticky_idea1",
+      "type": "sticky_note",
+      "content": "Interactive product tour instead of static tutorial",
+      "x": 1580,
+      "y": 400,
+      "width": 240,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_idea2",
+      "type": "sticky_note",
+      "content": "Pre-populated sample project so users see value immediately",
+      "x": 1840,
+      "y": 400,
+      "width": 240,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_idea3",
+      "type": "sticky_note",
+      "content": "Skip email verification — verify later",
+      "x": 2100,
+      "y": 400,
+      "width": 240,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_idea4",
+      "type": "sticky_note",
+      "content": "Progress bar showing 'You're 60% set up!'",
+      "x": 1580,
+      "y": 490,
+      "width": 240,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_idea5",
+      "type": "sticky_note",
+      "content": "Personalized onboarding based on role (PM, Dev, Designer)",
+      "x": 1840,
+      "y": 490,
+      "width": 240,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_idea6",
+      "type": "sticky_note",
+      "content": "Onboarding checklist in sidebar that persists",
+      "x": 2100,
+      "y": 490,
+      "width": 240,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_idea7",
+      "type": "sticky_note",
+      "content": "Send 'You left off here...' email after 24h inactivity",
+      "x": 1580,
+      "y": 580,
+      "width": 240,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_idea8",
+      "type": "sticky_note",
+      "content": "Video walkthrough from a real human (not animated)",
+      "x": 1840,
+      "y": 580,
+      "width": 240,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_idea9",
+      "type": "sticky_note",
+      "content": "AI assistant that guides setup: 'What do you want to build?'",
+      "x": 2100,
+      "y": 580,
+      "width": 240,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_idea10",
+      "type": "sticky_note",
+      "content": "Social proof: 'Join 50K teams using AutoPilot'",
+      "x": 1580,
+      "y": 670,
+      "width": 240,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_idea11",
+      "type": "sticky_note",
+      "content": "Invite teammates at step 3 — collaborative setup",
+      "x": 1840,
+      "y": 670,
+      "width": 240,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_idea12",
+      "type": "sticky_note",
+      "content": "Gamify: earn badges for completing setup milestones",
+      "x": 2100,
+      "y": 670,
+      "width": 240,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "frame_clustering",
+      "type": "frame",
+      "title": "Phase 3: Clustering",
+      "x": 2700,
+      "y": 300,
+      "width": 1200,
+      "height": 700,
+      "style": { "fillColor": "#E8F5E9" }
+    },
+    {
+      "id": "text_cluster_header",
+      "type": "text",
+      "content": "Phase 3: Clustering (10 min)",
+      "x": 2730,
+      "y": 320,
+      "width": 600,
+      "style": { "fontSize": 20, "fontWeight": "bold", "color": "#2E7D32" }
+    },
+    {
+      "id": "text_cluster_desc",
+      "type": "text",
+      "content": "Group related ideas into themes. Name each cluster.",
+      "x": 2730,
+      "y": 360,
+      "width": 900,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "sticky_cluster1_label",
+      "type": "sticky_note",
+      "content": "THEME: First-Run Experience\n(Product tour, sample project, progress bar, checklist)",
+      "x": 2730,
+      "y": 400,
+      "width": 350,
+      "height": 90,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_cluster2_label",
+      "type": "sticky_note",
+      "content": "THEME: Personalization\n(Role-based flow, AI assistant, 'What do you want to build?')",
+      "x": 3120,
+      "y": 400,
+      "width": 350,
+      "height": 90,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_cluster3_label",
+      "type": "sticky_note",
+      "content": "THEME: Re-Engagement\n(Return email, social proof, teammate invites)",
+      "x": 2730,
+      "y": 510,
+      "width": 350,
+      "height": 90,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_cluster4_label",
+      "type": "sticky_note",
+      "content": "THEME: Friction Reduction\n(Skip email verify, fewer steps, video walkthrough)",
+      "x": 3120,
+      "y": 510,
+      "width": 350,
+      "height": 90,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "center", "fontSize": 11 }
+    },
+    {
+      "id": "frame_voting",
+      "type": "frame",
+      "title": "Phase 4: Voting & Prioritization",
+      "x": 50,
+      "y": 1050,
+      "width": 2000,
+      "height": 600,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_voting_header",
+      "type": "text",
+      "content": "Phase 4: Voting & Prioritization (10 min)",
+      "x": 80,
+      "y": 1070,
+      "width": 700,
+      "style": { "fontSize": 20, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "text_voting_desc",
+      "type": "text",
+      "content": "3 votes per person. Dot-vote on themes. Then plot top ideas on Impact vs Effort.",
+      "x": 80,
+      "y": 1110,
+      "width": 1500,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "shape_voting_matrix",
+      "type": "shape",
+      "content": "IMPACT vs EFFORT\n\nHigh Impact / Low Effort (DO FIRST):\n  1. Pre-populated sample project (8 votes)\n  2. Progress bar + checklist (6 votes)\n\nHigh Impact / High Effort:\n  3. Role-based personalized onboarding (5 votes)\n  4. AI setup assistant (4 votes)\n\nLow Impact / Low Effort:\n  5. Return email trigger (3 votes)\n\nLow Impact / High Effort:\n  6. Gamification badges (1 vote) — DEPRIORITIZE",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 1150,
+      "width": 1900,
+      "height": 400,
+      "style": {
+        "fillColor": "#FAFAFA",
+        "fontColor": "#212121",
+        "borderColor": "#4A148C",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "frame_action",
+      "type": "frame",
+      "title": "Phase 5: Action Plan",
+      "x": 2100,
+      "y": 1050,
+      "width": 1800,
+      "height": 600,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_action_header",
+      "type": "text",
+      "content": "Phase 5: Action Plan (15 min)",
+      "x": 2130,
+      "y": 1070,
+      "width": 600,
+      "style": { "fontSize": 20, "fontWeight": "bold", "color": "#FF5252" }
+    },
+    {
+      "id": "shape_action_table",
+      "type": "shape",
+      "content": "# | Action | Owner | Sprint | Status\n────────────────────────────────────────────\n1 | Build pre-populated sample project for new signups | Leo C. (Eng) | Sprint 15 | Not Started\n2 | Add progress bar + persistent checklist to onboarding | Priya T. (Design) + Noor A. (FE) | Sprint 15 | Not Started\n3 | Design role-based onboarding flow (PM / Dev / Designer) | Priya T. (Design) | Sprint 16 | Not Started\n4 | Implement 'You left off here' re-engagement email (24h trigger) | Marcus W. (BE) | Sprint 15 | Not Started\n5 | Prototype AI setup assistant for user testing | Jake R. (PM) + Aisha K. (AI) | Sprint 16 | Not Started",
+      "shape": "rectangle",
+      "x": 2130,
+      "y": 1110,
+      "width": 1700,
+      "height": 300,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#FF5252",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "sticky_action_note",
+      "type": "sticky_note",
+      "content": "Success Metric: Reduce onboarding drop-off from 40% to <20% by end of Q2. Track daily in analytics dashboard. Review at Sprint 17 retro.",
+      "x": 2130,
+      "y": 1430,
+      "width": 800,
+      "height": 80,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 12 }
+    },
+    {
+      "id": "frame_parking",
+      "type": "frame",
+      "title": "Parking Lot",
+      "x": 50,
+      "y": 1700,
+      "width": 3900,
+      "height": 200,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "text_parking_header",
+      "type": "text",
+      "content": "Parking Lot",
+      "x": 80,
+      "y": 1720,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#F57F17" }
+    },
+    {
+      "id": "sticky_park1",
+      "type": "sticky_note",
+      "content": "Should we A/B test different onboarding flows? Discuss with Data team.",
+      "x": 80,
+      "y": 1770,
+      "width": 400,
+      "height": 70,
+      "style": { "fillColor": "#FFF176", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_park2",
+      "type": "sticky_note",
+      "content": "Competitor analysis: how does Linear/Notion handle onboarding? Research ticket needed.",
+      "x": 500,
+      "y": 1770,
+      "width": 400,
+      "height": 70,
+      "style": { "fillColor": "#FFF176", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_park3",
+      "type": "sticky_note",
+      "content": "Long-term: can we skip signup entirely and let users try in-browser first?",
+      "x": 920,
+      "y": 1770,
+      "width": 400,
+      "height": 70,
+      "style": { "fillColor": "#FFF176", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "conn_problem_ideation",
+      "type": "connector",
+      "startItem": "frame_problem",
+      "endItem": "frame_ideation",
+      "style": {
+        "strokeColor": "#4A148C",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Ideate" }]
+    },
+    {
+      "id": "conn_ideation_clustering",
+      "type": "connector",
+      "startItem": "frame_ideation",
+      "endItem": "frame_clustering",
+      "style": {
+        "strokeColor": "#4A148C",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Group" }]
+    },
+    {
+      "id": "conn_clustering_voting",
+      "type": "connector",
+      "startItem": "frame_clustering",
+      "endItem": "frame_voting",
+      "style": {
+        "strokeColor": "#4A148C",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Prioritize" }]
+    },
+    {
+      "id": "conn_voting_action",
+      "type": "connector",
+      "startItem": "frame_voting",
+      "endItem": "frame_action",
+      "style": {
+        "strokeColor": "#4A148C",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Act" }]
+    }
+  ]
+}

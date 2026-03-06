@@ -12,8 +12,8 @@ interface CreationProgressProps {
 const subtitles: Record<string, string> = {
   validate: 'Checking your configuration...',
   'create-board': 'Setting up your Miro board...',
-  diagrams: 'Building diagrams and flowcharts...',
-  documents: 'Creating companion documents...',
+  diagrams: 'Generating board sections...',
+  documents: 'Creating content blocks...',
   tables: 'Adding data tables...',
   polish: 'Applying visual styling...',
   cleanup: 'Finishing up...',

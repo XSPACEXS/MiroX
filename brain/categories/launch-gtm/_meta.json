@@ -1,0 +1,46 @@
+{
+  "category": "Project Overview & Launch GTM",
+  "description": "Cross-functional project dashboards that unite insights, customer journey mapping, task management, and design review into a single visual command center — enabling teams to align on strategy, track execution, and launch with confidence",
+  "icon": "🚀",
+  "colorTheme": {
+    "primary": "#1565C0",
+    "secondary": "#37474F",
+    "accent": "#00897B"
+  },
+  "templates": [
+    {
+      "file": "launch-gtm-overview",
+      "name": "Launch GTM Overview",
+      "description": "Comprehensive 2x2 project overview dashboard combining Insights (data and research), Mapping (customer journey flows), Tasks (kanban execution tracking), and Design (wireframes and visual review) into a single cross-functional command center",
+      "tags": ["launch", "gtm", "overview", "cross-functional", "dashboard"],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "cross-functional-dashboard",
+      "name": "Cross-Functional Dashboard",
+      "description": "Multi-team coordination board with department swim lanes, shared milestones, dependency mapping, and status reporting for complex product launches involving engineering, marketing, sales, and customer success",
+      "tags": [
+        "cross-functional",
+        "coordination",
+        "launch",
+        "milestones",
+        "dependencies"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "insights-mapping-tasks",
+      "name": "Insights-Mapping-Tasks Board",
+      "description": "Three-panel workflow board flowing from research insights through customer journey mapping to actionable task breakdown — connecting the 'why' to the 'what' to the 'how' of product launches",
+      "tags": ["insights", "mapping", "tasks", "research", "workflow"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "quarterly-review",
+      "name": "Quarterly Review Dashboard",
+      "description": "End-of-quarter retrospective and forward-planning board with OKR tracking, launch retrospective, metrics review, lessons learned, and next-quarter planning in a structured presentation-ready format",
+      "tags": ["quarterly", "review", "okr", "retrospective", "planning"],
+      "complexity": "Medium"
+    }
+  ]
+}

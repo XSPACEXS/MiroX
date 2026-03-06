@@ -9,6 +9,8 @@ export const sprintRetro: TemplateDefinition = {
   emoji: '\u{1F504}',
   estimatedTime: '~2 min',
   blueprintId: 'sprint-retrospective',
+  brainCategory: 'workshops',
+  brainBlueprint: 'retrospective',
   complexity: 'simple',
   color: '#10B981',
   tags: ['retro', 'retrospective', 'sprint', 'agile', 'improvement', 'scrum'],

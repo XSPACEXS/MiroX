@@ -12,7 +12,7 @@ export default function Templates() {
       className="h-full overflow-y-auto p-6"
     >
       <h1 className="font-display font-bold text-4xl text-white mb-2">Board Templates</h1>
-      <p className="text-gray-400 mb-6">Choose from 30+ professional templates</p>
+      <p className="text-gray-400 mb-6">Choose from 100+ professional templates</p>
       <TemplateGallery />
     </motion.div>
   )

@@ -1,0 +1,882 @@
+{
+  "metadata": {
+    "name": "Event Guide — Immersive Conference Overview",
+    "description": "Bird's-eye spatial map of InnovateTech Summit 2026 showing all zones: registration, main stage, community hub, speaker showcase, lightning talks, agenda, sponsors, networking, and quiet zone",
+    "category": "Event Planning",
+    "tags": ["event-guide", "conference", "spatial-map", "zones", "overview"],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#FAFAFA",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_banner",
+      "type": "frame",
+      "title": "Event Title Banner",
+      "x": 100,
+      "y": 50,
+      "width": 4800,
+      "height": 500,
+      "style": { "fillColor": "#1A237E" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "InnovateTech Summit 2026",
+      "x": 400,
+      "y": 80,
+      "width": 4000,
+      "style": { "fontSize": 72, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_date",
+      "type": "text",
+      "content": "March 18-20, 2026 | San Francisco Convention Center",
+      "x": 700,
+      "y": 220,
+      "width": 3000,
+      "style": { "fontSize": 28, "color": "#E8EAF6" }
+    },
+    {
+      "id": "text_tagline",
+      "type": "text",
+      "content": "The Future of Product, Design & Engineering",
+      "x": 800,
+      "y": 290,
+      "width": 3000,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#FF8F00" }
+    },
+    {
+      "id": "sticky_board_owner",
+      "type": "sticky_note",
+      "content": "Board Owner: Events Team | Last Updated: March 6, 2026",
+      "x": 3800,
+      "y": 400,
+      "width": 400,
+      "height": 60,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "frame_registration",
+      "type": "frame",
+      "title": "Registration & Check-In",
+      "x": 100,
+      "y": 600,
+      "width": 1200,
+      "height": 900,
+      "style": { "fillColor": "#E8EAF6" }
+    },
+    {
+      "id": "text_reg_header",
+      "type": "text",
+      "content": "Registration & Check-In",
+      "x": 130,
+      "y": 620,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "sticky_reg1",
+      "type": "sticky_note",
+      "content": "Pre-registered attendees: QR code scan lane -- avg 30 sec per person",
+      "x": 130,
+      "y": 690,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_reg2",
+      "type": "sticky_note",
+      "content": "Walk-in registration: ID verification + badge printing -- avg 3 min per person",
+      "x": 130,
+      "y": 770,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_reg3",
+      "type": "sticky_note",
+      "content": "VIP/Speaker lane: Dedicated desk with welcome packet + lanyard",
+      "x": 130,
+      "y": 850,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_reg4",
+      "type": "sticky_note",
+      "content": "Swag pickup: Tote bags, T-shirts (S/M/L/XL), sticker packs",
+      "x": 130,
+      "y": 930,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_reg_capacity",
+      "type": "text",
+      "content": "Capacity: 2,000 attendees | Opens: 7:30 AM | Staff: 12 volunteers",
+      "x": 130,
+      "y": 1020,
+      "width": 600,
+      "style": { "fontSize": 12, "color": "#616161" }
+    },
+    {
+      "id": "frame_mainstage",
+      "type": "frame",
+      "title": "Main Stage",
+      "x": 1400,
+      "y": 600,
+      "width": 1800,
+      "height": 1000,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_stage_header",
+      "type": "text",
+      "content": "Main Stage",
+      "x": 1430,
+      "y": 620,
+      "width": 400,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "shape_stage_platform",
+      "type": "shape",
+      "content": "Stage -- 40ft x 20ft",
+      "shape": "rectangle",
+      "x": 1600,
+      "y": 700,
+      "width": 600,
+      "height": 150,
+      "style": {
+        "fillColor": "#E0E0E0",
+        "fontColor": "#424242",
+        "borderColor": "#9E9E9E",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "text_stage_seating",
+      "type": "text",
+      "content": "Seating: 800 chairs + 200 standing",
+      "x": 1600,
+      "y": 870,
+      "width": 500,
+      "style": { "fontSize": 14, "color": "#616161" }
+    },
+    {
+      "id": "sticky_keynote1",
+      "type": "sticky_note",
+      "content": "Keynote: Dr. Amara Chen -- 'AI-Native Product Design' -- 9:00 AM Day 1",
+      "x": 1430,
+      "y": 910,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_keynote2",
+      "type": "sticky_note",
+      "content": "Keynote: Marcus Rivera -- 'Scaling Engineering Culture' -- 9:00 AM Day 2",
+      "x": 1430,
+      "y": 990,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_keynote3",
+      "type": "sticky_note",
+      "content": "Panel: 'The Ethics of Generative AI in Enterprise' -- 2:00 PM Day 1",
+      "x": 1960,
+      "y": 910,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_keynote4",
+      "type": "sticky_note",
+      "content": "Fireside Chat: CEO Roundtable -- 4:00 PM Day 2",
+      "x": 1960,
+      "y": 990,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_av",
+      "type": "sticky_note",
+      "content": "AV Requirements: 2x screens, lapel mics, confidence monitor, live stream",
+      "x": 1430,
+      "y": 1080,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#E1BEE7", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_livestream",
+      "type": "text",
+      "content": "Live Stream: YouTube + LinkedIn -- est. 5,000 remote viewers",
+      "x": 1430,
+      "y": 1160,
+      "width": 600,
+      "style": { "fontSize": 12, "color": "#757575" }
+    },
+    {
+      "id": "frame_companion",
+      "type": "frame",
+      "title": "Companion Experiences",
+      "x": 3300,
+      "y": 600,
+      "width": 1200,
+      "height": 900,
+      "style": { "fillColor": "#FFF8E1" }
+    },
+    {
+      "id": "text_companion_header",
+      "type": "text",
+      "content": "Companion Experiences",
+      "x": 3330,
+      "y": 620,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "sticky_comp1",
+      "type": "sticky_note",
+      "content": "Hands-On Lab: Build a Miro Plugin in 60 Minutes -- Room B2, 30 seats",
+      "x": 3330,
+      "y": 690,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_comp2",
+      "type": "sticky_note",
+      "content": "Design Sprint Mini: Rapid prototyping challenge -- Room B3, 20 seats",
+      "x": 3330,
+      "y": 770,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_comp3",
+      "type": "sticky_note",
+      "content": "Career Coaching Corner: 1-on-1 resume reviews -- Lounge Area, 10 AM - 4 PM",
+      "x": 3330,
+      "y": 850,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_comp4",
+      "type": "sticky_note",
+      "content": "Accessibility Workshop: Building Inclusive Products -- Room B4, 40 seats",
+      "x": 3330,
+      "y": 930,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#F8BBD0", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_comp_note",
+      "type": "sticky_note",
+      "content": "All companion sessions require pre-registration via event app",
+      "x": 3330,
+      "y": 1020,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_comp_total",
+      "type": "text",
+      "content": "Total companion sessions: 12 across 3 days",
+      "x": 3330,
+      "y": 1100,
+      "width": 500,
+      "style": { "fontSize": 14, "color": "#757575" }
+    },
+    {
+      "id": "frame_community",
+      "type": "frame",
+      "title": "Community Hub",
+      "x": 100,
+      "y": 1550,
+      "width": 1200,
+      "height": 900,
+      "style": { "fillColor": "#E0F2F1" }
+    },
+    {
+      "id": "text_community_header",
+      "type": "text",
+      "content": "Community Hub",
+      "x": 130,
+      "y": 1570,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "sticky_comm1",
+      "type": "sticky_note",
+      "content": "Community Meetup Board: Pin your city, find locals to connect with",
+      "x": 130,
+      "y": 1640,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_comm2",
+      "type": "sticky_note",
+      "content": "Open Source Showcase: 8 project booths with live demos",
+      "x": 130,
+      "y": 1720,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_comm3",
+      "type": "sticky_note",
+      "content": "Birds of a Feather: Self-organized discussion circles, sign-up sheet posted",
+      "x": 130,
+      "y": 1800,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_comm4",
+      "type": "sticky_note",
+      "content": "Photo Wall: Polaroid station + event hashtag #InnovateTech2026",
+      "x": 130,
+      "y": 1880,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_comm_hours",
+      "type": "text",
+      "content": "Open all day, both days | Bean bags + standing tables",
+      "x": 130,
+      "y": 1970,
+      "width": 500,
+      "style": { "fontSize": 12, "color": "#616161" }
+    },
+    {
+      "id": "frame_speakers",
+      "type": "frame",
+      "title": "Speaker's Showcase",
+      "x": 1400,
+      "y": 1650,
+      "width": 1800,
+      "height": 600,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_speakers_header",
+      "type": "text",
+      "content": "Speaker's Showcase",
+      "x": 1430,
+      "y": 1670,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "sticky_speaker1",
+      "type": "sticky_note",
+      "content": "Dr. Amara Chen\nVP Product, NovaTech\nAI-Native Product Design",
+      "x": 1430,
+      "y": 1730,
+      "width": 300,
+      "height": 100,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_speaker2",
+      "type": "sticky_note",
+      "content": "Marcus Rivera\nCTO, BuildScale\nScaling Engineering Culture",
+      "x": 1760,
+      "y": 1730,
+      "width": 300,
+      "height": 100,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_speaker3",
+      "type": "sticky_note",
+      "content": "Yuki Tanaka\nDesign Director, Figma\nDesign Systems at Scale",
+      "x": 2090,
+      "y": 1730,
+      "width": 300,
+      "height": 100,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_speaker4",
+      "type": "sticky_note",
+      "content": "Fatima Al-Rashid\nHead of UXR, Google\nResearch-Driven Decisions",
+      "x": 1430,
+      "y": 1850,
+      "width": 300,
+      "height": 100,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_speaker5",
+      "type": "sticky_note",
+      "content": "James O'Brien\nStaff Eng, Stripe\nPlatform Thinking",
+      "x": 1760,
+      "y": 1850,
+      "width": 300,
+      "height": 100,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_speaker6",
+      "type": "sticky_note",
+      "content": "Sofia Nguyen\nCEO, DataMesh\nReal-Time Analytics",
+      "x": 2090,
+      "y": 1850,
+      "width": 300,
+      "height": 100,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "center", "fontSize": 10 }
+    },
+    {
+      "id": "text_speakers_total",
+      "type": "text",
+      "content": "Full speaker directory: 42 speakers across 3 days",
+      "x": 1430,
+      "y": 1970,
+      "width": 600,
+      "style": { "fontSize": 14, "color": "#757575" }
+    },
+    {
+      "id": "frame_lightning",
+      "type": "frame",
+      "title": "Lightning Talks Arena",
+      "x": 3300,
+      "y": 1550,
+      "width": 1200,
+      "height": 900,
+      "style": { "fillColor": "#E8EAF6" }
+    },
+    {
+      "id": "text_lightning_header",
+      "type": "text",
+      "content": "Lightning Talks Arena",
+      "x": 3330,
+      "y": 1570,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "text_lightning_subtitle",
+      "type": "text",
+      "content": "5-minute rapid-fire presentations",
+      "x": 3330,
+      "y": 1610,
+      "width": 500,
+      "style": { "fontSize": 16, "color": "#757575" }
+    },
+    {
+      "id": "sticky_lt1",
+      "type": "sticky_note",
+      "content": "Day 1, 11:00 AM -- 'Why We Ditched Microservices' -- Raj Patel",
+      "x": 3330,
+      "y": 1660,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_lt2",
+      "type": "sticky_note",
+      "content": "Day 1, 11:10 AM -- 'CSS Container Queries Changed Everything' -- Lin Wei",
+      "x": 3330,
+      "y": 1730,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_lt3",
+      "type": "sticky_note",
+      "content": "Day 1, 11:20 AM -- 'From Figma to Production in 4 Hours' -- Alex Kim",
+      "x": 3330,
+      "y": 1800,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_lt4",
+      "type": "sticky_note",
+      "content": "Day 2, 11:00 AM -- 'Observability for Startups' -- Maria Santos",
+      "x": 3330,
+      "y": 1870,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_lt5",
+      "type": "sticky_note",
+      "content": "Day 2, 11:10 AM -- 'The One Metric That Matters' -- Derek Cho",
+      "x": 3330,
+      "y": 1940,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_lt6",
+      "type": "sticky_note",
+      "content": "Day 2, 11:20 AM -- 'Accessible by Default' -- Nadia Ibrahim",
+      "x": 3330,
+      "y": 2010,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_lt_format",
+      "type": "text",
+      "content": "Format: 5 min talk + 2 min Q&A | Capacity: 150 seats",
+      "x": 3330,
+      "y": 2090,
+      "width": 500,
+      "style": { "fontSize": 12, "color": "#616161" }
+    },
+    {
+      "id": "frame_agenda",
+      "type": "frame",
+      "title": "Agenda / Schedule Overview",
+      "x": 600,
+      "y": 2300,
+      "width": 3600,
+      "height": 400,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_agenda_header",
+      "type": "text",
+      "content": "Schedule at a Glance",
+      "x": 630,
+      "y": 2320,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "shape_agenda_table",
+      "type": "shape",
+      "content": "March 18 -- Discovery Day | March 19 -- Deep Dive Day | March 20 -- Action Day\n──────────────────────────────────────────────────────────────\n8:00 Registration | 8:30 Coffee | 8:30 Coffee\n9:00 Keynote | 9:00 Keynote | 9:00 Workshops\n10:30 Breakouts | 10:30 Breakouts | 11:00 Unconference\n12:00 Lunch | 12:00 Lunch | 12:30 Closing Keynote\n1:30 Workshops | 1:30 Panels | 1:30 Farewell Lunch\n3:00 Lightning Talks | 3:00 Companion Sessions |\n4:30 Networking | 4:30 Fireside Chat |\n6:00 Welcome Reception | 7:00 Gala Dinner |",
+      "shape": "rectangle",
+      "x": 630,
+      "y": 2370,
+      "width": 3500,
+      "height": 280,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#1A237E",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "frame_sponsors",
+      "type": "frame",
+      "title": "Sponsors & Expo Hall",
+      "x": 100,
+      "y": 2750,
+      "width": 1200,
+      "height": 700,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_sponsors_header",
+      "type": "text",
+      "content": "Sponsors & Expo Hall",
+      "x": 130,
+      "y": 2770,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "shape_platinum1",
+      "type": "shape",
+      "content": "TechCorp",
+      "shape": "rectangle",
+      "x": 130,
+      "y": 2830,
+      "width": 300,
+      "height": 80,
+      "style": {
+        "fillColor": "#FFE082",
+        "fontColor": "#212121",
+        "borderColor": "#FF8F00",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "shape_platinum2",
+      "type": "shape",
+      "content": "CloudBase",
+      "shape": "rectangle",
+      "x": 450,
+      "y": 2830,
+      "width": 300,
+      "height": 80,
+      "style": {
+        "fillColor": "#FFE082",
+        "fontColor": "#212121",
+        "borderColor": "#FF8F00",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "shape_platinum3",
+      "type": "shape",
+      "content": "DevTools Inc.",
+      "shape": "rectangle",
+      "x": 770,
+      "y": 2830,
+      "width": 300,
+      "height": 80,
+      "style": {
+        "fillColor": "#FFE082",
+        "fontColor": "#212121",
+        "borderColor": "#FF8F00",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "text_sponsor_label",
+      "type": "text",
+      "content": "3 Platinum | 6 Gold | 12 Expo Booths (B1-B12)",
+      "x": 130,
+      "y": 2930,
+      "width": 600,
+      "style": { "fontSize": 14, "color": "#616161" }
+    },
+    {
+      "id": "sticky_expo_note",
+      "type": "sticky_note",
+      "content": "Expo Hall open 9 AM - 5 PM both days | Passport stamp challenge for prizes",
+      "x": 130,
+      "y": 2970,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "frame_networking",
+      "type": "frame",
+      "title": "Networking Lounge",
+      "x": 1400,
+      "y": 2750,
+      "width": 1200,
+      "height": 700,
+      "style": { "fillColor": "#E0F2F1" }
+    },
+    {
+      "id": "text_net_header",
+      "type": "text",
+      "content": "Networking Lounge",
+      "x": 1430,
+      "y": 2770,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "sticky_net1",
+      "type": "sticky_note",
+      "content": "Speed Networking: 3-minute rotations, Day 1 at 4:30 PM -- sign up at registration",
+      "x": 1430,
+      "y": 2830,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_net2",
+      "type": "sticky_note",
+      "content": "Mentorship Circles: Topic-based groups of 6-8, Day 2 at 10:30 AM",
+      "x": 1430,
+      "y": 2910,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_net3",
+      "type": "sticky_note",
+      "content": "Founders Corner: Pitch your startup in 60 seconds, Day 2 at 3:00 PM",
+      "x": 1430,
+      "y": 2990,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_net_coffee",
+      "type": "sticky_note",
+      "content": "Coffee & refreshments available all day",
+      "x": 1430,
+      "y": 3070,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_net_capacity",
+      "type": "text",
+      "content": "Capacity: 120 people | Charging stations available",
+      "x": 1430,
+      "y": 3150,
+      "width": 500,
+      "style": { "fontSize": 12, "color": "#616161" }
+    },
+    {
+      "id": "frame_quiet",
+      "type": "frame",
+      "title": "Quiet Zone & Wellness",
+      "x": 2700,
+      "y": 2750,
+      "width": 1000,
+      "height": 700,
+      "style": { "fillColor": "#E8EAF6" }
+    },
+    {
+      "id": "text_quiet_header",
+      "type": "text",
+      "content": "Quiet Zone & Wellness",
+      "x": 2730,
+      "y": 2770,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "sticky_quiet1",
+      "type": "sticky_note",
+      "content": "Meditation sessions: 15 min guided, every hour on the hour",
+      "x": 2730,
+      "y": 2830,
+      "width": 450,
+      "height": 70,
+      "style": { "fillColor": "#D1C4E9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_quiet2",
+      "type": "sticky_note",
+      "content": "Noise-cancelling headphone lending station",
+      "x": 2730,
+      "y": 2910,
+      "width": 450,
+      "height": 70,
+      "style": { "fillColor": "#D1C4E9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_quiet3",
+      "type": "sticky_note",
+      "content": "Lactation room: Private, lockable -- see registration desk for key",
+      "x": 2730,
+      "y": 2990,
+      "width": 450,
+      "height": 70,
+      "style": { "fillColor": "#D1C4E9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_quiet4",
+      "type": "sticky_note",
+      "content": "Prayer/reflection room: Open all day, multi-faith",
+      "x": 2730,
+      "y": 3070,
+      "width": 450,
+      "height": 70,
+      "style": { "fillColor": "#D1C4E9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_quiet_rules",
+      "type": "text",
+      "content": "No laptops zone | Phone on silent | Max 20 people",
+      "x": 2730,
+      "y": 3160,
+      "width": 500,
+      "style": { "fontSize": 12, "color": "#616161" }
+    },
+    {
+      "id": "conn_reg_stage",
+      "type": "connector",
+      "startItem": "frame_registration",
+      "endItem": "frame_mainstage",
+      "style": {
+        "strokeColor": "#00897B",
+        "strokeWidth": 3,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Primary Attendee Flow" }]
+    },
+    {
+      "id": "conn_stage_community",
+      "type": "connector",
+      "startItem": "frame_mainstage",
+      "endItem": "frame_community",
+      "style": {
+        "strokeColor": "#00897B",
+        "strokeWidth": 1,
+        "strokeStyle": "dashed"
+      },
+      "captions": [{ "content": "Between Sessions" }]
+    },
+    {
+      "id": "conn_stage_lightning",
+      "type": "connector",
+      "startItem": "frame_mainstage",
+      "endItem": "frame_lightning",
+      "style": {
+        "strokeColor": "#00897B",
+        "strokeWidth": 1,
+        "strokeStyle": "dashed"
+      },
+      "captions": [{ "content": "Alt Track" }]
+    },
+    {
+      "id": "conn_speakers_stage",
+      "type": "connector",
+      "startItem": "frame_speakers",
+      "endItem": "frame_mainstage",
+      "style": {
+        "strokeColor": "#1A237E",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Featured Speakers" }]
+    },
+    {
+      "id": "conn_companion_quiet",
+      "type": "connector",
+      "startItem": "frame_companion",
+      "endItem": "frame_quiet",
+      "style": {
+        "strokeColor": "#9E9E9E",
+        "strokeWidth": 1,
+        "strokeStyle": "dashed"
+      },
+      "captions": [{ "content": "Recharge" }]
+    }
+  ]
+}

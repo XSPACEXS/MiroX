@@ -3,8 +3,8 @@ import { ALL_TEMPLATES, TEMPLATES_BY_CATEGORY, getTemplateById, searchTemplates 
 import { TemplateCategory } from '../templates/types'
 
 describe('Template Registry', () => {
-  it('should have 38 templates in ALL_TEMPLATES', () => {
-    expect(ALL_TEMPLATES).toHaveLength(38)
+  it('should have 94 templates in ALL_TEMPLATES', () => {
+    expect(ALL_TEMPLATES).toHaveLength(94)
   })
 
   it('every template has required fields', () => {

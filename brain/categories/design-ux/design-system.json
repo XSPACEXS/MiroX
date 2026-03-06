@@ -1,0 +1,1049 @@
+{
+  "metadata": {
+    "name": "Design System Board",
+    "description": "Complete component library and design token system documented visually — covering color tokens, typography scale, spacing grid, buttons, inputs, cards, containers, and usage patterns for AutoPilot v3.0",
+    "category": "Design & UX",
+    "tags": [
+      "design-system",
+      "components",
+      "tokens",
+      "typography",
+      "UI",
+      "style-guide"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 6000, "height": 4000 }
+  },
+  "settings": {
+    "backgroundColor": "#FFFFFF",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_header",
+      "type": "frame",
+      "title": "System Header",
+      "x": 50,
+      "y": 50,
+      "width": 5900,
+      "height": 250,
+      "style": { "fillColor": "#1B1B1B" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "AutoPilot Design System",
+      "x": 100,
+      "y": 70,
+      "width": 2000,
+      "style": { "fontSize": 44, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_version",
+      "type": "text",
+      "content": "Version 3.0.0 | Last Updated: March 6, 2026 | Maintainers: Priya Tandon (Design Lead), Leo Chen (Frontend Lead)",
+      "x": 100,
+      "y": 150,
+      "width": 4000,
+      "style": { "fontSize": 14, "color": "#B0BEC5" }
+    },
+    {
+      "id": "text_description",
+      "type": "text",
+      "content": "This board documents all reusable components, design tokens, and patterns. Source of truth for Figma library and React component library.",
+      "x": 100,
+      "y": 190,
+      "width": 4000,
+      "style": { "fontSize": 14, "color": "#78909C" }
+    },
+    {
+      "id": "frame_colors",
+      "type": "frame",
+      "title": "Color Tokens",
+      "x": 50,
+      "y": 350,
+      "width": 1900,
+      "height": 1500,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_colors_header",
+      "type": "text",
+      "content": "Color Tokens",
+      "x": 80,
+      "y": 370,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_semantic_label",
+      "type": "text",
+      "content": "Semantic Tokens (use these in code)",
+      "x": 80,
+      "y": 420,
+      "width": 600,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "shape_semantic_tokens",
+      "type": "shape",
+      "content": "Token Name | Value | Usage\n────────────────────────────────────────────\n--color-primary | #2962FF | Primary actions, links, active states\n--color-primary-hover | #1E88E5 | Primary button hover\n--color-primary-light | #E3F2FD | Selected backgrounds, highlights\n--color-success | #00C853 | Success messages, completed states\n--color-warning | #FFC400 | Warnings, attention badges\n--color-error | #D32F2F | Errors, destructive actions\n--color-text-primary | #1B1B1B | Headings, body text\n--color-text-secondary | #607D8B | Labels, captions, helper text\n--color-text-disabled | #BDBDBD | Disabled text, placeholder\n--color-bg-page | #FAFAFA | Page background\n--color-bg-surface | #FFFFFF | Card, modal, popover backgrounds\n--color-bg-elevated | #F5F5F5 | Sidebar, nav backgrounds\n--color-border-default | #E0E0E0 | Default borders, dividers\n--color-border-focus | #2962FF | Focus ring color",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 460,
+      "width": 1800,
+      "height": 600,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#0288D1",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "text_darkmode_label",
+      "type": "text",
+      "content": "Dark Mode Tokens",
+      "x": 80,
+      "y": 1090,
+      "width": 600,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "shape_darkmode_tokens",
+      "type": "shape",
+      "content": "Token | Light Mode | Dark Mode\n────────────────────────────────────\n--color-bg-page | #FAFAFA | #121212\n--color-bg-surface | #FFFFFF | #1E1E1E\n--color-text-primary | #1B1B1B | #E0E0E0\n--color-border-default | #E0E0E0 | #424242",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 1130,
+      "width": 1800,
+      "height": 200,
+      "style": {
+        "fillColor": "#FAFAFA",
+        "fontColor": "#212121",
+        "borderColor": "#0288D1",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "frame_typography",
+      "type": "frame",
+      "title": "Typography Scale",
+      "x": 2000,
+      "y": 350,
+      "width": 1900,
+      "height": 1500,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_typo_header",
+      "type": "text",
+      "content": "Typography Scale",
+      "x": 2030,
+      "y": 370,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_typo_family",
+      "type": "text",
+      "content": "Font Family: Inter (primary), JetBrains Mono (code)",
+      "x": 2030,
+      "y": 420,
+      "width": 800,
+      "style": { "fontSize": 16, "color": "#607D8B" }
+    },
+    {
+      "id": "text_display",
+      "type": "text",
+      "content": "Display",
+      "x": 2030,
+      "y": 470,
+      "width": 600,
+      "style": { "fontSize": 48, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_display_desc",
+      "type": "text",
+      "content": "Inter Bold, 48px/56px, -0.5px tracking. Use for hero sections, marketing pages.",
+      "x": 2030,
+      "y": 530,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_h1",
+      "type": "text",
+      "content": "Heading 1",
+      "x": 2030,
+      "y": 570,
+      "width": 600,
+      "style": { "fontSize": 32, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_h1_desc",
+      "type": "text",
+      "content": "Inter SemiBold, 32px/40px, -0.25px tracking. Use for page titles, section headers.",
+      "x": 2030,
+      "y": 620,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_h2",
+      "type": "text",
+      "content": "Heading 2",
+      "x": 2030,
+      "y": 660,
+      "width": 600,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_h2_desc",
+      "type": "text",
+      "content": "Inter SemiBold, 24px/32px. Use for card titles, modal headers.",
+      "x": 2030,
+      "y": 700,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_h3",
+      "type": "text",
+      "content": "Heading 3",
+      "x": 2030,
+      "y": 740,
+      "width": 600,
+      "style": { "fontSize": 20, "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_h3_desc",
+      "type": "text",
+      "content": "Inter Medium, 20px/28px. Use for sub-section headers.",
+      "x": 2030,
+      "y": 775,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_body_large",
+      "type": "text",
+      "content": "Body Large",
+      "x": 2030,
+      "y": 810,
+      "width": 600,
+      "style": { "fontSize": 18, "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_body_large_desc",
+      "type": "text",
+      "content": "Inter Regular, 18px/28px. Use for long-form content, blog posts.",
+      "x": 2030,
+      "y": 845,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_body",
+      "type": "text",
+      "content": "Body",
+      "x": 2030,
+      "y": 880,
+      "width": 600,
+      "style": { "fontSize": 16, "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_body_desc",
+      "type": "text",
+      "content": "Inter Regular, 16px/24px. Default body text for UI.",
+      "x": 2030,
+      "y": 910,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_body_small",
+      "type": "text",
+      "content": "Body Small",
+      "x": 2030,
+      "y": 945,
+      "width": 600,
+      "style": { "fontSize": 14, "color": "#607D8B" }
+    },
+    {
+      "id": "text_body_small_desc",
+      "type": "text",
+      "content": "Inter Regular, 14px/20px. Use for secondary text, table cells.",
+      "x": 2030,
+      "y": 975,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_caption",
+      "type": "text",
+      "content": "CAPTION",
+      "x": 2030,
+      "y": 1010,
+      "width": 600,
+      "style": { "fontSize": 12, "color": "#607D8B" }
+    },
+    {
+      "id": "text_caption_desc",
+      "type": "text",
+      "content": "Inter Medium, 12px/16px, uppercase, 1px tracking. Use for labels, badges, overlines.",
+      "x": 2030,
+      "y": 1040,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_code_sample",
+      "type": "text",
+      "content": "const apiUrl = 'https://api.autopilot.io';",
+      "x": 2030,
+      "y": 1080,
+      "width": 800,
+      "style": { "fontSize": 14, "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_code_desc",
+      "type": "text",
+      "content": "JetBrains Mono Regular, 14px/22px. Use for code snippets and technical content.",
+      "x": 2030,
+      "y": 1110,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "frame_spacing",
+      "type": "frame",
+      "title": "Spacing & Grid",
+      "x": 3950,
+      "y": 350,
+      "width": 1900,
+      "height": 1500,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_spacing_header",
+      "type": "text",
+      "content": "Spacing & Grid",
+      "x": 3980,
+      "y": 370,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_base_unit",
+      "type": "text",
+      "content": "Base Unit: 4px",
+      "x": 3980,
+      "y": 420,
+      "width": 400,
+      "style": { "fontSize": 20, "fontWeight": "bold", "color": "#E91E63" }
+    },
+    {
+      "id": "text_spacing_intro",
+      "type": "text",
+      "content": "All spacing uses multiples of 4px. The scale provides consistent rhythm across the UI.",
+      "x": 3980,
+      "y": 460,
+      "width": 1600,
+      "style": { "fontSize": 14, "color": "#607D8B" }
+    },
+    {
+      "id": "text_spacing_scale_label",
+      "type": "text",
+      "content": "Spacing Scale",
+      "x": 3980,
+      "y": 500,
+      "width": 400,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "shape_spacing_table",
+      "type": "shape",
+      "content": "Token | Value | Pixels | Usage\n──────────────────────────────────────\n--space-xxs | 0.25rem | 4px | Inline icon padding\n--space-xs | 0.5rem | 8px | Tight component spacing, badge padding\n--space-sm | 0.75rem | 12px | Form field gap, button padding vertical\n--space-md | 1rem | 16px | Standard content spacing, card padding\n--space-lg | 1.5rem | 24px | Section spacing, modal padding\n--space-xl | 2rem | 32px | Between major sections\n--space-xxl | 3rem | 48px | Page-level vertical spacing\n--space-xxxl | 4rem | 64px | Hero section spacing",
+      "shape": "rectangle",
+      "x": 3980,
+      "y": 540,
+      "width": 1800,
+      "height": 400,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E91E63",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "text_grid_label",
+      "type": "text",
+      "content": "Grid System",
+      "x": 3980,
+      "y": 970,
+      "width": 400,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "text_grid_desc",
+      "type": "text",
+      "content": "12-column grid with 24px gutters. Max content width: 1200px centered.",
+      "x": 3980,
+      "y": 1010,
+      "width": 1600,
+      "style": { "fontSize": 14, "color": "#607D8B" }
+    },
+    {
+      "id": "shape_grid_visual",
+      "type": "shape",
+      "content": "| col | col | col | col | col | col | col | col | col | col | col | col |",
+      "shape": "rectangle",
+      "x": 3980,
+      "y": 1050,
+      "width": 1800,
+      "height": 60,
+      "style": {
+        "fillColor": "#E3F2FD",
+        "fontColor": "#0288D1",
+        "borderColor": "#BBDEFB",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_breakpoints_label",
+      "type": "text",
+      "content": "Breakpoints",
+      "x": 3980,
+      "y": 1130,
+      "width": 400,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "shape_breakpoints_table",
+      "type": "shape",
+      "content": "Name | Value | Columns | Gutter\n───────────────────────────────\nMobile | 0-767px | 4 columns | 16px\nTablet | 768-1023px | 8 columns | 20px\nDesktop | 1024-1439px | 12 columns | 24px\nWide | 1440px+ | 12 columns | 24px (max-width: 1200px)",
+      "shape": "rectangle",
+      "x": 3980,
+      "y": 1170,
+      "width": 1800,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E91E63",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "frame_buttons",
+      "type": "frame",
+      "title": "Buttons & Inputs",
+      "x": 50,
+      "y": 1900,
+      "width": 1900,
+      "height": 1500,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_buttons_header",
+      "type": "text",
+      "content": "Buttons",
+      "x": 80,
+      "y": 1920,
+      "width": 400,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_primary_btn_label",
+      "type": "text",
+      "content": "Primary Button",
+      "x": 80,
+      "y": 1970,
+      "width": 300,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "shape_btn_primary",
+      "type": "shape",
+      "content": "Create Sprint",
+      "shape": "round_rectangle",
+      "x": 80,
+      "y": 2010,
+      "width": 160,
+      "height": 40,
+      "style": {
+        "fillColor": "#2962FF",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#2962FF",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_btn_primary_hover",
+      "type": "shape",
+      "content": "Create Sprint (hover)",
+      "shape": "round_rectangle",
+      "x": 260,
+      "y": 2010,
+      "width": 180,
+      "height": 40,
+      "style": {
+        "fillColor": "#1E88E5",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#1E88E5",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_btn_primary_disabled",
+      "type": "shape",
+      "content": "Create Sprint (disabled)",
+      "shape": "round_rectangle",
+      "x": 460,
+      "y": 2010,
+      "width": 200,
+      "height": 40,
+      "style": {
+        "fillColor": "#BDBDBD",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#BDBDBD",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "text_primary_btn_spec",
+      "type": "text",
+      "content": "Background: --color-primary. Border-radius: 6px. Padding: 10px 20px. Font: Inter SemiBold 14px.",
+      "x": 80,
+      "y": 2060,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_secondary_btn_label",
+      "type": "text",
+      "content": "Secondary Button",
+      "x": 80,
+      "y": 2100,
+      "width": 300,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "shape_btn_secondary",
+      "type": "shape",
+      "content": "Cancel",
+      "shape": "round_rectangle",
+      "x": 80,
+      "y": 2140,
+      "width": 160,
+      "height": 40,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#2962FF",
+        "borderColor": "#2962FF",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_secondary_btn_spec",
+      "type": "text",
+      "content": "Background: transparent. Border: 1px solid --color-primary. Text: --color-primary.",
+      "x": 80,
+      "y": 2190,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_destructive_btn_label",
+      "type": "text",
+      "content": "Destructive Button",
+      "x": 80,
+      "y": 2230,
+      "width": 300,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "shape_btn_destructive",
+      "type": "shape",
+      "content": "Delete Project",
+      "shape": "round_rectangle",
+      "x": 80,
+      "y": 2270,
+      "width": 160,
+      "height": 40,
+      "style": {
+        "fillColor": "#D32F2F",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#D32F2F",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "text_destructive_btn_spec",
+      "type": "text",
+      "content": "Background: --color-error. Use for irreversible actions. Always with confirmation dialog.",
+      "x": 80,
+      "y": 2320,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_sizes_label",
+      "type": "text",
+      "content": "Button Sizes",
+      "x": 80,
+      "y": 2360,
+      "width": 300,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "shape_btn_small",
+      "type": "shape",
+      "content": "Small",
+      "shape": "round_rectangle",
+      "x": 80,
+      "y": 2400,
+      "width": 120,
+      "height": 32,
+      "style": {
+        "fillColor": "#2962FF",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#2962FF",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_btn_medium",
+      "type": "shape",
+      "content": "Medium (default)",
+      "shape": "round_rectangle",
+      "x": 220,
+      "y": 2396,
+      "width": 160,
+      "height": 40,
+      "style": {
+        "fillColor": "#2962FF",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#2962FF",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_btn_large",
+      "type": "shape",
+      "content": "Large",
+      "shape": "round_rectangle",
+      "x": 400,
+      "y": 2392,
+      "width": 200,
+      "height": 48,
+      "style": {
+        "fillColor": "#2962FF",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#2962FF",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "text_inputs_header",
+      "type": "text",
+      "content": "Text Inputs",
+      "x": 80,
+      "y": 2460,
+      "width": 400,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "shape_input_default",
+      "type": "shape",
+      "content": "Sprint Name\n[ Enter sprint name... ]",
+      "shape": "round_rectangle",
+      "x": 80,
+      "y": 2510,
+      "width": 300,
+      "height": 60,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_input_focused",
+      "type": "shape",
+      "content": "Sprint Name\n[ My Sprint | ]",
+      "shape": "round_rectangle",
+      "x": 400,
+      "y": 2510,
+      "width": 300,
+      "height": 60,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#2962FF",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "shape_input_error",
+      "type": "shape",
+      "content": "Sprint Name\n[ ]\nSprint name is required",
+      "shape": "round_rectangle",
+      "x": 720,
+      "y": 2510,
+      "width": 300,
+      "height": 70,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#D32F2F",
+        "borderColor": "#D32F2F",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_input_spec",
+      "type": "text",
+      "content": "Height: 40px. Border-radius: 6px. Padding: 10px 12px. Font: Inter Regular 14px. Label: Inter Medium 14px above.",
+      "x": 80,
+      "y": 2600,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "frame_cards",
+      "type": "frame",
+      "title": "Cards & Containers",
+      "x": 2000,
+      "y": 1900,
+      "width": 1900,
+      "height": 1500,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_cards_header",
+      "type": "text",
+      "content": "Cards & Containers",
+      "x": 2030,
+      "y": 1920,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_standard_card_label",
+      "type": "text",
+      "content": "Standard Card",
+      "x": 2030,
+      "y": 1970,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "shape_standard_card",
+      "type": "shape",
+      "content": "Card Title\n\nCard description text goes here with up to two lines of content before truncation.\n\n[Action]",
+      "shape": "round_rectangle",
+      "x": 2030,
+      "y": 2010,
+      "width": 340,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_standard_card_spec",
+      "type": "text",
+      "content": "Padding: 16px. Border-radius: 8px. Shadow: 0 1px 3px rgba(0,0,0,0.12). Border: 1px solid --color-border-default.",
+      "x": 2030,
+      "y": 2220,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_task_card_label",
+      "type": "text",
+      "content": "Task Card",
+      "x": 2030,
+      "y": 2270,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "shape_task_card",
+      "type": "shape",
+      "content": "Fix login timeout bug\n[HIGH] [Core Platform]\nDue: Apr 10 | Aisha K.",
+      "shape": "rectangle",
+      "x": 2030,
+      "y": 2310,
+      "width": 260,
+      "height": 120,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#2962FF",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_task_card_spec",
+      "type": "text",
+      "content": "Left border indicates status color. Padding: 12px. Width: flexible (260px in Kanban, full-width in list).",
+      "x": 2030,
+      "y": 2440,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_modal_label",
+      "type": "text",
+      "content": "Modal / Dialog",
+      "x": 2030,
+      "y": 2490,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "shape_modal",
+      "type": "shape",
+      "content": "Delete Project?\n\nThis action cannot be undone. All tasks and sprint data will be permanently removed.\n\n[Delete]  [Cancel]",
+      "shape": "round_rectangle",
+      "x": 2030,
+      "y": 2530,
+      "width": 340,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#455A64",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "text_modal_spec",
+      "type": "text",
+      "content": "Max width: 480px. Padding: 24px. Border-radius: 12px. Centered in viewport with backdrop overlay.",
+      "x": 2030,
+      "y": 2740,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_toast_label",
+      "type": "text",
+      "content": "Toast / Notification",
+      "x": 2030,
+      "y": 2790,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "shape_toast_success",
+      "type": "shape",
+      "content": "Sprint created successfully  [x]",
+      "shape": "round_rectangle",
+      "x": 2030,
+      "y": 2830,
+      "width": 360,
+      "height": 50,
+      "style": {
+        "fillColor": "#E8F5E9",
+        "fontColor": "#1B5E20",
+        "borderColor": "#00C853",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_toast_spec",
+      "type": "text",
+      "content": "Appears top-right. Auto-dismiss after 5s. Left border color: green (success), amber (warning), red (error), blue (info).",
+      "x": 2030,
+      "y": 2890,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "frame_patterns",
+      "type": "frame",
+      "title": "Patterns & Usage",
+      "x": 3950,
+      "y": 1900,
+      "width": 1900,
+      "height": 1500,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_patterns_header",
+      "type": "text",
+      "content": "Patterns & Usage",
+      "x": 3980,
+      "y": 1920,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_loading_label",
+      "type": "text",
+      "content": "Loading States",
+      "x": 3980,
+      "y": 1970,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "shape_skeleton",
+      "type": "shape",
+      "content": "Skeleton Card\n[=====          ]\n[============   ]\n[========       ]",
+      "shape": "round_rectangle",
+      "x": 3980,
+      "y": 2010,
+      "width": 340,
+      "height": 120,
+      "style": {
+        "fillColor": "#F5F5F5",
+        "fontColor": "#BDBDBD",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_skeleton_spec",
+      "type": "text",
+      "content": "Use skeleton screens for content loading. Shimmer animation (left-to-right). Match the layout shape of the content being loaded.",
+      "x": 3980,
+      "y": 2140,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_empty_label",
+      "type": "text",
+      "content": "Empty States",
+      "x": 3980,
+      "y": 2190,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "shape_empty_state",
+      "type": "shape",
+      "content": "[illustration]\n\nNo sprints yet\nCreate your first sprint to get started\n\n[Create Sprint]",
+      "shape": "round_rectangle",
+      "x": 3980,
+      "y": 2230,
+      "width": 340,
+      "height": 180,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#455A64",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_empty_spec",
+      "type": "text",
+      "content": "Always include: illustration/icon + headline + description + primary CTA. Never show a blank area.",
+      "x": 3980,
+      "y": 2420,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_error_label",
+      "type": "text",
+      "content": "Error States",
+      "x": 3980,
+      "y": 2470,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "shape_error_state",
+      "type": "shape",
+      "content": "Something went wrong\nWe could not load your sprints. Please try again.\n[Retry]",
+      "shape": "round_rectangle",
+      "x": 3980,
+      "y": 2510,
+      "width": 340,
+      "height": 100,
+      "style": {
+        "fillColor": "#FFEBEE",
+        "fontColor": "#D32F2F",
+        "borderColor": "#D32F2F",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_error_spec",
+      "type": "text",
+      "content": "Error banner: inline, above affected content. Include actionable message + retry when possible.",
+      "x": 3980,
+      "y": 2620,
+      "width": 1600,
+      "style": { "fontSize": 13, "color": "#607D8B" }
+    },
+    {
+      "id": "text_a11y_label",
+      "type": "text",
+      "content": "Focus & Accessibility",
+      "x": 3980,
+      "y": 2670,
+      "width": 400,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "sticky_a11y_focus",
+      "type": "sticky_note",
+      "content": "Focus ring: 2px solid --color-border-focus (#2962FF), 2px offset. Visible on keyboard navigation, hidden on mouse click.",
+      "x": 3980,
+      "y": 2710,
+      "width": 800,
+      "height": 80,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_a11y_contrast",
+      "type": "sticky_note",
+      "content": "All interactive elements must meet WCAG 2.1 AA: 4.5:1 contrast for text, 3:1 for large text. Tab order matches visual order.",
+      "x": 3980,
+      "y": 2800,
+      "width": 800,
+      "height": 80,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_a11y_color",
+      "type": "sticky_note",
+      "content": "Color is never the sole indicator. Always pair with text labels, icons, or patterns. Capacity bars use color + percentage text.",
+      "x": 3980,
+      "y": 2890,
+      "width": 800,
+      "height": 80,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "text_motion_label",
+      "type": "text",
+      "content": "Motion & Animation",
+      "x": 3980,
+      "y": 2990,
+      "width": 400,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "text_motion_desc",
+      "type": "text",
+      "content": "Duration: micro-interactions 150ms, transitions 250ms, page transitions 350ms. Easing: ease-out for enter, ease-in for exit. Reduced motion: respect prefers-reduced-motion media query.",
+      "x": 3980,
+      "y": 3030,
+      "width": 1600,
+      "style": { "fontSize": 14, "color": "#607D8B" }
+    }
+  ]
+}

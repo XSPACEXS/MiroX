@@ -1,0 +1,40 @@
+{
+  "category": "Data & Analytics",
+  "description": "Boards for visualizing metrics, synthesizing research findings, tracking KPIs, and analyzing survey results to bridge the gap between raw data and strategic decision-making",
+  "icon": "📊",
+  "colorTheme": {
+    "primary": "#006064",
+    "secondary": "#455A64",
+    "accent": "#1976D2"
+  },
+  "templates": [
+    {
+      "file": "data-dashboard",
+      "name": "Analytics Dashboard",
+      "description": "Executive analytics dashboard with KPI cards, trend charts, cohort analysis, funnel metrics, and data source documentation",
+      "tags": ["dashboard", "metrics", "charts", "KPIs", "analytics"],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "research-synthesis",
+      "name": "Research Synthesis",
+      "description": "Qualitative research board for organizing quotes, clustering themes, deriving insights, and prioritizing recommendations",
+      "tags": ["research", "qualitative", "interviews", "themes", "insights"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "kpi-tracker",
+      "name": "KPI Tracker",
+      "description": "Performance scoreboard with RAG status indicators, trend sparklines, accountable owners, and corrective action plans",
+      "tags": ["KPI", "OKR", "tracking", "RAG", "performance"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "survey-analysis",
+      "name": "Survey Analysis",
+      "description": "Survey results visualization with response summaries, demographic breakdowns, cross-tabulations, and open-ended theme analysis",
+      "tags": ["survey", "NPS", "engagement", "feedback", "analysis"],
+      "complexity": "Medium"
+    }
+  ]
+}

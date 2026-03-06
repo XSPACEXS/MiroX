@@ -159,6 +159,14 @@ const electronAPI = {
     },
   },
 
+  // Brain
+  brain: {
+    loadContext: (blueprintId: string) =>
+      ipcRenderer.invoke(IPC_CHANNELS.BRAIN_LOAD_CONTEXT, blueprintId),
+    generateBoard: (params: unknown) =>
+      ipcRenderer.invoke(IPC_CHANNELS.BRAIN_GENERATE_BOARD, params),
+  },
+
   // Self-test
   selfTest: {
     screenshot: () => ipcRenderer.invoke(IPC_CHANNELS.SELFTEST_SCREENSHOT),

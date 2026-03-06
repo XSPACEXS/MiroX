@@ -1,0 +1,1120 @@
+{
+  "metadata": {
+    "name": "Wireframe Board",
+    "description": "Low-fidelity wireframe layouts for AutoPilot Sprint Planning feature with 3 desktop screens, 3 mobile screens, annotations, interaction notes, and responsive behavior documentation",
+    "category": "Design & UX",
+    "tags": [
+      "wireframe",
+      "low-fidelity",
+      "mobile",
+      "desktop",
+      "responsive",
+      "annotations"
+    ],
+    "complexity": "Medium",
+    "boardSize": { "width": 5400, "height": 3600 }
+  },
+  "settings": {
+    "backgroundColor": "#FAFAFA",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_header",
+      "type": "frame",
+      "title": "Project Header",
+      "x": 50,
+      "y": 50,
+      "width": 5300,
+      "height": 250,
+      "style": { "fillColor": "#455A64" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "Wireframes: Sprint Planning Feature",
+      "x": 100,
+      "y": 70,
+      "width": 3000,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_meta",
+      "type": "text",
+      "content": "Project: AutoPilot 3.0 | Feature: Sprint Planning with AI Suggestions | Designer: Priya Tandon | Date: March 5, 2026 | Status: Draft v2",
+      "x": 100,
+      "y": 130,
+      "width": 4500,
+      "style": { "fontSize": 14, "color": "#B0BEC5" }
+    },
+    {
+      "id": "text_scope",
+      "type": "text",
+      "content": "Scope: 3 desktop screens + 3 mobile screens covering sprint creation, task assignment, and workload view",
+      "x": 100,
+      "y": 170,
+      "width": 4500,
+      "style": { "fontSize": 14, "color": "#CFD8DC" }
+    },
+    {
+      "id": "frame_desktop",
+      "type": "frame",
+      "title": "Desktop Wireframes",
+      "x": 50,
+      "y": 350,
+      "width": 2400,
+      "height": 2400,
+      "style": { "fillColor": "#FAFAFA" }
+    },
+    {
+      "id": "text_desktop_header",
+      "type": "text",
+      "content": "Desktop (1440px viewport)",
+      "x": 80,
+      "y": 370,
+      "width": 500,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "shape_d1_frame",
+      "type": "shape",
+      "content": "Screen D1: Sprint Creation",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 420,
+      "width": 1100,
+      "height": 700,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#1B1B1B",
+        "borderColor": "#455A64",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_d1_nav",
+      "type": "shape",
+      "content": "AutoPilot logo | Projects | Sprints | Dashboard | [avatar]",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 420,
+      "width": 1100,
+      "height": 50,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#455A64",
+        "borderColor": "#CFD8DC",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_d1_sidebar",
+      "type": "shape",
+      "content": "Project list\nSprint list\nSettings",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 470,
+      "width": 240,
+      "height": 640,
+      "style": {
+        "fillColor": "#F5F5F5",
+        "fontColor": "#455A64",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_d1_title",
+      "type": "text",
+      "content": "Create New Sprint",
+      "x": 340,
+      "y": 490,
+      "width": 400,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "shape_d1_input1",
+      "type": "shape",
+      "content": "Sprint Name [text input]",
+      "shape": "rectangle",
+      "x": 340,
+      "y": 530,
+      "width": 400,
+      "height": 35,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#757575",
+        "borderColor": "#CFD8DC",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_d1_input2",
+      "type": "shape",
+      "content": "Start Date [date picker]",
+      "shape": "rectangle",
+      "x": 340,
+      "y": 580,
+      "width": 200,
+      "height": 35,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#757575",
+        "borderColor": "#CFD8DC",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_d1_input3",
+      "type": "shape",
+      "content": "End Date [date picker]",
+      "shape": "rectangle",
+      "x": 560,
+      "y": 580,
+      "width": 200,
+      "height": 35,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#757575",
+        "borderColor": "#CFD8DC",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_d1_goal",
+      "type": "shape",
+      "content": "Sprint Goal [text area]",
+      "shape": "rectangle",
+      "x": 340,
+      "y": 630,
+      "width": 780,
+      "height": 40,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#757575",
+        "borderColor": "#CFD8DC",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_d1_backlog",
+      "type": "shape",
+      "content": "Backlog Tasks (drag to add)\n[ Task card ]\n[ Task card ]\n[ Task card ]\n[ Task card ]",
+      "shape": "rectangle",
+      "x": 340,
+      "y": 690,
+      "width": 780,
+      "height": 200,
+      "style": {
+        "fillColor": "#E3F2FD",
+        "fontColor": "#0288D1",
+        "borderColor": "#90CAF9",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_d1_button",
+      "type": "shape",
+      "content": "[Create Sprint]",
+      "shape": "round_rectangle",
+      "x": 340,
+      "y": 910,
+      "width": 120,
+      "height": 40,
+      "style": {
+        "fillColor": "#0288D1",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#0288D1",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "text_a1",
+      "type": "text",
+      "content": "A1: Date picker defaults to 2-week sprint from today",
+      "x": 800,
+      "y": 570,
+      "width": 350,
+      "style": { "fontSize": 11, "color": "#E91E63" }
+    },
+    {
+      "id": "text_a2",
+      "type": "text",
+      "content": "A2: Backlog section supports drag-and-drop from sidebar task list",
+      "x": 800,
+      "y": 700,
+      "width": 350,
+      "style": { "fontSize": 11, "color": "#E91E63" }
+    },
+    {
+      "id": "shape_d2_frame",
+      "type": "shape",
+      "content": "Screen D2: Sprint Board with AI Suggestions",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 1160,
+      "width": 1100,
+      "height": 550,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#1B1B1B",
+        "borderColor": "#455A64",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_d2_nav",
+      "type": "shape",
+      "content": "AutoPilot | Projects | Sprints | Dashboard",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 1160,
+      "width": 1100,
+      "height": 45,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#455A64",
+        "borderColor": "#CFD8DC",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_d2_title",
+      "type": "text",
+      "content": "Sprint: Q2 Week 1 (Apr 7-18)",
+      "x": 340,
+      "y": 1220,
+      "width": 500,
+      "style": { "fontSize": 14, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "shape_d2_todo",
+      "type": "shape",
+      "content": "TO DO\n\n[ Task card ]\n[ Task card ]\n[ Task card ]",
+      "shape": "rectangle",
+      "x": 340,
+      "y": 1260,
+      "width": 250,
+      "height": 400,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#455A64",
+        "borderColor": "#CFD8DC",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_d2_inprogress",
+      "type": "shape",
+      "content": "IN PROGRESS\n\n[ Task card ]\n[ Task card ]",
+      "shape": "rectangle",
+      "x": 610,
+      "y": 1260,
+      "width": 250,
+      "height": 400,
+      "style": {
+        "fillColor": "#FFF8E1",
+        "fontColor": "#F57F17",
+        "borderColor": "#FFF9C4",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_d2_done",
+      "type": "shape",
+      "content": "DONE\n\n[ Task card ]",
+      "shape": "rectangle",
+      "x": 880,
+      "y": 1260,
+      "width": 250,
+      "height": 400,
+      "style": {
+        "fillColor": "#E8F5E9",
+        "fontColor": "#2E7D32",
+        "borderColor": "#C8E6C9",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_d2_ai",
+      "type": "shape",
+      "content": "AI Suggestion Overlay\nSuggested: Aisha K. (92% match)\n[Approve] [Dismiss]",
+      "shape": "rectangle",
+      "x": 360,
+      "y": 1400,
+      "width": 220,
+      "height": 100,
+      "style": {
+        "fillColor": "#E8EAF6",
+        "fontColor": "#5C6BC0",
+        "borderColor": "#7C4DFF",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "text_a3",
+      "type": "text",
+      "content": "A3: AI suggestion overlay appears on unassigned task hover",
+      "x": 800,
+      "y": 1380,
+      "width": 350,
+      "style": { "fontSize": 11, "color": "#E91E63" }
+    },
+    {
+      "id": "text_a4",
+      "type": "text",
+      "content": "A4: Approve assigns + sends notification; Dismiss shows next suggestion",
+      "x": 800,
+      "y": 1420,
+      "width": 350,
+      "style": { "fontSize": 11, "color": "#E91E63" }
+    },
+    {
+      "id": "shape_d3_frame",
+      "type": "shape",
+      "content": "Screen D3: Workload Dashboard",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 1750,
+      "width": 1100,
+      "height": 550,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#1B1B1B",
+        "borderColor": "#455A64",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_d3_title",
+      "type": "text",
+      "content": "Team Workload — Sprint Q2 Week 1",
+      "x": 100,
+      "y": 1770,
+      "width": 600,
+      "style": { "fontSize": 14, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "shape_d3_table",
+      "type": "shape",
+      "content": "Team Member | Capacity | Tasks | Hours\n──────────────────────────────────\nAisha K. | [===========] 85% | 6 tasks | 28h\nLeo C. | [========] 65% | 4 tasks | 22h\nMarcus W. | [==============] 100% | 8 tasks | 40h (OVERLOADED)\nNoor A. | [=====] 45% | 3 tasks | 16h",
+      "shape": "rectangle",
+      "x": 100,
+      "y": 1810,
+      "width": 1020,
+      "height": 250,
+      "style": {
+        "fillColor": "#FAFAFA",
+        "fontColor": "#212121",
+        "borderColor": "#455A64",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_d3_burndown",
+      "type": "shape",
+      "content": "Burndown Chart\n[placeholder]",
+      "shape": "rectangle",
+      "x": 100,
+      "y": 2080,
+      "width": 480,
+      "height": 180,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#757575",
+        "borderColor": "#CFD8DC",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_d3_velocity",
+      "type": "shape",
+      "content": "Velocity Chart\n[placeholder]",
+      "shape": "rectangle",
+      "x": 620,
+      "y": 2080,
+      "width": 480,
+      "height": 180,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#757575",
+        "borderColor": "#CFD8DC",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_a5",
+      "type": "text",
+      "content": "A5: Red highlight on team members at >95% capacity",
+      "x": 800,
+      "y": 1940,
+      "width": 350,
+      "style": { "fontSize": 11, "color": "#E91E63" }
+    },
+    {
+      "id": "text_a6",
+      "type": "text",
+      "content": "A6: Clicking a team member row expands to show their task breakdown",
+      "x": 800,
+      "y": 1970,
+      "width": 350,
+      "style": { "fontSize": 11, "color": "#E91E63" }
+    },
+    {
+      "id": "frame_mobile",
+      "type": "frame",
+      "title": "Mobile Wireframes",
+      "x": 2500,
+      "y": 350,
+      "width": 1400,
+      "height": 2400,
+      "style": { "fillColor": "#FAFAFA" }
+    },
+    {
+      "id": "text_mobile_header",
+      "type": "text",
+      "content": "Mobile (375px viewport)",
+      "x": 2530,
+      "y": 370,
+      "width": 500,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "shape_m1_frame",
+      "type": "shape",
+      "content": "M1: Sprint List",
+      "shape": "round_rectangle",
+      "x": 2530,
+      "y": 420,
+      "width": 375,
+      "height": 650,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#1B1B1B",
+        "borderColor": "#455A64",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_m1_header",
+      "type": "shape",
+      "content": "Sprints | [hamburger] | [+]",
+      "shape": "rectangle",
+      "x": 2530,
+      "y": 420,
+      "width": 375,
+      "height": 50,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#455A64",
+        "borderColor": "#CFD8DC",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_m1_card1",
+      "type": "shape",
+      "content": "Q2 Week 1 | Apr 7-18\n12 tasks | 3 completed",
+      "shape": "rectangle",
+      "x": 2540,
+      "y": 490,
+      "width": 355,
+      "height": 80,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_m1_card2",
+      "type": "shape",
+      "content": "Q2 Week 2 | Apr 21 - May 2\n8 tasks | 0 completed",
+      "shape": "rectangle",
+      "x": 2540,
+      "y": 580,
+      "width": 355,
+      "height": 80,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_m1_card3",
+      "type": "shape",
+      "content": "Q2 Week 3 | Draft | [Edit]",
+      "shape": "rectangle",
+      "x": 2540,
+      "y": 670,
+      "width": 355,
+      "height": 80,
+      "style": {
+        "fillColor": "#F5F5F5",
+        "fontColor": "#9E9E9E",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_m1_fab",
+      "type": "shape",
+      "content": "+",
+      "shape": "circle",
+      "x": 2830,
+      "y": 990,
+      "width": 56,
+      "height": 56,
+      "style": {
+        "fillColor": "#0288D1",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#0288D1",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "text_m1_note",
+      "type": "text",
+      "content": "M1: Swipe left on sprint card to archive",
+      "x": 2530,
+      "y": 1080,
+      "width": 350,
+      "style": { "fontSize": 11, "color": "#E91E63" }
+    },
+    {
+      "id": "shape_m2_frame",
+      "type": "shape",
+      "content": "M2: Task Card with AI Suggestion",
+      "shape": "round_rectangle",
+      "x": 2530,
+      "y": 1130,
+      "width": 375,
+      "height": 650,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#1B1B1B",
+        "borderColor": "#455A64",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_m2_header",
+      "type": "shape",
+      "content": "< Back | Task Detail",
+      "shape": "rectangle",
+      "x": 2530,
+      "y": 1130,
+      "width": 375,
+      "height": 50,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#455A64",
+        "borderColor": "#CFD8DC",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_m2_title",
+      "type": "text",
+      "content": "Fix login timeout bug",
+      "x": 2545,
+      "y": 1195,
+      "width": 340,
+      "style": { "fontSize": 14, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_m2_meta",
+      "type": "text",
+      "content": "Priority: High | Due: Apr 10 | Project: Core Platform",
+      "x": 2545,
+      "y": 1225,
+      "width": 340,
+      "style": { "fontSize": 11, "color": "#757575" }
+    },
+    {
+      "id": "shape_m2_desc",
+      "type": "shape",
+      "content": "Description: Users are logged out after 5 minutes of inactivity...",
+      "shape": "rectangle",
+      "x": 2545,
+      "y": 1260,
+      "width": 340,
+      "height": 60,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#616161",
+        "borderColor": "#CFD8DC",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_m2_ai",
+      "type": "shape",
+      "content": "Suggested Assignee\nAisha K. — 92% match | 6 tasks in progress\n[Approve] [See Others]",
+      "shape": "rectangle",
+      "x": 2545,
+      "y": 1340,
+      "width": 340,
+      "height": 120,
+      "style": {
+        "fillColor": "#E8EAF6",
+        "fontColor": "#5C6BC0",
+        "borderColor": "#7C4DFF",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "text_m2_note",
+      "type": "text",
+      "content": "M2: 'See Others' opens a bottom sheet with top 3 suggestions",
+      "x": 2530,
+      "y": 1790,
+      "width": 350,
+      "style": { "fontSize": 11, "color": "#E91E63" }
+    },
+    {
+      "id": "shape_m3_frame",
+      "type": "shape",
+      "content": "M3: Workload View (Simplified)",
+      "shape": "round_rectangle",
+      "x": 2530,
+      "y": 1840,
+      "width": 375,
+      "height": 650,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#1B1B1B",
+        "borderColor": "#455A64",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_m3_header",
+      "type": "shape",
+      "content": "< Back | Team Workload",
+      "shape": "rectangle",
+      "x": 2530,
+      "y": 1840,
+      "width": 375,
+      "height": 50,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#455A64",
+        "borderColor": "#CFD8DC",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_m3_row1",
+      "type": "shape",
+      "content": "Aisha K. | [=======] 85% capacity",
+      "shape": "rectangle",
+      "x": 2545,
+      "y": 1910,
+      "width": 340,
+      "height": 60,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_m3_row2",
+      "type": "shape",
+      "content": "Leo C. | [=====] 65% capacity",
+      "shape": "rectangle",
+      "x": 2545,
+      "y": 1980,
+      "width": 340,
+      "height": 60,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_m3_row3",
+      "type": "shape",
+      "content": "Marcus W. | [==========] 100% capacity",
+      "shape": "rectangle",
+      "x": 2545,
+      "y": 2050,
+      "width": 340,
+      "height": 60,
+      "style": {
+        "fillColor": "#FFEBEE",
+        "fontColor": "#C62828",
+        "borderColor": "#EF9A9A",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_m3_row4",
+      "type": "shape",
+      "content": "Noor A. | [===] 45% capacity",
+      "shape": "rectangle",
+      "x": 2545,
+      "y": 2120,
+      "width": 340,
+      "height": 60,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_m3_chart",
+      "type": "shape",
+      "content": "Simplified Burndown Chart\n[placeholder]",
+      "shape": "rectangle",
+      "x": 2545,
+      "y": 2200,
+      "width": 340,
+      "height": 180,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#757575",
+        "borderColor": "#CFD8DC",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_m3_note",
+      "type": "text",
+      "content": "M3: Tap team member to see their assigned tasks",
+      "x": 2530,
+      "y": 2500,
+      "width": 350,
+      "style": { "fontSize": 11, "color": "#E91E63" }
+    },
+    {
+      "id": "frame_annotations",
+      "type": "frame",
+      "title": "Annotations & Interaction Notes",
+      "x": 3950,
+      "y": 350,
+      "width": 1300,
+      "height": 2400,
+      "style": { "fillColor": "#FAFAFA" }
+    },
+    {
+      "id": "text_anno_header",
+      "type": "text",
+      "content": "Interaction Notes",
+      "x": 3980,
+      "y": 370,
+      "width": 400,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "text_nav_label",
+      "type": "text",
+      "content": "Navigation",
+      "x": 3980,
+      "y": 420,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "sticky_nav1",
+      "type": "sticky_note",
+      "content": "Desktop: Persistent left sidebar with collapsible sections. Sprint list is a sub-nav under the active project.",
+      "x": 3980,
+      "y": 460,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#FCE4EC", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_nav2",
+      "type": "sticky_note",
+      "content": "Mobile: Bottom tab bar replaces sidebar. Sprints, Tasks, Dashboard, Profile. Hamburger menu for settings.",
+      "x": 3980,
+      "y": 550,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#FCE4EC", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_ai_label",
+      "type": "text",
+      "content": "AI Suggestion Behavior",
+      "x": 3980,
+      "y": 650,
+      "width": 400,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "sticky_ai1",
+      "type": "sticky_note",
+      "content": "Suggestions appear automatically for unassigned tasks. On desktop: inline overlay on hover. On mobile: embedded card in task detail view.",
+      "x": 3980,
+      "y": 690,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_ai2",
+      "type": "sticky_note",
+      "content": "If all suggestions are dismissed, show: 'No more suggestions. Assign manually?' with a people picker.",
+      "x": 3980,
+      "y": 780,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_ai3",
+      "type": "sticky_note",
+      "content": "Suggestion confidence score visible to managers only. Team members see 'Suggested for you' without the percentage.",
+      "x": 3980,
+      "y": 870,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_loading_label",
+      "type": "text",
+      "content": "Loading & Empty States",
+      "x": 3980,
+      "y": 970,
+      "width": 400,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "sticky_loading1",
+      "type": "sticky_note",
+      "content": "Sprint list empty state: illustration + 'No sprints yet. Create your first sprint to get started.' + [Create Sprint] CTA.",
+      "x": 3980,
+      "y": 1010,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#ECEFF1", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_loading2",
+      "type": "sticky_note",
+      "content": "Workload dashboard loading: skeleton UI (shimmer effect on rows and charts). Load time target: <3s.",
+      "x": 3980,
+      "y": 1100,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#ECEFF1", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_loading3",
+      "type": "sticky_note",
+      "content": "AI suggestions loading: 'Finding the best match...' spinner on the suggestion card. Timeout after 5s: 'Suggestions unavailable. Assign manually.'",
+      "x": 3980,
+      "y": 1190,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#ECEFF1", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_error_label",
+      "type": "text",
+      "content": "Error States",
+      "x": 3980,
+      "y": 1290,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "sticky_error1",
+      "type": "sticky_note",
+      "content": "Sprint creation fails: inline error banner -- 'Could not create sprint. Please check your dates and try again.' Retry button.",
+      "x": 3980,
+      "y": 1330,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#FFEBEE", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_error2",
+      "type": "sticky_note",
+      "content": "AI routing service unavailable: suggestion card shows 'AI routing is temporarily unavailable. You can assign tasks manually.' No retry -- graceful degradation.",
+      "x": 3980,
+      "y": 1420,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#FFEBEE", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_a11y_label",
+      "type": "text",
+      "content": "Accessibility",
+      "x": 3980,
+      "y": 1520,
+      "width": 300,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#455A64" }
+    },
+    {
+      "id": "sticky_a11y1",
+      "type": "sticky_note",
+      "content": "All interactive elements must be keyboard-navigable. Tab order follows visual reading order. Approve/Dismiss buttons have aria-labels.",
+      "x": 3980,
+      "y": 1560,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#E8F5E9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_a11y2",
+      "type": "sticky_note",
+      "content": "Capacity percentage bar uses color + text label (not color alone) for colorblind accessibility. Red bar also shows '100%' text.",
+      "x": 3980,
+      "y": 1650,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#E8F5E9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "frame_legend",
+      "type": "frame",
+      "title": "Component Legend & Responsive Behavior",
+      "x": 50,
+      "y": 2800,
+      "width": 5300,
+      "height": 600,
+      "style": { "fillColor": "#FAFAFA" }
+    },
+    {
+      "id": "text_legend_header",
+      "type": "text",
+      "content": "Component Legend",
+      "x": 80,
+      "y": 2820,
+      "width": 400,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "shape_legend_input",
+      "type": "shape",
+      "content": "Text Input",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 2870,
+      "width": 160,
+      "height": 40,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#455A64",
+        "borderColor": "#455A64",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_legend_button",
+      "type": "shape",
+      "content": "Primary Button",
+      "shape": "round_rectangle",
+      "x": 280,
+      "y": 2870,
+      "width": 160,
+      "height": 40,
+      "style": {
+        "fillColor": "#0288D1",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#0288D1",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "shape_legend_card",
+      "type": "shape",
+      "content": "Card Component",
+      "shape": "rectangle",
+      "x": 480,
+      "y": 2870,
+      "width": 160,
+      "height": 60,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#455A64",
+        "borderColor": "#455A64",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_legend_ai",
+      "type": "shape",
+      "content": "AI Suggestion Card",
+      "shape": "rectangle",
+      "x": 680,
+      "y": 2870,
+      "width": 160,
+      "height": 60,
+      "style": {
+        "fillColor": "#E8EAF6",
+        "fontColor": "#5C6BC0",
+        "borderColor": "#7C4DFF",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_legend_placeholder",
+      "type": "shape",
+      "content": "Placeholder / Skeleton",
+      "shape": "rectangle",
+      "x": 880,
+      "y": 2870,
+      "width": 160,
+      "height": 60,
+      "style": {
+        "fillColor": "#ECEFF1",
+        "fontColor": "#9E9E9E",
+        "borderColor": "#CFD8DC",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_responsive_header",
+      "type": "text",
+      "content": "Responsive Behavior",
+      "x": 2000,
+      "y": 2820,
+      "width": 500,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "shape_responsive_table",
+      "type": "shape",
+      "content": "Component | Desktop (>1024px) | Tablet (768-1024px) | Mobile (<768px)\n──────────────────────────────────────────────────────\nSidebar | Persistent, 240px wide | Collapsible overlay | Hidden, replaced by bottom tabs\nSprint Board | 3-column Kanban | 3-column (narrower) | Single column, swipe between\nWorkload Table | Full table with charts | Table only, charts below | Stacked cards, no table\nAI Suggestion | Inline hover overlay | Inline hover overlay | Embedded in task detail\nTask Cards | 260px wide | 220px wide | Full width (340px)",
+      "shape": "rectangle",
+      "x": 2000,
+      "y": 2870,
+      "width": 3200,
+      "height": 300,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#455A64",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "conn_d2_m2",
+      "type": "connector",
+      "startItem": "shape_d2_ai",
+      "endItem": "shape_m2_ai",
+      "style": {
+        "strokeColor": "#0288D1",
+        "strokeWidth": 1,
+        "strokeStyle": "dashed"
+      },
+      "captions": [{ "content": "Same feature, responsive adaptation" }]
+    }
+  ]
+}

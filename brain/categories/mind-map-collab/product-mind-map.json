@@ -1,0 +1,635 @@
+{
+  "metadata": {
+    "name": "Product Mind Map",
+    "description": "A product-centric mind map radiating from core vision through pillars, capabilities, features, and user stories with priority and status color-coding.",
+    "category": "Mind Map Product Collaboration",
+    "tags": [
+      "product",
+      "mind-map",
+      "strategy",
+      "features",
+      "roadmap",
+      "pillars",
+      "vision",
+      "prioritization"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#F3E5F5",
+    "gridEnabled": false
+  },
+  "items": [
+    {
+      "id": "title-banner",
+      "type": "frame",
+      "title": "Product Mind Map",
+      "x": 100,
+      "y": 50,
+      "width": 4800,
+      "height": 350,
+      "style": { "fillColor": "#1A237E" }
+    },
+    {
+      "id": "title-text",
+      "type": "text",
+      "content": "Product Mind Map",
+      "x": 200,
+      "y": 80,
+      "width": 1000,
+      "style": { "fontSize": 56, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "subtitle-text",
+      "type": "text",
+      "content": "From Vision to User Stories — NovaTech Platform 2026",
+      "x": 200,
+      "y": 170,
+      "width": 1200,
+      "style": { "fontSize": 24, "color": "#B39DDB" }
+    },
+    {
+      "id": "stats-bar",
+      "type": "shape",
+      "content": "4 pillars | 12 capabilities | 48 features | 96 user stories | 3 quarters planned",
+      "shape": "rectangle",
+      "x": 2800,
+      "y": 100,
+      "width": 1900,
+      "height": 70,
+      "style": {
+        "fillColor": "#283593",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#B39DDB"
+      }
+    },
+    {
+      "id": "vision-core",
+      "type": "shape",
+      "content": "VISION\nEmpower every team to collaborate, decide, and ship faster through intelligent, connected workspaces.\n\nNorth Star: 10M WAU by Q4 2026",
+      "shape": "circle",
+      "x": 2000,
+      "y": 450,
+      "width": 600,
+      "height": 400,
+      "style": { "fillColor": "#1A237E", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "keyword-speed",
+      "type": "text",
+      "content": "Speed",
+      "x": 1850,
+      "y": 430,
+      "width": 120,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "keyword-intel",
+      "type": "text",
+      "content": "Intelligence",
+      "x": 2650,
+      "y": 430,
+      "width": 200,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#6A1B9A" }
+    },
+    {
+      "id": "keyword-connect",
+      "type": "text",
+      "content": "Connection",
+      "x": 1850,
+      "y": 850,
+      "width": 200,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#2E7D32" }
+    },
+    {
+      "id": "keyword-scale",
+      "type": "text",
+      "content": "Scale",
+      "x": 2650,
+      "y": 850,
+      "width": 120,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#00695C" }
+    },
+    {
+      "id": "platform-pillar",
+      "type": "shape",
+      "content": "PLATFORM\nReliability, speed, extensibility",
+      "shape": "rectangle",
+      "x": 100,
+      "y": 500,
+      "width": 500,
+      "height": 150,
+      "style": { "fillColor": "#1565C0", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "plat-perf",
+      "type": "shape",
+      "content": "Performance\nSub-60ms API | 99.99% uptime",
+      "shape": "rectangle",
+      "x": 100,
+      "y": 700,
+      "width": 450,
+      "height": 100,
+      "style": { "fillColor": "#1976D2", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "plat-perf-f1",
+      "type": "sticky_note",
+      "content": "CDN migration\nShipped | P1",
+      "x": 100,
+      "y": 830,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#43A047" }
+    },
+    {
+      "id": "plat-perf-f2",
+      "type": "sticky_note",
+      "content": "Query optimizer\nIn Progress | P0",
+      "x": 260,
+      "y": 830,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#1E88E5" }
+    },
+    {
+      "id": "plat-ext",
+      "type": "shape",
+      "content": "Extensibility\nPlugin SDK, widgets, marketplace",
+      "shape": "rectangle",
+      "x": 100,
+      "y": 960,
+      "width": 450,
+      "height": 100,
+      "style": { "fillColor": "#1976D2", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "plat-ext-f1",
+      "type": "sticky_note",
+      "content": "Plugin SDK v2\nShipped | P0",
+      "x": 100,
+      "y": 1090,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#43A047" }
+    },
+    {
+      "id": "plat-ext-f2",
+      "type": "sticky_note",
+      "content": "Widget builder\nIn Progress | P0",
+      "x": 260,
+      "y": 1090,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#1E88E5" }
+    },
+    {
+      "id": "plat-ext-f3",
+      "type": "sticky_note",
+      "content": "Marketplace\nPlanned | P1",
+      "x": 420,
+      "y": 1090,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#9E9E9E" }
+    },
+    {
+      "id": "growth-pillar",
+      "type": "shape",
+      "content": "GROWTH\nAcquire, activate, retain users",
+      "shape": "rectangle",
+      "x": 700,
+      "y": 500,
+      "width": 500,
+      "height": 150,
+      "style": { "fillColor": "#2E7D32", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "growth-onboard",
+      "type": "shape",
+      "content": "Onboarding\nFirst-value in 5min, personalized",
+      "shape": "rectangle",
+      "x": 700,
+      "y": 700,
+      "width": 450,
+      "height": 100,
+      "style": { "fillColor": "#388E3C", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "growth-onboard-f1",
+      "type": "sticky_note",
+      "content": "Setup wizard v3\nIn Progress | P0",
+      "x": 700,
+      "y": 830,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#1E88E5" }
+    },
+    {
+      "id": "growth-onboard-f2",
+      "type": "sticky_note",
+      "content": "Role-based paths\nPlanned | P0",
+      "x": 860,
+      "y": 830,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#D32F2F" }
+    },
+    {
+      "id": "growth-viral",
+      "type": "shape",
+      "content": "Virality\nSharing, invites, referrals",
+      "shape": "rectangle",
+      "x": 700,
+      "y": 960,
+      "width": 450,
+      "height": 100,
+      "style": { "fillColor": "#388E3C", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "growth-viral-f1",
+      "type": "sticky_note",
+      "content": "Smart sharing\nShipped | P1",
+      "x": 700,
+      "y": 1090,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#43A047" }
+    },
+    {
+      "id": "growth-viral-f2",
+      "type": "sticky_note",
+      "content": "Referral program\nIn Progress | P1",
+      "x": 860,
+      "y": 1090,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#1E88E5" }
+    },
+    {
+      "id": "intel-pillar",
+      "type": "shape",
+      "content": "INTELLIGENCE\nAI-powered capabilities",
+      "shape": "rectangle",
+      "x": 3100,
+      "y": 500,
+      "width": 500,
+      "height": 150,
+      "style": { "fillColor": "#6A1B9A", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "intel-suggest",
+      "type": "shape",
+      "content": "Smart Suggestions\nContext-aware, auto-complete",
+      "shape": "rectangle",
+      "x": 3100,
+      "y": 700,
+      "width": 450,
+      "height": 100,
+      "style": { "fillColor": "#7B1FA2", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "intel-suggest-f1",
+      "type": "sticky_note",
+      "content": "AI template suggest\nShipped | P1",
+      "x": 3100,
+      "y": 830,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#43A047" }
+    },
+    {
+      "id": "intel-suggest-f2",
+      "type": "sticky_note",
+      "content": "Smart complete\nIn Progress | P0",
+      "x": 3260,
+      "y": 830,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#1E88E5" }
+    },
+    {
+      "id": "intel-analytics",
+      "type": "shape",
+      "content": "Analytics & Insights\nPredictive dashboards, anomaly",
+      "shape": "rectangle",
+      "x": 3100,
+      "y": 960,
+      "width": 450,
+      "height": 100,
+      "style": { "fillColor": "#7B1FA2", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "intel-analytics-f1",
+      "type": "sticky_note",
+      "content": "Predictive churn\nIn Progress | P0",
+      "x": 3100,
+      "y": 1090,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#1E88E5" }
+    },
+    {
+      "id": "enterprise-pillar",
+      "type": "shape",
+      "content": "ENTERPRISE\nSecurity, compliance, scale",
+      "shape": "rectangle",
+      "x": 3700,
+      "y": 500,
+      "width": 500,
+      "height": 150,
+      "style": { "fillColor": "#00695C", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "ent-security",
+      "type": "shape",
+      "content": "Security\nSSO, SCIM, audit, encryption",
+      "shape": "rectangle",
+      "x": 3700,
+      "y": 700,
+      "width": 450,
+      "height": 100,
+      "style": { "fillColor": "#00796B", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "ent-sec-f1",
+      "type": "sticky_note",
+      "content": "SAML SSO\nShipped | P0",
+      "x": 3700,
+      "y": 830,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#43A047" }
+    },
+    {
+      "id": "ent-sec-f2",
+      "type": "sticky_note",
+      "content": "SCIM provisioning\nIn Progress | P0",
+      "x": 3860,
+      "y": 830,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#1E88E5" }
+    },
+    {
+      "id": "ent-compliance",
+      "type": "shape",
+      "content": "Compliance\nSOC2, GDPR, HIPAA",
+      "shape": "rectangle",
+      "x": 3700,
+      "y": 960,
+      "width": 450,
+      "height": 100,
+      "style": { "fillColor": "#00796B", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "ent-comp-f1",
+      "type": "sticky_note",
+      "content": "SOC2 Type II\nShipped",
+      "x": 3700,
+      "y": 1090,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#43A047" }
+    },
+    {
+      "id": "ent-comp-f2",
+      "type": "sticky_note",
+      "content": "HIPAA\nPlanned | P0",
+      "x": 3860,
+      "y": 1090,
+      "width": 140,
+      "height": 100,
+      "style": { "fillColor": "#D32F2F" }
+    },
+    {
+      "id": "legend-frame",
+      "type": "frame",
+      "title": "Legend & Priority Matrix",
+      "x": 100,
+      "y": 1300,
+      "width": 2400,
+      "height": 500,
+      "style": { "fillColor": "#FAFAFA" }
+    },
+    {
+      "id": "legend-priority",
+      "type": "shape",
+      "content": "PRIORITY\nP0 (Red): Must-ship this quarter\nP1 (Orange): Should-ship\nP2 (Amber): Nice-to-have",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1350,
+      "width": 500,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#9E9E9E"
+      }
+    },
+    {
+      "id": "legend-status",
+      "type": "shape",
+      "content": "STATUS\nShipped (Green)\nIn Progress (Blue)\nPlanned (Gray)",
+      "shape": "rectangle",
+      "x": 700,
+      "y": 1350,
+      "width": 500,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#9E9E9E"
+      }
+    },
+    {
+      "id": "legend-stats",
+      "type": "shape",
+      "content": "Feature Breakdown\nP0: 12 features (8 shipped, 4 in progress)\nP1: 20 features (6 shipped, 8 in progress, 6 planned)\nP2: 16 features (all planned)",
+      "shape": "rectangle",
+      "x": 1250,
+      "y": 1350,
+      "width": 600,
+      "height": 200,
+      "style": {
+        "fillColor": "#E8EAF6",
+        "fontColor": "#1A237E",
+        "borderColor": "#1A237E"
+      }
+    },
+    {
+      "id": "quarterly-frame",
+      "type": "frame",
+      "title": "Quarterly Assignments",
+      "x": 2600,
+      "y": 1300,
+      "width": 2300,
+      "height": 500,
+      "style": { "fillColor": "#F3E5F5" }
+    },
+    {
+      "id": "q1-block",
+      "type": "shape",
+      "content": "Q1 2026 (Current)\n16 features\nPlatform: 4 | Growth: 4\nIntel: 4 | Enterprise: 4\nCapacity: 92% used",
+      "shape": "rectangle",
+      "x": 2650,
+      "y": 1350,
+      "width": 600,
+      "height": 200,
+      "style": { "fillColor": "#1A237E", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "q2-block",
+      "type": "shape",
+      "content": "Q2 2026\n18 features planned\nPlatform: 5 | Growth: 5\nIntel: 4 | Enterprise: 4\nCapacity: 85%",
+      "shape": "rectangle",
+      "x": 3300,
+      "y": 1350,
+      "width": 600,
+      "height": 200,
+      "style": { "fillColor": "#283593", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "q3-block",
+      "type": "shape",
+      "content": "Q3 2026\n14 features planned\nPlatform: 3 | Growth: 4\nIntel: 3 | Enterprise: 4\nCapacity: 70%",
+      "shape": "rectangle",
+      "x": 3950,
+      "y": 1350,
+      "width": 600,
+      "height": 200,
+      "style": { "fillColor": "#3949AB", "fontColor": "#FFFFFF" }
+    },
+    {
+      "type": "connector",
+      "startItem": "vision-core",
+      "endItem": "platform-pillar",
+      "style": {
+        "strokeColor": "#1565C0",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "vision-core",
+      "endItem": "growth-pillar",
+      "style": {
+        "strokeColor": "#2E7D32",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "vision-core",
+      "endItem": "intel-pillar",
+      "style": {
+        "strokeColor": "#6A1B9A",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "vision-core",
+      "endItem": "enterprise-pillar",
+      "style": {
+        "strokeColor": "#00695C",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "platform-pillar",
+      "endItem": "plat-perf",
+      "style": {
+        "strokeColor": "#1565C0",
+        "strokeWidth": 2,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "platform-pillar",
+      "endItem": "plat-ext",
+      "style": {
+        "strokeColor": "#1565C0",
+        "strokeWidth": 2,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "growth-pillar",
+      "endItem": "growth-onboard",
+      "style": {
+        "strokeColor": "#2E7D32",
+        "strokeWidth": 2,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "growth-pillar",
+      "endItem": "growth-viral",
+      "style": {
+        "strokeColor": "#2E7D32",
+        "strokeWidth": 2,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "intel-pillar",
+      "endItem": "intel-suggest",
+      "style": {
+        "strokeColor": "#6A1B9A",
+        "strokeWidth": 2,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "intel-pillar",
+      "endItem": "intel-analytics",
+      "style": {
+        "strokeColor": "#6A1B9A",
+        "strokeWidth": 2,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "enterprise-pillar",
+      "endItem": "ent-security",
+      "style": {
+        "strokeColor": "#00695C",
+        "strokeWidth": 2,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "enterprise-pillar",
+      "endItem": "ent-compliance",
+      "style": {
+        "strokeColor": "#00695C",
+        "strokeWidth": 2,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "intel-pillar",
+      "endItem": "platform-pillar",
+      "style": {
+        "strokeColor": "#9E9E9E",
+        "strokeWidth": 1,
+        "strokeStyle": "dashed"
+      }
+    }
+  ]
+}

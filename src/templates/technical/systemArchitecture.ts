@@ -9,6 +9,8 @@ export const systemArchitecture: TemplateDefinition = {
   emoji: '\u{1F3D7}\uFE0F',
   estimatedTime: '~8 min',
   blueprintId: 'system-architecture',
+  brainCategory: 'technical-architecture',
+  brainBlueprint: 'system-diagram',
   complexity: 'complex',
   color: '#3B82F6',
   tags: ['architecture', 'system design', 'infrastructure', 'technical', 'components'],

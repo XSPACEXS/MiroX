@@ -1,0 +1,68 @@
+{
+  "category": "Mind Map Product Collaboration",
+  "description": "Collaborative mind map boards with colorful branching nodes, sticky note grids, app mockups, FAQ sections, integration panels, and real-time collaboration zones",
+  "icon": "🔮",
+  "colorTheme": {
+    "primary": "#6C5CE7",
+    "secondary": "#00CEC9",
+    "accent": "#FD79A8"
+  },
+  "templates": [
+    {
+      "file": "collaborative-brainstorm",
+      "name": "Collaborative Brainstorm",
+      "description": "Multi-user brainstorm map with personal zones, shared synthesis area, voting clusters, and real-time collaboration indicators",
+      "tags": [
+        "collaboration",
+        "brainstorm",
+        "multi-user",
+        "voting",
+        "real-time",
+        "synthesis"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "product-mind-map",
+      "name": "Product Mind Map",
+      "description": "Product-centric mind map with feature branches, user persona nodes, integration panels, mobile/desktop mockup zones, and FAQ sections",
+      "tags": [
+        "product",
+        "mind-map",
+        "features",
+        "personas",
+        "integrations",
+        "mockups"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "research-cluster-map",
+      "name": "Research Cluster Map",
+      "description": "Research synthesis mind map clustering findings into themes with evidence cards, insight nodes, and recommendation branches",
+      "tags": [
+        "research",
+        "clusters",
+        "synthesis",
+        "insights",
+        "themes",
+        "evidence"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "decision-tree",
+      "name": "Decision Tree",
+      "description": "Visual decision tree with branching paths, criteria nodes, outcome scenarios, risk indicators, and recommendation highlights",
+      "tags": [
+        "decisions",
+        "tree",
+        "criteria",
+        "scenarios",
+        "outcomes",
+        "risk"
+      ],
+      "complexity": "Advanced"
+    }
+  ]
+}

@@ -9,6 +9,8 @@ export const riskMatrix: TemplateDefinition = {
   emoji: '\u26A0\uFE0F',
   estimatedTime: '~4 min',
   blueprintId: 'risk-matrix',
+  brainCategory: 'strategy-planning',
+  brainBlueprint: 'competitive-analysis',
   complexity: 'medium',
   color: '#FFD600',
   tags: ['risk', 'matrix', 'assessment', 'mitigation', 'project management'],

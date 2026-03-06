@@ -1,0 +1,47 @@
+{
+  "category": "Product Development",
+  "description": "Visual boards for planning, specifying, prioritizing, and shipping product features — from high-level roadmaps to granular user stories and release coordination.",
+  "icon": "🚀",
+  "colorTheme": {
+    "primary": "#6200EA",
+    "secondary": "#2979FF",
+    "accent": "#F50057"
+  },
+  "templates": [
+    {
+      "file": "feature-planning",
+      "name": "Feature Planning Board",
+      "description": "Comprehensive feature specification with user stories, wireframes, and technical requirements",
+      "tags": ["feature", "spec", "user-stories", "wireframes", "requirements"],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "user-story-mapping",
+      "name": "User Story Mapping",
+      "description": "Organize user activities, tasks, and stories into a prioritized delivery plan",
+      "tags": ["user-stories", "journey", "backlog", "prioritization", "agile"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "product-roadmap",
+      "name": "Product Roadmap",
+      "description": "Communicate product direction across Now/Next/Later or quarterly timelines",
+      "tags": ["roadmap", "timeline", "strategy", "quarters", "planning"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "release-planning",
+      "name": "Release Planning Board",
+      "description": "Coordinate everything needed to ship a release: features, QA, deployment, and communications",
+      "tags": ["release", "launch", "qa", "deployment", "coordination"],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "prioritization-matrix",
+      "name": "Prioritization Matrix",
+      "description": "Evaluate and rank features by impact vs effort using visual matrix and RICE scoring",
+      "tags": ["prioritization", "impact", "effort", "RICE", "decision-making"],
+      "complexity": "Simple"
+    }
+  ]
+}

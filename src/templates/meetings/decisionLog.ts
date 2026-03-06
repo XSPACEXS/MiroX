@@ -9,6 +9,8 @@ export const decisionLog: TemplateDefinition = {
   emoji: '\u{1F4DD}',
   estimatedTime: '~2 min',
   blueprintId: 'decision-log',
+  brainCategory: 'workshops',
+  brainBlueprint: 'retrospective',
   complexity: 'simple',
   color: '#10B981',
   tags: ['decision', 'adr', 'log', 'record', 'architecture', 'governance'],

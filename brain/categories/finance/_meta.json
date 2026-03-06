@@ -1,0 +1,58 @@
+{
+  "category": "Finance",
+  "description": "Financial planning, analysis, and reporting templates for budgeting, dashboards, investment evaluation, and revenue modeling",
+  "icon": "\ud83d\udcb0",
+  "colorTheme": {
+    "primary": "#1B3A5C",
+    "secondary": "#607D8B",
+    "accent": "#F9A825"
+  },
+  "templates": [
+    {
+      "file": "budget-planning",
+      "name": "Budget Planning Board",
+      "description": "Collaborative annual or quarterly budget planning with department breakdowns, variance tracking, cash flow forecasts, and approval workflows",
+      "tags": ["budget", "planning", "finance", "departments", "approval"],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "financial-dashboard",
+      "name": "Financial Dashboard",
+      "description": "Executive-level financial performance dashboard with KPI scorecards, revenue trends, expense breakdowns, P&L summary, and cash flow waterfall",
+      "tags": [
+        "dashboard",
+        "kpi",
+        "revenue",
+        "financial-reporting",
+        "executive"
+      ],
+      "complexity": "Medium"
+    },
+    {
+      "file": "investment-analysis",
+      "name": "Investment Analysis Board",
+      "description": "Structured evaluation and comparison of investment opportunities with financial comparisons, risk-return matrices, strategic fit scoring, and due diligence tracking",
+      "tags": [
+        "investment",
+        "analysis",
+        "due-diligence",
+        "risk-return",
+        "acquisition"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "revenue-model",
+      "name": "Revenue Model Canvas",
+      "description": "Comprehensive revenue model canvas mapping revenue streams, pricing tiers, unit economics, cohort retention, growth projections, and scenario analysis",
+      "tags": [
+        "revenue",
+        "pricing",
+        "unit-economics",
+        "projections",
+        "scenarios"
+      ],
+      "complexity": "Advanced"
+    }
+  ]
+}

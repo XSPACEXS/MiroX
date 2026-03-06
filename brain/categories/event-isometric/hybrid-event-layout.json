@@ -1,0 +1,478 @@
+{
+  "metadata": {
+    "name": "Hybrid Event Layout",
+    "description": "A split-world event board visualizing both physical venue and virtual experience side by side, connected by a bridge layer showing cameras, livestreams, chat bridges, and shared engagement.",
+    "category": "Event Guide Immersive Isometric",
+    "tags": [
+      "hybrid",
+      "event",
+      "physical",
+      "virtual",
+      "bridge",
+      "livestream",
+      "engagement",
+      "conference"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#F0F0F0",
+    "gridEnabled": false
+  },
+  "items": [
+    {
+      "id": "title-banner",
+      "type": "frame",
+      "title": "Hybrid Event Layout",
+      "x": 100,
+      "y": 50,
+      "width": 4800,
+      "height": 350,
+      "style": { "fillColor": "#2D3436" }
+    },
+    {
+      "id": "title-text",
+      "type": "text",
+      "content": "Hybrid Event Layout",
+      "x": 200,
+      "y": 80,
+      "width": 1200,
+      "style": { "fontSize": 56, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "subtitle-text",
+      "type": "text",
+      "content": "Two Worlds. One Experience.",
+      "x": 200,
+      "y": 170,
+      "width": 1000,
+      "style": { "fontSize": 24, "color": "#FDCB6E" }
+    },
+    {
+      "id": "stats-bar",
+      "type": "shape",
+      "content": "800 in-person | 2,400 virtual | 32 sessions | 15 exhibitors | Live in 6 languages",
+      "shape": "rectangle",
+      "x": 2800,
+      "y": 100,
+      "width": 1900,
+      "height": 70,
+      "style": {
+        "fillColor": "#34495E",
+        "fontColor": "#FDCB6E",
+        "borderColor": "#FDCB6E"
+      }
+    },
+    {
+      "id": "physical-label",
+      "type": "text",
+      "content": "PHYSICAL WORLD",
+      "x": 200,
+      "y": 430,
+      "width": 600,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#E17055" }
+    },
+    {
+      "id": "bridge-label",
+      "type": "text",
+      "content": "THE BRIDGE",
+      "x": 2050,
+      "y": 430,
+      "width": 400,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FDCB6E" }
+    },
+    {
+      "id": "virtual-label",
+      "type": "text",
+      "content": "VIRTUAL WORLD",
+      "x": 3400,
+      "y": 430,
+      "width": 600,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#00CEC9" }
+    },
+    {
+      "id": "phys-stage",
+      "type": "frame",
+      "title": "Physical: Main Stage",
+      "x": 100,
+      "y": 500,
+      "width": 1600,
+      "height": 650,
+      "style": { "fillColor": "#FDEBD0" }
+    },
+    {
+      "id": "phys-stage-header",
+      "type": "text",
+      "content": "Main Stage",
+      "x": 150,
+      "y": 520,
+      "width": 400,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#E17055" }
+    },
+    {
+      "id": "phys-stage-setup",
+      "type": "shape",
+      "content": "Stage Setup\n1 main podium | 2 screens | Panel table (5)\nSeating: 600 theater + 200 overflow\nWireless mics (8) | Teleprompter | LED wall",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 580,
+      "width": 700,
+      "height": 220,
+      "style": { "fillColor": "#E17055", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "phys-cameras",
+      "type": "shape",
+      "content": "Camera Positions\nCam 1: Wide stage shot\nCam 2: Speaker close-up\nCam 3: Audience reactions",
+      "shape": "rectangle",
+      "x": 900,
+      "y": 580,
+      "width": 650,
+      "height": 220,
+      "style": { "fillColor": "#D35400", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "phys-stage-sched",
+      "type": "sticky_note",
+      "content": "6 keynotes & panels across 2 days\nCam 2 dedicated to audience reactions for virtual engagement",
+      "x": 150,
+      "y": 830,
+      "width": 500,
+      "height": 180,
+      "style": { "fillColor": "#F39C12" }
+    },
+    {
+      "id": "phys-expo",
+      "type": "frame",
+      "title": "Physical: Expo Hall",
+      "x": 100,
+      "y": 1200,
+      "width": 1600,
+      "height": 500,
+      "style": { "fillColor": "#FDEBD0" }
+    },
+    {
+      "id": "phys-expo-content",
+      "type": "shape",
+      "content": "15 exhibitor booths with QR scanning\n6 hands-on demo stations\nLead scanning syncs with virtual profiles\n360-degree cameras for virtual walkthrough",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1250,
+      "width": 1400,
+      "height": 200,
+      "style": { "fillColor": "#E17055", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "phys-network",
+      "type": "frame",
+      "title": "Physical: Networking",
+      "x": 100,
+      "y": 1750,
+      "width": 1600,
+      "height": 450,
+      "style": { "fillColor": "#FDEBD0" }
+    },
+    {
+      "id": "phys-network-content",
+      "type": "shape",
+      "content": "10 roundtables | 15 cocktail tables | 4 quiet pods\nHybrid mixer tables: Physical + Virtual via tablets\nPhoto booth with social share",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1800,
+      "width": 1400,
+      "height": 180,
+      "style": { "fillColor": "#FF7675", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "phys-network-sticky",
+      "type": "sticky_note",
+      "content": "Hybrid mixer tables are the highlight — 82% of virtual attendees rate them as best feature",
+      "x": 150,
+      "y": 2010,
+      "width": 500,
+      "height": 140,
+      "style": { "fillColor": "#FF7675" }
+    },
+    {
+      "id": "bridge-frame",
+      "type": "frame",
+      "title": "Bridge — AV & Technology",
+      "x": 1800,
+      "y": 500,
+      "width": 900,
+      "height": 1700,
+      "style": { "fillColor": "#FFF9E6" }
+    },
+    {
+      "id": "bridge-header",
+      "type": "text",
+      "content": "The Bridge\nConnecting Two Worlds",
+      "x": 1850,
+      "y": 520,
+      "width": 500,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#F39C12" }
+    },
+    {
+      "id": "bridge-cameras",
+      "type": "shape",
+      "content": "CAMERAS & STREAMS\n3 stage cams --> Main livestream\n2 expo cams --> Virtual walkthrough\n1 lounge cam --> Ambient stream\n1080p | 5sec delay",
+      "shape": "rectangle",
+      "x": 1850,
+      "y": 610,
+      "width": 750,
+      "height": 220,
+      "style": { "fillColor": "#FDCB6E", "fontColor": "#2D3436" }
+    },
+    {
+      "id": "bridge-chat",
+      "type": "shape",
+      "content": "CHAT BRIDGE\nSlido polls: Both audiences vote\nVirtual Q&A on physical screens\nShared emoji reactions (LED wall)\nSimultaneous swag drops",
+      "shape": "rectangle",
+      "x": 1850,
+      "y": 870,
+      "width": 750,
+      "height": 220,
+      "style": { "fillColor": "#F6B93B", "fontColor": "#2D3436" }
+    },
+    {
+      "id": "bridge-tech",
+      "type": "shape",
+      "content": "TECH STACK\nOBS | Zoom Events | Slido\nMiro | Custom integration layer\n6-language interpretation",
+      "shape": "rectangle",
+      "x": 1850,
+      "y": 1130,
+      "width": 750,
+      "height": 180,
+      "style": { "fillColor": "#E2B400", "fontColor": "#2D3436" }
+    },
+    {
+      "id": "bridge-qr",
+      "type": "shape",
+      "content": "QR CODE SYNC\nPhysical badge --> Virtual profile\nBooth scans --> Digital follow-up\nSession check-in --> Attendance",
+      "shape": "rectangle",
+      "x": 1850,
+      "y": 1350,
+      "width": 750,
+      "height": 180,
+      "style": { "fillColor": "#FDCB6E", "fontColor": "#2D3436" }
+    },
+    {
+      "id": "bridge-hybrid",
+      "type": "shape",
+      "content": "HYBRID MIXER\nTablet screens at physical tables\nVideo call with virtual attendees\nAI-powered conversation prompts",
+      "shape": "rectangle",
+      "x": 1850,
+      "y": 1570,
+      "width": 750,
+      "height": 180,
+      "style": { "fillColor": "#F6B93B", "fontColor": "#2D3436" }
+    },
+    {
+      "id": "virt-stage",
+      "type": "frame",
+      "title": "Virtual: Livestream Stage",
+      "x": 2800,
+      "y": 500,
+      "width": 1600,
+      "height": 650,
+      "style": { "fillColor": "#E0F7FA" }
+    },
+    {
+      "id": "virt-stage-content",
+      "type": "shape",
+      "content": "Multi-camera switcher view\nSpeaker + slides layout\nReal-time chat | Q&A queue\nEmoji reactions | Hand raise\nLanguages: EN, ES, FR, DE, PT, JP",
+      "shape": "rectangle",
+      "x": 2850,
+      "y": 570,
+      "width": 700,
+      "height": 260,
+      "style": { "fillColor": "#00CEC9", "fontColor": "#2D3436" }
+    },
+    {
+      "id": "virt-replay",
+      "type": "shape",
+      "content": "On-demand replay: 30min after session\nVirtual-only: Interviews, BTS tours\nUnlimited capacity",
+      "shape": "rectangle",
+      "x": 3600,
+      "y": 570,
+      "width": 650,
+      "height": 260,
+      "style": { "fillColor": "#00B5B5", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "virt-expo",
+      "type": "frame",
+      "title": "Virtual: Digital Expo",
+      "x": 2800,
+      "y": 1200,
+      "width": 1600,
+      "height": 500,
+      "style": { "fillColor": "#E0F7FA" }
+    },
+    {
+      "id": "virt-expo-content",
+      "type": "shape",
+      "content": "15 virtual booths: Video, PDFs, live chat\n360-degree tours from physical cameras\nBadge collection gamification\n1:1 demo booking | Resource downloads",
+      "shape": "rectangle",
+      "x": 2850,
+      "y": 1250,
+      "width": 1400,
+      "height": 200,
+      "style": { "fillColor": "#00CEC9", "fontColor": "#2D3436" }
+    },
+    {
+      "id": "virt-network",
+      "type": "frame",
+      "title": "Virtual: Online Networking",
+      "x": 2800,
+      "y": 1750,
+      "width": 1600,
+      "height": 450,
+      "style": { "fillColor": "#E0F7FA" }
+    },
+    {
+      "id": "virt-network-content",
+      "type": "shape",
+      "content": "AI-powered matching: 5-min video calls\nVirtual tables: 8-person themed rooms\nHybrid mixer: Video with physical attendees\nDirect messaging & contact exchange",
+      "shape": "rectangle",
+      "x": 2850,
+      "y": 1800,
+      "width": 1400,
+      "height": 180,
+      "style": { "fillColor": "#00B894", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "virt-network-sticky",
+      "type": "sticky_note",
+      "content": "Avg 12 connections per virtual attendee vs 8 for physical — virtual networks more!",
+      "x": 2850,
+      "y": 2010,
+      "width": 500,
+      "height": 140,
+      "style": { "fillColor": "#00CEC9" }
+    },
+    {
+      "id": "metrics-frame",
+      "type": "frame",
+      "title": "Engagement Metrics",
+      "x": 100,
+      "y": 2300,
+      "width": 4800,
+      "height": 450,
+      "style": { "fillColor": "#EAECEE" }
+    },
+    {
+      "id": "metrics-header",
+      "type": "text",
+      "content": "Engagement Metrics — Physical vs Virtual",
+      "x": 150,
+      "y": 2320,
+      "width": 1000,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#2D3436" }
+    },
+    {
+      "id": "metrics-physical",
+      "type": "shape",
+      "content": "PHYSICAL (800 attendees)\n94% session attendance\n6.2 avg booth visits\n8 avg connections\n4.3/5 satisfaction\nCost per attendee: $420",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 2400,
+      "width": 1000,
+      "height": 250,
+      "style": { "fillColor": "#E17055", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "metrics-combined",
+      "type": "shape",
+      "content": "COMBINED\n4.2/5 overall\n3,200 total attendees\nTop insight: Virtual networks more,\nPhysical engages deeper",
+      "shape": "circle",
+      "x": 1400,
+      "y": 2420,
+      "width": 280,
+      "height": 280,
+      "style": { "fillColor": "#FDCB6E", "fontColor": "#2D3436" }
+    },
+    {
+      "id": "metrics-virtual",
+      "type": "shape",
+      "content": "VIRTUAL (2,400 attendees)\n72% live session attendance\n4.8 avg booth visits\n12 avg connections\n4.1/5 satisfaction\nCost per attendee: $45",
+      "shape": "rectangle",
+      "x": 1900,
+      "y": 2400,
+      "width": 1000,
+      "height": 250,
+      "style": { "fillColor": "#00CEC9", "fontColor": "#2D3436" }
+    },
+    {
+      "type": "connector",
+      "startItem": "phys-stage",
+      "endItem": "bridge-cameras",
+      "style": {
+        "strokeColor": "#FDCB6E",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "bridge-cameras",
+      "endItem": "virt-stage",
+      "style": {
+        "strokeColor": "#FDCB6E",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "phys-expo",
+      "endItem": "bridge-qr",
+      "style": {
+        "strokeColor": "#FDCB6E",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "bridge-qr",
+      "endItem": "virt-expo",
+      "style": {
+        "strokeColor": "#FDCB6E",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "phys-network",
+      "endItem": "bridge-hybrid",
+      "style": {
+        "strokeColor": "#FDCB6E",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "bridge-hybrid",
+      "endItem": "virt-network",
+      "style": {
+        "strokeColor": "#FDCB6E",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "bridge-frame",
+      "endItem": "metrics-frame",
+      "style": {
+        "strokeColor": "#2D3436",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    }
+  ]
+}

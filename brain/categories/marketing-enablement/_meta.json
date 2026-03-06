@@ -1,0 +1,65 @@
+{
+  "category": "Marketing Enablement Board",
+  "description": "Massive marketing workspace boards for landing page designs, template tracking, traction metrics funnels, feature bundles, user research synthesis, and design iterations",
+  "icon": "🚀",
+  "colorTheme": {
+    "primary": "#2D3436",
+    "secondary": "#E17055",
+    "accent": "#00B894"
+  },
+  "templates": [
+    {
+      "file": "enablement-war-room",
+      "name": "Enablement War Room",
+      "description": "Central command center for marketing operations with campaign trackers, asset libraries, approval workflows, and performance dashboards",
+      "tags": [
+        "marketing",
+        "war-room",
+        "operations",
+        "campaigns",
+        "enablement"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "landing-page-tracker",
+      "name": "Landing Page Tracker",
+      "description": "Visual tracker for landing page designs showing wireframes, copy variations, A/B test results, and conversion optimization pipeline",
+      "tags": [
+        "landing-page",
+        "conversion",
+        "AB-testing",
+        "design",
+        "optimization"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "traction-funnel",
+      "name": "Traction Funnel",
+      "description": "Full-funnel marketing metrics board with acquisition channels, activation flows, retention loops, and revenue attribution",
+      "tags": [
+        "funnel",
+        "metrics",
+        "traction",
+        "acquisition",
+        "retention",
+        "growth"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "feature-bundle-board",
+      "name": "Feature Bundle Board",
+      "description": "Product marketing board organizing features into bundles with messaging frameworks, competitive positioning, and sales enablement materials",
+      "tags": [
+        "features",
+        "bundles",
+        "messaging",
+        "positioning",
+        "product-marketing"
+      ],
+      "complexity": "Advanced"
+    }
+  ]
+}

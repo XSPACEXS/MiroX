@@ -1,0 +1,84 @@
+{
+  "category": "Project Management",
+  "description": "Boards for planning, tracking, and managing projects including kanban workflows, sprint cycles, roadmaps, and timeline views",
+  "icon": "📋",
+  "colorTheme": {
+    "primary": "#0D47A1",
+    "secondary": "#1B5E20",
+    "accent": "#FF6F00"
+  },
+  "knowledge": [
+    {
+      "file": "design-philosophy",
+      "name": "Design Philosophy",
+      "description": "Why PM boards exist, Kanban theory of constraints, Zeigarnik effect, color-status mapping, and historical context from Toyota to digital era"
+    },
+    {
+      "file": "layout-patterns",
+      "name": "Layout Patterns",
+      "description": "Five patterns (Kanban Columns, Sprint Board, Timeline/Gantt, Roadmap, Dashboard) with ASCII diagrams, card design specs, and status color systems"
+    },
+    {
+      "file": "visual-guide",
+      "name": "Visual Guide",
+      "description": "Four color palettes, PM typography scale, card design states, progress bars, burndown indicators, icon system, and accessibility guidelines"
+    },
+    {
+      "file": "content-guide",
+      "name": "Content Guide",
+      "description": "Content by board type (Kanban, Sprint, Timeline, Roadmap, Dashboard), task writing rules, description templates, and metrics tables"
+    },
+    {
+      "file": "build-process",
+      "name": "Build Process",
+      "description": "Six-phase workflow with PM-specific Miro API code, grid calculations, card creation, timeline bars, and dependency connectors"
+    },
+    {
+      "file": "examples-reference",
+      "name": "Examples Reference",
+      "description": "Five detailed examples (Sprint, Roadmap, Kanban, Gantt, Dashboard), anti-patterns, transformations, and design elements to steal"
+    },
+    {
+      "file": "variations",
+      "name": "Variations",
+      "description": "Industry adaptations (SaaS, Healthcare, Construction, Agency), team sizes, complexity levels, cultural considerations, and cross-board integrations"
+    }
+  ],
+  "templates": [
+    {
+      "file": "project-overview",
+      "name": "Project Overview",
+      "description": "High-level project dashboard showing goals, milestones, team, risks, and status at a glance",
+      "tags": ["project", "overview", "dashboard", "status", "milestones"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "kanban-board",
+      "name": "Kanban Board",
+      "description": "Column-based workflow board with swim lanes for managing tasks through stages from backlog to done",
+      "tags": ["kanban", "workflow", "tasks", "agile", "cards"],
+      "complexity": "Simple"
+    },
+    {
+      "file": "sprint-planning",
+      "name": "Sprint Planning",
+      "description": "Agile sprint board with backlog grooming, capacity planning, sprint goals, and story point estimation",
+      "tags": ["sprint", "agile", "scrum", "planning", "estimation"],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "roadmap",
+      "name": "Roadmap",
+      "description": "Quarterly product or project roadmap with swimlanes for teams, themes, and dependency tracking",
+      "tags": ["roadmap", "planning", "quarters", "strategy", "timeline"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "gantt-timeline",
+      "name": "Gantt Timeline",
+      "description": "Timeline-based project schedule with task dependencies, milestones, and resource allocation",
+      "tags": ["gantt", "timeline", "schedule", "dependencies", "milestones"],
+      "complexity": "Advanced"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "category": "Miro World Product Showcase",
+  "description": "Isometric visual campus layouts where each building or zone represents a product area, department, or feature set — inspired by Miro's What's New showcase boards",
+  "icon": "🏙️",
+  "colorTheme": {
+    "primary": "#1A1A2E",
+    "secondary": "#FFD166",
+    "accent": "#06D6A0"
+  },
+  "templates": [
+    {
+      "file": "product-world-map",
+      "name": "Product World Map",
+      "description": "Isometric city-style visual map where each building zone represents a product area with features, roadmap items, and team ownership",
+      "tags": [
+        "isometric",
+        "product",
+        "showcase",
+        "world-map",
+        "visual",
+        "campus"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "whats-new-showcase",
+      "name": "What's New Showcase",
+      "description": "Release announcement board styled as an interactive landscape with feature zones, changelog highlights, and adoption metrics",
+      "tags": ["release", "changelog", "features", "announcement", "showcase"],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "feature-landscape",
+      "name": "Feature Landscape",
+      "description": "Terrain-style board mapping the entire feature set as a landscape with mountains, valleys, rivers connecting capability areas",
+      "tags": ["features", "landscape", "capability", "overview", "terrain"],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "department-campus",
+      "name": "Department Campus",
+      "description": "University campus metaphor where each department is a building with rooms for teams, projects, and cross-functional pathways",
+      "tags": [
+        "departments",
+        "campus",
+        "organization",
+        "teams",
+        "cross-functional"
+      ],
+      "complexity": "Advanced"
+    }
+  ]
+}

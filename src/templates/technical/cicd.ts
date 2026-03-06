@@ -9,6 +9,8 @@ export const cicd: TemplateDefinition = {
   emoji: '\u{1F504}',
   estimatedTime: '~4 min',
   blueprintId: 'deployment-pipeline',
+  brainCategory: 'technical-architecture',
+  brainBlueprint: 'infrastructure-overview',
   complexity: 'medium',
   color: '#3B82F6',
   tags: ['cicd', 'devops', 'pipeline', 'deployment', 'automation', 'infrastructure'],

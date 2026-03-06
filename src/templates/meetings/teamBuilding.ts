@@ -9,6 +9,8 @@ export const teamBuilding: TemplateDefinition = {
   emoji: '\u{1F91D}',
   estimatedTime: '~3 min',
   blueprintId: 'team-building',
+  brainCategory: 'team-hr',
+  brainBlueprint: 'team-building',
   complexity: 'simple',
   color: '#10B981',
   tags: ['team', 'building', 'culture', 'icebreaker', 'values', 'agreements'],

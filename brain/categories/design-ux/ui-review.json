@@ -1,0 +1,647 @@
+{
+  "metadata": {
+    "name": "UI Review Board",
+    "description": "Structured design review board for Sprint Planning feature Round 2, presenting 4 screen mockups with reviewer comments, approval status tags, designer responses, and a revision tracker across iterations",
+    "category": "Design & UX",
+    "tags": [
+      "UI-review",
+      "design-critique",
+      "feedback",
+      "approval",
+      "mockups",
+      "iteration"
+    ],
+    "complexity": "Medium",
+    "boardSize": { "width": 5000, "height": 3200 }
+  },
+  "settings": {
+    "backgroundColor": "#FAFAFA",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_header",
+      "type": "frame",
+      "title": "Review Header",
+      "x": 50,
+      "y": 50,
+      "width": 4900,
+      "height": 300,
+      "style": { "fillColor": "#E91E63" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "UI Review: Sprint Planning Feature",
+      "x": 100,
+      "y": 70,
+      "width": 2500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_reviewers",
+      "type": "text",
+      "content": "Review Round: 2 of 3 | Designer: Priya Tandon | Reviewers: Jake R. (PM), Marcus W. (Eng), David K. (VP Product)",
+      "x": 100,
+      "y": 130,
+      "width": 4000,
+      "style": { "fontSize": 14, "color": "#FCE4EC" }
+    },
+    {
+      "id": "text_dates",
+      "type": "text",
+      "content": "Date Submitted: March 4, 2026 | Feedback Due: March 6, 2026 | Status: In Review",
+      "x": 100,
+      "y": 160,
+      "width": 4000,
+      "style": { "fontSize": 14, "color": "#FCE4EC" }
+    },
+    {
+      "id": "shape_review_goal",
+      "type": "shape",
+      "content": "Review Goal: Validate layout, interaction patterns, and AI suggestion UI. Not reviewing visual polish or copy.",
+      "shape": "round_rectangle",
+      "x": 100,
+      "y": 200,
+      "width": 800,
+      "height": 50,
+      "style": {
+        "fillColor": "#AD1457",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#AD1457",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_status_summary",
+      "type": "shape",
+      "content": "Approved: 1/4 screens | Changes Requested: 2/4 | Pending: 1/4",
+      "shape": "round_rectangle",
+      "x": 950,
+      "y": 200,
+      "width": 600,
+      "height": 50,
+      "style": {
+        "fillColor": "#AD1457",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#880E4F",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "frame_screen1",
+      "type": "frame",
+      "title": "Screen 1: Sprint Creation",
+      "x": 50,
+      "y": 400,
+      "width": 2300,
+      "height": 1200,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_screen1_title",
+      "type": "text",
+      "content": "Screen 1: Sprint Creation (Desktop)",
+      "x": 80,
+      "y": 420,
+      "width": 1000,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "shape_screen1_tag",
+      "type": "shape",
+      "content": "APPROVED",
+      "shape": "round_rectangle",
+      "x": 2100,
+      "y": 420,
+      "width": 120,
+      "height": 30,
+      "style": {
+        "fillColor": "#00BFA5",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#00BFA5",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_screen1_mockup",
+      "type": "shape",
+      "content": "[High-fidelity mockup: Sprint Creation]\n\nLeft sidebar with project nav\nMain content area:\n  - Sprint Name [text input]\n  - Start Date / End Date [date pickers]\n  - Sprint Goal [textarea]\n  - Backlog task list with drag handles\n  - [Create Sprint] primary button",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 470,
+      "width": 1400,
+      "height": 400,
+      "style": {
+        "fillColor": "#F5F5F5",
+        "fontColor": "#607D8B",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_screen1_comments",
+      "type": "text",
+      "content": "Comments",
+      "x": 80,
+      "y": 890,
+      "width": 200,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#E91E63" }
+    },
+    {
+      "id": "sticky_s1_jake",
+      "type": "sticky_note",
+      "content": "Jake R. (PM): Layout is clean and intuitive. Sprint goal field is a great addition — teams will use this to stay focused. APPROVED.",
+      "x": 80,
+      "y": 930,
+      "width": 700,
+      "height": 80,
+      "style": { "fillColor": "#E8F5E9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_s1_marcus",
+      "type": "sticky_note",
+      "content": "Marcus W. (Eng): Date picker component matches our design system. Drag-and-drop from backlog is feasible with React DnD library. No concerns.",
+      "x": 800,
+      "y": 930,
+      "width": 700,
+      "height": 80,
+      "style": { "fillColor": "#E8F5E9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_s1_david",
+      "type": "sticky_note",
+      "content": "David K. (VP): Looks good. Consider adding a character count on the sprint goal field (suggest 200 char max). Minor suggestion, not blocking.",
+      "x": 1520,
+      "y": 930,
+      "width": 700,
+      "height": 80,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_s1_response_label",
+      "type": "text",
+      "content": "Design Response",
+      "x": 80,
+      "y": 1030,
+      "width": 300,
+      "style": { "fontSize": 14, "fontWeight": "bold", "color": "#607D8B" }
+    },
+    {
+      "id": "text_s1_response",
+      "type": "text",
+      "content": "Added 200-character limit with counter to sprint goal field. See Round 3 for updated mockup.",
+      "x": 80,
+      "y": 1060,
+      "width": 2000,
+      "style": { "fontSize": 14, "color": "#607D8B" }
+    },
+    {
+      "id": "frame_screen2",
+      "type": "frame",
+      "title": "Screen 2: Sprint Board + AI",
+      "x": 2400,
+      "y": 400,
+      "width": 2300,
+      "height": 1200,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_screen2_title",
+      "type": "text",
+      "content": "Screen 2: Sprint Board with AI Suggestions (Desktop)",
+      "x": 2430,
+      "y": 420,
+      "width": 1500,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "shape_screen2_tag",
+      "type": "shape",
+      "content": "CHANGES REQUESTED",
+      "shape": "round_rectangle",
+      "x": 4400,
+      "y": 420,
+      "width": 200,
+      "height": 30,
+      "style": {
+        "fillColor": "#FFC400",
+        "fontColor": "#1B1B1B",
+        "borderColor": "#FFC400",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_screen2_mockup",
+      "type": "shape",
+      "content": "[High-fidelity mockup: Sprint Board]\n\nKanban columns: TO DO | IN PROGRESS | DONE\nTask cards with titles and priority badges\nAI Suggestion overlay on unassigned task:\n  'Suggested: Aisha K. (92% match)'\n  [Approve] [Dismiss]",
+      "shape": "rectangle",
+      "x": 2430,
+      "y": 470,
+      "width": 1400,
+      "height": 400,
+      "style": {
+        "fillColor": "#F5F5F5",
+        "fontColor": "#607D8B",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_screen2_comments",
+      "type": "text",
+      "content": "Comments",
+      "x": 2430,
+      "y": 890,
+      "width": 200,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#E91E63" }
+    },
+    {
+      "id": "sticky_s2_jake",
+      "type": "sticky_note",
+      "content": "Jake R. (PM): AI suggestion overlay is too small — skill match % and workload info are hard to read. Make overlay 20% larger. Also, 'Dismiss' is ambiguous — rename to 'Show Next.'",
+      "x": 2430,
+      "y": 930,
+      "width": 700,
+      "height": 90,
+      "style": { "fillColor": "#FFEBEE", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_s2_marcus",
+      "type": "sticky_note",
+      "content": "Marcus W. (Eng): Overlay positioning concern — if task card is near right edge, overlay is cut off. Can it flip direction? What happens on touch devices with no hover?",
+      "x": 3150,
+      "y": 930,
+      "width": 700,
+      "height": 90,
+      "style": { "fillColor": "#FFF8E1", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_s2_david",
+      "type": "sticky_note",
+      "content": "David K. (VP): Love the concept. Can we show what drives the 92% score (e.g., 'Skills: React, TypeScript | Capacity: 65%') so managers trust it?",
+      "x": 3870,
+      "y": 930,
+      "width": 700,
+      "height": 90,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_s2_response_label",
+      "type": "text",
+      "content": "Design Response",
+      "x": 2430,
+      "y": 1040,
+      "width": 300,
+      "style": { "fontSize": 14, "fontWeight": "bold", "color": "#607D8B" }
+    },
+    {
+      "id": "text_s2_response",
+      "type": "text",
+      "content": "1. Increased overlay size from 250px to 300px wide. 2. Renamed 'Dismiss' to 'Next Suggestion'. 3. Added edge-detection logic to flip overlay direction. 4. On mobile, overlay replaced by embedded card. 5. Added score breakdown tooltip. See Round 3.",
+      "x": 2430,
+      "y": 1070,
+      "width": 2200,
+      "style": { "fontSize": 14, "color": "#607D8B" }
+    },
+    {
+      "id": "frame_screen3",
+      "type": "frame",
+      "title": "Screen 3: Workload Dashboard",
+      "x": 50,
+      "y": 1650,
+      "width": 2300,
+      "height": 1200,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_screen3_title",
+      "type": "text",
+      "content": "Screen 3: Workload Dashboard (Desktop)",
+      "x": 80,
+      "y": 1670,
+      "width": 1200,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "shape_screen3_tag",
+      "type": "shape",
+      "content": "CHANGES REQUESTED",
+      "shape": "round_rectangle",
+      "x": 2100,
+      "y": 1670,
+      "width": 200,
+      "height": 30,
+      "style": {
+        "fillColor": "#FFC400",
+        "fontColor": "#1B1B1B",
+        "borderColor": "#FFC400",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_screen3_mockup",
+      "type": "shape",
+      "content": "[High-fidelity mockup: Workload Dashboard]\n\nTeam member rows:\n  Aisha K. | [=========] 85% | 6 tasks | 28h\n  Leo C.   | [=======] 65% | 4 tasks | 22h\n  Marcus W.| [============] 100% | 8 tasks (RED)\n  Noor A.  | [====] 45% | 3 tasks | 16h\nBurndown chart + Velocity chart",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 1720,
+      "width": 1400,
+      "height": 400,
+      "style": {
+        "fillColor": "#F5F5F5",
+        "fontColor": "#607D8B",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_screen3_comments",
+      "type": "text",
+      "content": "Comments",
+      "x": 80,
+      "y": 2140,
+      "width": 200,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#E91E63" }
+    },
+    {
+      "id": "sticky_s3_jake",
+      "type": "sticky_note",
+      "content": "Jake R. (PM): Capacity bar needs clearer thresholds. Add distinct visual breaks: green 0-79%, yellow 80-94%, red 95-100%. Also, add a team-level summary at top.",
+      "x": 80,
+      "y": 2180,
+      "width": 700,
+      "height": 90,
+      "style": { "fillColor": "#FFEBEE", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_s3_marcus",
+      "type": "sticky_note",
+      "content": "Marcus W. (Eng): Burndown chart: can we show the ideal burndown line as a dotted overlay on the actual burndown? Standard practice and easy to implement.",
+      "x": 800,
+      "y": 2180,
+      "width": 700,
+      "height": 90,
+      "style": { "fillColor": "#FFF8E1", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_s3_david",
+      "type": "sticky_note",
+      "content": "David K. (VP): This is exactly what I have been asking for. Can I click on a team member to drill into their task list? If so, approved from my side with that addition.",
+      "x": 1520,
+      "y": 2180,
+      "width": 700,
+      "height": 90,
+      "style": { "fillColor": "#E8F5E9", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_s3_response_label",
+      "type": "text",
+      "content": "Design Response",
+      "x": 80,
+      "y": 2290,
+      "width": 300,
+      "style": { "fontSize": 14, "fontWeight": "bold", "color": "#607D8B" }
+    },
+    {
+      "id": "text_s3_response",
+      "type": "text",
+      "content": "1. Added distinct color thresholds to capacity bars with numerical labels. 2. Added team summary banner at top. 3. Added ideal burndown dotted line. 4. Clicking a team member row expands inline to show their task list. See Round 3.",
+      "x": 80,
+      "y": 2320,
+      "width": 2000,
+      "style": { "fontSize": 14, "color": "#607D8B" }
+    },
+    {
+      "id": "frame_screen4",
+      "type": "frame",
+      "title": "Screen 4: Mobile Task Detail",
+      "x": 2400,
+      "y": 1650,
+      "width": 2300,
+      "height": 1200,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_screen4_title",
+      "type": "text",
+      "content": "Screen 4: Mobile Task Detail with AI Suggestion",
+      "x": 2430,
+      "y": 1670,
+      "width": 1500,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "shape_screen4_tag",
+      "type": "shape",
+      "content": "PENDING",
+      "shape": "round_rectangle",
+      "x": 4500,
+      "y": 1670,
+      "width": 120,
+      "height": 30,
+      "style": {
+        "fillColor": "#607D8B",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#607D8B",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_screen4_mockup",
+      "type": "shape",
+      "content": "[High-fidelity mobile mockup]\n\nHeader: < Back | Task Detail\nFix login timeout bug\nPriority: High | Due: Apr 10\n\nAI Suggestion Card:\n  Aisha K. — 92% match\n  6 tasks in progress\n  [Approve] [Next Suggestion]",
+      "shape": "round_rectangle",
+      "x": 2430,
+      "y": 1720,
+      "width": 375,
+      "height": 500,
+      "style": {
+        "fillColor": "#F5F5F5",
+        "fontColor": "#607D8B",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_screen4_comments",
+      "type": "text",
+      "content": "Comments",
+      "x": 2850,
+      "y": 1720,
+      "width": 200,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#E91E63" }
+    },
+    {
+      "id": "sticky_s4_jake",
+      "type": "sticky_note",
+      "content": "Jake R. (PM): Looks good overall. Need to review after the desktop AI overlay changes are applied — the mobile version should stay consistent. Holding feedback until Round 3.",
+      "x": 2850,
+      "y": 1770,
+      "width": 700,
+      "height": 90,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_s4_marcus",
+      "type": "sticky_note",
+      "content": "Marcus W. (Eng): No comments yet. Will review with mobile team.",
+      "x": 2850,
+      "y": 1880,
+      "width": 700,
+      "height": 60,
+      "style": { "fillColor": "#ECEFF1", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_s4_david",
+      "type": "sticky_note",
+      "content": "David K. (VP): Will review after desktop screens are finalized.",
+      "x": 2850,
+      "y": 1960,
+      "width": 700,
+      "height": 60,
+      "style": { "fillColor": "#ECEFF1", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_s4_response_label",
+      "type": "text",
+      "content": "Design Response",
+      "x": 2850,
+      "y": 2040,
+      "width": 300,
+      "style": { "fontSize": 14, "fontWeight": "bold", "color": "#607D8B" }
+    },
+    {
+      "id": "text_s4_response",
+      "type": "text",
+      "content": "Awaiting feedback. Will update in Round 3 after desktop changes are incorporated.",
+      "x": 2850,
+      "y": 2070,
+      "width": 1500,
+      "style": { "fontSize": 14, "color": "#607D8B" }
+    },
+    {
+      "id": "frame_tracker",
+      "type": "frame",
+      "title": "Revision Tracker & Approval Status",
+      "x": 50,
+      "y": 2900,
+      "width": 4900,
+      "height": 600,
+      "style": { "fillColor": "#FAFAFA" }
+    },
+    {
+      "id": "text_tracker_header",
+      "type": "text",
+      "content": "Revision Tracker",
+      "x": 80,
+      "y": 2920,
+      "width": 500,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1B1B1B" }
+    },
+    {
+      "id": "shape_revision_table",
+      "type": "shape",
+      "content": "Screen | Round 1 Status | Round 1 Changes | Round 2 Status | Round 2 Changes | Round 3 Status\n──────────────────────────────────────────────────────────────────────────────────────────\nSprint Creation | Changes Requested | Added sprint goal field, fixed date picker | Approved | Add char count (minor) | Pending\nSprint Board + AI | Major Revision | Redesigned AI overlay to inline card | Changes Requested | Enlarge overlay, rename Dismiss, edge detection | Pending\nWorkload Dashboard | Changes Requested | Added capacity colors, fixed chart sizing | Changes Requested | Add thresholds, team summary, ideal burndown | Pending\nMobile Task Detail | Not Reviewed | N/A (not designed in Round 1) | Pending | Awaiting desktop finalization | Pending",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 2970,
+      "width": 4700,
+      "height": 220,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E91E63",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "text_approval_header",
+      "type": "text",
+      "content": "Approval Status Summary",
+      "x": 80,
+      "y": 3210,
+      "width": 500,
+      "style": { "fontSize": 20, "fontWeight": "bold", "color": "#E91E63" }
+    },
+    {
+      "id": "shape_approval_table",
+      "type": "shape",
+      "content": "Reviewer | Screens Approved | Outstanding Items | Final Approval\n───────────────────────────────────────────────────────────\nJake R. (PM) | 1/4 | AI overlay size, dashboard thresholds | Pending Round 3\nMarcus W. (Eng) | 1/4 | Overlay edge detection, mobile review | Pending Round 3\nDavid K. (VP) | 1/4 | Dashboard drill-down confirmation | Pending Round 3",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 3250,
+      "width": 2200,
+      "height": 150,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#0288D1",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_target",
+      "type": "text",
+      "content": "Target: All 4 screens approved by March 10, 2026. Design handoff to engineering: March 11, 2026.",
+      "x": 2400,
+      "y": 3260,
+      "width": 2000,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#607D8B" }
+    },
+    {
+      "id": "sticky_next_steps",
+      "type": "sticky_note",
+      "content": "NEXT STEPS: Priya to incorporate all Round 2 feedback and post Round 3 by March 7. Reviewers to provide final approval/feedback by March 9.",
+      "x": 2400,
+      "y": 3310,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#FCE4EC", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "conn_s1_tracker",
+      "type": "connector",
+      "startItem": "frame_screen1",
+      "endItem": "frame_tracker",
+      "style": {
+        "strokeColor": "#BDBDBD",
+        "strokeWidth": 1,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "id": "conn_s2_tracker",
+      "type": "connector",
+      "startItem": "frame_screen2",
+      "endItem": "frame_tracker",
+      "style": {
+        "strokeColor": "#BDBDBD",
+        "strokeWidth": 1,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "id": "conn_s3_tracker",
+      "type": "connector",
+      "startItem": "frame_screen3",
+      "endItem": "frame_tracker",
+      "style": {
+        "strokeColor": "#BDBDBD",
+        "strokeWidth": 1,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "id": "conn_s4_tracker",
+      "type": "connector",
+      "startItem": "frame_screen4",
+      "endItem": "frame_tracker",
+      "style": {
+        "strokeColor": "#BDBDBD",
+        "strokeWidth": 1,
+        "strokeStyle": "dashed"
+      }
+    }
+  ]
+}

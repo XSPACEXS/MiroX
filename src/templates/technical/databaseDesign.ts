@@ -9,6 +9,8 @@ export const databaseDesign: TemplateDefinition = {
   emoji: '\u{1F5C4}\uFE0F',
   estimatedTime: '~5 min',
   blueprintId: 'database-design',
+  brainCategory: 'technical-architecture',
+  brainBlueprint: 'database-schema',
   complexity: 'complex',
   color: '#3B82F6',
   tags: ['database', 'schema', 'er diagram', 'sql', 'data model', 'migration'],

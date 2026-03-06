@@ -1,0 +1,660 @@
+{
+  "metadata": {
+    "name": "Enablement War Room",
+    "description": "A central marketing command center with campaign trackers, asset libraries, approval workflows, performance dashboards, team assignments, budget tracking, and competitive intelligence — all in one mission-control-style board.",
+    "category": "Marketing Enablement Board",
+    "tags": [
+      "marketing",
+      "war-room",
+      "campaigns",
+      "operations",
+      "dashboard",
+      "budget",
+      "performance",
+      "competitive"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#2D3436",
+    "gridEnabled": false
+  },
+  "items": [
+    {
+      "id": "title-banner",
+      "type": "frame",
+      "title": "Marketing Enablement War Room",
+      "x": 100,
+      "y": 50,
+      "width": 4800,
+      "height": 400,
+      "style": { "fillColor": "#2D3436" }
+    },
+    {
+      "id": "title-text",
+      "type": "text",
+      "content": "Marketing Enablement War Room",
+      "x": 200,
+      "y": 80,
+      "width": 1800,
+      "style": { "fontSize": 56, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "subtitle-text",
+      "type": "text",
+      "content": "Mission Control for Campaigns, Content, and Growth",
+      "x": 200,
+      "y": 190,
+      "width": 1500,
+      "style": { "fontSize": 24, "color": "#E17055" }
+    },
+    {
+      "id": "stats-bar",
+      "type": "shape",
+      "content": "Q1 2026 | 12 active campaigns | $2.4M budget deployed | 34 team members",
+      "shape": "rectangle",
+      "x": 3000,
+      "y": 100,
+      "width": 1700,
+      "height": 60,
+      "style": { "fillColor": "#00B894", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "campaigns-frame",
+      "type": "frame",
+      "title": "Active Campaigns Tracker",
+      "x": 100,
+      "y": 500,
+      "width": 1500,
+      "height": 1000,
+      "style": { "fillColor": "#1A2A3A" }
+    },
+    {
+      "id": "campaigns-header",
+      "type": "text",
+      "content": "Active Campaigns",
+      "x": 150,
+      "y": 520,
+      "width": 500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#0984E3" }
+    },
+    {
+      "id": "campaign-1",
+      "type": "shape",
+      "content": "Build Together Brand Refresh\nStatus: LIVE | Budget: $500K\nChannels: Paid, organic, email, events\nOwner: Sofia N. | Launched Feb 15",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 600,
+      "width": 650,
+      "height": 170,
+      "style": { "fillColor": "#0984E3", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "campaign-2",
+      "type": "shape",
+      "content": "Enterprise ABM Wave 3\nStatus: LIVE | Budget: $180K\nTarget: 50 accounts | Pipeline: $2.1M\nOwner: Marcus R.",
+      "shape": "rectangle",
+      "x": 850,
+      "y": 600,
+      "width": 650,
+      "height": 170,
+      "style": { "fillColor": "#0984E3", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "campaign-3",
+      "type": "shape",
+      "content": "AI Assist Launch Campaign\nStatus: IN PREP | Budget: $320K\nLaunch: March 15 | PR, webinar, email\nOwner: Lin W.",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 820,
+      "width": 650,
+      "height": 170,
+      "style": { "fillColor": "#FDCB6E", "fontColor": "#2D3436" }
+    },
+    {
+      "id": "campaign-4",
+      "type": "shape",
+      "content": "Developer Community Growth\nStatus: LIVE | Budget: $95K\nYouTube, docs, hackathons\n45K views, 1.2K new devs",
+      "shape": "rectangle",
+      "x": 850,
+      "y": 820,
+      "width": 650,
+      "height": 170,
+      "style": { "fillColor": "#0984E3", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "campaign-5",
+      "type": "shape",
+      "content": "Q1 Webinar Series\nStatus: COMPLETE | 6 webinars\n2,400 registrants | 1,100 attended | 89 MQLs",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1040,
+      "width": 650,
+      "height": 140,
+      "style": { "fillColor": "#00B894", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "assets-frame",
+      "type": "frame",
+      "title": "Asset Library & Content Hub",
+      "x": 1750,
+      "y": 500,
+      "width": 1500,
+      "height": 1000,
+      "style": { "fillColor": "#1A1A2E" }
+    },
+    {
+      "id": "assets-header",
+      "type": "text",
+      "content": "Asset Library & Content Hub",
+      "x": 1800,
+      "y": 520,
+      "width": 700,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#6C5CE7" }
+    },
+    {
+      "id": "asset-blog",
+      "type": "shape",
+      "content": "Blog Posts\n24 published Q1 | 8 in draft\nTop: AI Trends 2026 (12K views)",
+      "shape": "rectangle",
+      "x": 1800,
+      "y": 600,
+      "width": 650,
+      "height": 130,
+      "style": { "fillColor": "#6C5CE7", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "asset-case-studies",
+      "type": "shape",
+      "content": "Case Studies\n6 published | 3 in pipeline\nMost downloaded: Enterprise ROI Calculator",
+      "shape": "rectangle",
+      "x": 1800,
+      "y": 780,
+      "width": 650,
+      "height": 130,
+      "style": { "fillColor": "#6C5CE7", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "asset-videos",
+      "type": "shape",
+      "content": "Videos\n12 produced Q1 | Product demos, testimonials\n45K total views across channels",
+      "shape": "rectangle",
+      "x": 2500,
+      "y": 600,
+      "width": 650,
+      "height": 130,
+      "style": { "fillColor": "#A29BFE", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "asset-social",
+      "type": "shape",
+      "content": "Social Assets\n140+ created | Templates, carousels\nEmail Templates: 18 live",
+      "shape": "rectangle",
+      "x": 2500,
+      "y": 780,
+      "width": 650,
+      "height": 130,
+      "style": { "fillColor": "#A29BFE", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "asset-gap",
+      "type": "sticky_note",
+      "content": "Gap: Need 3 more customer testimonial videos — prioritize enterprise segment",
+      "x": 1800,
+      "y": 960,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "approvals-frame",
+      "type": "frame",
+      "title": "Approval Workflow",
+      "x": 3400,
+      "y": 500,
+      "width": 1200,
+      "height": 1000,
+      "style": { "fillColor": "#2A2A14" }
+    },
+    {
+      "id": "approvals-header",
+      "type": "text",
+      "content": "Approval Workflow",
+      "x": 3450,
+      "y": 520,
+      "width": 500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FDCB6E" }
+    },
+    {
+      "id": "approval-pipeline",
+      "type": "shape",
+      "content": "Draft > Review > Legal > Design > Final Approval > Published",
+      "shape": "rectangle",
+      "x": 3450,
+      "y": 600,
+      "width": 1050,
+      "height": 60,
+      "style": { "fillColor": "#FDCB6E", "fontColor": "#2D3436" }
+    },
+    {
+      "id": "approval-queue",
+      "type": "shape",
+      "content": "Current Queue\n8 items in Review | 3 in Legal | 2 in Design | 1 Final Approval",
+      "shape": "rectangle",
+      "x": 3450,
+      "y": 700,
+      "width": 1050,
+      "height": 120,
+      "style": { "fillColor": "#F39C12", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "approval-sla",
+      "type": "sticky_note",
+      "content": "SLA tracking: Avg approval time: 4.2 days | Target: 3 days | Bottleneck: Legal review",
+      "x": 3450,
+      "y": 870,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#D63031" }
+    },
+    {
+      "id": "performance-frame",
+      "type": "frame",
+      "title": "Performance Dashboard",
+      "x": 100,
+      "y": 1600,
+      "width": 2200,
+      "height": 900,
+      "style": { "fillColor": "#0A2020" }
+    },
+    {
+      "id": "perf-header",
+      "type": "text",
+      "content": "Performance Dashboard",
+      "x": 150,
+      "y": 1620,
+      "width": 600,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#00CEC9" }
+    },
+    {
+      "id": "kpi-traffic",
+      "type": "shape",
+      "content": "Website Traffic\n340K/mo (+18% MoM)",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1700,
+      "width": 320,
+      "height": 100,
+      "style": { "fillColor": "#00CEC9", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "kpi-mqls",
+      "type": "shape",
+      "content": "MQLs Generated\n420 (target: 500)",
+      "shape": "rectangle",
+      "x": 520,
+      "y": 1700,
+      "width": 320,
+      "height": 100,
+      "style": { "fillColor": "#00CEC9", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "kpi-sqls",
+      "type": "shape",
+      "content": "SQLs\n145 (target: 180)",
+      "shape": "rectangle",
+      "x": 890,
+      "y": 1700,
+      "width": 320,
+      "height": 100,
+      "style": { "fillColor": "#00CEC9", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "kpi-pipeline",
+      "type": "shape",
+      "content": "Pipeline Created\n$3.2M (target: $4M)",
+      "shape": "rectangle",
+      "x": 1260,
+      "y": 1700,
+      "width": 320,
+      "height": 100,
+      "style": { "fillColor": "#00CEC9", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "kpi-cac",
+      "type": "shape",
+      "content": "CAC\n$1,240 (target: $1,100)",
+      "shape": "rectangle",
+      "x": 1630,
+      "y": 1700,
+      "width": 320,
+      "height": 100,
+      "style": { "fillColor": "#FDCB6E", "fontColor": "#2D3436" }
+    },
+    {
+      "id": "kpi-roi",
+      "type": "shape",
+      "content": "Marketing ROI\n4.2x",
+      "shape": "rectangle",
+      "x": 2000,
+      "y": 1700,
+      "width": 200,
+      "height": 100,
+      "style": { "fillColor": "#00B894", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "channel-perf-1",
+      "type": "sticky_note",
+      "content": "Paid Search: $890 CAC | Content/SEO: $420 CAC | Email: $310 CAC | Events: $1,800 CAC",
+      "x": 150,
+      "y": 1860,
+      "width": 500,
+      "height": 200,
+      "style": { "fillColor": "#B2DFDB" }
+    },
+    {
+      "id": "channel-perf-2",
+      "type": "sticky_note",
+      "content": "Best ROI channel: Referral/Partners at 12.1x — invest more in partner program",
+      "x": 700,
+      "y": 1860,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "calendar-frame",
+      "type": "frame",
+      "title": "Campaign Calendar & Timeline",
+      "x": 2500,
+      "y": 1600,
+      "width": 1800,
+      "height": 900,
+      "style": { "fillColor": "#2E0E1E" }
+    },
+    {
+      "id": "calendar-header",
+      "type": "text",
+      "content": "Campaign Calendar & Timeline",
+      "x": 2550,
+      "y": 1620,
+      "width": 800,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#E84393" }
+    },
+    {
+      "id": "cal-jan",
+      "type": "shape",
+      "content": "Jan\nBrand refresh prep\nWebinar series kick-off",
+      "shape": "rectangle",
+      "x": 2550,
+      "y": 1720,
+      "width": 250,
+      "height": 150,
+      "style": { "fillColor": "#E84393", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "cal-feb",
+      "type": "shape",
+      "content": "Feb\nBrand launch\nABM Wave 3 live\nDev community ramp",
+      "shape": "rectangle",
+      "x": 2850,
+      "y": 1720,
+      "width": 250,
+      "height": 150,
+      "style": { "fillColor": "#E84393", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "cal-mar",
+      "type": "shape",
+      "content": "Mar\nAI Assist launch\nEnd Q1 webinars\nQuarter review",
+      "shape": "rectangle",
+      "x": 3150,
+      "y": 1720,
+      "width": 250,
+      "height": 150,
+      "style": { "fillColor": "#D63031", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "cal-apr",
+      "type": "shape",
+      "content": "Apr (planned)\nQ2 kick-off\nACMEconf prep\nPartner program launch",
+      "shape": "rectangle",
+      "x": 3450,
+      "y": 1720,
+      "width": 250,
+      "height": 150,
+      "style": { "fillColor": "#636E72", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "cal-may",
+      "type": "shape",
+      "content": "May (planned)\nACMEconf final push\nEnterprise summit\nQ2 webinar series",
+      "shape": "rectangle",
+      "x": 3750,
+      "y": 1720,
+      "width": 250,
+      "height": 150,
+      "style": { "fillColor": "#636E72", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "team-frame",
+      "type": "frame",
+      "title": "Team Roster & Assignments",
+      "x": 100,
+      "y": 2600,
+      "width": 1200,
+      "height": 700,
+      "style": { "fillColor": "#0A2A1A" }
+    },
+    {
+      "id": "team-header",
+      "type": "text",
+      "content": "Team Roster",
+      "x": 150,
+      "y": 2620,
+      "width": 400,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#00B894" }
+    },
+    {
+      "id": "team-grid",
+      "type": "shape",
+      "content": "Growth: 10 | Content: 7 | Brand: 8 | PMM: 6 | Demand Gen: 5 | Ops: 3\nTotal: 34 team members",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 2700,
+      "width": 1050,
+      "height": 100,
+      "style": { "fillColor": "#00B894", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "team-overload",
+      "type": "sticky_note",
+      "content": "Overloaded: Sofia N. (3 campaigns), Marcus R. (2 campaigns + ABM), Content lead (24 posts Q1 backlog)",
+      "x": 150,
+      "y": 2850,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#D63031" }
+    },
+    {
+      "id": "team-available",
+      "type": "sticky_note",
+      "content": "Available: 2 demand gen specialists have capacity post-webinar series completion",
+      "x": 600,
+      "y": 2850,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "budget-frame",
+      "type": "frame",
+      "title": "Budget Tracker",
+      "x": 1450,
+      "y": 2600,
+      "width": 1200,
+      "height": 700,
+      "style": { "fillColor": "#2A1A0A" }
+    },
+    {
+      "id": "budget-header",
+      "type": "text",
+      "content": "Budget Tracker",
+      "x": 1500,
+      "y": 2620,
+      "width": 400,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#E17055" }
+    },
+    {
+      "id": "budget-total",
+      "type": "shape",
+      "content": "Total Q1: $2.4M | Spent: $1.8M (75%) | Remaining: $600K",
+      "shape": "rectangle",
+      "x": 1500,
+      "y": 2700,
+      "width": 1050,
+      "height": 70,
+      "style": { "fillColor": "#E17055", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "budget-paid",
+      "type": "sticky_note",
+      "content": "Paid: $800K/$1M (80%)\nEvents: $400K/$500K (80%)\nContent: $200K/$300K (67%)",
+      "x": 1500,
+      "y": 2810,
+      "width": 350,
+      "height": 200,
+      "style": { "fillColor": "#FFE0B2" }
+    },
+    {
+      "id": "budget-tools",
+      "type": "sticky_note",
+      "content": "Tools: $150K/$200K (75%)\nAgency: $250K/$400K (63%)\nBurn rate: On track",
+      "x": 1900,
+      "y": 2810,
+      "width": 350,
+      "height": 200,
+      "style": { "fillColor": "#FFE0B2" }
+    },
+    {
+      "id": "competitive-frame",
+      "type": "frame",
+      "title": "Competitive Intel Board",
+      "x": 2800,
+      "y": 2600,
+      "width": 1200,
+      "height": 700,
+      "style": { "fillColor": "#2D3436" }
+    },
+    {
+      "id": "competitive-header",
+      "type": "text",
+      "content": "Competitive Intel",
+      "x": 2850,
+      "y": 2620,
+      "width": 500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#D63031" }
+    },
+    {
+      "id": "comp-a",
+      "type": "sticky_note",
+      "content": "Competitor A: Launched new AI feature. Win rate vs them: 62%. Pricing cited in 30% of losses.",
+      "x": 2850,
+      "y": 2700,
+      "width": 350,
+      "height": 200,
+      "style": { "fillColor": "#FFCDD2" }
+    },
+    {
+      "id": "comp-b",
+      "type": "sticky_note",
+      "content": "Competitor B: Raised $50M Series C. Strong brand. We lose to them 55% — mobile app cited 4x.",
+      "x": 3250,
+      "y": 2700,
+      "width": 350,
+      "height": 200,
+      "style": { "fillColor": "#FFCDD2" }
+    },
+    {
+      "id": "comp-c",
+      "type": "sticky_note",
+      "content": "Competitor C: Acquired smaller player. Expanding enterprise. Our win rate vs them: 78%.",
+      "x": 2850,
+      "y": 2950,
+      "width": 350,
+      "height": 200,
+      "style": { "fillColor": "#FFE0B2" }
+    },
+    {
+      "type": "connector",
+      "startItem": "campaigns-frame",
+      "endItem": "performance-frame",
+      "style": {
+        "strokeColor": "#00CEC9",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "campaigns-frame",
+      "endItem": "calendar-frame",
+      "style": {
+        "strokeColor": "#E84393",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "assets-frame",
+      "endItem": "approvals-frame",
+      "style": {
+        "strokeColor": "#FDCB6E",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "approvals-frame",
+      "endItem": "campaigns-frame",
+      "style": {
+        "strokeColor": "#FDCB6E",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "budget-frame",
+      "endItem": "campaigns-frame",
+      "style": {
+        "strokeColor": "#E17055",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "team-frame",
+      "endItem": "campaigns-frame",
+      "style": {
+        "strokeColor": "#00B894",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "competitive-frame",
+      "endItem": "campaigns-frame",
+      "style": {
+        "strokeColor": "#D63031",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    }
+  ]
+}

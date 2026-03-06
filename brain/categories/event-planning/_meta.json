@@ -1,0 +1,40 @@
+{
+  "category": "Event Planning",
+  "description": "Comprehensive Miro board templates for organizing, visualizing, and executing events of all scales — from intimate workshops to large-scale conferences.",
+  "icon": "🎪",
+  "colorTheme": {
+    "primary": "#1A237E",
+    "secondary": "#00897B",
+    "accent": "#FF8F00"
+  },
+  "templates": [
+    {
+      "file": "event-guide",
+      "name": "Event Guide — Conference Overview",
+      "description": "Full-scale conference or summit overview with spatial zones and immersive layout",
+      "tags": ["conference", "summit", "overview", "spatial", "zones"],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "agenda-board",
+      "name": "Agenda Board",
+      "description": "Multi-track event scheduling with time blocks and speaker assignments",
+      "tags": ["agenda", "schedule", "tracks", "time-blocks", "speakers"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "speaker-showcase",
+      "name": "Speaker Showcase",
+      "description": "Speaker profile management, talk details, and promotional assets",
+      "tags": ["speakers", "profiles", "talks", "bios", "promotional"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "venue-layout",
+      "name": "Venue Layout",
+      "description": "Floor plan visualization with rooms, booths, flow paths, and logistics",
+      "tags": ["venue", "floor-plan", "rooms", "booths", "logistics"],
+      "complexity": "Advanced"
+    }
+  ]
+}

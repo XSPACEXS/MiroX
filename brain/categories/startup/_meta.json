@@ -1,0 +1,46 @@
+{
+  "category": "Startup",
+  "description": "Visual frameworks for lean methodology, fundraising, investor communication, and MVP planning — helping founders turn uncertainty into structured visual thinking that accelerates decision-making and stakeholder alignment",
+  "icon": "🚀",
+  "colorTheme": {
+    "primary": "#1565C0",
+    "secondary": "#37474F",
+    "accent": "#EF6C00"
+  },
+  "templates": [
+    {
+      "file": "lean-canvas",
+      "name": "Lean Canvas",
+      "description": "Single-canvas business model mapping with 9 blocks covering Problem, Solution, Key Metrics, UVP, Unfair Advantage, Channels, Segments, Costs, and Revenue plus a hypothesis validation tracker",
+      "tags": ["lean", "business-model", "canvas", "validation", "startup"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "pitch-deck-plan",
+      "name": "Pitch Deck Planning",
+      "description": "Slide-by-slide pitch deck storyboard with narrative arc guide, visual direction notes, talking points, and rehearsal preparation for fundraising presentations",
+      "tags": ["pitch", "fundraising", "deck", "storytelling", "narrative"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "investor-board",
+      "name": "Investor Relations Board",
+      "description": "Fundraising process management board with investor pipeline kanban, term sheet comparison, cap table impact analysis, and milestone planning",
+      "tags": [
+        "investors",
+        "fundraising",
+        "pipeline",
+        "term-sheet",
+        "cap-table"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "mvp-planning",
+      "name": "MVP Planning",
+      "description": "Minimum viable product scoping board with feature prioritization matrix, build timeline, success criteria, and validation experiment design",
+      "tags": ["mvp", "prioritization", "roadmap", "validation", "experiments"],
+      "complexity": "Medium"
+    }
+  ]
+}

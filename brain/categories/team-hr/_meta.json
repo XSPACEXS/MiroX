@@ -1,0 +1,78 @@
+{
+  "category": "Team & HR",
+  "description": "Templates for organizational structure, employee onboarding flows, team dynamics workshops, performance evaluation frameworks, and career growth planning — from startup org charts to enterprise-scale people operations",
+  "icon": "\ud83d\udc65",
+  "colorTheme": {
+    "primary": "#1565C0",
+    "secondary": "#EF6C00",
+    "accent": "#7B1FA2"
+  },
+  "templates": [
+    {
+      "file": "org-chart",
+      "name": "Organization Chart",
+      "description": "Visual organization chart mapping reporting lines, department groupings, role cards with key responsibilities, headcount summaries, and organizational health flags — providing a clear picture of how a company or team is structured",
+      "tags": [
+        "org-chart",
+        "hierarchy",
+        "departments",
+        "headcount",
+        "reporting",
+        "structure"
+      ],
+      "complexity": "Medium"
+    },
+    {
+      "file": "onboarding-board",
+      "name": "New Hire Onboarding Board",
+      "description": "Structured onboarding board guiding new hires through their first 90 days with week-by-week task checklists, key contacts, tools setup, culture introduction, and 30-60-90 day milestone goals",
+      "tags": [
+        "onboarding",
+        "new-hire",
+        "checklist",
+        "30-60-90",
+        "welcome",
+        "ramp-up"
+      ],
+      "complexity": "Medium"
+    },
+    {
+      "file": "team-building",
+      "name": "Team Building Activity Board",
+      "description": "Collaborative workshop board for team building sessions — mapping team values, identifying strengths, establishing working agreements, sharing fun facts, and aligning on collaboration preferences",
+      "tags": [
+        "team-building",
+        "workshop",
+        "values",
+        "strengths",
+        "agreements",
+        "collaboration"
+      ],
+      "complexity": "Simple"
+    },
+    {
+      "file": "performance-review",
+      "name": "Performance Review Framework",
+      "description": "Structured performance review board for evaluations — reviewing goals and OKRs, assessing competencies, gathering 360-degree feedback, building development plans, and mapping career growth paths",
+      "tags": [
+        "performance",
+        "review",
+        "OKR",
+        "feedback",
+        "development",
+        "career",
+        "competency"
+      ],
+      "complexity": "Advanced"
+    }
+  ],
+  "knowledgeFiles": [
+    "design-philosophy.md",
+    "layout-patterns.md",
+    "visual-guide.md",
+    "content-guide.md",
+    "build-process.md",
+    "examples-reference.md",
+    "variations.md"
+  ]
+}

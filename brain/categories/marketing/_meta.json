@@ -1,0 +1,90 @@
+{
+  "category": "Marketing",
+  "description": "Marketing strategy and execution boards for campaigns, go-to-market launches, content planning, funnel optimization, and brand management",
+  "icon": "📣",
+  "colorTheme": {
+    "primary": "#B71C1C",
+    "secondary": "#1565C0",
+    "accent": "#F9A825"
+  },
+  "knowledge": [
+    {
+      "file": "design-philosophy",
+      "name": "Design Philosophy",
+      "description": "Why marketing boards exist, cognitive principles (Mere Exposure, AIDA, Zeigarnik, Anchoring), visual design principles, and the marketer's mindset"
+    },
+    {
+      "file": "layout-patterns",
+      "name": "Layout Patterns",
+      "description": "Five patterns (Campaign Planning, Content Calendar, Marketing Funnel, GTM Launch, Brand Guidelines) with ASCII diagrams and spatial rules"
+    },
+    {
+      "file": "visual-guide",
+      "name": "Visual Guide",
+      "description": "Four palettes (Brand Forward, Modern Growth, Premium Brand, Community Impact), marketing typography, channel color system, and metric widgets"
+    },
+    {
+      "file": "content-guide",
+      "name": "Content Guide",
+      "description": "Content by board type (Campaign, Calendar, Funnel, GTM, Brand), writing guidelines, metric triad, audience specificity rules, and volume guidelines"
+    },
+    {
+      "file": "build-process",
+      "name": "Build Process",
+      "description": "Six-phase workflow with marketing-specific Miro API code, channel columns, calendar grids, funnel shapes, and metric widgets"
+    },
+    {
+      "file": "examples-reference",
+      "name": "Examples Reference",
+      "description": "Five detailed examples (SaaS Launch Campaign, Content Calendar, Funnel Analysis, GTM Launch, Brand Guidelines), anti-patterns, and transformations"
+    },
+    {
+      "file": "variations",
+      "name": "Variations",
+      "description": "Industry adaptations (SaaS, E-Commerce, Healthcare, Financial Services, Non-Profit, Agency), team sizes, complexity levels, and cross-board integrations"
+    }
+  ],
+  "templates": [
+    {
+      "file": "campaign-planning",
+      "name": "Campaign Planning",
+      "description": "End-to-end marketing campaign board with objectives, channels, timeline, budget, and KPIs",
+      "tags": ["campaign", "marketing", "planning", "channels", "budget"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "gtm-strategy",
+      "name": "Go-to-Market Strategy",
+      "description": "Comprehensive GTM launch board covering positioning, pricing, channels, and launch timeline",
+      "tags": ["gtm", "launch", "go-to-market", "strategy", "positioning"],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "content-calendar",
+      "name": "Content Calendar",
+      "description": "Monthly content planning board with editorial calendar, content types, channels, and publishing schedule",
+      "tags": [
+        "content",
+        "calendar",
+        "editorial",
+        "publishing",
+        "social-media"
+      ],
+      "complexity": "Medium"
+    },
+    {
+      "file": "funnel-mapping",
+      "name": "Funnel Mapping",
+      "description": "Marketing and sales funnel visualization from awareness to conversion with metrics and optimization tactics",
+      "tags": ["funnel", "conversion", "pipeline", "metrics", "optimization"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "brand-guidelines",
+      "name": "Brand Guidelines",
+      "description": "Visual brand identity board with logo usage, color palette, typography, voice guidelines, and asset library",
+      "tags": ["brand", "identity", "guidelines", "design-system", "visual"],
+      "complexity": "Simple"
+    }
+  ]
+}

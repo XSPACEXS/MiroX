@@ -9,6 +9,8 @@ export const dailyStandup: TemplateDefinition = {
   emoji: '\u2600\uFE0F',
   estimatedTime: '~2 min',
   blueprintId: 'daily-standup',
+  brainCategory: 'workshops',
+  brainBlueprint: 'icebreaker',
   complexity: 'simple',
   color: '#10B981',
   tags: ['standup', 'daily', 'scrum', 'sync', 'team', 'blockers'],

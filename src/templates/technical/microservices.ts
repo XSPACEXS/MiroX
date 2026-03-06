@@ -9,6 +9,8 @@ export const microservices: TemplateDefinition = {
   emoji: '\u2699\uFE0F',
   estimatedTime: '~5 min',
   blueprintId: 'microservices-map',
+  brainCategory: 'technical-architecture',
+  brainBlueprint: 'system-diagram',
   complexity: 'complex',
   color: '#3B82F6',
   tags: ['microservices', 'distributed', 'services', 'api gateway', 'architecture'],

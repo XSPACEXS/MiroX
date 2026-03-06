@@ -1,0 +1,730 @@
+{
+  "metadata": {
+    "name": "Event Agenda Board",
+    "description": "Multi-track event schedule for InnovateTech Summit 2026 with Day 1-3 time blocks, parallel sessions across Main Stage and Tracks A/B/C, breaks, meals, and evening events",
+    "category": "Event Planning",
+    "tags": ["agenda", "schedule", "multi-track", "conference", "time-blocks"],
+    "complexity": "Medium",
+    "boardSize": { "width": 4000, "height": 2500 }
+  },
+  "settings": {
+    "backgroundColor": "#FAFAFA",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_title",
+      "type": "frame",
+      "title": "Agenda Title Banner",
+      "x": 50,
+      "y": 50,
+      "width": 3900,
+      "height": 300,
+      "style": { "fillColor": "#1A237E" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "InnovateTech Summit 2026 -- Full Event Agenda",
+      "x": 300,
+      "y": 80,
+      "width": 3300,
+      "style": { "fontSize": 48, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_subtitle",
+      "type": "text",
+      "content": "March 18-20, 2026 | San Francisco Convention Center",
+      "x": 300,
+      "y": 190,
+      "width": 2000,
+      "style": { "fontSize": 20, "color": "#E8EAF6" }
+    },
+    {
+      "id": "text_updated",
+      "type": "text",
+      "content": "Last updated: March 6, 2026 | All times in PST",
+      "x": 2800,
+      "y": 190,
+      "width": 800,
+      "style": { "fontSize": 14, "color": "#FF8F00" }
+    },
+    {
+      "id": "frame_day1",
+      "type": "frame",
+      "title": "Day 1 -- March 18: Discovery Day",
+      "x": 50,
+      "y": 400,
+      "width": 3900,
+      "height": 2800,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_day1_header",
+      "type": "text",
+      "content": "Day 1 -- March 18: Discovery Day",
+      "x": 80,
+      "y": 420,
+      "width": 800,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "shape_track_main",
+      "type": "shape",
+      "content": "Main Stage\n(Hall 1, 800 seats)",
+      "shape": "rectangle",
+      "x": 250,
+      "y": 470,
+      "width": 850,
+      "height": 60,
+      "style": {
+        "fillColor": "#1A237E",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#1A237E",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_track_a",
+      "type": "shape",
+      "content": "Track A: Product & Design\n(Room 201, 120 seats)",
+      "shape": "rectangle",
+      "x": 1150,
+      "y": 470,
+      "width": 850,
+      "height": 60,
+      "style": {
+        "fillColor": "#00897B",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#00897B",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_track_b",
+      "type": "shape",
+      "content": "Track B: Engineering\n(Room 202, 120 seats)",
+      "shape": "rectangle",
+      "x": 2050,
+      "y": 470,
+      "width": 850,
+      "height": 60,
+      "style": {
+        "fillColor": "#FF8F00",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#FF8F00",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_track_c",
+      "type": "shape",
+      "content": "Track C: Leadership\n(Room 203, 80 seats)",
+      "shape": "rectangle",
+      "x": 2950,
+      "y": 470,
+      "width": 850,
+      "height": 60,
+      "style": {
+        "fillColor": "#7E57C2",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#7E57C2",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_0800_reg",
+      "type": "shape",
+      "content": "8:00 AM -- Registration Opens & Breakfast",
+      "shape": "rectangle",
+      "x": 250,
+      "y": 550,
+      "width": 3550,
+      "height": 50,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#2E7D32",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "sticky_0900_keynote",
+      "type": "sticky_note",
+      "content": "KEYNOTE: Dr. Amara Chen\n'AI-Native Product Design: Beyond the Hype'\n9:00-9:45 | Main Stage | Live stream + ASL",
+      "x": 250,
+      "y": 620,
+      "width": 850,
+      "height": 120,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "shape_1000_break",
+      "type": "shape",
+      "content": "10:00 AM -- Coffee Break (30 min) | Expo Hall opens",
+      "shape": "rectangle",
+      "x": 250,
+      "y": 760,
+      "width": 3550,
+      "height": 50,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#2E7D32",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "sticky_1030_main",
+      "type": "sticky_note",
+      "content": "Panel: 'The Ethics of Generative AI in Enterprise'\nModerator: Lisa Park\nPanelists: Amara Chen, Raj Patel, Nadia Ibrahim, Derek Cho",
+      "x": 250,
+      "y": 830,
+      "width": 850,
+      "height": 120,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_1030_a",
+      "type": "sticky_note",
+      "content": "Workshop: 'Jobs-to-be-Done for Product Teams'\nYuki Tanaka\nHands-on, bring laptops | Max 40 participants",
+      "x": 1150,
+      "y": 830,
+      "width": 850,
+      "height": 120,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_1030_b",
+      "type": "sticky_note",
+      "content": "Workshop: 'Building Resilient Microservices with Go'\nJames O'Brien\nLive coding session | Prerequisites: Go basics",
+      "x": 2050,
+      "y": 830,
+      "width": 850,
+      "height": 120,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_1030_c",
+      "type": "sticky_note",
+      "content": "Talk: 'From IC to Engineering Manager: Lessons from the First Year'\nMarcus Rivera\n45 min talk + 15 min Q&A",
+      "x": 2950,
+      "y": 830,
+      "width": 850,
+      "height": 120,
+      "style": { "fillColor": "#E8EAF6", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "shape_1200_lunch",
+      "type": "shape",
+      "content": "12:00 PM -- Lunch (60 min) | Buffet in Grand Ballroom | Dietary options labeled",
+      "shape": "rectangle",
+      "x": 250,
+      "y": 970,
+      "width": 3550,
+      "height": 50,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#2E7D32",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "sticky_1300_main",
+      "type": "sticky_note",
+      "content": "Talk: 'Designing for 1 Billion Users'\nFatima Al-Rashid | Head of UXR, Google\n45 min",
+      "x": 250,
+      "y": 1040,
+      "width": 850,
+      "height": 100,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_1300_a",
+      "type": "sticky_note",
+      "content": "Workshop: 'Design Systems at Scale: From Tokens to Components'\nYuki Tanaka | Figma required",
+      "x": 1150,
+      "y": 1040,
+      "width": 850,
+      "height": 100,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_1300_b",
+      "type": "sticky_note",
+      "content": "Talk: 'Platform Engineering: Build vs. Buy in 2026'\nJames O'Brien | Staff Eng, Stripe",
+      "x": 2050,
+      "y": 1040,
+      "width": 850,
+      "height": 100,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_1300_c",
+      "type": "sticky_note",
+      "content": "Roundtable: 'Hiring in a Post-AI Market'\nPanel of 4 CTOs | Moderated discussion",
+      "x": 2950,
+      "y": 1040,
+      "width": 850,
+      "height": 100,
+      "style": { "fillColor": "#E8EAF6", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "shape_1430_break",
+      "type": "shape",
+      "content": "2:30 PM -- Break (20 min)",
+      "shape": "rectangle",
+      "x": 250,
+      "y": 1160,
+      "width": 3550,
+      "height": 40,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#2E7D32",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "sticky_1450_main",
+      "type": "sticky_note",
+      "content": "Lightning Talks -- 6 speakers x 5 min:\nRaj Patel, Lin Wei, Alex Kim, Maria Santos, Derek Cho, Nadia Ibrahim",
+      "x": 250,
+      "y": 1220,
+      "width": 850,
+      "height": 100,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_1450_a",
+      "type": "sticky_note",
+      "content": "Workshop: 'User Research on a Budget'\nFatima Al-Rashid | Interview techniques + synthesis",
+      "x": 1150,
+      "y": 1220,
+      "width": 850,
+      "height": 100,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_1450_b",
+      "type": "sticky_note",
+      "content": "Workshop: 'Observability 101: From Logs to Traces'\nMaria Santos | Hands-on with Grafana",
+      "x": 2050,
+      "y": 1220,
+      "width": 850,
+      "height": 100,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_1450_c",
+      "type": "sticky_note",
+      "content": "Open Space: Attendee-led discussions\nSign up on the board outside Room 203",
+      "x": 2950,
+      "y": 1220,
+      "width": 850,
+      "height": 100,
+      "style": { "fillColor": "#E8EAF6", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "shape_1600_networking",
+      "type": "shape",
+      "content": "4:00 PM -- Networking Hour | Speed Networking | Expo Hall | Sponsor Happy Hour",
+      "shape": "rectangle",
+      "x": 250,
+      "y": 1340,
+      "width": 3550,
+      "height": 50,
+      "style": {
+        "fillColor": "#B2DFDB",
+        "fontColor": "#00695C",
+        "borderColor": "#80CBC4",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_1800_reception",
+      "type": "shape",
+      "content": "6:00 PM -- Welcome Reception | Rooftop Terrace | Drinks & appetizers | Live music | Smart casual",
+      "shape": "rectangle",
+      "x": 250,
+      "y": 1410,
+      "width": 3550,
+      "height": 50,
+      "style": {
+        "fillColor": "#FFE0B2",
+        "fontColor": "#E65100",
+        "borderColor": "#FFCC80",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_day2_header",
+      "type": "text",
+      "content": "Day 2 -- March 19: Deep Dive Day",
+      "x": 80,
+      "y": 1500,
+      "width": 800,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "shape_d2_coffee",
+      "type": "shape",
+      "content": "8:30 AM -- Morning Coffee",
+      "shape": "rectangle",
+      "x": 250,
+      "y": 1550,
+      "width": 3550,
+      "height": 40,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#2E7D32",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "sticky_d2_keynote",
+      "type": "sticky_note",
+      "content": "KEYNOTE: Marcus Rivera\n'Scaling Engineering Culture: People, Process, Platform'\n9:00-10:00 | Main Stage",
+      "x": 250,
+      "y": 1610,
+      "width": 850,
+      "height": 100,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "shape_d2_break1",
+      "type": "shape",
+      "content": "10:00 AM -- Break (30 min)",
+      "shape": "rectangle",
+      "x": 250,
+      "y": 1730,
+      "width": 3550,
+      "height": 40,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#2E7D32",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "sticky_d2_1030_main",
+      "type": "sticky_note",
+      "content": "Panel: 'The Future of Remote-First Teams'\n4 speakers",
+      "x": 250,
+      "y": 1790,
+      "width": 850,
+      "height": 80,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_d2_1030_a",
+      "type": "sticky_note",
+      "content": "Workshop: 'Advanced Prototyping in Figma'\nYuki Tanaka",
+      "x": 1150,
+      "y": 1790,
+      "width": 850,
+      "height": 80,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_d2_1030_b",
+      "type": "sticky_note",
+      "content": "Workshop: 'Real-Time Data Pipelines with Kafka'\nSofia Nguyen",
+      "x": 2050,
+      "y": 1790,
+      "width": 850,
+      "height": 80,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_d2_1030_c",
+      "type": "sticky_note",
+      "content": "Mentorship Circles: Topic-based groups of 6-8",
+      "x": 2950,
+      "y": 1790,
+      "width": 850,
+      "height": 80,
+      "style": { "fillColor": "#E8EAF6", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "shape_d2_lunch",
+      "type": "shape",
+      "content": "12:00 PM -- Lunch (60 min)",
+      "shape": "rectangle",
+      "x": 250,
+      "y": 1890,
+      "width": 3550,
+      "height": 40,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#2E7D32",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "sticky_d2_1300_main",
+      "type": "sticky_note",
+      "content": "Talk: 'Real-Time Analytics at Petabyte Scale'\nSofia Nguyen, CEO DataMesh",
+      "x": 250,
+      "y": 1950,
+      "width": 850,
+      "height": 80,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_d2_1300_a",
+      "type": "sticky_note",
+      "content": "Workshop: 'Accessibility Audit Workshop'\nNadia Ibrahim",
+      "x": 1150,
+      "y": 1950,
+      "width": 850,
+      "height": 80,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_d2_fireside",
+      "type": "sticky_note",
+      "content": "Fireside Chat: CEO Roundtable\nLive audience Q&A\n4:30-5:30 PM | Main Stage",
+      "x": 250,
+      "y": 2050,
+      "width": 850,
+      "height": 80,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "shape_d2_gala",
+      "type": "shape",
+      "content": "7:00 PM -- Gala Dinner | Grand Ballroom | Seated dinner | Awards ceremony | DJ + dancing",
+      "shape": "rectangle",
+      "x": 250,
+      "y": 2150,
+      "width": 3550,
+      "height": 50,
+      "style": {
+        "fillColor": "#FFE0B2",
+        "fontColor": "#E65100",
+        "borderColor": "#FFCC80",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_day3_header",
+      "type": "text",
+      "content": "Day 3 -- March 20: Action Day",
+      "x": 80,
+      "y": 2240,
+      "width": 800,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "shape_d3_coffee",
+      "type": "shape",
+      "content": "8:30 AM -- Coffee",
+      "shape": "rectangle",
+      "x": 250,
+      "y": 2290,
+      "width": 3550,
+      "height": 40,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#2E7D32",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "sticky_d3_workshop_a",
+      "type": "sticky_note",
+      "content": "Masterclass: 'Design Thinking in Practice'\nFull 2-hour session\n9:00-11:00 | Room 201",
+      "x": 1150,
+      "y": 2350,
+      "width": 850,
+      "height": 80,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_d3_workshop_b",
+      "type": "sticky_note",
+      "content": "Hackathon Kickoff: 'Build an AI Feature in 2 Hours'\nTeams of 4 | 9:00-11:00 | Room 202",
+      "x": 2050,
+      "y": 2350,
+      "width": 850,
+      "height": 80,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_d3_workshop_c",
+      "type": "sticky_note",
+      "content": "Workshop: 'OKR Setting for Q2'\nBring your team goals | Room 203",
+      "x": 2950,
+      "y": 2350,
+      "width": 850,
+      "height": 80,
+      "style": { "fillColor": "#E8EAF6", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_d3_unconf",
+      "type": "sticky_note",
+      "content": "11:00 AM -- Unconference: Attendee-proposed sessions\nVote on topics at the board | 4 parallel rooms",
+      "x": 250,
+      "y": 2450,
+      "width": 1700,
+      "height": 70,
+      "style": { "fillColor": "#E8EAF6", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_d3_closing",
+      "type": "sticky_note",
+      "content": "12:30 PM -- Closing Keynote: Key takeaways, community awards, next event announcement | Main Stage",
+      "x": 250,
+      "y": 2540,
+      "width": 1700,
+      "height": 70,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "shape_d3_farewell",
+      "type": "shape",
+      "content": "1:15 PM -- Farewell Lunch | Casual goodbye | Feedback forms | Photo ops",
+      "shape": "rectangle",
+      "x": 250,
+      "y": 2630,
+      "width": 3550,
+      "height": 50,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#2E7D32",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "frame_legend",
+      "type": "frame",
+      "title": "Legend & Room Guide",
+      "x": 2900,
+      "y": 2700,
+      "width": 900,
+      "height": 600,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_legend_header",
+      "type": "text",
+      "content": "Legend",
+      "x": 2930,
+      "y": 2720,
+      "width": 200,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "shape_legend_keynote",
+      "type": "shape",
+      "content": "Keynotes & Main Stage",
+      "shape": "rectangle",
+      "x": 2930,
+      "y": 2770,
+      "width": 300,
+      "height": 30,
+      "style": {
+        "fillColor": "#BBDEFB",
+        "fontColor": "#212121",
+        "borderColor": "#90CAF9",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_legend_tracka",
+      "type": "shape",
+      "content": "Track A -- Product & Design",
+      "shape": "rectangle",
+      "x": 2930,
+      "y": 2810,
+      "width": 300,
+      "height": 30,
+      "style": {
+        "fillColor": "#B2DFDB",
+        "fontColor": "#212121",
+        "borderColor": "#80CBC4",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_legend_trackb",
+      "type": "shape",
+      "content": "Track B -- Engineering",
+      "shape": "rectangle",
+      "x": 2930,
+      "y": 2850,
+      "width": 300,
+      "height": 30,
+      "style": {
+        "fillColor": "#FFE0B2",
+        "fontColor": "#212121",
+        "borderColor": "#FFCC80",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_legend_trackc",
+      "type": "shape",
+      "content": "Track C -- Leadership",
+      "shape": "rectangle",
+      "x": 2930,
+      "y": 2890,
+      "width": 300,
+      "height": 30,
+      "style": {
+        "fillColor": "#E8EAF6",
+        "fontColor": "#212121",
+        "borderColor": "#D1C4E9",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_legend_breaks",
+      "type": "shape",
+      "content": "Breaks & Meals",
+      "shape": "rectangle",
+      "x": 2930,
+      "y": 2930,
+      "width": 300,
+      "height": 30,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#212121",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_room_table",
+      "type": "shape",
+      "content": "Room Capacity:\nHall 1 (Main Stage): 800 seated + 200 standing\nRoom 201: 120 seated, theater style\nRoom 202: 120 seated, theater style\nRoom 203: 80 seated, cabaret style",
+      "shape": "rectangle",
+      "x": 2930,
+      "y": 2980,
+      "width": 800,
+      "height": 150,
+      "style": {
+        "fillColor": "#FAFAFA",
+        "fontColor": "#616161",
+        "borderColor": "#E0E0E0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_wifi",
+      "type": "text",
+      "content": "WiFi: InnovateTech2026 | Password: future!now",
+      "x": 2930,
+      "y": 3150,
+      "width": 500,
+      "style": { "fontSize": 12, "color": "#757575" }
+    }
+  ]
+}

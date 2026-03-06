@@ -9,6 +9,8 @@ export const kanban: TemplateDefinition = {
   emoji: '\u{1F4CB}',
   estimatedTime: '~2 min',
   blueprintId: 'kanban-board',
+  brainCategory: 'project-management',
+  brainBlueprint: 'kanban-board',
   complexity: 'simple',
   color: '#7C3AED',
   tags: ['kanban', 'tasks', 'workflow', 'agile', 'board', 'project management'],

@@ -1,0 +1,229 @@
+{
+  "metadata": {
+    "name": "Distributed Event World",
+    "description": "A multi-venue event map designed as floating islands connected by bridges, where each island represents a city hosting simultaneous distributed events with cross-venue interaction.",
+    "category": "Event Guide Immersive Isometric",
+    "tags": [
+      "distributed",
+      "event",
+      "multi-city",
+      "global",
+      "virtual",
+      "islands",
+      "conference",
+      "timezone"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#0C0C1E",
+    "gridEnabled": false
+  },
+  "items": [
+    {
+      "id": "title-banner",
+      "type": "frame",
+      "title": "Distributed Event World",
+      "x": 100,
+      "y": 50,
+      "width": 4800,
+      "height": 350,
+      "style": { "fillColor": "#141430" }
+    },
+    {
+      "id": "title-text",
+      "type": "text",
+      "content": "Distributed Event World",
+      "x": 200,
+      "y": 80,
+      "width": 1500,
+      "style": { "fontSize": 56, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "subtitle-text",
+      "type": "text",
+      "content": "One Event. Five Cities. One Shared Experience.",
+      "x": 200,
+      "y": 170,
+      "width": 1400,
+      "style": { "fontSize": 24, "color": "#FDCB6E" }
+    },
+    {
+      "id": "sf-island",
+      "type": "frame",
+      "title": "San Francisco — HQ Island",
+      "x": 100,
+      "y": 450,
+      "width": 1500,
+      "height": 800,
+      "style": { "fillColor": "#0D2137" }
+    },
+    {
+      "id": "sf-content",
+      "type": "shape",
+      "content": "PST (UTC-8) | Moscone Center | 1,500\nMain Stage: 3 keynotes\n12 breakouts | Expo: 30 exhibitors\nHackathon: 48hrs, $50K prize",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 530,
+      "width": 1350,
+      "height": 300,
+      "style": { "fillColor": "#0984E3", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "london-island",
+      "type": "frame",
+      "title": "London — EMEA Hub",
+      "x": 1800,
+      "y": 450,
+      "width": 1500,
+      "height": 800,
+      "style": { "fillColor": "#1E0A0A" }
+    },
+    {
+      "id": "london-content",
+      "type": "shape",
+      "content": "GMT (UTC+0) | ExCeL London | 800\nSimulcast + 2 local keynotes\n8 EMEA sessions | Networking\nPub Night at The Counting House",
+      "shape": "rectangle",
+      "x": 1850,
+      "y": 530,
+      "width": 1350,
+      "height": 300,
+      "style": { "fillColor": "#D63031", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "virtual-hub",
+      "type": "frame",
+      "title": "Virtual Hub",
+      "x": 1600,
+      "y": 1400,
+      "width": 1800,
+      "height": 500,
+      "style": { "fillColor": "#0A2020" }
+    },
+    {
+      "id": "virtual-content",
+      "type": "shape",
+      "content": "All keynotes livestreamed | Cross-venue Q&A\nVOD library | Global chat rooms\n12 virtual-only sessions | 1,400 registrations",
+      "shape": "rectangle",
+      "x": 1650,
+      "y": 1470,
+      "width": 1600,
+      "height": 250,
+      "style": { "fillColor": "#00CEC9", "fontColor": "#0C0C1E" }
+    },
+    {
+      "id": "tokyo-island",
+      "type": "frame",
+      "title": "Tokyo — APAC Hub",
+      "x": 100,
+      "y": 1400,
+      "width": 1400,
+      "height": 700,
+      "style": { "fillColor": "#1E0A14" }
+    },
+    {
+      "id": "tokyo-content",
+      "type": "shape",
+      "content": "JST (UTC+9) | Tokyo Big Sight | 600\nDev Track: 10 sessions (JP/EN)\nLightning Talks | AI/ML track\nKaraoke Night in Shibuya",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1470,
+      "width": 1200,
+      "height": 250,
+      "style": { "fillColor": "#FD79A8", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "sp-island",
+      "type": "frame",
+      "title": "Sao Paulo — LATAM Hub",
+      "x": 3500,
+      "y": 1400,
+      "width": 1400,
+      "height": 700,
+      "style": { "fillColor": "#0A1E14" }
+    },
+    {
+      "id": "sp-content",
+      "type": "shape",
+      "content": "BRT (UTC-3) | Transamerica Expo | 500\nCommunity Stage | Open Source Fair\nPortuguese track | Startup pitch $25K\nCarnival-themed party",
+      "shape": "rectangle",
+      "x": 3550,
+      "y": 1470,
+      "width": 1200,
+      "height": 250,
+      "style": { "fillColor": "#00B894", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "leaderboard-frame",
+      "type": "frame",
+      "title": "Global Leaderboard",
+      "x": 2600,
+      "y": 2200,
+      "width": 2300,
+      "height": 350,
+      "style": { "fillColor": "#1A1A0A" }
+    },
+    {
+      "id": "lb-scores",
+      "type": "shape",
+      "content": "1st: SF 24,500 | 2nd: Virtual 21,300 | 3rd: London 18,200 | 4th: Tokyo 15,800 | 5th: SP 12,400",
+      "shape": "rectangle",
+      "x": 2650,
+      "y": 2270,
+      "width": 2100,
+      "height": 80,
+      "style": { "fillColor": "#FDCB6E", "fontColor": "#0C0C1E" }
+    },
+    {
+      "type": "connector",
+      "startItem": "sf-island",
+      "endItem": "virtual-hub",
+      "style": {
+        "strokeColor": "#F6B93B",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "london-island",
+      "endItem": "virtual-hub",
+      "style": {
+        "strokeColor": "#F6B93B",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "tokyo-island",
+      "endItem": "virtual-hub",
+      "style": {
+        "strokeColor": "#F6B93B",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "sp-island",
+      "endItem": "virtual-hub",
+      "style": {
+        "strokeColor": "#F6B93B",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "sf-island",
+      "endItem": "london-island",
+      "style": {
+        "strokeColor": "#6C5CE7",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    }
+  ]
+}

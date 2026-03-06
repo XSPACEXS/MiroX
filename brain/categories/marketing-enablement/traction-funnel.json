@@ -1,0 +1,654 @@
+{
+  "metadata": {
+    "name": "Traction Funnel",
+    "description": "A full-funnel marketing metrics board visualizing the complete customer journey from first touch to closed revenue, with six funnel stages, channel attribution, velocity analysis, drop-off diagnostics, cohort comparison, and an experiment optimization pipeline.",
+    "category": "Marketing Enablement Board",
+    "tags": [
+      "funnel",
+      "conversion",
+      "metrics",
+      "pipeline",
+      "attribution",
+      "marketing",
+      "revenue",
+      "growth",
+      "cohort"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#0A0A2E",
+    "gridEnabled": false
+  },
+  "items": [
+    {
+      "id": "title-banner",
+      "type": "frame",
+      "title": "Traction Funnel Dashboard",
+      "x": 100,
+      "y": 50,
+      "width": 4800,
+      "height": 350,
+      "style": { "fillColor": "#1B1464" }
+    },
+    {
+      "id": "title-text",
+      "type": "text",
+      "content": "Traction Funnel Dashboard",
+      "x": 200,
+      "y": 80,
+      "width": 1500,
+      "style": { "fontSize": 56, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "subtitle-text",
+      "type": "text",
+      "content": "From First Touch to Closed Revenue",
+      "x": 200,
+      "y": 190,
+      "width": 1200,
+      "style": { "fontSize": 24, "color": "#F39C12" }
+    },
+    {
+      "id": "metrics-strip",
+      "type": "shape",
+      "content": "Q1 2026 | 142K visitors | 8,400 leads | 1,260 MQLs | 420 SQLs | 168 Opps | 84 Closed Won | $2.1M Revenue",
+      "shape": "rectangle",
+      "x": 2200,
+      "y": 100,
+      "width": 2500,
+      "height": 60,
+      "style": { "fillColor": "#283593", "fontColor": "#00E676" }
+    },
+    {
+      "id": "funnel-frame",
+      "type": "frame",
+      "title": "Funnel Visualization",
+      "x": 100,
+      "y": 450,
+      "width": 4400,
+      "height": 900,
+      "style": { "fillColor": "#0A0A2E" }
+    },
+    {
+      "id": "stage-awareness",
+      "type": "shape",
+      "content": "AWARENESS\n142,000 visitors\nOrganic 45% | Paid 30%\nSocial 15% | Referral 10%",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 520,
+      "width": 650,
+      "height": 350,
+      "style": { "fillColor": "#74B9FF", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "stage-interest",
+      "type": "shape",
+      "content": "INTEREST\n8,400 leads\n5.9% conversion\nEmail signups, content downloads",
+      "shape": "rectangle",
+      "x": 870,
+      "y": 560,
+      "width": 600,
+      "height": 300,
+      "style": { "fillColor": "#A29BFE", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "stage-consideration",
+      "type": "shape",
+      "content": "CONSIDERATION\n1,260 MQLs\n15% conversion\nScored by behavior",
+      "shape": "rectangle",
+      "x": 1540,
+      "y": 600,
+      "width": 550,
+      "height": 260,
+      "style": { "fillColor": "#FDCB6E", "fontColor": "#0A0A2E" }
+    },
+    {
+      "id": "stage-intent",
+      "type": "shape",
+      "content": "INTENT\n420 SQLs\n33.3% conversion\nBudget confirmed",
+      "shape": "rectangle",
+      "x": 2160,
+      "y": 640,
+      "width": 500,
+      "height": 220,
+      "style": { "fillColor": "#E17055", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "stage-evaluation",
+      "type": "shape",
+      "content": "EVALUATION\n168 Opps\n40% conversion\nActive sales cycle",
+      "shape": "rectangle",
+      "x": 2730,
+      "y": 670,
+      "width": 450,
+      "height": 190,
+      "style": { "fillColor": "#FF6B6B", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "stage-purchase",
+      "type": "shape",
+      "content": "PURCHASE\n84 Closed Won\n50% conversion\n$2.1M | $25K avg",
+      "shape": "rectangle",
+      "x": 3250,
+      "y": 700,
+      "width": 400,
+      "height": 160,
+      "style": { "fillColor": "#00B894", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "conv-1",
+      "type": "text",
+      "content": "5.9%",
+      "x": 820,
+      "y": 530,
+      "width": 80,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#00E676" }
+    },
+    {
+      "id": "conv-2",
+      "type": "text",
+      "content": "15%",
+      "x": 1490,
+      "y": 570,
+      "width": 80,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#00E676" }
+    },
+    {
+      "id": "conv-3",
+      "type": "text",
+      "content": "33.3%",
+      "x": 2110,
+      "y": 610,
+      "width": 80,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#00E676" }
+    },
+    {
+      "id": "conv-4",
+      "type": "text",
+      "content": "40%",
+      "x": 2680,
+      "y": 650,
+      "width": 80,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#00E676" }
+    },
+    {
+      "id": "conv-5",
+      "type": "text",
+      "content": "50%",
+      "x": 3200,
+      "y": 680,
+      "width": 80,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#00E676" }
+    },
+    {
+      "id": "channel-frame",
+      "type": "frame",
+      "title": "Channel Attribution",
+      "x": 100,
+      "y": 1400,
+      "width": 2100,
+      "height": 800,
+      "style": { "fillColor": "#0A1428" }
+    },
+    {
+      "id": "channel-header",
+      "type": "text",
+      "content": "Channel Attribution",
+      "x": 150,
+      "y": 1420,
+      "width": 500,
+      "style": { "fontSize": 32, "fontWeight": "bold", "color": "#74B9FF" }
+    },
+    {
+      "id": "channel-organic",
+      "type": "shape",
+      "content": "Organic Search\n63,900 visitors | 3,780 leads\n$420K revenue | CAC: $180 | ROI: 8.2x",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1500,
+      "width": 900,
+      "height": 100,
+      "style": { "fillColor": "#74B9FF", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "channel-paid",
+      "type": "shape",
+      "content": "Paid Search\n42,600 visitors | 2,520 leads\n$630K revenue | CAC: $340 | ROI: 4.1x",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1640,
+      "width": 900,
+      "height": 100,
+      "style": { "fillColor": "#A29BFE", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "channel-social",
+      "type": "shape",
+      "content": "Social Media\n21,300 visitors | 1,260 leads\n$315K revenue | CAC: $280 | ROI: 3.8x",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1780,
+      "width": 900,
+      "height": 100,
+      "style": { "fillColor": "#FDCB6E", "fontColor": "#0A0A2E" }
+    },
+    {
+      "id": "channel-referral",
+      "type": "shape",
+      "content": "Referral/Partners\n14,200 visitors | 840 leads\n$735K revenue | CAC: $120 | ROI: 12.1x",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1920,
+      "width": 900,
+      "height": 100,
+      "style": { "fillColor": "#00B894", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "channel-best",
+      "type": "sticky_note",
+      "content": "Best: Referral has 12.1x ROI — invest more in partner program. Worst: Events CAC at $2,100 — needs optimization.",
+      "x": 1100,
+      "y": 1500,
+      "width": 450,
+      "height": 250,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "velocity-frame",
+      "type": "frame",
+      "title": "Velocity & Timing",
+      "x": 2300,
+      "y": 1400,
+      "width": 2100,
+      "height": 800,
+      "style": { "fillColor": "#0A0A28" }
+    },
+    {
+      "id": "velocity-header",
+      "type": "text",
+      "content": "Funnel Velocity",
+      "x": 2350,
+      "y": 1420,
+      "width": 500,
+      "style": { "fontSize": 32, "fontWeight": "bold", "color": "#A29BFE" }
+    },
+    {
+      "id": "vel-1",
+      "type": "shape",
+      "content": "Awareness to Interest\navg 12 days",
+      "shape": "rectangle",
+      "x": 2350,
+      "y": 1500,
+      "width": 350,
+      "height": 80,
+      "style": { "fillColor": "#74B9FF", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "vel-2",
+      "type": "shape",
+      "content": "Interest to MQL\navg 18 days",
+      "shape": "rectangle",
+      "x": 2350,
+      "y": 1610,
+      "width": 500,
+      "height": 80,
+      "style": { "fillColor": "#A29BFE", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "vel-3",
+      "type": "shape",
+      "content": "MQL to SQL\navg 8 days (fastest)",
+      "shape": "rectangle",
+      "x": 2350,
+      "y": 1720,
+      "width": 250,
+      "height": 80,
+      "style": { "fillColor": "#00E676", "fontColor": "#0A0A2E" }
+    },
+    {
+      "id": "vel-4",
+      "type": "shape",
+      "content": "SQL to Opportunity\navg 22 days (BOTTLENECK)",
+      "shape": "rectangle",
+      "x": 2350,
+      "y": 1830,
+      "width": 600,
+      "height": 80,
+      "style": { "fillColor": "#FF6B6B", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "vel-5",
+      "type": "shape",
+      "content": "Opportunity to Close\navg 35 days",
+      "shape": "rectangle",
+      "x": 2350,
+      "y": 1940,
+      "width": 700,
+      "height": 80,
+      "style": { "fillColor": "#E17055", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "vel-total",
+      "type": "shape",
+      "content": "Total Cycle: 95 days avg (target: 75 days)",
+      "shape": "rectangle",
+      "x": 3200,
+      "y": 1500,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#F39C12", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "vel-note",
+      "type": "sticky_note",
+      "content": "SQL to Opp is the bottleneck — sales needs better enablement materials. Enterprise deals avg 140 days vs SMB 45 days.",
+      "x": 3200,
+      "y": 1620,
+      "width": 500,
+      "height": 250,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "dropoff-frame",
+      "type": "frame",
+      "title": "Drop-off Analysis",
+      "x": 100,
+      "y": 2250,
+      "width": 2100,
+      "height": 700,
+      "style": { "fillColor": "#1E0A0A" }
+    },
+    {
+      "id": "dropoff-header",
+      "type": "text",
+      "content": "Drop-off Analysis — Where Leads Leak",
+      "x": 150,
+      "y": 2270,
+      "width": 800,
+      "style": { "fontSize": 32, "fontWeight": "bold", "color": "#FF7675" }
+    },
+    {
+      "id": "dropoff-1",
+      "type": "sticky_note",
+      "content": "Awareness to Interest: 133,600 lost (94.1%)\nNormal for ToF — improve landing page conversion",
+      "x": 150,
+      "y": 2350,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#FFCDD2" }
+    },
+    {
+      "id": "dropoff-2",
+      "type": "sticky_note",
+      "content": "Interest to MQL: 7,140 lost (85%)\nNurture sequences need work. Only 22% open rate on drip emails.",
+      "x": 600,
+      "y": 2350,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#FFCDD2" }
+    },
+    {
+      "id": "dropoff-3",
+      "type": "sticky_note",
+      "content": "MQL to SQL: 840 lost (66.7%)\nScoring model too generous? Sales follow-up avg 36hrs — too slow.",
+      "x": 1050,
+      "y": 2350,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#FFCDD2" }
+    },
+    {
+      "id": "dropoff-4",
+      "type": "sticky_note",
+      "content": "SQL to Opp: 252 lost (60%)\nBudget objection in 45% of cases. Need better ROI collateral.",
+      "x": 150,
+      "y": 2580,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#FF7675" }
+    },
+    {
+      "id": "dropoff-5",
+      "type": "sticky_note",
+      "content": "Opp to Close: 84 lost (50%)\nLost to competitor in 38% of cases. Competitive positioning gaps.",
+      "x": 600,
+      "y": 2580,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#FF7675" }
+    },
+    {
+      "id": "cohort-frame",
+      "type": "frame",
+      "title": "Cohort Comparison",
+      "x": 2300,
+      "y": 2250,
+      "width": 2100,
+      "height": 700,
+      "style": { "fillColor": "#1A1A0A" }
+    },
+    {
+      "id": "cohort-header",
+      "type": "text",
+      "content": "Month-over-Month Cohort Analysis",
+      "x": 2350,
+      "y": 2270,
+      "width": 800,
+      "style": { "fontSize": 32, "fontWeight": "bold", "color": "#FDCB6E" }
+    },
+    {
+      "id": "cohort-jan",
+      "type": "shape",
+      "content": "January Cohort\n45K visitors | 2,800 leads | 380 MQLs\n6.2% lead-to-MQL | $680K pipeline",
+      "shape": "rectangle",
+      "x": 2350,
+      "y": 2350,
+      "width": 600,
+      "height": 120,
+      "style": { "fillColor": "#FDCB6E", "fontColor": "#0A0A2E" }
+    },
+    {
+      "id": "cohort-feb",
+      "type": "shape",
+      "content": "February Cohort\n48K visitors | 2,900 leads | 440 MQLs\n7.1% lead-to-MQL | $780K pipeline",
+      "shape": "rectangle",
+      "x": 2350,
+      "y": 2510,
+      "width": 600,
+      "height": 120,
+      "style": { "fillColor": "#F39C12", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "cohort-mar",
+      "type": "shape",
+      "content": "March Cohort (in progress)\n49K visitors | 2,700 leads | 440 MQLs\n7.8% lead-to-MQL | $640K (partial)",
+      "shape": "rectangle",
+      "x": 2350,
+      "y": 2670,
+      "width": 600,
+      "height": 120,
+      "style": { "fillColor": "#E17055", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "cohort-trend",
+      "type": "sticky_note",
+      "content": "Feb cohort converting 15% better than Jan — new content strategy working. Lead-to-MQL improving +1.6pp over 3 months.",
+      "x": 3050,
+      "y": 2350,
+      "width": 500,
+      "height": 200,
+      "style": { "fillColor": "#55EFC4" }
+    },
+    {
+      "id": "cohort-concern",
+      "type": "sticky_note",
+      "content": "March traffic is up but lead capture rate dropped — check form performance on new landing pages.",
+      "x": 3050,
+      "y": 2600,
+      "width": 500,
+      "height": 200,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "experiment-frame",
+      "type": "frame",
+      "title": "Experiment Log & Optimization",
+      "x": 100,
+      "y": 3000,
+      "width": 4400,
+      "height": 400,
+      "style": { "fillColor": "#0A1E0A" }
+    },
+    {
+      "id": "experiment-header",
+      "type": "text",
+      "content": "Optimization Experiments",
+      "x": 150,
+      "y": 3020,
+      "width": 600,
+      "style": { "fontSize": 32, "fontWeight": "bold", "color": "#00E676" }
+    },
+    {
+      "id": "exp-active-1",
+      "type": "sticky_note",
+      "content": "ACTIVE: Homepage CTA test — 'Start Free Trial' vs 'See It In Action' — Day 8, +12% variant B, 78% confidence",
+      "x": 150,
+      "y": 3080,
+      "width": 500,
+      "height": 150,
+      "style": { "fillColor": "#FDCB6E" }
+    },
+    {
+      "id": "exp-active-2",
+      "type": "sticky_note",
+      "content": "ACTIVE: Pricing simplification — 3 tiers vs 4 — Day 14, +8% conversion, 92% confidence",
+      "x": 700,
+      "y": 3080,
+      "width": 500,
+      "height": 150,
+      "style": { "fillColor": "#FDCB6E" }
+    },
+    {
+      "id": "exp-completed-1",
+      "type": "sticky_note",
+      "content": "WINNER: Email nurture 1x/week (+18% MQL rate, less fatigue) over 2x/week",
+      "x": 1250,
+      "y": 3080,
+      "width": 500,
+      "height": 150,
+      "style": { "fillColor": "#55EFC4" }
+    },
+    {
+      "id": "exp-completed-2",
+      "type": "sticky_note",
+      "content": "WINNER: Calendar embed (+34% booking rate) over traditional form for demo scheduling",
+      "x": 1800,
+      "y": 3080,
+      "width": 500,
+      "height": 150,
+      "style": { "fillColor": "#55EFC4" }
+    },
+    {
+      "type": "connector",
+      "startItem": "stage-awareness",
+      "endItem": "stage-interest",
+      "style": {
+        "strokeColor": "#00E676",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "stage-interest",
+      "endItem": "stage-consideration",
+      "style": {
+        "strokeColor": "#00E676",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "stage-consideration",
+      "endItem": "stage-intent",
+      "style": {
+        "strokeColor": "#00E676",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "stage-intent",
+      "endItem": "stage-evaluation",
+      "style": {
+        "strokeColor": "#00E676",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "stage-evaluation",
+      "endItem": "stage-purchase",
+      "style": {
+        "strokeColor": "#00E676",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "channel-frame",
+      "endItem": "funnel-frame",
+      "style": {
+        "strokeColor": "#74B9FF",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "funnel-frame",
+      "endItem": "dropoff-frame",
+      "style": {
+        "strokeColor": "#FF7675",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "dropoff-frame",
+      "endItem": "experiment-frame",
+      "style": {
+        "strokeColor": "#00E676",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "experiment-frame",
+      "endItem": "funnel-frame",
+      "style": {
+        "strokeColor": "#00E676",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "cohort-frame",
+      "endItem": "funnel-frame",
+      "style": {
+        "strokeColor": "#FDCB6E",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    }
+  ]
+}

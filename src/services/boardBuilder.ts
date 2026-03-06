@@ -1,5 +1,7 @@
-import type { TemplateDefinition, BoardSection } from '../templates/types'
+import type { TemplateDefinition, BoardSection, BoardManifest } from '../templates/types'
 import { generateBoardManifest } from './templateEngine'
+import { loadBrainContext } from './brainLoader'
+import { generateBoardWithBrain } from './boardGenerator'
 import { logger } from '../utils/logger'
 
 export type ProgressCallback = (step: string, progress: number) => void
@@ -30,8 +32,17 @@ export async function buildBoard(
 
   onProgress?.('Board created - adding content...', 15)
 
-  // Generate board manifest
-  const manifest = generateBoardManifest(template, fieldValues, boardName)
+  // Generate board manifest (use Brain if context available, else static)
+  let manifest: BoardManifest
+  const brainContext = await loadBrainContext(template.blueprintId)
+  if (brainContext) {
+    onProgress?.('Brain context loaded - generating intelligent layout...', 18)
+    manifest = await generateBoardWithBrain(template, fieldValues, boardName, brainContext, (p) => {
+      onProgress?.('Generating with Brain...', p)
+    })
+  } else {
+    manifest = generateBoardManifest(template, fieldValues, boardName)
+  }
 
   const totalSections = manifest.sections.length
 

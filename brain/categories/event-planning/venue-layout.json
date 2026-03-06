@@ -1,0 +1,945 @@
+{
+  "metadata": {
+    "name": "Venue Layout Board",
+    "description": "Floor plan-style board for InnovateTech Summit 2026 at San Francisco Convention Center with Level 1 (main stage, expo hall, registration), Level 2 (breakout rooms), outdoor areas, equipment checklist, and safety plan",
+    "category": "Event Planning",
+    "tags": ["venue", "floor-plan", "layout", "logistics", "safety"],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 4000 }
+  },
+  "settings": {
+    "backgroundColor": "#E3F2FD",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_title",
+      "type": "frame",
+      "title": "Title & Information Banner",
+      "x": 50,
+      "y": 50,
+      "width": 4900,
+      "height": 300,
+      "style": { "fillColor": "#1A237E" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "Venue Layout -- San Francisco Convention Center",
+      "x": 100,
+      "y": 70,
+      "width": 4000,
+      "style": { "fontSize": 48, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_event_info",
+      "type": "text",
+      "content": "InnovateTech Summit 2026 | March 18-20 | Ground Floor + Level 2 + Outdoor",
+      "x": 100,
+      "y": 160,
+      "width": 3000,
+      "style": { "fontSize": 20, "color": "#E8EAF6" }
+    },
+    {
+      "id": "text_scale",
+      "type": "text",
+      "content": "Scale: 1 Miro unit = 1 foot | Total venue area: 85,000 sq ft",
+      "x": 100,
+      "y": 210,
+      "width": 2000,
+      "style": { "fontSize": 14, "color": "#FF8F00" }
+    },
+    {
+      "id": "text_capacity",
+      "type": "text",
+      "content": "Fire Marshal max capacity: 2,500 | Current event capacity: 2,000",
+      "x": 100,
+      "y": 240,
+      "width": 2000,
+      "style": { "fontSize": 14, "color": "#FFFFFF" }
+    },
+    {
+      "id": "frame_legend",
+      "type": "frame",
+      "title": "Legend & Key",
+      "x": 3900,
+      "y": 50,
+      "width": 1000,
+      "height": 800,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_legend_header",
+      "type": "text",
+      "content": "Legend",
+      "x": 3930,
+      "y": 70,
+      "width": 300,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "shape_leg_main",
+      "type": "shape",
+      "content": "Main Stage / Keynote",
+      "shape": "rectangle",
+      "x": 3930,
+      "y": 120,
+      "width": 250,
+      "height": 30,
+      "style": {
+        "fillColor": "#BBDEFB",
+        "fontColor": "#212121",
+        "borderColor": "#90CAF9",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_leg_breakout",
+      "type": "shape",
+      "content": "Breakout Rooms",
+      "shape": "rectangle",
+      "x": 3930,
+      "y": 160,
+      "width": 250,
+      "height": 30,
+      "style": {
+        "fillColor": "#B2DFDB",
+        "fontColor": "#212121",
+        "borderColor": "#80CBC4",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_leg_expo",
+      "type": "shape",
+      "content": "Expo / Sponsor Area",
+      "shape": "rectangle",
+      "x": 3930,
+      "y": 200,
+      "width": 250,
+      "height": 30,
+      "style": {
+        "fillColor": "#FFE0B2",
+        "fontColor": "#212121",
+        "borderColor": "#FFCC80",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_leg_food",
+      "type": "shape",
+      "content": "Food & Beverage",
+      "shape": "rectangle",
+      "x": 3930,
+      "y": 240,
+      "width": 250,
+      "height": 30,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#212121",
+        "borderColor": "#A5D6A7",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_leg_wellness",
+      "type": "shape",
+      "content": "Wellness / Quiet",
+      "shape": "rectangle",
+      "x": 3930,
+      "y": 280,
+      "width": 250,
+      "height": 30,
+      "style": {
+        "fillColor": "#D1C4E9",
+        "fontColor": "#212121",
+        "borderColor": "#B39DDB",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_leg_staff",
+      "type": "shape",
+      "content": "Staff / Operations",
+      "shape": "rectangle",
+      "x": 3930,
+      "y": 320,
+      "width": 250,
+      "height": 30,
+      "style": {
+        "fillColor": "#E0E0E0",
+        "fontColor": "#212121",
+        "borderColor": "#BDBDBD",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "text_leg_icons",
+      "type": "text",
+      "content": "Icons:\nArrow = Attendee flow path\nCircle+X = Emergency exit\nSquare+P = Power outlet cluster\nTriangle+! = AV equipment\nWheelchair = Accessible entrance",
+      "x": 3930,
+      "y": 380,
+      "width": 500,
+      "style": { "fontSize": 11, "color": "#616161" }
+    },
+    {
+      "id": "text_leg_note",
+      "type": "text",
+      "content": "All dimensions in feet | Not to architectural scale",
+      "x": 3930,
+      "y": 520,
+      "width": 500,
+      "style": { "fontSize": 10, "color": "#9E9E9E" }
+    },
+    {
+      "id": "frame_level1",
+      "type": "frame",
+      "title": "Level 1 -- Ground Floor",
+      "x": 50,
+      "y": 400,
+      "width": 3800,
+      "height": 2000,
+      "style": { "fillColor": "#E3F2FD" }
+    },
+    {
+      "id": "text_level1_header",
+      "type": "text",
+      "content": "Level 1 -- Ground Floor",
+      "x": 80,
+      "y": 420,
+      "width": 600,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "shape_entrance",
+      "type": "shape",
+      "content": "Main Entrance\nDouble Doors (12ft wide)\nAccessible ramp -- left side",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 490,
+      "width": 400,
+      "height": 100,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#1A237E",
+        "borderWidth": 3
+      }
+    },
+    {
+      "id": "sticky_entrance_sign",
+      "type": "sticky_note",
+      "content": "Signage needed: Welcome banner (20ft x 4ft) above entrance",
+      "x": 80,
+      "y": 600,
+      "width": 400,
+      "height": 50,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "shape_registration",
+      "type": "shape",
+      "content": "Registration (3,200 sq ft)\nDesk A | Desk B | Desk C | Desk D\nVIP/Speaker Desk",
+      "shape": "rectangle",
+      "x": 550,
+      "y": 490,
+      "width": 600,
+      "height": 180,
+      "style": {
+        "fillColor": "#B2DFDB",
+        "fontColor": "#212121",
+        "borderColor": "#00897B",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "text_reg_capacity",
+      "type": "text",
+      "content": "Capacity: 200 simultaneous | Flow-through: 500/hour",
+      "x": 550,
+      "y": 680,
+      "width": 500,
+      "style": { "fontSize": 10, "color": "#616161" }
+    },
+    {
+      "id": "sticky_reg_power",
+      "type": "sticky_note",
+      "content": "Power: 8 outlets needed for badge printers and scanners",
+      "x": 550,
+      "y": 710,
+      "width": 280,
+      "height": 50,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "sticky_reg_wifi",
+      "type": "sticky_note",
+      "content": "WiFi access point #1 positioned here -- heavy load expected",
+      "x": 850,
+      "y": 710,
+      "width": 280,
+      "height": 50,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "shape_lobby",
+      "type": "shape",
+      "content": "Main Lobby (9,000 sq ft)\nWelcome Display | Coat Check | Info Desk",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 800,
+      "width": 1100,
+      "height": 300,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#1A237E",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "sticky_lobby_signs",
+      "type": "sticky_note",
+      "content": "Directional signage: Arrows to Hall 1, Expo Hall, Rooms 201-204 (upstairs)",
+      "x": 80,
+      "y": 1110,
+      "width": 500,
+      "height": 50,
+      "style": { "fillColor": "#B2DFDB", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "shape_hall1",
+      "type": "shape",
+      "content": "Hall 1 -- Main Stage (20,000 sq ft)\n\nStage Platform: 40ft x 20ft, 3ft elevated\nPodium with teleprompter\nScreen L (16x9) | Screen R (16x9)\nSeating: 800 chairs, 10 rows of 80\nStanding area: 200 capacity\nSound Booth | Live Stream Station",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 1200,
+      "width": 1600,
+      "height": 700,
+      "style": {
+        "fillColor": "#BBDEFB",
+        "fontColor": "#212121",
+        "borderColor": "#1A237E",
+        "borderWidth": 3
+      }
+    },
+    {
+      "id": "sticky_hall1_av",
+      "type": "sticky_note",
+      "content": "AV: 2x projectors (12K lumens), 4x lapel mics, 2x handheld, 1x confidence monitor",
+      "x": 80,
+      "y": 1920,
+      "width": 500,
+      "height": 50,
+      "style": { "fillColor": "#E1BEE7", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "sticky_hall1_lighting",
+      "type": "sticky_note",
+      "content": "Lighting: Stage wash + 4 spotlights + house lights on dimmers",
+      "x": 600,
+      "y": 1920,
+      "width": 500,
+      "height": 50,
+      "style": { "fillColor": "#E1BEE7", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "sticky_hall1_exit1",
+      "type": "sticky_note",
+      "content": "Emergency Exit: Stage right door leads to service corridor",
+      "x": 80,
+      "y": 1980,
+      "width": 500,
+      "height": 50,
+      "style": { "fillColor": "#FFCDD2", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "sticky_hall1_exit2",
+      "type": "sticky_note",
+      "content": "Emergency Exit: Rear double doors lead to Main Lobby",
+      "x": 600,
+      "y": 1980,
+      "width": 500,
+      "height": 50,
+      "style": { "fillColor": "#FFCDD2", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "text_hall1_fire",
+      "type": "text",
+      "content": "Fire capacity: 1,200 | Event capacity: 1,000 | ADA seats: Row 3, aisle seats marked",
+      "x": 80,
+      "y": 2050,
+      "width": 800,
+      "style": { "fontSize": 10, "color": "#616161" }
+    },
+    {
+      "id": "shape_greenroom",
+      "type": "shape",
+      "content": "Green Room\n(Room 105, 1,200 sq ft)\nSpeakers + staff only",
+      "shape": "rectangle",
+      "x": 1750,
+      "y": 1200,
+      "width": 400,
+      "height": 200,
+      "style": {
+        "fillColor": "#E0E0E0",
+        "fontColor": "#212121",
+        "borderColor": "#9E9E9E",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "sticky_green_supplies",
+      "type": "sticky_note",
+      "content": "Coffee, water, light snacks | Mirror, steamer, 2x power strips, WiFi booster",
+      "x": 1750,
+      "y": 1420,
+      "width": 400,
+      "height": 50,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "shape_expo",
+      "type": "shape",
+      "content": "Expo Hall (14,400 sq ft)\n\n3 Platinum Booths (20x10): TechCorp, CloudBase, DevTools Inc.\n6 Gold Booths (10x10): G1-G6\n12 Standard Booths (8x8): B1-B12\nDemo Stage (10x8) for sponsor presentations",
+      "shape": "rectangle",
+      "x": 1750,
+      "y": 1500,
+      "width": 1200,
+      "height": 500,
+      "style": {
+        "fillColor": "#FFE0B2",
+        "fontColor": "#212121",
+        "borderColor": "#FF8F00",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "sticky_expo_power",
+      "type": "sticky_note",
+      "content": "Power: Each booth gets 2x 20A circuits | Ethernet drops at Platinum booths",
+      "x": 1750,
+      "y": 2020,
+      "width": 500,
+      "height": 50,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "sticky_expo_setup",
+      "type": "sticky_note",
+      "content": "Setup: March 17, 2:00-8:00 PM | Teardown: March 20, 3:00-8:00 PM",
+      "x": 2280,
+      "y": 2020,
+      "width": 500,
+      "height": 50,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "shape_networking",
+      "type": "shape",
+      "content": "Networking Lounge (4,000 sq ft)\n8 round tables | 6 high-top standing tables\nCharging Station | Coffee & Snack Bar",
+      "shape": "rectangle",
+      "x": 3000,
+      "y": 1200,
+      "width": 800,
+      "height": 250,
+      "style": {
+        "fillColor": "#B2DFDB",
+        "fontColor": "#212121",
+        "borderColor": "#00897B",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "text_net_hours",
+      "type": "text",
+      "content": "Open all day | No scheduled programming -- free-form networking",
+      "x": 3000,
+      "y": 1470,
+      "width": 600,
+      "style": { "fontSize": 10, "color": "#616161" }
+    },
+    {
+      "id": "shape_dining",
+      "type": "shape",
+      "content": "Grand Ballroom / Dining (4,000 sq ft)\nBuffet Line A | Buffet Line B | Dessert | Beverages\n30 dining tables, 8 seats each = 240 seated",
+      "shape": "rectangle",
+      "x": 3000,
+      "y": 1530,
+      "width": 800,
+      "height": 250,
+      "style": {
+        "fillColor": "#C8E6C9",
+        "fontColor": "#212121",
+        "borderColor": "#4CAF50",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "sticky_dining_dietary",
+      "type": "sticky_note",
+      "content": "Dietary labels: V (vegan), VG (vegetarian), GF (gluten-free), DF (dairy-free), H (halal)",
+      "x": 3000,
+      "y": 1800,
+      "width": 500,
+      "height": 50,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "frame_level2",
+      "type": "frame",
+      "title": "Level 2 -- Upper Floor",
+      "x": 50,
+      "y": 2150,
+      "width": 3800,
+      "height": 600,
+      "style": { "fillColor": "#E3F2FD" }
+    },
+    {
+      "id": "text_level2_header",
+      "type": "text",
+      "content": "Level 2 -- Upper Floor",
+      "x": 80,
+      "y": 2170,
+      "width": 500,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "shape_room201",
+      "type": "shape",
+      "content": "Room 201: Product & Design\n1,440 sq ft\n120 theater | 60 classroom | 40 workshop",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 2220,
+      "width": 500,
+      "height": 140,
+      "style": {
+        "fillColor": "#B2DFDB",
+        "fontColor": "#212121",
+        "borderColor": "#00897B",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "sticky_rm201_av",
+      "type": "sticky_note",
+      "content": "AV: Projector, screen, lapel mic, 2 table mics, whiteboard",
+      "x": 80,
+      "y": 2370,
+      "width": 500,
+      "height": 40,
+      "style": { "fillColor": "#E1BEE7", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "shape_room202",
+      "type": "shape",
+      "content": "Room 202: Engineering\n1,440 sq ft\n120 theater | 60 classroom",
+      "shape": "rectangle",
+      "x": 630,
+      "y": 2220,
+      "width": 500,
+      "height": 140,
+      "style": {
+        "fillColor": "#FFE0B2",
+        "fontColor": "#212121",
+        "borderColor": "#FF8F00",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "sticky_rm202_av",
+      "type": "sticky_note",
+      "content": "AV: Projector, screen, lapel mic | Power strips for attendee laptops",
+      "x": 630,
+      "y": 2370,
+      "width": 500,
+      "height": 40,
+      "style": { "fillColor": "#E1BEE7", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "shape_room203",
+      "type": "shape",
+      "content": "Room 203: Leadership\n1,050 sq ft\n80 theater | 40 cabaret",
+      "shape": "rectangle",
+      "x": 1180,
+      "y": 2220,
+      "width": 450,
+      "height": 140,
+      "style": {
+        "fillColor": "#E8EAF6",
+        "fontColor": "#212121",
+        "borderColor": "#7E57C2",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "shape_room204",
+      "type": "shape",
+      "content": "Room 204: Companion\n1,050 sq ft\n40 workshop style",
+      "shape": "rectangle",
+      "x": 1680,
+      "y": 2220,
+      "width": 450,
+      "height": 140,
+      "style": {
+        "fillColor": "#F8BBD0",
+        "fontColor": "#212121",
+        "borderColor": "#EC407A",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "shape_quiet",
+      "type": "shape",
+      "content": "Quiet Zone (720 sq ft)\nNo laptops | Phone silent\nMeditation cushions + chairs\nMax 20 people",
+      "shape": "rectangle",
+      "x": 2180,
+      "y": 2220,
+      "width": 400,
+      "height": 140,
+      "style": {
+        "fillColor": "#D1C4E9",
+        "fontColor": "#212121",
+        "borderColor": "#9575CD",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "shape_staff",
+      "type": "shape",
+      "content": "Staff Room (450 sq ft)\nVolunteer break room\nShift schedules | Lost & found",
+      "shape": "rectangle",
+      "x": 2630,
+      "y": 2220,
+      "width": 350,
+      "height": 140,
+      "style": {
+        "fillColor": "#E0E0E0",
+        "fontColor": "#212121",
+        "borderColor": "#9E9E9E",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_prayer",
+      "type": "shape",
+      "content": "Prayer Room\n(300 sq ft)\nMulti-faith | Open all day",
+      "shape": "rectangle",
+      "x": 3030,
+      "y": 2220,
+      "width": 250,
+      "height": 100,
+      "style": {
+        "fillColor": "#D1C4E9",
+        "fontColor": "#212121",
+        "borderColor": "#9575CD",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_lactation",
+      "type": "shape",
+      "content": "Lactation Room\n(180 sq ft)\nPrivate, lockable",
+      "shape": "rectangle",
+      "x": 3330,
+      "y": 2220,
+      "width": 250,
+      "height": 100,
+      "style": {
+        "fillColor": "#D1C4E9",
+        "fontColor": "#212121",
+        "borderColor": "#9575CD",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "frame_outdoor",
+      "type": "frame",
+      "title": "Outdoor Areas",
+      "x": 50,
+      "y": 2800,
+      "width": 3800,
+      "height": 400,
+      "style": { "fillColor": "#E8F5E9" }
+    },
+    {
+      "id": "text_outdoor_header",
+      "type": "text",
+      "content": "Outdoor Areas",
+      "x": 80,
+      "y": 2820,
+      "width": 400,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "shape_terrace",
+      "type": "shape",
+      "content": "Rooftop Terrace (4,800 sq ft)\nCapacity: 300 standing\nBar service + passed appetizers\nString lights + heaters (4x) | DJ booth in NE corner",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 2870,
+      "width": 1200,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#FF8F00",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "sticky_terrace_event",
+      "type": "sticky_note",
+      "content": "Welcome Reception venue -- Day 1, 6:00-8:00 PM",
+      "x": 80,
+      "y": 3080,
+      "width": 500,
+      "height": 40,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "sticky_terrace_weather",
+      "type": "sticky_note",
+      "content": "Weather contingency: Move to Grand Ballroom if rain forecast",
+      "x": 600,
+      "y": 3080,
+      "width": 500,
+      "height": 40,
+      "style": { "fillColor": "#FFCDD2", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "shape_loading",
+      "type": "shape",
+      "content": "Loading Dock (1,800 sq ft)\n2 truck bays | Forklift available\nFreight elevator to Expo Hall and Hall 1",
+      "shape": "rectangle",
+      "x": 1400,
+      "y": 2870,
+      "width": 600,
+      "height": 200,
+      "style": {
+        "fillColor": "#E0E0E0",
+        "fontColor": "#212121",
+        "borderColor": "#9E9E9E",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "sticky_loading_schedule",
+      "type": "sticky_note",
+      "content": "Vendor load-in: March 17, 10:00 AM - 8:00 PM | Security escort required",
+      "x": 1400,
+      "y": 3080,
+      "width": 600,
+      "height": 40,
+      "style": { "fillColor": "#E0E0E0", "textAlign": "left", "fontSize": 9 }
+    },
+    {
+      "id": "frame_equipment",
+      "type": "frame",
+      "title": "Equipment Checklist",
+      "x": 50,
+      "y": 3250,
+      "width": 2200,
+      "height": 700,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_equip_header",
+      "type": "text",
+      "content": "Equipment Checklist",
+      "x": 80,
+      "y": 3270,
+      "width": 500,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#1A237E" }
+    },
+    {
+      "id": "shape_equip_table",
+      "type": "shape",
+      "content": "Item | Count | Location\n──────────────────────────────────────\nProjectors | 6 | Hall 1 (2), Rm 201-204 (1 each)\nScreens | 8 | Hall 1 (3), Rm 201-204 (1 each)\nLapel Mics | 8 | Hall 1 (4), Rm 201 (2), Rm 202-203 (1 each)\nHandheld Mics | 4 | Hall 1 (2), Rm 203 (1), Expo (1)\nCameras | 3 | Hall 1 only -- live stream setup\nWiFi APs | 6 | Registration (1), Lobby (1), Expo (2), Hall 1 (1), L2 (1)\nPower Strips | 30 | Distributed across all rooms and Expo\nMonitors | 4 | Lobby (1), Expo signage (2), Registration (1)",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 3320,
+      "width": 2100,
+      "height": 400,
+      "style": {
+        "fillColor": "#FAFAFA",
+        "fontColor": "#212121",
+        "borderColor": "#1A237E",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "sticky_equip_vendor",
+      "type": "sticky_note",
+      "content": "AV vendor: ProSound SF | Contact: Dave, (415) 555-0178 | On-site March 17-20",
+      "x": 80,
+      "y": 3740,
+      "width": 700,
+      "height": 50,
+      "style": { "fillColor": "#FFCDD2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_equip_backup",
+      "type": "sticky_note",
+      "content": "Backup equipment: 2 extra projectors, 4 extra mics in Staff Room",
+      "x": 800,
+      "y": 3740,
+      "width": 600,
+      "height": 50,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "frame_safety",
+      "type": "frame",
+      "title": "Safety & Emergency Plan",
+      "x": 2300,
+      "y": 3250,
+      "width": 2200,
+      "height": 700,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_safety_header",
+      "type": "text",
+      "content": "Safety & Emergency Plan",
+      "x": 2330,
+      "y": 3270,
+      "width": 500,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#E53935" }
+    },
+    {
+      "id": "shape_exits_table",
+      "type": "shape",
+      "content": "Emergency Exits:\n1. Main Entrance (front)\n2. Hall 1 stage right (to service corridor)\n3. Hall 1 rear doors (to lobby)\n4. Expo Hall east door (to parking lot)\n5. Level 2 Staircase B (east wing, to ground floor)",
+      "shape": "rectangle",
+      "x": 2330,
+      "y": 3320,
+      "width": 1100,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#E53935",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "sticky_safety_assembly",
+      "type": "sticky_note",
+      "content": "Assembly Point: Parking Lot B -- 200ft from main entrance",
+      "x": 2330,
+      "y": 3540,
+      "width": 500,
+      "height": 50,
+      "style": { "fillColor": "#FFCDD2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_safety_fire",
+      "type": "sticky_note",
+      "content": "Fire extinguishers: 12 total -- see venue map for exact positions",
+      "x": 2860,
+      "y": 3540,
+      "width": 500,
+      "height": 50,
+      "style": { "fillColor": "#FFCDD2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_safety_firstaid",
+      "type": "sticky_note",
+      "content": "First Aid Station: Main Lobby, Info Desk area | AED located at Registration",
+      "x": 2330,
+      "y": 3610,
+      "width": 500,
+      "height": 50,
+      "style": { "fillColor": "#FFCDD2", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_safety_contact",
+      "type": "sticky_note",
+      "content": "Emergency contact: Venue Manager Sarah Kim, (415) 555-0199",
+      "x": 2860,
+      "y": 3610,
+      "width": 500,
+      "height": 50,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "sticky_safety_hospital",
+      "type": "sticky_note",
+      "content": "Nearest hospital: SF General, 1001 Potrero Ave -- 2.3 miles / 8 min drive",
+      "x": 2330,
+      "y": 3680,
+      "width": 500,
+      "height": 50,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 10 }
+    },
+    {
+      "id": "text_safety_drill",
+      "type": "text",
+      "content": "Evacuation drill: March 17, 5:00 PM (during setup) | All staff mandatory",
+      "x": 2330,
+      "y": 3750,
+      "width": 800,
+      "style": { "fontSize": 12, "color": "#E53935" }
+    },
+    {
+      "id": "conn_entrance_reg",
+      "type": "connector",
+      "startItem": "shape_entrance",
+      "endItem": "shape_registration",
+      "style": {
+        "strokeColor": "#4CAF50",
+        "strokeWidth": 3,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Attendee Flow" }]
+    },
+    {
+      "id": "conn_reg_lobby",
+      "type": "connector",
+      "startItem": "shape_registration",
+      "endItem": "shape_lobby",
+      "style": {
+        "strokeColor": "#4CAF50",
+        "strokeWidth": 3,
+        "strokeStyle": "normal"
+      }
+    },
+    {
+      "id": "conn_lobby_hall",
+      "type": "connector",
+      "startItem": "shape_lobby",
+      "endItem": "shape_hall1",
+      "style": {
+        "strokeColor": "#4CAF50",
+        "strokeWidth": 3,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "To Main Stage" }]
+    },
+    {
+      "id": "conn_lobby_expo",
+      "type": "connector",
+      "startItem": "shape_lobby",
+      "endItem": "shape_expo",
+      "style": {
+        "strokeColor": "#00897B",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "To Expo Hall" }]
+    },
+    {
+      "id": "conn_greenroom_hall",
+      "type": "connector",
+      "startItem": "shape_greenroom",
+      "endItem": "shape_hall1",
+      "style": {
+        "strokeColor": "#9E9E9E",
+        "strokeWidth": 1,
+        "strokeStyle": "dashed"
+      },
+      "captions": [{ "content": "Speaker access" }]
+    }
+  ]
+}

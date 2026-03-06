@@ -1,0 +1,446 @@
+{
+  "metadata": {
+    "name": "User Story Mapping Board",
+    "description": "User story map for AutoPilot Onboarding Flow with activity backbone, user tasks, and four swim lanes (MVP, v2.0, v3.0, Icebox) organizing stories by release priority",
+    "category": "Product Development",
+    "tags": [
+      "user-story-mapping",
+      "onboarding",
+      "backlog",
+      "MVP",
+      "release-planning"
+    ],
+    "complexity": "Medium",
+    "boardSize": { "width": 6000, "height": 3200 }
+  },
+  "settings": {
+    "backgroundColor": "#F3E5F5",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_header",
+      "type": "frame",
+      "title": "Map Header",
+      "x": 50,
+      "y": 50,
+      "width": 5900,
+      "height": 200,
+      "style": { "fillColor": "#6200EA" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "User Story Map: AutoPilot Onboarding Flow",
+      "x": 100,
+      "y": 70,
+      "width": 3000,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_meta",
+      "type": "text",
+      "content": "Product: AutoPilot 3.0 | PM: Jake R. | Date: March 6, 2026 | Goal: Map the complete new-user onboarding journey from signup to first sprint",
+      "x": 100,
+      "y": 130,
+      "width": 5000,
+      "style": { "fontSize": 14, "color": "#D1C4E9" }
+    },
+    {
+      "id": "text_backbone_label",
+      "type": "text",
+      "content": "Activity Backbone (top-level user activities, left to right)",
+      "x": 80,
+      "y": 300,
+      "width": 800,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#6200EA" }
+    },
+    {
+      "id": "shape_act1",
+      "type": "shape",
+      "content": "1. Sign Up",
+      "shape": "round_rectangle",
+      "x": 80,
+      "y": 340,
+      "width": 800,
+      "height": 60,
+      "style": {
+        "fillColor": "#6200EA",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#6200EA",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_act2",
+      "type": "shape",
+      "content": "2. Verify Email",
+      "shape": "round_rectangle",
+      "x": 930,
+      "y": 340,
+      "width": 800,
+      "height": 60,
+      "style": {
+        "fillColor": "#6200EA",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#6200EA",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_act3",
+      "type": "shape",
+      "content": "3. Set Up Profile",
+      "shape": "round_rectangle",
+      "x": 1780,
+      "y": 340,
+      "width": 800,
+      "height": 60,
+      "style": {
+        "fillColor": "#6200EA",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#6200EA",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_act4",
+      "type": "shape",
+      "content": "4. Create First Project",
+      "shape": "round_rectangle",
+      "x": 2630,
+      "y": 340,
+      "width": 800,
+      "height": 60,
+      "style": {
+        "fillColor": "#6200EA",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#6200EA",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_act5",
+      "type": "shape",
+      "content": "5. Invite Team",
+      "shape": "round_rectangle",
+      "x": 3480,
+      "y": 340,
+      "width": 800,
+      "height": 60,
+      "style": {
+        "fillColor": "#6200EA",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#6200EA",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "shape_act6",
+      "type": "shape",
+      "content": "6. Create First Sprint",
+      "shape": "round_rectangle",
+      "x": 4330,
+      "y": 340,
+      "width": 800,
+      "height": 60,
+      "style": {
+        "fillColor": "#6200EA",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#6200EA",
+        "borderWidth": 0
+      }
+    },
+    {
+      "id": "text_mvp_label",
+      "type": "text",
+      "content": "MVP (v1.0) — Ship Q2 2026",
+      "x": 80,
+      "y": 440,
+      "width": 500,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#2E7D32" }
+    },
+    {
+      "id": "sticky_mvp1",
+      "type": "sticky_note",
+      "content": "Email + password signup form",
+      "x": 80,
+      "y": 480,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_mvp2",
+      "type": "sticky_note",
+      "content": "Google OAuth signup",
+      "x": 480,
+      "y": 480,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_mvp3",
+      "type": "sticky_note",
+      "content": "Email verification link",
+      "x": 930,
+      "y": 480,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_mvp4",
+      "type": "sticky_note",
+      "content": "Name + role selection",
+      "x": 1780,
+      "y": 480,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_mvp5",
+      "type": "sticky_note",
+      "content": "Create project with name",
+      "x": 2630,
+      "y": 480,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_mvp6",
+      "type": "sticky_note",
+      "content": "Invite via email",
+      "x": 3480,
+      "y": 480,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_mvp7",
+      "type": "sticky_note",
+      "content": "Basic sprint creation",
+      "x": 4330,
+      "y": 480,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "text_v2_label",
+      "type": "text",
+      "content": "v2.0 — Ship Q3 2026",
+      "x": 80,
+      "y": 570,
+      "width": 500,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#1565C0" }
+    },
+    {
+      "id": "sticky_v2_1",
+      "type": "sticky_note",
+      "content": "SSO (SAML) for enterprise",
+      "x": 80,
+      "y": 610,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_v2_2",
+      "type": "sticky_note",
+      "content": "Skip verification for OAuth",
+      "x": 930,
+      "y": 610,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_v2_3",
+      "type": "sticky_note",
+      "content": "Profile avatar upload",
+      "x": 1780,
+      "y": 610,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_v2_4",
+      "type": "sticky_note",
+      "content": "Pre-populated sample project",
+      "x": 2630,
+      "y": 610,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_v2_5",
+      "type": "sticky_note",
+      "content": "Invite via Slack",
+      "x": 3480,
+      "y": 610,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_v2_6",
+      "type": "sticky_note",
+      "content": "Sprint templates",
+      "x": 4330,
+      "y": 610,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#BBDEFB", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "text_v3_label",
+      "type": "text",
+      "content": "v3.0 — Ship Q4 2026",
+      "x": 80,
+      "y": 700,
+      "width": 500,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#E65100" }
+    },
+    {
+      "id": "sticky_v3_1",
+      "type": "sticky_note",
+      "content": "Passwordless login (magic link)",
+      "x": 80,
+      "y": 740,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_v3_2",
+      "type": "sticky_note",
+      "content": "Role-based onboarding flow",
+      "x": 1780,
+      "y": 740,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_v3_3",
+      "type": "sticky_note",
+      "content": "AI project setup assistant",
+      "x": 2630,
+      "y": 740,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_v3_4",
+      "type": "sticky_note",
+      "content": "AI-suggested sprint goals",
+      "x": 4330,
+      "y": 740,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#FFE0B2", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "text_icebox_label",
+      "type": "text",
+      "content": "Icebox (Maybe Later)",
+      "x": 80,
+      "y": 830,
+      "width": 500,
+      "style": { "fontSize": 16, "fontWeight": "bold", "color": "#607D8B" }
+    },
+    {
+      "id": "sticky_ice1",
+      "type": "sticky_note",
+      "content": "Apple Sign In",
+      "x": 80,
+      "y": 870,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#ECEFF1", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_ice2",
+      "type": "sticky_note",
+      "content": "Gamified onboarding badges",
+      "x": 1780,
+      "y": 870,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#ECEFF1", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_ice3",
+      "type": "sticky_note",
+      "content": "Import from Jira/Asana",
+      "x": 2630,
+      "y": 870,
+      "width": 380,
+      "height": 60,
+      "style": { "fillColor": "#ECEFF1", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "conn_act1_act2",
+      "type": "connector",
+      "startItem": "shape_act1",
+      "endItem": "shape_act2",
+      "style": {
+        "strokeColor": "#6200EA",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      }
+    },
+    {
+      "id": "conn_act2_act3",
+      "type": "connector",
+      "startItem": "shape_act2",
+      "endItem": "shape_act3",
+      "style": {
+        "strokeColor": "#6200EA",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      }
+    },
+    {
+      "id": "conn_act3_act4",
+      "type": "connector",
+      "startItem": "shape_act3",
+      "endItem": "shape_act4",
+      "style": {
+        "strokeColor": "#6200EA",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      }
+    },
+    {
+      "id": "conn_act4_act5",
+      "type": "connector",
+      "startItem": "shape_act4",
+      "endItem": "shape_act5",
+      "style": {
+        "strokeColor": "#6200EA",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      }
+    },
+    {
+      "id": "conn_act5_act6",
+      "type": "connector",
+      "startItem": "shape_act5",
+      "endItem": "shape_act6",
+      "style": {
+        "strokeColor": "#6200EA",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      }
+    }
+  ]
+}

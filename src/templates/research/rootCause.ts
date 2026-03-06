@@ -9,6 +9,8 @@ export const rootCause: TemplateDefinition = {
   emoji: '\u{1F50E}',
   estimatedTime: '~4 min',
   blueprintId: 'root-cause-analysis',
+  brainCategory: 'workshops',
+  brainBlueprint: 'retrospective',
   complexity: 'medium',
   color: '#F59E0B',
   tags: ['root cause', 'fishbone', 'ishikawa', '5 whys', 'problem solving', 'quality'],

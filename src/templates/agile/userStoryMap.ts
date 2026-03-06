@@ -9,6 +9,8 @@ export const userStoryMap: TemplateDefinition = {
   emoji: '\u{1F5FA}\uFE0F',
   estimatedTime: '~5 min',
   blueprintId: 'user-story-map',
+  brainCategory: 'product-development',
+  brainBlueprint: 'user-story-mapping',
   complexity: 'medium',
   color: '#7C3AED',
   tags: ['story map', 'user stories', 'mvp', 'product', 'backlog', 'prioritization'],

@@ -1,0 +1,321 @@
+{
+  "metadata": {
+    "name": "Immersive Conference Map",
+    "description": "A large-scale isometric-style conference venue map with navigable zones for main stage, breakout rooms, expo hall, networking lounge, and embedded schedules.",
+    "category": "Event Guide Immersive Isometric",
+    "tags": [
+      "conference",
+      "event",
+      "venue-map",
+      "isometric",
+      "immersive",
+      "schedule",
+      "speakers",
+      "expo"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#FDFEFE",
+    "gridEnabled": false
+  },
+  "items": [
+    {
+      "id": "title-banner",
+      "type": "frame",
+      "title": "Innovate Summit 2026",
+      "x": 100,
+      "y": 50,
+      "width": 4800,
+      "height": 400,
+      "style": { "fillColor": "#2C3E50" }
+    },
+    {
+      "id": "title-text",
+      "type": "text",
+      "content": "Innovate Summit 2026",
+      "x": 200,
+      "y": 80,
+      "width": 1500,
+      "style": { "fontSize": 56, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "subtitle-text",
+      "type": "text",
+      "content": "Conference Venue Map — March 18-20, San Francisco",
+      "x": 200,
+      "y": 170,
+      "width": 1500,
+      "style": { "fontSize": 24, "color": "#F1C40F" }
+    },
+    {
+      "id": "stats-bar",
+      "type": "shape",
+      "content": "3,200 attendees | 48 sessions | 96 speakers | 45 exhibitors | 3 days",
+      "shape": "rectangle",
+      "x": 2800,
+      "y": 100,
+      "width": 1900,
+      "height": 70,
+      "style": {
+        "fillColor": "#34495E",
+        "fontColor": "#F1C40F",
+        "borderColor": "#F1C40F"
+      }
+    },
+    {
+      "id": "registration-frame",
+      "type": "frame",
+      "title": "Registration & Welcome",
+      "x": 100,
+      "y": 500,
+      "width": 1200,
+      "height": 600,
+      "style": { "fillColor": "#E8F8F5" }
+    },
+    {
+      "id": "reg-desks",
+      "type": "shape",
+      "content": "Check-in Desks\nA-F (Fast Pass) | G-L | M-R | S-Z\nVIP/Speaker | Press\nOpens 7:30 AM daily",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 570,
+      "width": 500,
+      "height": 200,
+      "style": { "fillColor": "#1ABC9C", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "reg-badges",
+      "type": "sticky_note",
+      "content": "Badge types: Attendee (blue), Speaker (gold), VIP (black), Press (green)",
+      "x": 700,
+      "y": 570,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#1ABC9C" }
+    },
+    {
+      "id": "main-stage-frame",
+      "type": "frame",
+      "title": "Main Stage — Grand Ballroom",
+      "x": 1500,
+      "y": 500,
+      "width": 2000,
+      "height": 1000,
+      "style": { "fillColor": "#D6EAF8" }
+    },
+    {
+      "id": "day1-keynote1",
+      "type": "shape",
+      "content": "DAY 1 — 9:00 AM\n\"The Future of AI in Enterprise\"\nDr. Sarah Chen, CEO\n60 min",
+      "shape": "rectangle",
+      "x": 1550,
+      "y": 600,
+      "width": 600,
+      "height": 160,
+      "style": { "fillColor": "#2980B9", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "day1-keynote2",
+      "type": "shape",
+      "content": "DAY 1 — 10:30 AM\n\"Building Products People Love\"\nMarcus Rivera, CPO\n45 min",
+      "shape": "rectangle",
+      "x": 2200,
+      "y": 600,
+      "width": 600,
+      "height": 160,
+      "style": { "fillColor": "#2980B9", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "day3-closing",
+      "type": "shape",
+      "content": "DAY 3 — 11:00 AM\nClosing Keynote & Awards\n90 min | Don't miss!",
+      "shape": "rectangle",
+      "x": 2800,
+      "y": 600,
+      "width": 600,
+      "height": 160,
+      "style": { "fillColor": "#E74C3C", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "breakout-frame",
+      "type": "frame",
+      "title": "Breakout Rooms",
+      "x": 100,
+      "y": 1200,
+      "width": 2200,
+      "height": 700,
+      "style": { "fillColor": "#D5F5E3" }
+    },
+    {
+      "id": "room-a",
+      "type": "shape",
+      "content": "Room A — Builder Track\n120 seats | Technical deep-dives",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1280,
+      "width": 650,
+      "height": 200,
+      "style": { "fillColor": "#27AE60", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "room-b",
+      "type": "shape",
+      "content": "Room B — Growth Track\n100 seats | Marketing & sales",
+      "shape": "rectangle",
+      "x": 850,
+      "y": 1280,
+      "width": 650,
+      "height": 200,
+      "style": { "fillColor": "#27AE60", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "room-c",
+      "type": "shape",
+      "content": "Room C — Leadership Track\n80 seats | Culture & org design",
+      "shape": "rectangle",
+      "x": 1550,
+      "y": 1280,
+      "width": 650,
+      "height": 200,
+      "style": { "fillColor": "#27AE60", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "expo-frame",
+      "type": "frame",
+      "title": "Expo Hall",
+      "x": 2500,
+      "y": 1600,
+      "width": 2000,
+      "height": 700,
+      "style": { "fillColor": "#F4ECF7" }
+    },
+    {
+      "id": "expo-platinum",
+      "type": "shape",
+      "content": "Platinum Sponsors (6): NovaTech, CloudScale, DataForge, SecureNet, FlowOps, IntegrateIO",
+      "shape": "rectangle",
+      "x": 2550,
+      "y": 1680,
+      "width": 900,
+      "height": 150,
+      "style": { "fillColor": "#8E44AD", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "expo-demo",
+      "type": "shape",
+      "content": "Demo Theater (50 seats)\n20-min demos every 30 min",
+      "shape": "rectangle",
+      "x": 3550,
+      "y": 1680,
+      "width": 400,
+      "height": 150,
+      "style": { "fillColor": "#F1C40F", "fontColor": "#2C3E50" }
+    },
+    {
+      "id": "networking-frame",
+      "type": "frame",
+      "title": "Networking Lounge",
+      "x": 2500,
+      "y": 2400,
+      "width": 1400,
+      "height": 500,
+      "style": { "fillColor": "#FDEBD0" }
+    },
+    {
+      "id": "network-areas",
+      "type": "shape",
+      "content": "Speed networking (8 tables) | Quiet pods (4) | Open lounge (60 seats) | Coffee bar",
+      "shape": "rectangle",
+      "x": 2550,
+      "y": 2470,
+      "width": 1200,
+      "height": 120,
+      "style": { "fillColor": "#E67E22", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "schedule-frame",
+      "type": "frame",
+      "title": "Schedule Timeline",
+      "x": 100,
+      "y": 2700,
+      "width": 2400,
+      "height": 400,
+      "style": { "fillColor": "#F2F3F4" }
+    },
+    {
+      "id": "sched-day1",
+      "type": "shape",
+      "content": "DAY 1: Registration 7:30 | Keynotes 9-11 | Sessions 11-5 | Reception 6-8",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 2780,
+      "width": 700,
+      "height": 200,
+      "style": { "fillColor": "#2980B9", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "sched-day2",
+      "type": "shape",
+      "content": "DAY 2: Breakfast 8 | Keynotes 9-11 | Workshops 10-5 | Party 7-11",
+      "shape": "rectangle",
+      "x": 900,
+      "y": 2780,
+      "width": 700,
+      "height": 200,
+      "style": { "fillColor": "#27AE60", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "sched-day3",
+      "type": "shape",
+      "content": "DAY 3: Sessions 9-3 | Closing 11 | Farewell lunch 1",
+      "shape": "rectangle",
+      "x": 1650,
+      "y": 2780,
+      "width": 700,
+      "height": 200,
+      "style": { "fillColor": "#E74C3C", "fontColor": "#FFFFFF" }
+    },
+    {
+      "type": "connector",
+      "startItem": "registration-frame",
+      "endItem": "main-stage-frame",
+      "style": {
+        "strokeColor": "#BDC3C7",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "main-stage-frame",
+      "endItem": "breakout-frame",
+      "style": {
+        "strokeColor": "#BDC3C7",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "main-stage-frame",
+      "endItem": "expo-frame",
+      "style": {
+        "strokeColor": "#BDC3C7",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "expo-frame",
+      "endItem": "networking-frame",
+      "style": {
+        "strokeColor": "#BDC3C7",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    }
+  ]
+}

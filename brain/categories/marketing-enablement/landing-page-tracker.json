@@ -1,0 +1,527 @@
+{
+  "metadata": {
+    "name": "Landing Page Tracker",
+    "description": "A visual lifecycle tracker for landing pages — from wireframe concepts through copy variations, design iterations, A/B test results, live performance metrics, and optimization backlog in a continuous improvement loop.",
+    "category": "Marketing Enablement Board",
+    "tags": [
+      "landing-page",
+      "conversion",
+      "A/B-testing",
+      "growth",
+      "CRO",
+      "wireframes",
+      "optimization",
+      "marketing"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#FAFAFA",
+    "gridEnabled": false
+  },
+  "items": [
+    {
+      "id": "title-banner",
+      "type": "frame",
+      "title": "Landing Page Tracker",
+      "x": 100,
+      "y": 50,
+      "width": 4800,
+      "height": 350,
+      "style": { "fillColor": "#2C3E50" }
+    },
+    {
+      "id": "title-text",
+      "type": "text",
+      "content": "Landing Page Tracker",
+      "x": 200,
+      "y": 80,
+      "width": 1200,
+      "style": { "fontSize": 56, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "subtitle-text",
+      "type": "text",
+      "content": "From Wireframe to Winner — Full Lifecycle Landing Page Management",
+      "x": 200,
+      "y": 180,
+      "width": 1500,
+      "style": { "fontSize": 24, "color": "#E17055" }
+    },
+    {
+      "id": "stats-bar",
+      "type": "shape",
+      "content": "12 pages tracked | Avg 5.4% conversion | 4 active A/B tests | $840K pipeline attributed",
+      "shape": "rectangle",
+      "x": 2800,
+      "y": 100,
+      "width": 1900,
+      "height": 60,
+      "style": { "fillColor": "#34495E", "fontColor": "#00B894" }
+    },
+    {
+      "id": "wireframes-frame",
+      "type": "frame",
+      "title": "Wireframe Pipeline",
+      "x": 100,
+      "y": 450,
+      "width": 1400,
+      "height": 1000,
+      "style": { "fillColor": "#EDF2F7" }
+    },
+    {
+      "id": "wireframes-header",
+      "type": "text",
+      "content": "Wireframe Pipeline",
+      "x": 150,
+      "y": 470,
+      "width": 500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#74B9FF" }
+    },
+    {
+      "id": "wire-1",
+      "type": "sticky_note",
+      "content": "Homepage v4\nStatus: Wireframe complete\nStakeholder feedback: Approved\nTarget: March 20",
+      "x": 150,
+      "y": 550,
+      "width": 350,
+      "height": 200,
+      "style": { "fillColor": "#BBDEFB" }
+    },
+    {
+      "id": "wire-2",
+      "type": "sticky_note",
+      "content": "Pricing Redesign\nStatus: In wireframe\nGoal: Simplify 3 tiers\nTarget: April 1",
+      "x": 550,
+      "y": 550,
+      "width": 350,
+      "height": 200,
+      "style": { "fillColor": "#BBDEFB" }
+    },
+    {
+      "id": "wire-3",
+      "type": "sticky_note",
+      "content": "AI Assist LP\nStatus: Copy review\nFocus: Demo CTA\nTarget: March 15",
+      "x": 150,
+      "y": 800,
+      "width": 350,
+      "height": 200,
+      "style": { "fillColor": "#BBDEFB" }
+    },
+    {
+      "id": "wire-4",
+      "type": "sticky_note",
+      "content": "Enterprise LP\nStatus: Wireframe draft\nGoal: ROI calculator embed\nTarget: April 15",
+      "x": 550,
+      "y": 800,
+      "width": 350,
+      "height": 200,
+      "style": { "fillColor": "#BBDEFB" }
+    },
+    {
+      "id": "wire-5",
+      "type": "sticky_note",
+      "content": "Webinar Registration\nStatus: Template ready\n6 upcoming webinars\nTarget: Ongoing",
+      "x": 150,
+      "y": 1050,
+      "width": 350,
+      "height": 200,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "wire-6",
+      "type": "sticky_note",
+      "content": "Free Trial Page\nStatus: Complete\nConverting at 12.4%\nOptimize: Form fields",
+      "x": 550,
+      "y": 1050,
+      "width": 350,
+      "height": 200,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "copy-frame",
+      "type": "frame",
+      "title": "Copy Variations Lab",
+      "x": 1650,
+      "y": 450,
+      "width": 1400,
+      "height": 1000,
+      "style": { "fillColor": "#FFFBEF" }
+    },
+    {
+      "id": "copy-header",
+      "type": "text",
+      "content": "Copy Variations Lab",
+      "x": 1700,
+      "y": 470,
+      "width": 500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FDCB6E" }
+    },
+    {
+      "id": "copy-headline-a",
+      "type": "sticky_note",
+      "content": "Headline A: \"Collaborate in Real-Time, Anywhere\"\nClarity: 9/10 | Urgency: 5/10\n42 chars | Currently live",
+      "x": 1700,
+      "y": 560,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "copy-headline-b",
+      "type": "sticky_note",
+      "content": "Headline B: \"Stop Losing Ideas — Start Building Together\"\nClarity: 7/10 | Urgency: 9/10\n46 chars | Testing variant",
+      "x": 2150,
+      "y": 560,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "copy-cta-options",
+      "type": "shape",
+      "content": "CTA Options Testing:\nA: \"Start Free Trial\" (baseline)\nB: \"See It In Action\" (+12% Day 8)\nC: \"Get Started — It's Free\" (next test)",
+      "shape": "rectangle",
+      "x": 1700,
+      "y": 810,
+      "width": 850,
+      "height": 150,
+      "style": { "fillColor": "#FDCB6E", "fontColor": "#2C3E50" }
+    },
+    {
+      "id": "copy-social-proof",
+      "type": "sticky_note",
+      "content": "Social proof test: Logo bar vs. \"Trusted by 3,200+ teams\" text vs. video testimonial snippet",
+      "x": 1700,
+      "y": 1010,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#FFE0B2" }
+    },
+    {
+      "id": "design-frame",
+      "type": "frame",
+      "title": "Design Iterations Gallery",
+      "x": 3200,
+      "y": 450,
+      "width": 1400,
+      "height": 1000,
+      "style": { "fillColor": "#F3EEFA" }
+    },
+    {
+      "id": "design-header",
+      "type": "text",
+      "content": "Design Iterations Gallery",
+      "x": 3250,
+      "y": 470,
+      "width": 600,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#A29BFE" }
+    },
+    {
+      "id": "design-checklist",
+      "type": "shape",
+      "content": "Design Checklist:\nMobile responsive | ADA compliant | Brand guidelines\nLoad speed <3s | Cross-browser tested",
+      "shape": "rectangle",
+      "x": 3250,
+      "y": 560,
+      "width": 1200,
+      "height": 100,
+      "style": { "fillColor": "#A29BFE", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "design-v1",
+      "type": "sticky_note",
+      "content": "Homepage v3 (current): Clean, minimal. Stakeholder feedback: \"Needs more personality.\" 3.2% conv.",
+      "x": 3250,
+      "y": 710,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#E1BEE7" }
+    },
+    {
+      "id": "design-v2",
+      "type": "sticky_note",
+      "content": "Homepage v4 (new): Bolder colors, animated hero, video embed. Hypothesis: +20% engagement.",
+      "x": 3700,
+      "y": 710,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#E1BEE7" }
+    },
+    {
+      "id": "design-feedback",
+      "type": "sticky_note",
+      "content": "Pricing page: CMO wants single-page scroll. CTO wants comparison table. Testing both.",
+      "x": 3250,
+      "y": 960,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "testing-frame",
+      "type": "frame",
+      "title": "A/B Testing Control Center",
+      "x": 100,
+      "y": 1550,
+      "width": 2400,
+      "height": 900,
+      "style": { "fillColor": "#E8FAFA" }
+    },
+    {
+      "id": "testing-header",
+      "type": "text",
+      "content": "A/B Testing Control Center",
+      "x": 150,
+      "y": 1570,
+      "width": 800,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#00CEC9" }
+    },
+    {
+      "id": "test-1",
+      "type": "shape",
+      "content": "Pricing Page: Variant B +18% conversion\n97% confidence | 14 days | WINNER DECLARED",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1660,
+      "width": 700,
+      "height": 120,
+      "style": { "fillColor": "#55EFC4", "fontColor": "#2C3E50" }
+    },
+    {
+      "id": "test-2",
+      "type": "shape",
+      "content": "AI Assist LP: Variant A +6%\n72% confidence | Needs 5 more days",
+      "shape": "rectangle",
+      "x": 900,
+      "y": 1660,
+      "width": 700,
+      "height": 120,
+      "style": { "fillColor": "#FDCB6E", "fontColor": "#2C3E50" }
+    },
+    {
+      "id": "test-3",
+      "type": "shape",
+      "content": "Homepage CTA: \"See It In Action\" +12%\n78% confidence | Day 8 — monitoring",
+      "shape": "rectangle",
+      "x": 1650,
+      "y": 1660,
+      "width": 700,
+      "height": 120,
+      "style": { "fillColor": "#FDCB6E", "fontColor": "#2C3E50" }
+    },
+    {
+      "id": "test-completed-1",
+      "type": "sticky_note",
+      "content": "COMPLETED: Email nurture 1x/week vs 2x/week — WINNER: 1x/week (+18% MQL rate)",
+      "x": 150,
+      "y": 1840,
+      "width": 500,
+      "height": 180,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "test-completed-2",
+      "type": "sticky_note",
+      "content": "COMPLETED: Demo booking calendar vs form — WINNER: Calendar embed (+34% booking rate)",
+      "x": 700,
+      "y": 1840,
+      "width": 500,
+      "height": 180,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "live-frame",
+      "type": "frame",
+      "title": "Live Pages Performance",
+      "x": 2600,
+      "y": 1550,
+      "width": 2400,
+      "height": 800,
+      "style": { "fillColor": "#E8F5E9" }
+    },
+    {
+      "id": "live-header",
+      "type": "text",
+      "content": "Live Pages Performance",
+      "x": 2650,
+      "y": 1570,
+      "width": 600,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#00B894" }
+    },
+    {
+      "id": "live-homepage",
+      "type": "shape",
+      "content": "Homepage\n85K visits/mo | 3.2% conv | 42% bounce | Avg 2:10 on page",
+      "shape": "rectangle",
+      "x": 2650,
+      "y": 1660,
+      "width": 700,
+      "height": 100,
+      "style": { "fillColor": "#00B894", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "live-pricing",
+      "type": "shape",
+      "content": "Pricing Page\n34K visits/mo | 8.1% conv | 28% bounce | TOP PERFORMER",
+      "shape": "rectangle",
+      "x": 3400,
+      "y": 1660,
+      "width": 700,
+      "height": 100,
+      "style": { "fillColor": "#55EFC4", "fontColor": "#2C3E50" }
+    },
+    {
+      "id": "live-trial",
+      "type": "shape",
+      "content": "Free Trial\n22K visits/mo | 12.4% conv | 35% bounce | Strong performer",
+      "shape": "rectangle",
+      "x": 2650,
+      "y": 1810,
+      "width": 700,
+      "height": 100,
+      "style": { "fillColor": "#00B894", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "live-enterprise",
+      "type": "shape",
+      "content": "Enterprise LP\n8K visits/mo | 2.1% conv | 55% bounce | UNDERPERFORMER",
+      "shape": "rectangle",
+      "x": 3400,
+      "y": 1810,
+      "width": 700,
+      "height": 100,
+      "style": { "fillColor": "#FF7675", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "optimization-frame",
+      "type": "frame",
+      "title": "Optimization Backlog",
+      "x": 100,
+      "y": 2550,
+      "width": 4800,
+      "height": 700,
+      "style": { "fillColor": "#FFF0F0" }
+    },
+    {
+      "id": "optimization-header",
+      "type": "text",
+      "content": "Optimization Backlog",
+      "x": 150,
+      "y": 2570,
+      "width": 600,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#E17055" }
+    },
+    {
+      "id": "opt-1",
+      "type": "sticky_note",
+      "content": "Add video testimonial to AI Assist LP\nEst: +15% conversion | Effort: Medium\nPriority: HIGH",
+      "x": 150,
+      "y": 2660,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#FFCDD2" }
+    },
+    {
+      "id": "opt-2",
+      "type": "sticky_note",
+      "content": "Simplify enterprise form: 8 to 4 fields\nEst: +25% completion | Effort: Low\nPriority: HIGH",
+      "x": 600,
+      "y": 2660,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#FFCDD2" }
+    },
+    {
+      "id": "opt-3",
+      "type": "sticky_note",
+      "content": "Add live chat to pricing page\nEst: +10% conv | Effort: Medium\nPriority: MEDIUM",
+      "x": 1050,
+      "y": 2660,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#FFE0B2" }
+    },
+    {
+      "id": "opt-4",
+      "type": "sticky_note",
+      "content": "Redesign homepage hero with animated product tour\nEst: +20% engagement | Effort: High\nPriority: MEDIUM",
+      "x": 1500,
+      "y": 2660,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#FFE0B2" }
+    },
+    {
+      "id": "opt-5",
+      "type": "sticky_note",
+      "content": "Add exit-intent popup with discount\nEst: +5% recovery | Effort: Low\nPriority: LOW",
+      "x": 1950,
+      "y": 2660,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "type": "connector",
+      "startItem": "wireframes-frame",
+      "endItem": "copy-frame",
+      "style": {
+        "strokeColor": "#74B9FF",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "copy-frame",
+      "endItem": "design-frame",
+      "style": {
+        "strokeColor": "#FDCB6E",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "design-frame",
+      "endItem": "testing-frame",
+      "style": {
+        "strokeColor": "#A29BFE",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "testing-frame",
+      "endItem": "live-frame",
+      "style": {
+        "strokeColor": "#00CEC9",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "live-frame",
+      "endItem": "optimization-frame",
+      "style": {
+        "strokeColor": "#00B894",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "optimization-frame",
+      "endItem": "wireframes-frame",
+      "style": {
+        "strokeColor": "#E17055",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    }
+  ]
+}

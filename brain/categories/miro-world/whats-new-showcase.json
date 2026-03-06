@@ -1,0 +1,673 @@
+{
+  "metadata": {
+    "name": "What's New Showcase",
+    "description": "A release announcement board styled as an interactive nightscape where each feature release is a glowing building along a golden pathway, with zones for major releases, improvements, bug fixes, betas, deprecations, and coming soon previews.",
+    "category": "Miro World Product Showcase",
+    "tags": [
+      "release-notes",
+      "changelog",
+      "what's-new",
+      "product-updates",
+      "showcase",
+      "nightscape",
+      "announcement"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#0F0E2E",
+    "gridEnabled": false
+  },
+  "items": [
+    {
+      "id": "title-banner",
+      "type": "frame",
+      "title": "What's New — March 2026",
+      "x": 100,
+      "y": 50,
+      "width": 4800,
+      "height": 400,
+      "style": { "fillColor": "#0F0E2E" }
+    },
+    {
+      "id": "title-text",
+      "type": "text",
+      "content": "What's New",
+      "x": 200,
+      "y": 80,
+      "width": 1200,
+      "style": { "fontSize": 72, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "subtitle-text",
+      "type": "text",
+      "content": "March 2026 — Product Updates & Releases",
+      "x": 200,
+      "y": 210,
+      "width": 1200,
+      "style": { "fontSize": 28, "color": "#FFD166" }
+    },
+    {
+      "id": "glow-text",
+      "type": "text",
+      "content": "Explore every feature, improvement, and fix shipped this month",
+      "x": 200,
+      "y": 280,
+      "width": 1500,
+      "style": { "fontSize": 16, "color": "#00FFE0" }
+    },
+    {
+      "id": "stats-note",
+      "type": "sticky_note",
+      "content": "14 features shipped | 23 bugs fixed | 3 beta launches | 2 deprecations",
+      "x": 3800,
+      "y": 100,
+      "width": 500,
+      "height": 150,
+      "style": { "fillColor": "#2D2B55" }
+    },
+    {
+      "id": "major-release-frame",
+      "type": "frame",
+      "title": "Major Release — AI Assist v2.0",
+      "x": 100,
+      "y": 500,
+      "width": 1500,
+      "height": 1100,
+      "style": { "fillColor": "#17153A" }
+    },
+    {
+      "id": "major-header",
+      "type": "text",
+      "content": "Major Release",
+      "x": 150,
+      "y": 520,
+      "width": 500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#7C5CFC" }
+    },
+    {
+      "id": "new-badge",
+      "type": "shape",
+      "content": "NEW",
+      "shape": "rectangle",
+      "x": 1400,
+      "y": 520,
+      "width": 100,
+      "height": 40,
+      "style": { "fillColor": "#FF6B6B", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "major-feature-title",
+      "type": "text",
+      "content": "AI Assist v2.0 — Intelligent Board Building",
+      "x": 150,
+      "y": 590,
+      "width": 1200,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "major-showcase",
+      "type": "shape",
+      "content": "Natural language board creation: describe what you want, AI builds it.\nSupports mind maps, flowcharts, Kanban, and freeform layouts.",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 650,
+      "width": 1350,
+      "height": 150,
+      "style": { "fillColor": "#7C5CFC", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "major-note1",
+      "type": "sticky_note",
+      "content": "Auto-generate sticky notes from meeting transcripts — paste Zoom/Teams transcript, get organized board",
+      "x": 150,
+      "y": 850,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#D1C4E9" }
+    },
+    {
+      "id": "major-note2",
+      "type": "sticky_note",
+      "content": "Smart layout engine: AI rearranges messy boards into clean structures with one click",
+      "x": 600,
+      "y": 850,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#D1C4E9" }
+    },
+    {
+      "id": "major-metrics",
+      "type": "sticky_note",
+      "content": "Early metrics: 67% of users tried AI Assist in first week | 4.2/5 satisfaction",
+      "x": 1050,
+      "y": 850,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "major-limitation",
+      "type": "sticky_note",
+      "content": "Known limitation: Max 50 items per AI generation — expanding in v2.1",
+      "x": 150,
+      "y": 1080,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "improvements-frame",
+      "type": "frame",
+      "title": "Improvements & Enhancements",
+      "x": 1750,
+      "y": 500,
+      "width": 1500,
+      "height": 1100,
+      "style": { "fillColor": "#0E2525" }
+    },
+    {
+      "id": "improve-header",
+      "type": "text",
+      "content": "Improvements & Enhancements",
+      "x": 1800,
+      "y": 520,
+      "width": 800,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#4ECDC4" }
+    },
+    {
+      "id": "improve-note1",
+      "type": "sticky_note",
+      "content": "Dashboard performance: 3x faster load times for boards with 500+ items — new virtual scrolling engine",
+      "x": 1800,
+      "y": 600,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#B2DFDB" }
+    },
+    {
+      "id": "improve-note2",
+      "type": "sticky_note",
+      "content": "Connector routing: Smarter auto-routing avoids overlapping shapes — reduces manual adjustments by 60%",
+      "x": 2250,
+      "y": 600,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#B2DFDB" }
+    },
+    {
+      "id": "improve-note3",
+      "type": "sticky_note",
+      "content": "Export quality: PDF and PNG exports now at 300 DPI — print-ready quality for presentations",
+      "x": 1800,
+      "y": 830,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#B2DFDB" }
+    },
+    {
+      "id": "improve-note4",
+      "type": "sticky_note",
+      "content": "Dark mode polish: Improved contrast ratios, fixed 12 accessibility issues, WCAG AA compliant",
+      "x": 2250,
+      "y": 830,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#B2DFDB" }
+    },
+    {
+      "id": "improve-note5",
+      "type": "sticky_note",
+      "content": "Search overhaul: Full-text search across all board content, filters by type, date, and author",
+      "x": 1800,
+      "y": 1060,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#BBDEFB" }
+    },
+    {
+      "id": "improve-note6",
+      "type": "sticky_note",
+      "content": "Template preview: See full board preview before applying a template — reduces wrong picks by 40%",
+      "x": 2250,
+      "y": 1060,
+      "width": 400,
+      "height": 180,
+      "style": { "fillColor": "#BBDEFB" }
+    },
+    {
+      "id": "bugfix-frame",
+      "type": "frame",
+      "title": "Bug Fixes & Stability",
+      "x": 3400,
+      "y": 500,
+      "width": 1200,
+      "height": 1100,
+      "style": { "fillColor": "#0E1E14" }
+    },
+    {
+      "id": "bugfix-header",
+      "type": "text",
+      "content": "Bug Fixes & Stability",
+      "x": 3450,
+      "y": 520,
+      "width": 600,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#95D5B2" }
+    },
+    {
+      "id": "bugfix-note1",
+      "type": "sticky_note",
+      "content": "Fixed: Sticky notes losing content when moved rapidly during collaborative editing",
+      "x": 3450,
+      "y": 600,
+      "width": 350,
+      "height": 170,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "bugfix-note2",
+      "type": "sticky_note",
+      "content": "Fixed: Connector endpoints disconnecting when parent frame is resized",
+      "x": 3850,
+      "y": 600,
+      "width": 350,
+      "height": 170,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "bugfix-note3",
+      "type": "sticky_note",
+      "content": "Fixed: Safari 17 rendering glitch causing frames to flicker on scroll",
+      "x": 3450,
+      "y": 820,
+      "width": 350,
+      "height": 170,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "bugfix-note4",
+      "type": "sticky_note",
+      "content": "Fixed: Undo/redo stack corruption when multiple users edit same sticky simultaneously",
+      "x": 3850,
+      "y": 820,
+      "width": 350,
+      "height": 170,
+      "style": { "fillColor": "#C8E6C9" }
+    },
+    {
+      "id": "bugfix-stability",
+      "type": "sticky_note",
+      "content": "Stability: Reduced crash rate from 0.3% to 0.08% — 73% improvement",
+      "x": 3450,
+      "y": 1040,
+      "width": 350,
+      "height": 170,
+      "style": { "fillColor": "#E8F5E9" }
+    },
+    {
+      "id": "bugfix-stats",
+      "type": "text",
+      "content": "23 bugs resolved | 0 P0 regressions | 99.98% uptime this month",
+      "x": 3450,
+      "y": 1250,
+      "width": 800,
+      "style": { "fontSize": 12, "color": "#95D5B2" }
+    },
+    {
+      "id": "beta-frame",
+      "type": "frame",
+      "title": "Beta & Preview",
+      "x": 100,
+      "y": 1700,
+      "width": 1500,
+      "height": 900,
+      "style": { "fillColor": "#2E1A0E" }
+    },
+    {
+      "id": "beta-header",
+      "type": "text",
+      "content": "Beta & Preview",
+      "x": 150,
+      "y": 1720,
+      "width": 500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FF8A5C" }
+    },
+    {
+      "id": "beta-note1",
+      "type": "sticky_note",
+      "content": "BETA: Miro Spaces — organize boards into topic-based spaces with shared permissions and dashboards",
+      "x": 150,
+      "y": 1800,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#FFE0B2" }
+    },
+    {
+      "id": "beta-note2",
+      "type": "sticky_note",
+      "content": "BETA: Video recording — record board walkthroughs with voiceover, share as async presentations",
+      "x": 600,
+      "y": 1800,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#FFE0B2" }
+    },
+    {
+      "id": "beta-note3",
+      "type": "sticky_note",
+      "content": "PREVIEW: Conditional connectors — connectors that change color/style based on linked data values",
+      "x": 1050,
+      "y": 1800,
+      "width": 400,
+      "height": 200,
+      "style": { "fillColor": "#FFE0B2" }
+    },
+    {
+      "id": "beta-participation",
+      "type": "shape",
+      "content": "Beta Participation\nCurrent beta users: 1,240 | Feedback submitted: 389 items",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 2060,
+      "width": 700,
+      "height": 100,
+      "style": { "fillColor": "#FF8A5C", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "deprecation-frame",
+      "type": "frame",
+      "title": "Deprecations & Migration",
+      "x": 1750,
+      "y": 1700,
+      "width": 1200,
+      "height": 900,
+      "style": { "fillColor": "#1A1A1A" }
+    },
+    {
+      "id": "deprecation-header",
+      "type": "text",
+      "content": "Deprecations & Migration Notes",
+      "x": 1800,
+      "y": 1720,
+      "width": 800,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#A0A0A0" }
+    },
+    {
+      "id": "deprecation-note1",
+      "type": "sticky_note",
+      "content": "DEPRECATED: Legacy export format (v1 JSON) — will be removed June 2026. Migrate to v2 format.",
+      "x": 1800,
+      "y": 1800,
+      "width": 450,
+      "height": 200,
+      "style": { "fillColor": "#E0E0E0" }
+    },
+    {
+      "id": "deprecation-note2",
+      "type": "sticky_note",
+      "content": "DEPRECATED: Old webhook format — new event-driven webhooks replace polling. Migration guide available.",
+      "x": 1800,
+      "y": 2050,
+      "width": 450,
+      "height": 200,
+      "style": { "fillColor": "#E0E0E0" }
+    },
+    {
+      "id": "deprecation-action",
+      "type": "sticky_note",
+      "content": "ACTION REQUIRED: API key rotation — all keys issued before Jan 2025 expire April 30, 2026",
+      "x": 2300,
+      "y": 1800,
+      "width": 450,
+      "height": 200,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "deprecation-timeline",
+      "type": "shape",
+      "content": "Migration Timeline\nNotice: Mar 2026 | Soft removal: May 2026 | Hard removal: Jun 2026",
+      "shape": "rectangle",
+      "x": 2300,
+      "y": 2050,
+      "width": 450,
+      "height": 100,
+      "style": { "fillColor": "#A0A0A0", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "coming-soon-frame",
+      "type": "frame",
+      "title": "Coming Soon",
+      "x": 3100,
+      "y": 1700,
+      "width": 1200,
+      "height": 900,
+      "style": { "fillColor": "#0F0E2E" }
+    },
+    {
+      "id": "coming-header",
+      "type": "text",
+      "content": "Coming Soon",
+      "x": 3150,
+      "y": 1720,
+      "width": 500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#00FFE0" }
+    },
+    {
+      "id": "coming-note1",
+      "type": "sticky_note",
+      "content": "Miro Canvas SDK v3 — new component model, TypeScript-first, 10x faster plugin rendering",
+      "x": 3150,
+      "y": 1800,
+      "width": 450,
+      "height": 180,
+      "style": { "fillColor": "#2D2B55" }
+    },
+    {
+      "id": "coming-note2",
+      "type": "sticky_note",
+      "content": "Board-level permissions — granular read/write/comment access per frame or section",
+      "x": 3650,
+      "y": 1800,
+      "width": 450,
+      "height": 180,
+      "style": { "fillColor": "#2D2B55" }
+    },
+    {
+      "id": "coming-note3",
+      "type": "sticky_note",
+      "content": "AI meeting recap — auto-generates a Miro board summary from Zoom/Teams recordings",
+      "x": 3150,
+      "y": 2030,
+      "width": 450,
+      "height": 180,
+      "style": { "fillColor": "#2D2B55" }
+    },
+    {
+      "id": "coming-note4",
+      "type": "sticky_note",
+      "content": "Offline mode — full board editing without internet, syncs when reconnected",
+      "x": 3650,
+      "y": 2030,
+      "width": 450,
+      "height": 180,
+      "style": { "fillColor": "#2D2B55" }
+    },
+    {
+      "id": "coming-vote",
+      "type": "shape",
+      "content": "Roadmap Vote\nVote on features: roadmap.acme.com",
+      "shape": "diamond",
+      "x": 3350,
+      "y": 2260,
+      "width": 300,
+      "height": 200,
+      "style": { "fillColor": "#FFD166", "fontColor": "#1A1A2E" }
+    },
+    {
+      "id": "timeline-frame",
+      "type": "frame",
+      "title": "Release Timeline 2026",
+      "x": 100,
+      "y": 2700,
+      "width": 4800,
+      "height": 300,
+      "style": { "fillColor": "#1A1A0E" }
+    },
+    {
+      "id": "timeline-header",
+      "type": "text",
+      "content": "Release Timeline 2026",
+      "x": 150,
+      "y": 2720,
+      "width": 600,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#1A1A2E" }
+    },
+    {
+      "id": "timeline-jan",
+      "type": "shape",
+      "content": "Jan\nv4.8 — Connector overhaul",
+      "shape": "circle",
+      "x": 400,
+      "y": 2770,
+      "width": 180,
+      "height": 180,
+      "style": { "fillColor": "#FFD166", "fontColor": "#1A1A2E" }
+    },
+    {
+      "id": "timeline-feb",
+      "type": "shape",
+      "content": "Feb\nv4.9 — Template v2 engine",
+      "shape": "circle",
+      "x": 1000,
+      "y": 2770,
+      "width": 180,
+      "height": 180,
+      "style": { "fillColor": "#FFD166", "fontColor": "#1A1A2E" }
+    },
+    {
+      "id": "timeline-mar",
+      "type": "shape",
+      "content": "Mar\nv5.0 — AI Assist v2\nYOU ARE HERE",
+      "shape": "circle",
+      "x": 1600,
+      "y": 2770,
+      "width": 180,
+      "height": 180,
+      "style": { "fillColor": "#FF6B6B", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "timeline-apr",
+      "type": "shape",
+      "content": "Apr\nv5.1 — Canvas SDK v3\n(planned)",
+      "shape": "circle",
+      "x": 2200,
+      "y": 2770,
+      "width": 180,
+      "height": 180,
+      "style": { "fillColor": "#2D2B55", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "timeline-may",
+      "type": "shape",
+      "content": "May\nv5.2 — Offline mode\n(planned)",
+      "shape": "circle",
+      "x": 2800,
+      "y": 2770,
+      "width": 180,
+      "height": 180,
+      "style": { "fillColor": "#2D2B55", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "timeline-jun",
+      "type": "shape",
+      "content": "Jun\nv5.3 — TBD",
+      "shape": "circle",
+      "x": 3400,
+      "y": 2770,
+      "width": 180,
+      "height": 180,
+      "style": { "fillColor": "#2D2B55", "fontColor": "#FFFFFF" }
+    },
+    {
+      "type": "connector",
+      "startItem": "title-banner",
+      "endItem": "major-release-frame",
+      "style": {
+        "strokeColor": "#FFD166",
+        "strokeWidth": 5,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "major-release-frame",
+      "endItem": "improvements-frame",
+      "style": {
+        "strokeColor": "#FFD166",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "improvements-frame",
+      "endItem": "bugfix-frame",
+      "style": {
+        "strokeColor": "#FFD166",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "major-release-frame",
+      "endItem": "beta-frame",
+      "style": {
+        "strokeColor": "#FFD166",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "improvements-frame",
+      "endItem": "deprecation-frame",
+      "style": {
+        "strokeColor": "#FFD166",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "bugfix-frame",
+      "endItem": "coming-soon-frame",
+      "style": {
+        "strokeColor": "#FFD166",
+        "strokeWidth": 4,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "major-showcase",
+      "endItem": "coming-note3",
+      "style": {
+        "strokeColor": "#00FFE0",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "beta-note1",
+      "endItem": "coming-note2",
+      "style": {
+        "strokeColor": "#00FFE0",
+        "strokeWidth": 2,
+        "strokeStyle": "dashed"
+      }
+    }
+  ]
+}

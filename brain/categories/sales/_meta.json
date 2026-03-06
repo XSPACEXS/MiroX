@@ -1,0 +1,52 @@
+{
+  "category": "Sales",
+  "description": "Visual tools for managing pipelines, planning strategic accounts, building repeatable playbooks, and tracking deal performance to align revenue teams around a single source of truth",
+  "icon": "💰",
+  "colorTheme": {
+    "primary": "#1B2A4A",
+    "secondary": "#4A6FA5",
+    "accent": "#2E7D32"
+  },
+  "templates": [
+    {
+      "file": "sales-pipeline",
+      "name": "Sales Pipeline",
+      "description": "Horizontal Kanban-style pipeline with deal cards, stage conversion metrics, velocity tracking, and aging deal alerts",
+      "tags": ["pipeline", "deals", "kanban", "stages", "conversion"],
+      "complexity": "Medium"
+    },
+    {
+      "file": "account-planning",
+      "name": "Account Planning",
+      "description": "Strategic account canvas with stakeholder mapping, relationship matrix, competitive landscape, and quarterly action plans",
+      "tags": [
+        "account",
+        "enterprise",
+        "stakeholders",
+        "strategy",
+        "expansion"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "sales-playbook",
+      "name": "Sales Playbook",
+      "description": "End-to-end sales motion codified with ICP, outreach sequences, discovery framework, objection handling, and competitor battlecards",
+      "tags": [
+        "playbook",
+        "enablement",
+        "objections",
+        "battlecards",
+        "onboarding"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "deal-tracker",
+      "name": "Deal Tracker",
+      "description": "Revenue dashboard with active deal table, forecast breakdown, win/loss analysis, and team performance leaderboard",
+      "tags": ["deals", "forecast", "revenue", "leaderboard", "win-loss"],
+      "complexity": "Medium"
+    }
+  ]
+}

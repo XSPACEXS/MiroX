@@ -1,0 +1,396 @@
+{
+  "metadata": {
+    "name": "Release Planning Board",
+    "description": "AutoPilot 3.0 release plan with pre-release checklist, feature readiness matrix, QA test plan, deployment steps, rollback procedure, and communication plan",
+    "category": "Product Development",
+    "tags": [
+      "release-planning",
+      "deployment",
+      "QA",
+      "rollback",
+      "launch-checklist"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5200, "height": 3400 }
+  },
+  "settings": {
+    "backgroundColor": "#F3E5F5",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_header",
+      "type": "frame",
+      "title": "Release Header",
+      "x": 50,
+      "y": 50,
+      "width": 5100,
+      "height": 200,
+      "style": { "fillColor": "#6200EA" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "Release Planning: AutoPilot 3.0",
+      "x": 100,
+      "y": 70,
+      "width": 2500,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_meta",
+      "type": "text",
+      "content": "Release Date: May 1, 2026 | Release Manager: Marcus W. | PM: Jake R. | Status: Planning | Updated: March 6, 2026",
+      "x": 100,
+      "y": 130,
+      "width": 4500,
+      "style": { "fontSize": 14, "color": "#D1C4E9" }
+    },
+    {
+      "id": "frame_checklist",
+      "type": "frame",
+      "title": "Pre-Release Checklist",
+      "x": 50,
+      "y": 300,
+      "width": 2500,
+      "height": 700,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_checklist_header",
+      "type": "text",
+      "content": "Pre-Release Checklist",
+      "x": 80,
+      "y": 320,
+      "width": 500,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "shape_checklist",
+      "type": "shape",
+      "content": "[ ] All features code-complete and merged to release branch\n[ ] Feature flags configured for staged rollout\n[ ] QA sign-off on all critical paths\n[ ] Performance benchmarks pass (p95 < 200ms)\n[ ] Security audit completed (no critical/high findings)\n[ ] Documentation updated (API docs, changelog, help center)\n[ ] Marketing assets ready (blog post, email, social)\n[ ] Support team briefed on new features and known issues\n[ ] Rollback plan reviewed and tested\n[ ] Monitoring dashboards configured (error rates, latency, adoption)",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 370,
+      "width": 2400,
+      "height": 350,
+      "style": {
+        "fillColor": "#FAFAFA",
+        "fontColor": "#212121",
+        "borderColor": "#6200EA",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "frame_features",
+      "type": "frame",
+      "title": "Feature Readiness",
+      "x": 2600,
+      "y": 300,
+      "width": 2500,
+      "height": 700,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_features_header",
+      "type": "text",
+      "content": "Feature Readiness Matrix",
+      "x": 2630,
+      "y": 320,
+      "width": 500,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "shape_features_table",
+      "type": "shape",
+      "content": "Feature | Dev | QA | Docs | Flag | Status\n──────────────────────────────────────────\nAI Task Routing | DONE | IN QA | DONE | ON | On Track\nSmart Notifications | DONE | DONE | DONE | ON | Ready\nKanban WIP Limits | DONE | DONE | DONE | OFF | Ready\nSprint Goal Field | DONE | DONE | In Progress | OFF | On Track\nWorkload Dashboard | 80% | Not Started | Not Started | OFF | At Risk",
+      "shape": "rectangle",
+      "x": 2630,
+      "y": 370,
+      "width": 2400,
+      "height": 250,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#2979FF",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "sticky_feature_note",
+      "type": "sticky_note",
+      "content": "Workload Dashboard at risk — design handoff was late. Marcus escalating to ensure Sprint 16 completion. Fallback: ship without burndown chart in v3.0, add in v3.1.",
+      "x": 2630,
+      "y": 650,
+      "width": 800,
+      "height": 80,
+      "style": { "fillColor": "#FFEBEE", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_qa",
+      "type": "frame",
+      "title": "QA & Test Plan",
+      "x": 50,
+      "y": 1050,
+      "width": 2500,
+      "height": 600,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_qa_header",
+      "type": "text",
+      "content": "QA & Test Plan",
+      "x": 80,
+      "y": 1070,
+      "width": 400,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "shape_qa_table",
+      "type": "shape",
+      "content": "Test Type | Scope | Owner | Status | Pass Rate\n────────────────────────────────────────────\nUnit Tests | All new code | Dev team | DONE | 98.2%\nIntegration Tests | API + Frontend | QA team | IN PROGRESS | 91.5%\nE2E Tests | 15 critical user flows | QA team | NOT STARTED | —\nPerformance Tests | Load test 10K concurrent | Marcus W. | NOT STARTED | —\nSecurity Scan | OWASP Top 10 | External vendor | SCHEDULED | —\nAccessibility Audit | WCAG 2.1 AA | Priya T. | NOT STARTED | —",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 1120,
+      "width": 2400,
+      "height": 300,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#00897B",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "frame_deployment",
+      "type": "frame",
+      "title": "Deployment Plan",
+      "x": 2600,
+      "y": 1050,
+      "width": 2500,
+      "height": 600,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_deploy_header",
+      "type": "text",
+      "content": "Deployment Steps",
+      "x": 2630,
+      "y": 1070,
+      "width": 400,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "sticky_deploy1",
+      "type": "sticky_note",
+      "content": "Step 1: Database migrations (off-peak, 2 AM PST)",
+      "x": 2630,
+      "y": 1120,
+      "width": 550,
+      "height": 60,
+      "style": { "fillColor": "#E8F5E9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_deploy2",
+      "type": "sticky_note",
+      "content": "Step 2: Deploy backend services (blue-green deployment)",
+      "x": 2630,
+      "y": 1200,
+      "width": 550,
+      "height": 60,
+      "style": { "fillColor": "#E8F5E9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_deploy3",
+      "type": "sticky_note",
+      "content": "Step 3: Deploy frontend (CDN cache purge)",
+      "x": 2630,
+      "y": 1280,
+      "width": 550,
+      "height": 60,
+      "style": { "fillColor": "#E8F5E9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_deploy4",
+      "type": "sticky_note",
+      "content": "Step 4: Enable feature flags — 5% canary",
+      "x": 3200,
+      "y": 1120,
+      "width": 550,
+      "height": 60,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_deploy5",
+      "type": "sticky_note",
+      "content": "Step 5: Monitor for 4 hours — if clean, 25% rollout",
+      "x": 3200,
+      "y": 1200,
+      "width": 550,
+      "height": 60,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_deploy6",
+      "type": "sticky_note",
+      "content": "Step 6: 50% → 100% over 48 hours if metrics stable",
+      "x": 3200,
+      "y": 1280,
+      "width": 550,
+      "height": 60,
+      "style": { "fillColor": "#E3F2FD", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_rollback",
+      "type": "frame",
+      "title": "Rollback Plan",
+      "x": 50,
+      "y": 1700,
+      "width": 2500,
+      "height": 500,
+      "style": { "fillColor": "#FFEBEE" }
+    },
+    {
+      "id": "text_rollback_header",
+      "type": "text",
+      "content": "Rollback Plan",
+      "x": 80,
+      "y": 1720,
+      "width": 400,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#C62828" }
+    },
+    {
+      "id": "sticky_trigger1",
+      "type": "sticky_note",
+      "content": "Trigger: Error rate >2% for 15 minutes",
+      "x": 80,
+      "y": 1770,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#EF9A9A", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_trigger2",
+      "type": "sticky_note",
+      "content": "Trigger: p95 latency >1s for 10 minutes",
+      "x": 600,
+      "y": 1770,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#EF9A9A", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_trigger3",
+      "type": "sticky_note",
+      "content": "Trigger: Critical security vulnerability discovered",
+      "x": 1120,
+      "y": 1770,
+      "width": 500,
+      "height": 60,
+      "style": { "fillColor": "#EF9A9A", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "shape_rollback_procedure",
+      "type": "shape",
+      "content": "Rollback Procedure:\n1. Disable all feature flags immediately (< 1 min)\n2. If feature flags insufficient: revert to previous deployment via blue-green swap (< 5 min)\n3. If database migration involved: run reverse migration script (tested, < 10 min)\n4. Notify #incident-response Slack channel\n5. Post-incident review within 24 hours",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 1850,
+      "width": 2400,
+      "height": 200,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#D32F2F",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "frame_comms",
+      "type": "frame",
+      "title": "Communication Plan",
+      "x": 2600,
+      "y": 1700,
+      "width": 2500,
+      "height": 500,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_comms_header",
+      "type": "text",
+      "content": "Communication Plan",
+      "x": 2630,
+      "y": 1720,
+      "width": 500,
+      "style": { "fontSize": 24, "fontWeight": "bold", "color": "#263238" }
+    },
+    {
+      "id": "shape_internal_comms",
+      "type": "shape",
+      "content": "Internal (Pre-Launch):\n- Engineering all-hands: March 28\n- Support team training: April 15-18\n- Sales enablement deck: April 20\n- Company announcement: April 29",
+      "shape": "round_rectangle",
+      "x": 2630,
+      "y": 1770,
+      "width": 1100,
+      "height": 180,
+      "style": {
+        "fillColor": "#E3F2FD",
+        "fontColor": "#212121",
+        "borderColor": "#1565C0",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "shape_external_comms",
+      "type": "shape",
+      "content": "External (Launch Day May 1):\n- Blog post: 'Introducing AutoPilot 3.0'\n- Email to all users (segmented by plan)\n- Social media campaign (Twitter, LinkedIn)\n- In-app banner: 'New! AI Task Routing'\n- Press release via PR agency",
+      "shape": "round_rectangle",
+      "x": 3780,
+      "y": 1770,
+      "width": 1100,
+      "height": 180,
+      "style": {
+        "fillColor": "#E8F5E9",
+        "fontColor": "#212121",
+        "borderColor": "#2E7D32",
+        "borderWidth": 1
+      }
+    },
+    {
+      "id": "conn_features_qa",
+      "type": "connector",
+      "startItem": "frame_features",
+      "endItem": "frame_qa",
+      "style": {
+        "strokeColor": "#6200EA",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Validates" }]
+    },
+    {
+      "id": "conn_qa_deploy",
+      "type": "connector",
+      "startItem": "frame_qa",
+      "endItem": "frame_deployment",
+      "style": {
+        "strokeColor": "#6200EA",
+        "strokeWidth": 2,
+        "strokeStyle": "normal"
+      },
+      "captions": [{ "content": "Gates" }]
+    },
+    {
+      "id": "conn_deploy_rollback",
+      "type": "connector",
+      "startItem": "frame_deployment",
+      "endItem": "frame_rollback",
+      "style": {
+        "strokeColor": "#D32F2F",
+        "strokeWidth": 1,
+        "strokeStyle": "dashed"
+      },
+      "captions": [{ "content": "If failure" }]
+    }
+  ]
+}

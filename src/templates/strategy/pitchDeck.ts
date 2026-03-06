@@ -9,6 +9,8 @@ export const pitchDeck: TemplateDefinition = {
   emoji: '\u{1F4BC}',
   estimatedTime: '~6 min',
   blueprintId: 'pitch-deck',
+  brainCategory: 'startup',
+  brainBlueprint: 'pitch-deck-plan',
   complexity: 'complex',
   color: '#FFD600',
   tags: ['pitch', 'investors', 'fundraising', 'startup', 'deck', 'presentation'],

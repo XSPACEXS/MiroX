@@ -9,6 +9,8 @@ export const apiDesign: TemplateDefinition = {
   emoji: '\u{1F50C}',
   estimatedTime: '~6 min',
   blueprintId: 'api-design',
+  brainCategory: 'technical-architecture',
+  brainBlueprint: 'api-map',
   complexity: 'complex',
   color: '#3B82F6',
   tags: ['api', 'rest', 'backend', 'endpoints', 'authentication', 'design'],

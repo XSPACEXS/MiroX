@@ -1,0 +1,566 @@
+{
+  "metadata": {
+    "name": "Retrospective Board",
+    "description": "Sailboat retrospective for Sprint 14 with Wind (what went well), Island (goals), Anchor (what held us back), Rocks (risks ahead), action items, parking lot, and facilitator notes",
+    "category": "Workshops",
+    "tags": [
+      "retrospective",
+      "sailboat",
+      "agile",
+      "sprint-review",
+      "team-reflection"
+    ],
+    "complexity": "Medium",
+    "boardSize": { "width": 3500, "height": 2500 }
+  },
+  "settings": {
+    "backgroundColor": "#FFF8E1",
+    "gridEnabled": true
+  },
+  "items": [
+    {
+      "id": "frame_header",
+      "type": "frame",
+      "title": "Retro Header",
+      "x": 50,
+      "y": 50,
+      "width": 3400,
+      "height": 200,
+      "style": { "fillColor": "#4A148C" }
+    },
+    {
+      "id": "title_main",
+      "type": "text",
+      "content": "Sailboat Retrospective: Sprint 14",
+      "x": 100,
+      "y": 70,
+      "width": 2000,
+      "style": { "fontSize": 36, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "text_meta",
+      "type": "text",
+      "content": "Team: Platform Engineering | Sprint: Mar 3-14, 2026 | Facilitator: Aisha K. | Duration: 60 min | Participants: 8",
+      "x": 100,
+      "y": 130,
+      "width": 3000,
+      "style": { "fontSize": 14, "color": "#CE93D8" }
+    },
+    {
+      "id": "text_format_note",
+      "type": "text",
+      "content": "Format: Sailboat metaphor — Wind pushes us forward, Island is our destination, Anchors slow us down, Rocks are risks ahead",
+      "x": 100,
+      "y": 165,
+      "width": 3000,
+      "style": { "fontSize": 14, "color": "#CE93D8" }
+    },
+    {
+      "id": "frame_prev_retro",
+      "type": "frame",
+      "title": "Previous Retro Follow-Up",
+      "x": 50,
+      "y": 300,
+      "width": 3400,
+      "height": 200,
+      "style": { "fillColor": "#F3E5F5" }
+    },
+    {
+      "id": "text_prev_header",
+      "type": "text",
+      "content": "Previous Retro Follow-Up (Sprint 13 Actions)",
+      "x": 80,
+      "y": 320,
+      "width": 800,
+      "style": { "fontSize": 20, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_prev1",
+      "type": "sticky_note",
+      "content": "DONE: Implemented daily async standup in Slack (replaced 15-min meetings)",
+      "x": 80,
+      "y": 370,
+      "width": 380,
+      "height": 70,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_prev2",
+      "type": "sticky_note",
+      "content": "DONE: Added PR template with checklist — 90% adoption",
+      "x": 480,
+      "y": 370,
+      "width": 380,
+      "height": 70,
+      "style": { "fillColor": "#C8E6C9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_prev3",
+      "type": "sticky_note",
+      "content": "IN PROGRESS: Pairing sessions for knowledge sharing — 2 of 4 completed",
+      "x": 880,
+      "y": 370,
+      "width": 380,
+      "height": 70,
+      "style": { "fillColor": "#FFF9C4", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_prev4",
+      "type": "sticky_note",
+      "content": "NOT STARTED: Investigate flaky CI pipeline — deprioritized by new work",
+      "x": 1280,
+      "y": 370,
+      "width": 380,
+      "height": 70,
+      "style": { "fillColor": "#FFCDD2", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_wind",
+      "type": "frame",
+      "title": "Wind (What Went Well)",
+      "x": 50,
+      "y": 550,
+      "width": 800,
+      "height": 800,
+      "style": { "fillColor": "#E8F5E9" }
+    },
+    {
+      "id": "text_wind_header",
+      "type": "text",
+      "content": "Wind (What Went Well)",
+      "x": 80,
+      "y": 570,
+      "width": 500,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#2E7D32" }
+    },
+    {
+      "id": "sticky_wind1",
+      "type": "sticky_note",
+      "content": "AI Task Routing shipped on time! Huge team effort.",
+      "x": 80,
+      "y": 620,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_wind2",
+      "type": "sticky_note",
+      "content": "Code review turnaround improved from 48h to 12h avg after process change.",
+      "x": 440,
+      "y": 620,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_wind3",
+      "type": "sticky_note",
+      "content": "Cross-team collaboration with Design was seamless. Weekly syncs worked well.",
+      "x": 80,
+      "y": 720,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_wind4",
+      "type": "sticky_note",
+      "content": "New testing strategy caught 3 critical bugs before release.",
+      "x": 440,
+      "y": 720,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_wind5",
+      "type": "sticky_note",
+      "content": "Sprint velocity at 42 points — highest this quarter!",
+      "x": 80,
+      "y": 820,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_wind6",
+      "type": "sticky_note",
+      "content": "Async standup in Slack saved 1.25 hours per person per week.",
+      "x": 440,
+      "y": 820,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#A5D6A7", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_island",
+      "type": "frame",
+      "title": "Island (Goals / Destination)",
+      "x": 900,
+      "y": 550,
+      "width": 800,
+      "height": 800,
+      "style": { "fillColor": "#E3F2FD" }
+    },
+    {
+      "id": "text_island_header",
+      "type": "text",
+      "content": "Island (Goals / Destination)",
+      "x": 930,
+      "y": 570,
+      "width": 500,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#1565C0" }
+    },
+    {
+      "id": "sticky_island1",
+      "type": "sticky_note",
+      "content": "Ship Smart Notifications by end of Q2",
+      "x": 930,
+      "y": 620,
+      "width": 340,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_island2",
+      "type": "sticky_note",
+      "content": "Achieve 99.9% uptime SLA for the platform",
+      "x": 930,
+      "y": 710,
+      "width": 340,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_island3",
+      "type": "sticky_note",
+      "content": "Zero critical bugs in production for 3 consecutive sprints",
+      "x": 930,
+      "y": 800,
+      "width": 340,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_island4",
+      "type": "sticky_note",
+      "content": "Every team member can deploy to production independently",
+      "x": 930,
+      "y": 890,
+      "width": 340,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_island5",
+      "type": "sticky_note",
+      "content": "Reduce average PR cycle time to under 8 hours",
+      "x": 930,
+      "y": 980,
+      "width": 340,
+      "height": 70,
+      "style": { "fillColor": "#90CAF9", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_anchor",
+      "type": "frame",
+      "title": "Anchor (What Held Us Back)",
+      "x": 1750,
+      "y": 550,
+      "width": 800,
+      "height": 800,
+      "style": { "fillColor": "#FFEBEE" }
+    },
+    {
+      "id": "text_anchor_header",
+      "type": "text",
+      "content": "Anchor (What Held Us Back)",
+      "x": 1780,
+      "y": 570,
+      "width": 500,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#C62828" }
+    },
+    {
+      "id": "sticky_anchor1",
+      "type": "sticky_note",
+      "content": "Flaky CI pipeline wasted ~4 hours per person this sprint with false failures.",
+      "x": 1780,
+      "y": 620,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#EF9A9A", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_anchor2",
+      "type": "sticky_note",
+      "content": "Scope creep on AI routing — 3 additional edge cases added mid-sprint without reestimation.",
+      "x": 1780,
+      "y": 720,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#EF9A9A", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_anchor3",
+      "type": "sticky_note",
+      "content": "Staging environment was down for 2 days — blocked integration testing.",
+      "x": 1780,
+      "y": 820,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#EF9A9A", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_anchor4",
+      "type": "sticky_note",
+      "content": "Documentation debt — onboarding new dev took 3x longer than expected.",
+      "x": 1780,
+      "y": 920,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#EF9A9A", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_anchor5",
+      "type": "sticky_note",
+      "content": "Design handoff was late by 2 days on the Workload Dashboard.",
+      "x": 1780,
+      "y": 1020,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#EF9A9A", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_anchor6",
+      "type": "sticky_note",
+      "content": "Too many meetings on Wednesday — lost focus time for deep work.",
+      "x": 1780,
+      "y": 1120,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#EF9A9A", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_rocks",
+      "type": "frame",
+      "title": "Rocks (Risks Ahead)",
+      "x": 2600,
+      "y": 550,
+      "width": 800,
+      "height": 800,
+      "style": { "fillColor": "#FFF3E0" }
+    },
+    {
+      "id": "text_rocks_header",
+      "type": "text",
+      "content": "Rocks (Risks Ahead)",
+      "x": 2630,
+      "y": 570,
+      "width": 500,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#E65100" }
+    },
+    {
+      "id": "sticky_rocks1",
+      "type": "sticky_note",
+      "content": "AI model dependency on external vendor — SLA unclear if they have downtime.",
+      "x": 2630,
+      "y": 620,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_rocks2",
+      "type": "sticky_note",
+      "content": "Marcus at 100% capacity — single point of failure for backend architecture decisions.",
+      "x": 2630,
+      "y": 720,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_rocks3",
+      "type": "sticky_note",
+      "content": "Enterprise customer demo in Sprint 16 — must finalize workload dashboard by Sprint 15.",
+      "x": 2630,
+      "y": 820,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_rocks4",
+      "type": "sticky_note",
+      "content": "Tech debt in notification service — could break Smart Notifications feature.",
+      "x": 2630,
+      "y": 920,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_rocks5",
+      "type": "sticky_note",
+      "content": "Team member going on leave in Sprint 16 — need to redistribute work early.",
+      "x": 2630,
+      "y": 1020,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#FFCC80", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_actions",
+      "type": "frame",
+      "title": "Action Items",
+      "x": 50,
+      "y": 1400,
+      "width": 2500,
+      "height": 500,
+      "style": { "fillColor": "#FFFFFF" }
+    },
+    {
+      "id": "text_actions_header",
+      "type": "text",
+      "content": "Action Items (SMART format)",
+      "x": 80,
+      "y": 1420,
+      "width": 600,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "shape_actions_table",
+      "type": "shape",
+      "content": "# | Action | Owner | Due | Status\n────────────────────────────────────────────\n1 | Fix flaky CI pipeline — identify top 5 failures and resolve | Marcus W. | Sprint 15 Day 3 | Not Started\n2 | Implement scope change freeze after Day 3 of sprint | Aisha K. (SM) | Sprint 15 Day 1 | Not Started\n3 | Set up staging environment auto-recovery with health checks | Leo C. | Sprint 15 Day 5 | Not Started\n4 | Create onboarding doc for platform architecture (2 pages max) | Noor A. | Sprint 15 Day 8 | Not Started\n5 | Block 2-hour 'Focus Time' on Wednesday calendars team-wide | Aisha K. (SM) | Sprint 15 Day 1 | Not Started",
+      "shape": "rectangle",
+      "x": 80,
+      "y": 1470,
+      "width": 2400,
+      "height": 300,
+      "style": {
+        "fillColor": "#FFFFFF",
+        "fontColor": "#212121",
+        "borderColor": "#4A148C",
+        "borderWidth": 2
+      }
+    },
+    {
+      "id": "frame_parking",
+      "type": "frame",
+      "title": "Parking Lot",
+      "x": 2600,
+      "y": 1400,
+      "width": 800,
+      "height": 500,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "text_parking_header",
+      "type": "text",
+      "content": "Parking Lot",
+      "x": 2630,
+      "y": 1420,
+      "width": 300,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#F57F17" }
+    },
+    {
+      "id": "text_parking_desc",
+      "type": "text",
+      "content": "Topics for later discussion (not retro scope)",
+      "x": 2630,
+      "y": 1460,
+      "width": 600,
+      "style": { "fontSize": 12, "color": "#9E9E9E" }
+    },
+    {
+      "id": "sticky_park1",
+      "type": "sticky_note",
+      "content": "Should we adopt Trunk-Based Development? Discuss at next Architecture Guild meeting.",
+      "x": 2630,
+      "y": 1500,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#FFF176", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_park2",
+      "type": "sticky_note",
+      "content": "Team OKRs for Q3 — need input from everyone before planning meeting.",
+      "x": 2630,
+      "y": 1600,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#FFF176", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_park3",
+      "type": "sticky_note",
+      "content": "Evaluate switching from Jest to Vitest for unit testing speed improvement.",
+      "x": 2630,
+      "y": 1700,
+      "width": 340,
+      "height": 80,
+      "style": { "fillColor": "#FFF176", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "frame_facilitator",
+      "type": "frame",
+      "title": "Facilitator Notes",
+      "x": 50,
+      "y": 1950,
+      "width": 3400,
+      "height": 250,
+      "style": { "fillColor": "#F3E5F5" }
+    },
+    {
+      "id": "text_fac_header",
+      "type": "text",
+      "content": "Facilitator Notes",
+      "x": 80,
+      "y": 1970,
+      "width": 400,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#4A148C" }
+    },
+    {
+      "id": "sticky_fac1",
+      "type": "sticky_note",
+      "content": "Good energy today. Team is proud of shipping AI routing on time. Keep celebrating wins.",
+      "x": 80,
+      "y": 2020,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_fac2",
+      "type": "sticky_note",
+      "content": "CI pipeline frustration is a recurring theme (3rd sprint in a row). Escalate priority. Action item is critical.",
+      "x": 600,
+      "y": 2020,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_fac3",
+      "type": "sticky_note",
+      "content": "Marcus capacity risk needs leadership attention. Consider hiring or redistributing ownership of key systems.",
+      "x": 1120,
+      "y": 2020,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 11 }
+    },
+    {
+      "id": "sticky_fac4",
+      "type": "sticky_note",
+      "content": "Limit actions to 5 per retro (achieved). Follow up on completion rate in Sprint 15 retro.",
+      "x": 1640,
+      "y": 2020,
+      "width": 500,
+      "height": 70,
+      "style": { "fillColor": "#CE93D8", "textAlign": "left", "fontSize": 11 }
+    }
+  ]
+}

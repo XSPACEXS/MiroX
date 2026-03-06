@@ -1,0 +1,600 @@
+{
+  "metadata": {
+    "name": "Research Cluster Map",
+    "description": "A research synthesis mind map organizing qualitative and quantitative findings into thematic clusters with evidence, confidence levels, and actionable recommendations.",
+    "category": "Mind Map Product Collaboration",
+    "tags": [
+      "research",
+      "synthesis",
+      "clusters",
+      "insights",
+      "UX",
+      "interviews",
+      "analytics",
+      "evidence"
+    ],
+    "complexity": "Advanced",
+    "boardSize": { "width": 5000, "height": 3500 }
+  },
+  "settings": {
+    "backgroundColor": "#FFFDE7",
+    "gridEnabled": false
+  },
+  "items": [
+    {
+      "id": "title-banner",
+      "type": "frame",
+      "title": "Research Cluster Map",
+      "x": 100,
+      "y": 50,
+      "width": 4800,
+      "height": 350,
+      "style": { "fillColor": "#0D47A1" }
+    },
+    {
+      "id": "title-text",
+      "type": "text",
+      "content": "Research Cluster Map",
+      "x": 200,
+      "y": 80,
+      "width": 1200,
+      "style": { "fontSize": 56, "fontWeight": "bold", "color": "#FFFFFF" }
+    },
+    {
+      "id": "subtitle-text",
+      "type": "text",
+      "content": "From Raw Data to Actionable Insights",
+      "x": 200,
+      "y": 170,
+      "width": 1000,
+      "style": { "fontSize": 24, "color": "#FFC107" }
+    },
+    {
+      "id": "stats-bar",
+      "type": "shape",
+      "content": "24 interviews | 1,200 survey responses | 3 months analytics | 450 support tickets | 5 insight clusters",
+      "shape": "rectangle",
+      "x": 2800,
+      "y": 100,
+      "width": 1900,
+      "height": 70,
+      "style": {
+        "fillColor": "#1565C0",
+        "fontColor": "#FFFFFF",
+        "borderColor": "#FFC107"
+      }
+    },
+    {
+      "id": "interviews-frame",
+      "type": "frame",
+      "title": "User Interviews (24)",
+      "x": 100,
+      "y": 450,
+      "width": 1100,
+      "height": 500,
+      "style": { "fillColor": "#E0F2F1" }
+    },
+    {
+      "id": "int-header",
+      "type": "text",
+      "content": "User Interviews (24)",
+      "x": 150,
+      "y": 470,
+      "width": 500,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#00897B" }
+    },
+    {
+      "id": "int-quote1",
+      "type": "sticky_note",
+      "content": "\"I spent 3 days trying to set up the integration and almost gave up\" — Enterprise PM",
+      "x": 150,
+      "y": 530,
+      "width": 300,
+      "height": 130,
+      "style": { "fillColor": "#00897B" }
+    },
+    {
+      "id": "int-quote2",
+      "type": "sticky_note",
+      "content": "\"Collaboration features are amazing when they work, but lag kills us\" — MM Team Lead",
+      "x": 480,
+      "y": 530,
+      "width": 300,
+      "height": 130,
+      "style": { "fillColor": "#00897B" }
+    },
+    {
+      "id": "int-quote3",
+      "type": "sticky_note",
+      "content": "\"We can't use this on mobile at all — dealbreaker for field teams\" — Enterprise Sales Dir",
+      "x": 150,
+      "y": 690,
+      "width": 300,
+      "height": 130,
+      "style": { "fillColor": "#00897B" }
+    },
+    {
+      "id": "int-quote4",
+      "type": "sticky_note",
+      "content": "\"After the data breach news, my security team flagged your product\" — Enterprise CISO",
+      "x": 480,
+      "y": 690,
+      "width": 300,
+      "height": 130,
+      "style": { "fillColor": "#00897B" }
+    },
+    {
+      "id": "surveys-frame",
+      "type": "frame",
+      "title": "Survey Responses (1,200)",
+      "x": 1300,
+      "y": 450,
+      "width": 1100,
+      "height": 500,
+      "style": { "fillColor": "#E8EAF6" }
+    },
+    {
+      "id": "survey-header",
+      "type": "text",
+      "content": "Survey Responses (1,200)",
+      "x": 1350,
+      "y": 470,
+      "width": 500,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#3949AB" }
+    },
+    {
+      "id": "survey-data",
+      "type": "shape",
+      "content": "Top Dissatisfiers:\nOnboarding complexity: 67%\nCollaboration lag: 52%\nConfusing pricing: 48%\nMissing mobile: 44%\nSecurity concerns: 31%",
+      "shape": "rectangle",
+      "x": 1350,
+      "y": 530,
+      "width": 500,
+      "height": 250,
+      "style": { "fillColor": "#3949AB", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "survey-nps",
+      "type": "sticky_note",
+      "content": "NPS by segment:\nEnterprise: 32\nMid-Market: 45\nSMB: 38",
+      "x": 1900,
+      "y": 530,
+      "width": 300,
+      "height": 180,
+      "style": { "fillColor": "#5C6BC0" }
+    },
+    {
+      "id": "analytics-frame",
+      "type": "frame",
+      "title": "Behavioral Analytics",
+      "x": 2500,
+      "y": 450,
+      "width": 1100,
+      "height": 500,
+      "style": { "fillColor": "#FBE9E7" }
+    },
+    {
+      "id": "analytics-header",
+      "type": "text",
+      "content": "Behavioral Analytics (3 months)",
+      "x": 2550,
+      "y": 470,
+      "width": 600,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#E64A19" }
+    },
+    {
+      "id": "analytics-data",
+      "type": "shape",
+      "content": "Day 1 drop-off: 38% never complete onboarding\n5+ user collab: 4.2s avg latency (target <1s)\nPricing page: 72% bounce rate\nMobile usage: 8% (down from 12%)\nSecurity page views: +340%",
+      "shape": "rectangle",
+      "x": 2550,
+      "y": 530,
+      "width": 950,
+      "height": 250,
+      "style": { "fillColor": "#E64A19", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "tickets-frame",
+      "type": "frame",
+      "title": "Support Tickets (450)",
+      "x": 3700,
+      "y": 450,
+      "width": 1100,
+      "height": 500,
+      "style": { "fillColor": "#F3E5F5" }
+    },
+    {
+      "id": "tickets-header",
+      "type": "text",
+      "content": "Support Tickets (450)",
+      "x": 3750,
+      "y": 470,
+      "width": 500,
+      "style": { "fontSize": 22, "fontWeight": "bold", "color": "#7B1FA2" }
+    },
+    {
+      "id": "tickets-data",
+      "type": "shape",
+      "content": "Category Breakdown:\nOnboarding/Setup: 34% (153)\nPerformance/Lag: 22% (99)\nBilling/Pricing: 18% (81)\nMobile requests: 14% (63)\nSecurity: 12% (54)",
+      "shape": "rectangle",
+      "x": 3750,
+      "y": 530,
+      "width": 950,
+      "height": 250,
+      "style": { "fillColor": "#7B1FA2", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "synthesis-bar",
+      "type": "frame",
+      "title": "Synthesis Engine",
+      "x": 100,
+      "y": 1000,
+      "width": 4700,
+      "height": 200,
+      "style": { "fillColor": "#FFF9C4" }
+    },
+    {
+      "id": "synthesis-text",
+      "type": "text",
+      "content": "Synthesis: Raw data > Code > Theme > Cluster > Insight > Recommendation | 847 data points | 126 codes | 28 themes | 5 clusters",
+      "x": 150,
+      "y": 1040,
+      "width": 4400,
+      "style": { "fontSize": 18, "fontWeight": "bold", "color": "#F9A825" }
+    },
+    {
+      "id": "cluster1",
+      "type": "frame",
+      "title": "Cluster 1: Onboarding Pain",
+      "x": 100,
+      "y": 1250,
+      "width": 900,
+      "height": 600,
+      "style": { "fillColor": "#E8F5E9" }
+    },
+    {
+      "id": "c1-insight",
+      "type": "shape",
+      "content": "ONBOARDING PAIN\nConfidence: HIGH\n\n38% abandon before first value.\n3-day onboarding wall.\n\nRecommendation: Deliver first value in 5 min. Reduce fields 12->4.\n\nImpact: +20% activation | P0",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1300,
+      "width": 800,
+      "height": 400,
+      "style": { "fillColor": "#2E7D32", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "c1-evidence",
+      "type": "sticky_note",
+      "content": "Evidence: 8 quotes, 67% survey, Day 1 analytics, 153 tickets",
+      "x": 150,
+      "y": 1720,
+      "width": 400,
+      "height": 100,
+      "style": { "fillColor": "#A5D6A7" }
+    },
+    {
+      "id": "cluster2",
+      "type": "frame",
+      "title": "Cluster 2: Collaboration Friction",
+      "x": 1050,
+      "y": 1250,
+      "width": 900,
+      "height": 600,
+      "style": { "fillColor": "#E8F5E9" }
+    },
+    {
+      "id": "c2-insight",
+      "type": "shape",
+      "content": "COLLABORATION FRICTION\nConfidence: HIGH\n\nReal-time degrades at 5+ users.\n4.2s latency vs <1s target.\n\nRecommendation: Re-architect real-time engine. Target <500ms at 10 users.\n\nImpact: +15% retention | P0",
+      "shape": "rectangle",
+      "x": 1100,
+      "y": 1300,
+      "width": 800,
+      "height": 400,
+      "style": { "fillColor": "#2E7D32", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "c2-evidence",
+      "type": "sticky_note",
+      "content": "Evidence: 6 quotes, 52% survey, latency data, 99 tickets",
+      "x": 1100,
+      "y": 1720,
+      "width": 400,
+      "height": 100,
+      "style": { "fillColor": "#A5D6A7" }
+    },
+    {
+      "id": "cluster3",
+      "type": "frame",
+      "title": "Cluster 3: Pricing Confusion",
+      "x": 2000,
+      "y": 1250,
+      "width": 900,
+      "height": 600,
+      "style": { "fillColor": "#FFF8E1" }
+    },
+    {
+      "id": "c3-insight",
+      "type": "shape",
+      "content": "PRICING CONFUSION\nConfidence: MEDIUM\n\n48% find tiers confusing.\n72% pricing page bounce.\n\nRecommendation: Simplify to 3 tiers. Add calculator.\n\nImpact: +12% conversion | P1",
+      "shape": "rectangle",
+      "x": 2050,
+      "y": 1300,
+      "width": 800,
+      "height": 400,
+      "style": { "fillColor": "#F9A825", "fontColor": "#212121" }
+    },
+    {
+      "id": "c3-evidence",
+      "type": "sticky_note",
+      "content": "Evidence: 4 quotes, 48% survey, bounce data, 81 tickets",
+      "x": 2050,
+      "y": 1720,
+      "width": 400,
+      "height": 100,
+      "style": { "fillColor": "#FFF59D" }
+    },
+    {
+      "id": "cluster4",
+      "type": "frame",
+      "title": "Cluster 4: Mobile Gaps",
+      "x": 2950,
+      "y": 1250,
+      "width": 900,
+      "height": 600,
+      "style": { "fillColor": "#FFF8E1" }
+    },
+    {
+      "id": "c4-insight",
+      "type": "shape",
+      "content": "MOBILE GAPS\nConfidence: MEDIUM\n\nMobile usage dropped 33%.\nUnusable for field teams.\n\nRecommendation: Build native iOS/Android. Prioritize view + comment.\n\nImpact: +8% MAU | P1",
+      "shape": "rectangle",
+      "x": 3000,
+      "y": 1300,
+      "width": 800,
+      "height": 400,
+      "style": { "fillColor": "#F9A825", "fontColor": "#212121" }
+    },
+    {
+      "id": "c4-evidence",
+      "type": "sticky_note",
+      "content": "Evidence: 3 quotes, 44% survey, declining analytics, 63 tickets",
+      "x": 3000,
+      "y": 1720,
+      "width": 400,
+      "height": 100,
+      "style": { "fillColor": "#FFF59D" }
+    },
+    {
+      "id": "cluster5",
+      "type": "frame",
+      "title": "Cluster 5: Trust & Security",
+      "x": 3900,
+      "y": 1250,
+      "width": 900,
+      "height": 600,
+      "style": { "fillColor": "#F5F5F5" }
+    },
+    {
+      "id": "c5-insight",
+      "type": "shape",
+      "content": "TRUST & SECURITY\nConfidence: LOW (emerging)\n\n31% cite concerns (up from 12%).\n+340% security page views.\n\nRecommendation: Trust center + SOC2 badge + bug bounty.\n\nImpact: Prevent 5-10% churn | P1",
+      "shape": "rectangle",
+      "x": 3950,
+      "y": 1300,
+      "width": 800,
+      "height": 400,
+      "style": { "fillColor": "#757575", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "c5-evidence",
+      "type": "sticky_note",
+      "content": "Evidence: 2 quotes, 31% survey, page view spike, 54 tickets",
+      "x": 3950,
+      "y": 1720,
+      "width": 400,
+      "height": 100,
+      "style": { "fillColor": "#E0E0E0" }
+    },
+    {
+      "id": "summary-frame",
+      "type": "frame",
+      "title": "Insight Summary & Recommendations",
+      "x": 100,
+      "y": 1900,
+      "width": 4700,
+      "height": 450,
+      "style": { "fillColor": "#E3F2FD" }
+    },
+    {
+      "id": "summary-header",
+      "type": "text",
+      "content": "Prioritized Recommendations",
+      "x": 150,
+      "y": 1920,
+      "width": 800,
+      "style": { "fontSize": 28, "fontWeight": "bold", "color": "#0D47A1" }
+    },
+    {
+      "id": "rec-1",
+      "type": "shape",
+      "content": "1. Onboarding redesign (P0, Q1) — +20% activation",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 1990,
+      "width": 1200,
+      "height": 50,
+      "style": { "fillColor": "#2E7D32", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "rec-2",
+      "type": "shape",
+      "content": "2. Real-time engine rebuild (P0, Q1-Q2) — +15% retention",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 2050,
+      "width": 1100,
+      "height": 50,
+      "style": { "fillColor": "#2E7D32", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "rec-3",
+      "type": "shape",
+      "content": "3. Pricing simplification (P1, Q2) — +12% conversion",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 2110,
+      "width": 1000,
+      "height": 50,
+      "style": { "fillColor": "#F9A825", "fontColor": "#212121" }
+    },
+    {
+      "id": "rec-4",
+      "type": "shape",
+      "content": "4. Mobile native app (P1, Q2-Q3) — +8% MAU",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 2170,
+      "width": 900,
+      "height": 50,
+      "style": { "fillColor": "#F9A825", "fontColor": "#212121" }
+    },
+    {
+      "id": "rec-5",
+      "type": "shape",
+      "content": "5. Trust center (P1, Q2) — prevent 5-10% enterprise churn",
+      "shape": "rectangle",
+      "x": 150,
+      "y": 2230,
+      "width": 800,
+      "height": 50,
+      "style": { "fillColor": "#757575", "fontColor": "#FFFFFF" }
+    },
+    {
+      "id": "impact-total",
+      "type": "shape",
+      "content": "Total estimated impact: +$2.4M ARR if all 5 implemented",
+      "shape": "rectangle",
+      "x": 1500,
+      "y": 1990,
+      "width": 700,
+      "height": 80,
+      "style": {
+        "fillColor": "#0D47A1",
+        "fontColor": "#FFC107",
+        "borderColor": "#FFC107"
+      }
+    },
+    {
+      "id": "next-steps",
+      "type": "sticky_note",
+      "content": "Next Steps:\nPresent to product leadership March 10\nDetailed briefs for each cluster by March 14\nEngineer spike on real-time engine by March 21",
+      "x": 1500,
+      "y": 2100,
+      "width": 500,
+      "height": 200,
+      "style": { "fillColor": "#FFC107" }
+    },
+    {
+      "type": "connector",
+      "startItem": "interviews-frame",
+      "endItem": "synthesis-bar",
+      "style": {
+        "strokeColor": "#00897B",
+        "strokeWidth": 2,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "surveys-frame",
+      "endItem": "synthesis-bar",
+      "style": {
+        "strokeColor": "#3949AB",
+        "strokeWidth": 2,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "analytics-frame",
+      "endItem": "synthesis-bar",
+      "style": {
+        "strokeColor": "#E64A19",
+        "strokeWidth": 2,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "tickets-frame",
+      "endItem": "synthesis-bar",
+      "style": {
+        "strokeColor": "#7B1FA2",
+        "strokeWidth": 2,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "synthesis-bar",
+      "endItem": "cluster1",
+      "style": {
+        "strokeColor": "#FFC107",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "synthesis-bar",
+      "endItem": "cluster3",
+      "style": {
+        "strokeColor": "#FFC107",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "synthesis-bar",
+      "endItem": "cluster5",
+      "style": {
+        "strokeColor": "#FFC107",
+        "strokeWidth": 3,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "cluster1",
+      "endItem": "cluster2",
+      "style": {
+        "strokeColor": "#9E9E9E",
+        "strokeWidth": 1,
+        "strokeStyle": "dashed"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "cluster1",
+      "endItem": "summary-frame",
+      "style": {
+        "strokeColor": "#0D47A1",
+        "strokeWidth": 2,
+        "strokeStyle": "solid"
+      }
+    },
+    {
+      "type": "connector",
+      "startItem": "cluster5",
+      "endItem": "summary-frame",
+      "style": {
+        "strokeColor": "#0D47A1",
+        "strokeWidth": 2,
+        "strokeStyle": "solid"
+      }
+    }
+  ]
+}

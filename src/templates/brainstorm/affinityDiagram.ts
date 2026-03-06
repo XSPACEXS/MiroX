@@ -9,6 +9,8 @@ export const affinityDiagram: TemplateDefinition = {
   emoji: '\u{1F5C2}\uFE0F',
   estimatedTime: '~4 min',
   blueprintId: 'affinity-diagram',
+  brainCategory: 'workshops',
+  brainBlueprint: 'brainstorm-session',
   complexity: 'medium',
   color: '#EC4899',
   tags: ['affinity', 'clustering', 'synthesis', 'research', 'themes', 'patterns'],

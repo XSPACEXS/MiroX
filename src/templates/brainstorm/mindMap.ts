@@ -9,6 +9,8 @@ export const mindMap: TemplateDefinition = {
   emoji: '\u{1F9E0}',
   estimatedTime: '~3 min',
   blueprintId: 'mind-map',
+  brainCategory: 'mind-maps',
+  brainBlueprint: 'concept-map',
   complexity: 'simple',
   color: '#EC4899',
   tags: ['mind map', 'brainstorm', 'topics', 'ideas', 'knowledge', 'exploration'],

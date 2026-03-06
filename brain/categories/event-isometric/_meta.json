@@ -1,0 +1,68 @@
+{
+  "category": "Event Guide Immersive Isometric",
+  "description": "Isometric 3D-style conference and event maps with decorative zones, pathways, clouds, and stars — inspired by immersive event guide showcase boards",
+  "icon": "🎪",
+  "colorTheme": {
+    "primary": "#2C3E50",
+    "secondary": "#F1C40F",
+    "accent": "#E74C3C"
+  },
+  "templates": [
+    {
+      "file": "immersive-conference-map",
+      "name": "Immersive Conference Map",
+      "description": "3D isometric conference map with Speaker Showcase, Community Hub, Registration, Lightning Talks, and Agenda zones connected by yellow pathways",
+      "tags": [
+        "conference",
+        "isometric",
+        "immersive",
+        "3D",
+        "event-map",
+        "pathways"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "distributed-event-world",
+      "name": "Distributed Event World",
+      "description": "Multi-city or multi-venue event mapped as floating islands connected by bridges, each island hosting a different event track",
+      "tags": [
+        "distributed",
+        "multi-venue",
+        "islands",
+        "virtual",
+        "hybrid",
+        "event"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "hybrid-event-layout",
+      "name": "Hybrid Event Layout",
+      "description": "Split-world board showing physical venue on one side and virtual platform on the other, with bridges connecting shared experiences",
+      "tags": [
+        "hybrid",
+        "virtual",
+        "physical",
+        "dual-world",
+        "event",
+        "streaming"
+      ],
+      "complexity": "Advanced"
+    },
+    {
+      "file": "festival-campus",
+      "name": "Festival Campus",
+      "description": "Multi-day festival campus with outdoor stages, workshop tents, food courts, sponsor villages, and winding pathways through the grounds",
+      "tags": [
+        "festival",
+        "campus",
+        "outdoor",
+        "multi-day",
+        "stages",
+        "village"
+      ],
+      "complexity": "Advanced"
+    }
+  ]
+}
