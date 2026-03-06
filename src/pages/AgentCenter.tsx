@@ -12,6 +12,7 @@ import { startMissionAdapter } from '@services/chatService/missionAdapter'
 import { useChatIPCBridge } from '@hooks/useChatIPCBridge'
 import { ChatPanel } from '@components/agent-center/chat/ChatPanel'
 import { ConnectionsStrip, ConnectionsPanel } from '@components/agent-center/ConnectionsPanel'
+import { MissionReportsStrip, MissionReportsPanel } from '@components/agent-center/MissionReportsPanel'
 import { useClaude } from '@hooks/useClaude'
 import { useGemini } from '@hooks/useGemini'
 import { CelebrationOverlay } from '@components/agent-center/scene/CelebrationOverlay'
@@ -29,8 +30,11 @@ export default function AgentCenter(): JSX.Element {
 
   const addToast = useUIStore((s) => s.addToast)
 
+  const missionHistory = useMissionStore((s) => s.missionHistory)
+
   const [showCelebration, setShowCelebration] = useState(false)
   const [showConnections, setShowConnections] = useState(false)
+  const [showReports, setShowReports] = useState(false)
   const claude = useClaude()
   const gemini = useGemini()
 
@@ -143,6 +147,10 @@ export default function AgentCenter(): JSX.Element {
             </span>
           </div>
         )}
+        <MissionReportsStrip
+          onClick={() => setShowReports((v) => !v)}
+          count={missionHistory.length}
+        />
         <ConnectionsStrip
           onClick={() => setShowConnections((v) => !v)}
           claudeConnected={claude.isConnected}
@@ -164,6 +172,11 @@ export default function AgentCenter(): JSX.Element {
       {/* Connections panel */}
       {showConnections && (
         <ConnectionsPanel onClose={() => setShowConnections(false)} />
+      )}
+
+      {/* Mission reports panel */}
+      {showReports && (
+        <MissionReportsPanel onClose={() => setShowReports(false)} />
       )}
 
       {/* Chat panel — the unified interface */}
