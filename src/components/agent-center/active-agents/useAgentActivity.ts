@@ -11,16 +11,78 @@ export interface AgentActivity {
 }
 
 const TOOL_PATTERNS: [string, RegExp][] = [
-  ['Read', /\bread\(/i],
-  ['Edit', /\bedit\(/i],
-  ['Bash', /\bbash\(|^\$/i],
-  ['Glob', /\bglob\(/i],
-  ['Grep', /\bgrep\(/i],
-  ['Write', /\bwrite\(/i],
+  ['Read', /\bread\(|"name"\s*:\s*"Read"/i],
+  ['Edit', /\bedit\(|"name"\s*:\s*"Edit"/i],
+  ['Bash', /\bbash\(|^\$|"name"\s*:\s*"Bash"/i],
+  ['Glob', /\bglob\(|"name"\s*:\s*"Glob"/i],
+  ['Grep', /\bgrep\(|"name"\s*:\s*"Grep"/i],
+  ['Write', /\bwrite\(|"name"\s*:\s*"Write"/i],
 ]
+
+function tryParseStreamJson(text: string): string | null {
+  if (!text.startsWith('{')) return null
+  try {
+    const obj = JSON.parse(text) as Record<string, unknown>
+
+    // tool_use events — Claude CLI uses "tool" or "name" depending on version
+    if (obj.type === 'tool_use') {
+      const toolName = (obj.name || obj.tool) as string | undefined
+      if (!toolName) return 'Using tool...'
+      const input = obj.input as Record<string, unknown> | undefined
+      if ((toolName === 'Read' || toolName === 'read') && input?.file_path) {
+        const file = String(input.file_path).split('/').pop()
+        return `Reading ${file}`
+      }
+      if ((toolName === 'Edit' || toolName === 'edit') && input?.file_path) {
+        const file = String(input.file_path).split('/').pop()
+        return `Editing ${file}`
+      }
+      if ((toolName === 'Write' || toolName === 'write') && input?.file_path) {
+        const file = String(input.file_path).split('/').pop()
+        return `Writing ${file}`
+      }
+      if (toolName === 'Bash' || toolName === 'bash') {
+        const cmd = String(input?.command || '').slice(0, 30)
+        return cmd ? `Running ${cmd}` : 'Running command...'
+      }
+      if (/^(Glob|Grep|glob|grep)$/.test(toolName)) return 'Searching files...'
+      return `Using ${toolName}`
+    }
+
+    // assistant text — various possible shapes
+    if (obj.type === 'assistant') {
+      const msg = (obj.message || obj.content || obj.text) as string | undefined
+      if (typeof msg === 'string' && msg.length > 0) {
+        return msg.length > 40 ? msg.slice(0, 40) + '\u2026' : msg
+      }
+      return 'Thinking...'
+    }
+
+    // content_block events from streaming API
+    if (obj.type === 'content_block_start' || obj.type === 'content_block_delta') {
+      return 'Thinking...'
+    }
+
+    // result / tool_result events
+    if (obj.type === 'result' || obj.type === 'tool_result') return 'Processing result...'
+
+    // system init
+    if (obj.type === 'system') return 'Initializing...'
+
+    return null
+  } catch {
+    return null
+  }
+}
 
 function parseAction(text: string): string {
   if (!text) return 'Waiting...'
+
+  // Try parsing as stream-json first
+  const parsed = tryParseStreamJson(text)
+  if (parsed) return parsed
+
+  // Fallback: plain-text keyword matching
   const lower = text.toLowerCase()
   if (lower.includes('reading') || lower.includes('read(')) {
     const file = text.match(/(?:Reading|Read\().*?([/\w.-]+\.\w+)/)?.[1]
@@ -36,7 +98,7 @@ function parseAction(text: string): string {
   if (lower.includes('npm run build') || lower.includes('vite build')) return 'Building...'
   if (lower.includes('npm run test') || lower.includes('vitest')) return 'Running tests...'
   if (lower.includes('electron-builder')) return 'Packaging app...'
-  return text.length > 30 ? text.slice(0, 30) + '\u2026' : text
+  return text.length > 40 ? text.slice(0, 40) + '\u2026' : text
 }
 
 function computeTimeDependentState(

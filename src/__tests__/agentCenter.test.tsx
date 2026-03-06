@@ -34,6 +34,7 @@ function makeAgent(overrides: Partial<AgentRun> = {}): AgentRun {
     outputType: 'text' as const,
     teamRunId: null,
     teamRole: null,
+    teamSkill: null,
     ...overrides,
   }
 }

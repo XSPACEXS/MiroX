@@ -60,7 +60,7 @@ function StepConnect({ onNext }: { onNext: () => void }) {
       const result = await window.electronAPI.miro.testConnection()
       if (result.ok) {
         setStatus('success')
-        setMiroConnected(true, 'MiroX User')
+        setMiroConnected(true, 'Miro User')
         setTimeout(onNext, 800)
       } else {
         setStatus('error')

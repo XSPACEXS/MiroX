@@ -52,7 +52,7 @@ export function Modal({ isOpen, onClose, title, size = 'md', children }: ModalPr
               {title && (
                 <div className="flex items-center justify-between px-6 py-4 border-b border-black-600">
                   <h2 id={titleId} className="font-display font-semibold text-lg text-white">{title}</h2>
-                  <button onClick={onClose} aria-label="Close dialog" className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
+                  <button onClick={onClose} aria-label="Close dialog" className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50">
                     <X size={16} />
                   </button>
                 </div>

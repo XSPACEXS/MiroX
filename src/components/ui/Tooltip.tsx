@@ -30,7 +30,7 @@ export function Tooltip({ content, placement = 'top', children, className = '' }
       <div
         id={tooltipId}
         role="tooltip"
-        className={`absolute ${placementStyles[placement]} pointer-events-none opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 z-50`}
+        className={`absolute ${placementStyles[placement]} pointer-events-none opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 z-30`}
       >
         <div className="px-2.5 py-1.5 text-xs font-medium text-white bg-black-700 border border-black-500 rounded-lg shadow-lg whitespace-nowrap">
           {content}

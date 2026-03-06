@@ -167,6 +167,7 @@ Mark exactly one as recommended: true. All colors must be valid hex or rgba.`)
         outputType: 'text',
         teamRunId: null,
         teamRole: null,
+        teamSkill: null,
       })
     }
   }, [buildPrompt, setIsGenerating, addAgent])
@@ -259,7 +260,7 @@ Mark exactly one as recommended: true. All colors must be valid hex or rgba.`)
                       <Check size={14} className="text-purple-400" />
                     )}
                   </div>
-                  <p className="text-xs text-gray-500 line-clamp-2 mb-2">{proposal.description}</p>
+                  <p className="text-xs text-gray-500 line-clamp-2 mb-2" title={proposal.description}>{proposal.description}</p>
                   <div className="flex gap-1">
                     {proposal.recommended && (
                       <Badge color="purple" size="sm">Best Match</Badge>

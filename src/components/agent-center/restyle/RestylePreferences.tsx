@@ -59,6 +59,7 @@ export function RestylePreferences(): JSX.Element {
             outputType: 'text',
             teamRunId: null,
             teamRole: null,
+            teamSkill: null,
           })
         }
       })()

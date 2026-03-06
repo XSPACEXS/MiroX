@@ -60,7 +60,7 @@ export function RecentBoards() {
               href={board.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between glass rounded-xl px-5 py-4 hover:border-yellow-400/30 transition-colors group"
+              className="flex items-center justify-between glass rounded-xl px-5 py-4 hover:border-yellow-400/30 transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50"
             >
               <div className="flex items-center gap-4 min-w-0">
                 <div className="w-10 h-10 rounded-lg bg-yellow-400/10 flex items-center justify-center flex-shrink-0">
@@ -69,7 +69,7 @@ export function RecentBoards() {
                   </span>
                 </div>
                 <div className="min-w-0">
-                  <div className="font-semibold text-white truncate">{board.name}</div>
+                  <div className="font-semibold text-white truncate" title={board.name}>{board.name}</div>
                   <div className="text-gray-400 text-sm flex items-center gap-2">
                     <Badge color="yellow">
                       {board.templateName}

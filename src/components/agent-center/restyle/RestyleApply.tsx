@@ -122,6 +122,7 @@ IMPORTANT: Do each step one at a time, verify it works, then move on.`
         outputType: 'text',
         teamRunId: null,
         teamRole: null,
+        teamSkill: null,
       })
     }
   }, [selectedProposal, buildApplyPrompt, setIsApplying, setApplyProgress, setApplyAgentId, addAgent])

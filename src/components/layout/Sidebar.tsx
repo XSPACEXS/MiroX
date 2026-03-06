@@ -98,7 +98,7 @@ export function Sidebar({ collapsed }: SidebarProps) {
         <button
           onClick={toggleSidebar}
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          className="flex items-center justify-center w-full p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+          className="flex items-center justify-center w-full p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50"
         >
           {collapsed ? <PanelLeft size={18} /> : <PanelLeftClose size={18} />}
         </button>

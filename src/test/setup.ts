@@ -10,7 +10,7 @@ const mockElectronAPI = {
     platform: 'darwin',
     arch: 'arm64',
     version: '28.0.0',
-    appVersion: '1.0.0',
+    appVersion: '1.1.0',
     nodeVersion: '20.0.0',
   }),
   quit: vi.fn().mockResolvedValue(undefined),

@@ -48,7 +48,7 @@ export function TemplateCard({ template, onSelect }: TemplateCardProps) {
       </div>
 
       {/* Description */}
-      <p className="mt-3 text-sm text-gray-400 line-clamp-2">{template.description}</p>
+      <p className="mt-3 text-sm text-gray-400 line-clamp-2" title={template.description}>{template.description}</p>
 
       {/* Tags */}
       <div className="flex flex-wrap gap-1.5 mt-3">
@@ -66,7 +66,7 @@ export function TemplateCard({ template, onSelect }: TemplateCardProps) {
             navigate(`/builder?template=${template.id}`)
           }}
           aria-label={`Use ${template.name} template`}
-          className="flex items-center gap-1 text-sm text-yellow-400 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:underline"
+          className="flex items-center gap-1 text-sm text-yellow-400 font-medium opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity duration-200 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 rounded"
         >
           Use Template <ArrowRight size={14} />
         </button>

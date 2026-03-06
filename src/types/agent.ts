@@ -37,6 +37,7 @@ export interface AgentRun {
   outputType: AgentOutputType
   teamRunId: string | null
   teamRole: 'primary' | 'collaborator' | null
+  teamSkill: string | null
 }
 
 export interface AgentConfig {

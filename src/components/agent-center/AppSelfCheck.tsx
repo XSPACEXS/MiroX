@@ -129,7 +129,7 @@ export function AppSelfCheck(): JSX.Element {
                   )}
                   <div className="flex-1 min-w-0">
                     <span className="text-sm text-white">{check.label}</span>
-                    <p className="text-xs text-gray-400 truncate">{check.detail}</p>
+                    <p className="text-xs text-gray-400 truncate" title={check.detail}>{check.detail}</p>
                   </div>
                 </div>
               ))}
@@ -146,7 +146,7 @@ export function AppSelfCheck(): JSX.Element {
               <button
                 onClick={() => setErrorsExpanded(!errorsExpanded)}
                 aria-expanded={errorsExpanded}
-                className="flex items-center gap-2 w-full text-left"
+                className="flex items-center gap-2 w-full text-left rounded-lg p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50"
               >
                 <ChevronDown
                   size={14}

@@ -109,7 +109,7 @@ export function RunHistory(): JSX.Element {
                 <div className="p-4">
                   <div className="flex items-center gap-3">
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm text-white truncate">{agent.prompt}</p>
+                      <p className="text-sm text-white truncate" title={agent.prompt}>{agent.prompt}</p>
                       <div className="flex items-center gap-2 mt-1.5 flex-wrap">
                         <Badge color={STATUS_COLORS[agent.status] || 'gray'} size="sm">
                           {agent.status}
@@ -145,7 +145,7 @@ export function RunHistory(): JSX.Element {
                         onClick={() => toggleExpand(agent.id)}
                         aria-label={expandedId === agent.id ? 'Collapse logs' : 'Expand logs'}
                         aria-expanded={expandedId === agent.id}
-                        className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+                        className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50"
                       >
                         <ChevronDown
                           size={16}

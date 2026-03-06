@@ -42,7 +42,7 @@ function ToastItem({ toast }: { toast: ToastType }) {
         <p className="text-sm font-medium text-white">{toast.title}</p>
         {toast.message && <p className="text-xs text-gray-400 mt-0.5">{toast.message}</p>}
       </div>
-      <button onClick={() => removeToast(toast.id)} aria-label="Dismiss notification" className="p-0.5 text-gray-500 hover:text-white transition-colors">
+      <button onClick={() => removeToast(toast.id)} aria-label="Dismiss notification" className="p-0.5 text-gray-500 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 rounded">
         <X size={14} />
       </button>
     </motion.div>

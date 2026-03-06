@@ -194,6 +194,7 @@ export function RestyleInspiration(): JSX.Element {
             onChange={(e) => setUrlInput(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === 'Enter') void handleAddUrl()
+              if (e.key === 'Escape') { e.preventDefault(); setUrlInput('') }
             }}
             className="flex-1 bg-black-700 border border-black-500 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-purple-400/50"
           />
@@ -223,8 +224,8 @@ export function RestyleInspiration(): JSX.Element {
                   <div className="flex items-center gap-3 min-w-0">
                     <Globe size={14} className="text-purple-400 flex-shrink-0" />
                     <div className="min-w-0">
-                      <div className="text-sm text-white truncate">{ref.title}</div>
-                      <div className="text-xs text-gray-500 truncate">{ref.domain}</div>
+                      <div className="text-sm text-white truncate" title={ref.title}>{ref.title}</div>
+                      <div className="text-xs text-gray-500 truncate" title={ref.domain}>{ref.domain}</div>
                     </div>
                     {ref.tags.length > 0 && (
                       <div className="flex gap-1 flex-shrink-0">

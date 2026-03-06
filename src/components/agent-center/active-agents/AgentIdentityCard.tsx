@@ -113,7 +113,7 @@ export function AgentIdentityCard({ agent, onKill, isPrimary, compact }: AgentId
       </div>
 
       {/* Agent name */}
-      <p className="mt-2 text-sm font-display font-semibold text-white text-center truncate w-full">
+      <p className="mt-2 text-sm font-display font-semibold text-white text-center truncate w-full" title={name}>
         {name}
       </p>
 
@@ -136,9 +136,9 @@ export function AgentIdentityCard({ agent, onKill, isPrimary, compact }: AgentId
         <Badge color={badgeColor} size="sm">
           {modelDef?.label || agent.model}
         </Badge>
-        {agent.teamRole && (
-          <Badge color={agent.teamRole === 'primary' ? 'yellow' : 'gray'} size="sm">
-            {agent.teamRole}
+        {agent.teamSkill && (
+          <Badge color={agent.teamRole === 'primary' ? 'yellow' : 'blue'} size="sm">
+            {agent.teamSkill}
           </Badge>
         )}
       </div>
@@ -152,7 +152,7 @@ export function AgentIdentityCard({ agent, onKill, isPrimary, compact }: AgentId
       </div>
 
       {/* Prompt — small gray text at bottom, preserves test assertions */}
-      <p className="text-[10px] text-gray-500 text-center truncate w-full mt-auto pt-2">
+      <p className="text-[10px] text-gray-500 text-center truncate w-full mt-auto pt-2" title={agent.prompt}>
         {agent.prompt}
       </p>
     </motion.div>

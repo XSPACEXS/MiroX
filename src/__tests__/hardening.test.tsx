@@ -349,6 +349,7 @@ describe('Store versioning', () => {
     outputType: 'text' as const,
     teamRunId: null,
     teamRole: null,
+    teamSkill: null,
     })
     expect(useAgentStore.getState().agents).toHaveLength(1)
   })
@@ -806,6 +807,7 @@ describe('Additional store operations', () => {
     outputType: 'text' as const,
     teamRunId: null,
     teamRole: null,
+    teamSkill: null,
     })
     useAgentStore.getState().moveToHistory('move-me')
     expect(useAgentStore.getState().agents).toHaveLength(0)
@@ -820,6 +822,7 @@ describe('Additional store operations', () => {
     outputType: 'text' as const,
     teamRunId: null,
     teamRole: null,
+    teamSkill: null,
     })
     useAgentStore.getState().moveToHistory('h1')
     useAgentStore.getState().clearHistory()
@@ -834,6 +837,7 @@ describe('Additional store operations', () => {
     outputType: 'text' as const,
     teamRunId: null,
     teamRole: null,
+    teamSkill: null,
     })
     useAgentStore.getState().updateAgentStatus('status-test', 'completed', 0)
     const agent = useAgentStore.getState().agents.find(a => a.id === 'status-test')
@@ -990,6 +994,7 @@ describe('Agent log management', () => {
     outputType: 'text' as const,
     teamRunId: null,
     teamRole: null,
+    teamSkill: null,
     })
     useAgentStore.getState().appendLog('log-agent', { timestamp: 1000, type: 'stdout', text: 'Line 1' })
     useAgentStore.getState().appendLog('log-agent', { timestamp: 2000, type: 'stderr', text: 'Line 2' })
@@ -1008,6 +1013,7 @@ describe('Agent log management', () => {
     outputType: 'text' as const,
     teamRunId: null,
     teamRole: null,
+    teamSkill: null,
     })
     for (let i = 0; i < 2100; i++) {
       useAgentStore.getState().appendLog('cap-agent', { timestamp: i, type: 'stdout', text: `Line ${i}` })

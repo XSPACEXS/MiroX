@@ -34,7 +34,7 @@ export function AboutPanel() {
           </div>
           <div>
             <h3 className="font-display font-bold text-xl text-white">MiroX</h3>
-            <p className="text-gray-400 text-sm">v{systemInfo?.appVersion || '1.0.0'}</p>
+            <p className="text-gray-400 text-sm">v{systemInfo?.appVersion || __APP_VERSION__}</p>
           </div>
         </div>
 
@@ -44,11 +44,20 @@ export function AboutPanel() {
         </p>
 
         {/* System info */}
-        {systemInfo && (
+        {systemInfo ? (
           <div className="space-y-2 pt-2 border-t border-black-600">
             <InfoRow label="Platform" value={`${systemInfo.platform} ${systemInfo.arch}`} />
             <InfoRow label="Electron" value={systemInfo.version} />
             <InfoRow label="Node.js" value={systemInfo.nodeVersion} />
+          </div>
+        ) : (
+          <div className="space-y-2 pt-2 border-t border-black-600 animate-pulse">
+            {[1, 2, 3].map(i => (
+              <div key={i} className="flex items-center justify-between">
+                <div className="h-3 w-16 bg-black-600 rounded" />
+                <div className="h-3 w-24 bg-black-600 rounded" />
+              </div>
+            ))}
           </div>
         )}
       </div>

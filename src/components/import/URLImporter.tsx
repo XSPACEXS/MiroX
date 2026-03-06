@@ -65,7 +65,7 @@ export default function URLImporter({ onAnalysisReady }: URLImporterProps) {
         <button
           onClick={handleFetch}
           disabled={!url.trim() || isFetching}
-          className="px-5 py-3 rounded-lg bg-yellow-400 text-black font-semibold text-sm hover:bg-yellow-300 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex items-center gap-2 whitespace-nowrap"
+          className="px-5 py-3 rounded-lg bg-yellow-400 text-black font-semibold text-sm hover:bg-yellow-300 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex items-center gap-2 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black-900"
         >
           {isFetching ? (
             <>
@@ -131,7 +131,7 @@ export default function URLImporter({ onAnalysisReady }: URLImporterProps) {
               </div>
               <div className="min-w-0">
                 <p className="text-sm font-medium text-white">{result.title}</p>
-                <p className="text-xs text-gray-500 mt-1 line-clamp-2">{result.excerpt}</p>
+                <p className="text-xs text-gray-500 mt-1 line-clamp-2" title={result.excerpt}>{result.excerpt}</p>
               </div>
             </div>
 

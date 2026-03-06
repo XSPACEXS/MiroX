@@ -92,7 +92,7 @@ export function Dropdown({ options, value, onChange, placeholder = 'Select...', 
           <ChevronDown size={16} className={`transition-transform duration-150 ${isOpen ? 'rotate-180' : ''}`} />
         </button>
         {isOpen && (
-          <div role="listbox" className="absolute z-50 w-full mt-1 bg-black-700 border border-black-500 rounded-xl shadow-xl overflow-hidden">
+          <div role="listbox" className="absolute z-40 w-full mt-1 bg-black-700 border border-black-500 rounded-xl shadow-xl overflow-hidden">
             {options.map((option, index) => (
               <button
                 key={option.value}

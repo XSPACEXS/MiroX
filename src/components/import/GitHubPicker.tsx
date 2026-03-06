@@ -196,7 +196,7 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <p className="text-sm font-medium text-white truncate flex items-center gap-1.5">
+                    <p className="text-sm font-medium text-white truncate flex items-center gap-1.5" title={repo.name}>
                       {repo.name}
                       {repo.private && (
                         <svg className="w-3 h-3 text-gray-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -205,7 +205,7 @@ export default function GitHubPicker({ onAnalysisReady }: GitHubPickerProps) {
                       )}
                     </p>
                     {repo.description && (
-                      <p className="text-xs text-gray-500 mt-0.5 line-clamp-1">{repo.description}</p>
+                      <p className="text-xs text-gray-500 mt-0.5 line-clamp-1" title={repo.description}>{repo.description}</p>
                     )}
                   </div>
                   <span className="text-2xs text-gray-600 flex-shrink-0 whitespace-nowrap">

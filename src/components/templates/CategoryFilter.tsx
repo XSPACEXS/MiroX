@@ -29,7 +29,7 @@ export function CategoryFilter() {
             onClick={() => setCategory(cat.id)}
             aria-pressed={isActive}
             className={`
-              flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-150
+              flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50
               ${isActive
                 ? 'bg-yellow-400 text-black'
                 : 'bg-black-700 text-gray-400 hover:text-white hover:bg-black-600 border border-black-600'

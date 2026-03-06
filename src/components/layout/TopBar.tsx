@@ -70,14 +70,14 @@ export function TopBar() {
         <button
           onClick={toggleSearch}
           aria-label="Search"
-          className="p-1.5 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-colors"
+          className="p-1.5 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50"
         >
           <Search size={14} />
         </button>
         <button
           onClick={() => navigate('/settings')}
           aria-label="Settings"
-          className="p-1.5 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-colors"
+          className="p-1.5 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50"
         >
           <Settings2 size={14} />
         </button>
@@ -85,7 +85,7 @@ export function TopBar() {
 
       {/* Search overlay */}
       {isSearchOpen && (
-        <div ref={overlayRef} className="no-drag absolute top-full right-4 mt-1 w-80 z-50">
+        <div ref={overlayRef} className="no-drag absolute top-full right-4 mt-1 w-80 z-40">
           <SearchBar
             value={query}
             onChange={setQuery}
@@ -100,12 +100,12 @@ export function TopBar() {
                   <button
                     key={t.id}
                     onClick={() => handleSelect(t.id)}
-                    className="w-full text-left px-3 py-2 hover:bg-white/5 transition-colors flex items-center gap-2"
+                    className="w-full text-left px-3 py-2 hover:bg-white/5 transition-colors flex items-center gap-2 focus-visible:outline-none focus-visible:bg-white/5 focus-visible:text-white"
                   >
                     <span>{t.emoji}</span>
                     <div className="min-w-0">
-                      <p className="text-sm text-white truncate">{t.name}</p>
-                      <p className="text-2xs text-gray-500 truncate">{t.category}</p>
+                      <p className="text-sm text-white truncate" title={t.name}>{t.name}</p>
+                      <p className="text-2xs text-gray-500 truncate" title={t.category}>{t.category}</p>
                     </div>
                   </button>
                 ))

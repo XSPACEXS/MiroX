@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Bot, Skull } from 'lucide-react'
 import { Badge } from '@components/ui/Badge'
@@ -64,10 +64,17 @@ export function ActiveAgents(): JSX.Element {
     [handleKill]
   )
 
+  const [isKillingAll, setIsKillingAll] = useState(false)
+
   const handleKillAll = useCallback(async () => {
-    const result = await window.electronAPI.agent.killAll()
-    if (!result.ok) {
-      addToast({ type: 'error', title: 'Failed to kill all agents' })
+    setIsKillingAll(true)
+    try {
+      const result = await window.electronAPI.agent.killAll()
+      if (!result.ok) {
+        addToast({ type: 'error', title: 'Failed to kill all agents' })
+      }
+    } finally {
+      setIsKillingAll(false)
     }
   }, [addToast])
 
@@ -88,6 +95,7 @@ export function ActiveAgents(): JSX.Element {
             variant="danger"
             size="sm"
             onClick={handleKillAll}
+            isLoading={isKillingAll}
             leftIcon={<Skull size={14} />}
           >
             Kill All

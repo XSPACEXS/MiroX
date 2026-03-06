@@ -33,6 +33,16 @@ export function SearchBar({ value, onChange, placeholder = 'Search...', showShor
         type="text"
         value={value}
         onChange={e => onChange(e.target.value)}
+        onKeyDown={e => {
+          if (e.key === 'Escape') {
+            e.preventDefault()
+            if (value) {
+              onChange('')
+            } else {
+              inputRef.current?.blur()
+            }
+          }
+        }}
         placeholder={placeholder}
         aria-label={placeholder}
         autoFocus={autoFocus}
@@ -40,7 +50,7 @@ export function SearchBar({ value, onChange, placeholder = 'Search...', showShor
       />
       <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
         {value && (
-          <button onClick={() => onChange('')} aria-label="Clear search" className="p-0.5 text-gray-500 hover:text-white transition-colors">
+          <button onClick={() => onChange('')} aria-label="Clear search" className="p-0.5 text-gray-500 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 rounded">
             <X size={14} />
           </button>
         )}

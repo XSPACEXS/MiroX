@@ -47,23 +47,115 @@ const TIER_DOWN: Record<string, ClaudeModel> = {
   haiku: 'haiku',
 }
 
-// Auto-team: support agent role prompts
-const SUPPORT_ROLES = {
-  specialist: {
-    prompt: (task: string): string => `You are a Code Reviewer supporting the lead agent on a team.
+// Task-aware role pool — each role has keywords, a skill label, and a prompt builder
+interface SupportRole {
+  skill: string
+  keywords: string[]
+  prompt: (task: string) => string
+  tools: string[]
+}
+
+const ROLE_POOL: SupportRole[] = [
+  {
+    skill: 'Bug Hunter',
+    keywords: ['fix', 'bug', 'error', 'crash', 'broken', 'issue', 'debug', 'fail'],
+    tools: DEFAULT_TOOLS,
+    prompt: (task) => `You are a Bug Hunter supporting the lead agent.
+
+Main task: ${task}
+
+Your role: Find and fix bugs related to this task. Check for runtime errors, type mismatches, edge cases, null checks, and broken logic. Run typecheck after changes. Report findings clearly.`,
+  },
+  {
+    skill: 'Test Engineer',
+    keywords: ['test', 'spec', 'coverage', 'vitest', 'jest', 'assert'],
+    tools: DEFAULT_TOOLS,
+    prompt: (task) => `You are a Test Engineer supporting the lead agent.
+
+Main task: ${task}
+
+Your role: Write and run tests related to this task. Ensure edge cases are covered. Run the test suite and fix failures. Report test results clearly.`,
+  },
+  {
+    skill: 'Design Reviewer',
+    keywords: ['design', 'ui', 'ux', 'style', 'css', 'tailwind', 'layout', 'visual', 'theme', 'color', 'responsive'],
+    tools: DEFAULT_TOOLS,
+    prompt: (task) => `You are a Design Reviewer supporting the lead agent.
+
+Main task: ${task}
+
+Your role: Review UI components, styling, accessibility, and visual consistency. Check Tailwind classes, spacing, color usage, and responsive behavior. Fix visual issues. Run typecheck after changes.`,
+  },
+  {
+    skill: 'Security Auditor',
+    keywords: ['security', 'auth', 'token', 'xss', 'injection', 'vulnerability', 'permission'],
+    tools: DEFAULT_TOOLS,
+    prompt: (task) => `You are a Security Auditor supporting the lead agent.
+
+Main task: ${task}
+
+Your role: Audit for security issues — XSS, injection, exposed secrets, improper auth, unsafe IPC. Fix vulnerabilities. Report findings clearly.`,
+  },
+  {
+    skill: 'Architect',
+    keywords: ['refactor', 'architecture', 'restructure', 'migrate', 'pattern', 'abstract', 'modular'],
+    tools: DEFAULT_TOOLS,
+    prompt: (task) => `You are an Architect supporting the lead agent.
+
+Main task: ${task}
+
+Your role: Review code structure, patterns, and architecture. Suggest and implement cleaner abstractions, reduce duplication, and improve maintainability. Run typecheck after changes.`,
+  },
+  {
+    skill: 'Perf Optimizer',
+    keywords: ['performance', 'speed', 'slow', 'optimize', 'memory', 'bundle', 'lazy', 'cache'],
+    tools: DEFAULT_TOOLS,
+    prompt: (task) => `You are a Performance Optimizer supporting the lead agent.
+
+Main task: ${task}
+
+Your role: Profile and optimize performance. Check for unnecessary re-renders, large bundles, missing memoization, and slow operations. Fix bottlenecks.`,
+  },
+]
+
+// Default fallback roles when no keywords match
+const DEFAULT_SPECIALIST: SupportRole = {
+  skill: 'Code Reviewer',
+  keywords: [],
+  tools: DEFAULT_TOOLS,
+  prompt: (task) => `You are a Code Reviewer supporting the lead agent.
 
 Main task: ${task}
 
 Your role: Review the codebase related to this task. Check for bugs, type errors, edge cases, performance issues, and code quality. Run typecheck after any changes. Report findings clearly.`,
-  },
-  scout: {
-    prompt: (task: string): string => `You are a Scout supporting the lead agent on a team.
+}
+
+const SCOUT_ROLE: SupportRole = {
+  skill: 'Scout',
+  keywords: [],
+  tools: ['Read', 'Glob', 'Grep'],
+  prompt: (task) => `You are a Scout supporting the lead agent.
 
 Main task: ${task}
 
 Your role: Explore the codebase to find all files, functions, and dependencies relevant to this task. Search broadly using Glob and Grep. Report file paths, key patterns, and context the lead agent needs. Do NOT edit files — only read and search.`,
-  },
-} as const
+}
+
+function pickSpecialistRole(prompt: string): SupportRole {
+  const lower = prompt.toLowerCase()
+  let best: SupportRole | null = null
+  let bestScore = 0
+
+  for (const role of ROLE_POOL) {
+    const score = role.keywords.filter((kw) => lower.includes(kw)).length
+    if (score > bestScore) {
+      bestScore = score
+      best = role
+    }
+  }
+
+  return best || DEFAULT_SPECIALIST
+}
 
 const MAX_CONCURRENT_CLAUDE = 5
 
@@ -177,6 +269,7 @@ export function AgentLauncher(): JSX.Element {
           outputType: 'text',
           teamRunId,
           teamRole: 'primary',
+          teamSkill: 'Lead',
         })
       } else {
         addToast({
@@ -193,9 +286,10 @@ export function AgentLauncher(): JSX.Element {
         (a) => a.provider === 'claude' && a.status === 'running'
       ).length + 1 // +1 for the primary we just launched
 
-      const supportAgents: { model: ClaudeModel; roleKey: keyof typeof SUPPORT_ROLES; tools: string[] }[] = [
-        { model: TIER_DOWN[primaryModel] || 'haiku', roleKey: 'specialist', tools: DEFAULT_TOOLS },
-        { model: 'haiku' as ClaudeModel, roleKey: 'scout', tools: ['Read', 'Glob', 'Grep'] },
+      const specialist = pickSpecialistRole(taskPrompt)
+      const supportAgents: { model: ClaudeModel; role: SupportRole }[] = [
+        { model: TIER_DOWN[primaryModel] || 'haiku', role: specialist },
+        { model: 'haiku' as ClaudeModel, role: SCOUT_ROLE },
       ]
 
       for (const support of supportAgents) {
@@ -206,8 +300,8 @@ export function AgentLauncher(): JSX.Element {
         try {
           const supportResult = await window.electronAPI.agent.launch({
             model: support.model,
-            prompt: SUPPORT_ROLES[support.roleKey].prompt(taskPrompt),
-            allowedTools: support.tools,
+            prompt: support.role.prompt(taskPrompt),
+            allowedTools: support.role.tools,
           })
 
           if (supportResult.ok && supportResult.id && supportResult.startedAt) {
@@ -222,12 +316,13 @@ export function AgentLauncher(): JSX.Element {
               finishedAt: null,
               exitCode: null,
               cost: null,
-              allowedTools: support.tools,
+              allowedTools: support.role.tools,
               gitTagStart: null,
               gitTagEnd: null,
               outputType: 'text',
               teamRunId,
               teamRole: 'collaborator',
+              teamSkill: support.role.skill,
             })
           }
         } catch {
@@ -288,6 +383,7 @@ export function AgentLauncher(): JSX.Element {
               outputType: collab.modelDef.outputType,
               teamRunId,
               teamRole: 'collaborator',
+              teamSkill: collab.modelDef.outputType === 'image' ? 'Artist' : collab.modelDef.outputType === 'video' ? 'Director' : collab.role,
             })
           } else {
             addToast({
@@ -375,7 +471,7 @@ export function AgentLauncher(): JSX.Element {
                   onClick={() => toggleTool(tool)}
                   aria-pressed={tools.includes(tool)}
                   aria-label={`Toggle ${tool} tool`}
-                  className={`px-2.5 py-1 text-xs font-mono rounded-lg border transition-all duration-150 ${
+                  className={`px-2.5 py-1 text-xs font-mono rounded-lg border transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 ${
                     tools.includes(tool)
                       ? 'bg-yellow-400/10 border-yellow-400/30 text-yellow-400'
                       : 'bg-black-700 border-black-500 text-gray-500 hover:text-gray-300'
@@ -437,7 +533,7 @@ export function AgentLauncher(): JSX.Element {
                   <button
                     onClick={() => handleRemoveCollaborator(i)}
                     aria-label={`Remove ${collab.modelDef.label}`}
-                    className="ml-auto p-1 text-gray-500 hover:text-red-400 transition-colors"
+                    className="ml-auto p-1 text-gray-500 hover:text-red-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 rounded"
                   >
                     <X size={14} />
                   </button>

@@ -85,6 +85,7 @@ export function RestyleScan(): JSX.Element {
         outputType: 'text',
         teamRunId: null,
         teamRole: null,
+        teamSkill: null,
       })
     }
   }, [setScanAgentId, setIsScanRunning, addAgent])
@@ -181,7 +182,7 @@ export function RestyleScan(): JSX.Element {
           {currentFile && (
             <div className="flex items-center gap-2 text-xs text-gray-500">
               <FileCode2 size={12} />
-              <span className="font-mono truncate">{currentFile}</span>
+              <span className="font-mono truncate" title={currentFile}>{currentFile}</span>
             </div>
           )}
         </motion.div>

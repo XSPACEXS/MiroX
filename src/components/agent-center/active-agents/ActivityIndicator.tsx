@@ -35,7 +35,7 @@ export function SpeechBubble({ text, isActive }: SpeechBubbleProps): JSX.Element
     <div className="relative">
       <div className="bg-black-700/90 border border-black-500 rounded-lg px-3 py-1.5">
         <div className="flex items-center justify-center">
-          <span className="text-xs text-gray-300 truncate max-w-[220px]">
+          <span className="text-xs text-gray-300 truncate max-w-[220px]" title={text}>
             {text}
           </span>
           {isActive && <TypingDots />}
