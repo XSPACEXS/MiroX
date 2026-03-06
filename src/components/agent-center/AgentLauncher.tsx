@@ -6,7 +6,6 @@ import { Input } from '@components/ui/Input'
 import { Dropdown } from '@components/ui/Dropdown'
 import { SimpleSelect } from '@components/ui/Dropdown'
 import { Badge } from '@components/ui/Badge'
-import { QuickActions } from './QuickActions'
 import { ModelPicker } from './ModelPicker'
 import { useAgentStore } from '@stores/agentStore'
 import { useUIStore } from '@stores/uiStore'
@@ -16,7 +15,7 @@ import {
   COLLABORATOR_ROLES,
   type ModelDefinition,
 } from '@services/modelRegistry'
-import type { ClaudeModel, GeminiModel, QuickAction } from '@/types/agent'
+import type { ClaudeModel, GeminiModel } from '@/types/agent'
 
 const CLAUDE_MODEL_OPTIONS = CLAUDE_MODELS.map((m) => ({
   value: m.id,
@@ -77,32 +76,6 @@ export function AgentLauncher(): JSX.Element {
   const [timeLimit, setTimeLimit] = useState('0')
   const addAgent = useAgentStore((s) => s.addAgent)
   const addToast = useUIStore((s) => s.addToast)
-
-  const handleQuickAction = useCallback((action: QuickAction) => {
-    setPrompt(action.prompt)
-    if (action.provider === 'claude') {
-      setPrimaryModel(action.model as ClaudeModel)
-    }
-    setTools(action.tools.length > 0 ? action.tools : DEFAULT_TOOLS)
-    // Set collaborators if quick action has them
-    if (action.collaborators) {
-      const entries: CollaboratorEntry[] = action.collaborators
-        .map((c) => {
-          const def = getModelById(c.model)
-          if (!def) return null
-          return {
-            model: c.model,
-            modelDef: def,
-            role: c.role || 'design-specialist',
-            customInstruction: c.promptOverride || '',
-          }
-        })
-        .filter((e): e is CollaboratorEntry => e !== null)
-      setCollaborators(entries)
-    } else {
-      setCollaborators([])
-    }
-  }, [])
 
   const handleAddCollaborator = useCallback(
     (modelId: string) => {
@@ -438,8 +411,6 @@ export function AgentLauncher(): JSX.Element {
         onSelect={handleAddCollaborator}
         excludeModelIds={collaborators.map((c) => c.model)}
       />
-
-      <QuickActions onSelect={handleQuickAction} />
     </div>
   )
 }

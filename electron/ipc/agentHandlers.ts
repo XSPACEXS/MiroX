@@ -67,9 +67,7 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
         modelId,
         '--output-format',
         'stream-json',
-        // --dangerously-skip-permissions is required for the agent to run autonomously
-        // without interactive confirmation prompts. This is intentional for the dev-tool
-        // use case where the user has explicitly chosen to launch the agent.
+        '--verbose',
         '--dangerously-skip-permissions',
       ]
 
@@ -85,6 +83,16 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
           safeEnv[key] = process.env[key]!
         }
       }
+      // Ensure common CLI install paths are in PATH (macOS GUI apps get a minimal PATH)
+      const extraPaths = [
+        `${process.env.HOME}/.local/bin`,
+        '/usr/local/bin',
+        '/opt/homebrew/bin',
+        `${process.env.HOME}/.nvm/versions/node/current/bin`,
+        `${process.env.HOME}/.npm-global/bin`,
+      ]
+      const currentPath = safeEnv.PATH || '/usr/bin:/bin'
+      safeEnv.PATH = [...extraPaths, currentPath].join(':')
       // Pass through ANTHROPIC_API_KEY if set (needed for Claude CLI)
       if (process.env.ANTHROPIC_API_KEY) {
         safeEnv.ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY

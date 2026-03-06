@@ -68,18 +68,6 @@ export interface TeamRunConfig {
   collaborators: CollaboratorConfig[]
 }
 
-export interface QuickAction {
-  id: string
-  label: string
-  description: string
-  prompt: string
-  provider: AIProvider
-  model: AgentModel
-  tools: string[]
-  icon: 'bug' | 'alert' | 'paintbrush' | 'package' | 'shield' | 'hammer' | 'sparkles'
-  collaborators?: CollaboratorConfig[]
-}
-
 export interface SessionConfig {
   timeLimitMinutes: number
   claudeModel: ClaudeModel
