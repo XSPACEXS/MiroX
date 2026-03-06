@@ -1,11 +1,11 @@
 import { useRef, useEffect, useCallback } from 'react'
 import { ArrowUp, Square } from 'lucide-react'
 import { useChatStore } from '@stores/chatStore'
-import { cancelStream } from '@services/chatService'
 import type { ChatMode } from '@/types/chat'
 
 interface Props {
   onSubmit: (text: string) => void
+  onStop: () => void
 }
 
 const PLACEHOLDERS: Record<ChatMode, string> = {
@@ -15,7 +15,7 @@ const PLACEHOLDERS: Record<ChatMode, string> = {
   debug: 'Paste an error or describe the bug...',
 }
 
-export function ChatInputBar({ onSubmit }: Props): JSX.Element {
+export function ChatInputBar({ onSubmit, onStop }: Props): JSX.Element {
   const mode = useChatStore((s) => s.mode)
   const isStreaming = useChatStore((s) => s.isStreaming)
   const config = useChatStore((s) => s.config)
@@ -47,7 +47,10 @@ export function ChatInputBar({ onSubmit }: Props): JSX.Element {
     }
   }
 
+  const isBusy = isStreaming || config.isLocked
+
   function handleSubmit(): void {
+    if (isBusy) return
     const text = textareaRef.current?.value.trim() ?? ''
     if (!text && mode !== 'scan') return
     onSubmit(text)
@@ -58,7 +61,7 @@ export function ChatInputBar({ onSubmit }: Props): JSX.Element {
   }
 
   function handleStop(): void {
-    void cancelStream()
+    onStop()
   }
 
   return (
@@ -68,12 +71,12 @@ export function ChatInputBar({ onSubmit }: Props): JSX.Element {
           ref={textareaRef}
           rows={1}
           placeholder={PLACEHOLDERS[mode]}
-          disabled={isStreaming}
+          disabled={isBusy}
           onChange={autoResize}
           onKeyDown={handleKeyDown}
           className="w-full resize-none bg-black-700 border border-black-500 rounded-xl text-sm text-white placeholder-gray-500 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400/50 disabled:opacity-50"
         />
-        {isStreaming ? (
+        {isBusy ? (
           <button
             onClick={handleStop}
             className="shrink-0 w-9 h-9 flex items-center justify-center rounded-full bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-colors"

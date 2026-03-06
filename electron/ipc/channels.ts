@@ -59,6 +59,14 @@ export const IPC_CHANNELS = {
   MISSION_LOG_READ: 'mission-log:read',
   MISSION_LOG_LIST: 'mission-log:list',
 
+  // Claude
+  CLAUDE_GET_TOKEN: 'claude:get-token',
+  CLAUDE_SET_TOKEN: 'claude:set-token',
+  CLAUDE_TEST_CONNECTION: 'claude:test-connection',
+
+  // System (extended)
+  SYSTEM_CHECK_ICLOUD: 'system:check-icloud',
+
   // Gemini
   GEMINI_GET_TOKEN: 'gemini:get-token',
   GEMINI_SET_TOKEN: 'gemini:set-token',

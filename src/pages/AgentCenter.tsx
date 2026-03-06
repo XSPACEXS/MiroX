@@ -11,6 +11,9 @@ import { generateCharacter } from '@services/characterGenerator'
 import { startMissionAdapter } from '@services/chatService/missionAdapter'
 import { useChatIPCBridge } from '@hooks/useChatIPCBridge'
 import { ChatPanel } from '@components/agent-center/chat/ChatPanel'
+import { ConnectionsStrip, ConnectionsPanel } from '@components/agent-center/ConnectionsPanel'
+import { useClaude } from '@hooks/useClaude'
+import { useGemini } from '@hooks/useGemini'
 import { CelebrationOverlay } from '@components/agent-center/scene/CelebrationOverlay'
 import { ReStyleWizard } from '@components/agent-center/ReStyleWizard'
 import { Button } from '@components/ui/Button'
@@ -27,6 +30,9 @@ export default function AgentCenter(): JSX.Element {
   const addToast = useUIStore((s) => s.addToast)
 
   const [showCelebration, setShowCelebration] = useState(false)
+  const [showConnections, setShowConnections] = useState(false)
+  const claude = useClaude()
+  const gemini = useGemini()
 
   // IPC bridge (agent logs, exits, context updates, gemini events)
   useChatIPCBridge()
@@ -137,6 +143,11 @@ export default function AgentCenter(): JSX.Element {
             </span>
           </div>
         )}
+        <ConnectionsStrip
+          onClick={() => setShowConnections((v) => !v)}
+          claudeConnected={claude.isConnected}
+          geminiConnected={gemini.isConnected}
+        />
         {pageState !== 'idle' && pageState !== 'done' && (
           <Button
             variant="secondary"
@@ -149,6 +160,11 @@ export default function AgentCenter(): JSX.Element {
           </Button>
         )}
       </div>
+
+      {/* Connections panel */}
+      {showConnections && (
+        <ConnectionsPanel onClose={() => setShowConnections(false)} />
+      )}
 
       {/* Chat panel — the unified interface */}
       <ChatPanel />

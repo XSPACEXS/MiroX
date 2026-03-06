@@ -1,4 +1,8 @@
+import { useState } from 'react'
 import { Bot, ClipboardList, CheckCircle2, Loader2, Circle, XCircle } from 'lucide-react'
+import { useChatStore } from '@stores/chatStore'
+import { useMissionStore } from '@stores/missionStore'
+import { isTerminal } from '@services/orchestrator'
 import type { ChatMessage } from '@/types/chat'
 import type { Subtask } from '@/services/orchestrator/types'
 
@@ -21,8 +25,18 @@ function StatusIcon({ status }: { status: Subtask['status'] }): JSX.Element {
   }
 }
 
+function modelColor(model: string): string {
+  if (model.includes('opus')) return 'bg-purple-400/20 text-purple-400'
+  if (model.includes('sonnet')) return 'bg-blue-400/20 text-blue-400'
+  return 'bg-green-400/20 text-green-400'
+}
+
 export default function MissionPlanCard({ message }: MissionPlanCardProps): JSX.Element {
   const plan = message.metadata?.plan
+  const setMode = useChatStore((s) => s.setMode)
+  const setPendingInput = useChatStore((s) => s.setPendingInput)
+  const missionPhase = useMissionStore((s) => s.mission?.phase ?? 'idle')
+  const [expanded, setExpanded] = useState(false)
 
   if (!plan) {
     return (
@@ -34,6 +48,9 @@ export default function MissionPlanCard({ message }: MissionPlanCardProps): JSX.
       </div>
     )
   }
+
+  const shouldCollapse = plan.subtasks.length > 4
+  const visibleSubtasks = shouldCollapse && !expanded ? plan.subtasks.slice(0, 3) : plan.subtasks
 
   return (
     <div className="flex items-start gap-3">
@@ -50,13 +67,56 @@ export default function MissionPlanCard({ message }: MissionPlanCardProps): JSX.
         </div>
 
         <div className="space-y-1.5">
-          {plan.subtasks.map((subtask) => (
+          {visibleSubtasks.map((subtask) => (
             <div key={subtask.id} className="flex items-center gap-2 text-xs">
               <StatusIcon status={subtask.status} />
               <span className="text-gray-300">{subtask.title}</span>
-              <span className="text-gray-500 ml-auto">{subtask.model}</span>
+              <span className={`ml-auto px-2 py-0.5 rounded-full text-[11px] font-medium ${modelColor(subtask.model)}`}>
+                {subtask.model}
+              </span>
             </div>
           ))}
+        </div>
+
+        {shouldCollapse && !expanded && (
+          <button
+            onClick={() => setExpanded(true)}
+            className="text-xs text-gray-500 hover:text-gray-300 mt-2 transition-colors"
+          >
+            + {plan.subtasks.length - 3} more subtasks
+          </button>
+        )}
+
+        {shouldCollapse && expanded && (
+          <button
+            onClick={() => setExpanded(false)}
+            className="text-xs text-gray-500 hover:text-gray-300 mt-2 transition-colors"
+          >
+            Show less
+          </button>
+        )}
+
+        <div className="flex gap-2 mt-3 pt-3 border-t border-blue-500/10">
+          <button
+            onClick={() => {
+              setMode('mission')
+              setPendingInput(message.content)
+            }}
+            className="px-3 py-1.5 rounded-lg bg-black-700 border border-black-500 hover:border-yellow-400/30 text-xs text-gray-300 hover:text-white transition-colors"
+          >
+            Adjust
+          </button>
+          {isTerminal(missionPhase) ? (
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-500/20 border border-gray-500/30 text-xs text-gray-400">
+              <CheckCircle2 size={10} />
+              {missionPhase === 'done' ? 'Completed' : missionPhase === 'aborted' ? 'Aborted' : 'Failed'}
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-500/20 border border-green-500/30 text-xs text-green-300">
+              <Loader2 size={10} className="animate-spin" />
+              Executing
+            </span>
+          )}
         </div>
       </div>
     </div>

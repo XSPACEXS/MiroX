@@ -1,4 +1,5 @@
 import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron'
+import { execSync } from 'child_process'
 import fs from 'fs/promises'
 import path from 'path'
 import { store } from '../config'
@@ -267,6 +268,21 @@ export function registerSystemHandlers(mainWindow: BrowserWindow): void {
       }
     }
     return { ok: true }
+  })
+
+  // iCloud check (macOS)
+  ipcMain.removeHandler(IPC_CHANNELS.SYSTEM_CHECK_ICLOUD)
+  ipcMain.handle(IPC_CHANNELS.SYSTEM_CHECK_ICLOUD, () => {
+    try {
+      const output = execSync('defaults read MobileMeAccounts Accounts 2>/dev/null', {
+        encoding: 'utf-8',
+        timeout: 5000,
+      })
+      const hasAccount = output.includes('AccountID')
+      return { ok: hasAccount, account: hasAccount ? 'iCloud configured' : undefined }
+    } catch {
+      return { ok: false }
+    }
   })
 
   // Shell

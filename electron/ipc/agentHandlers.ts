@@ -3,6 +3,7 @@ import { spawn, exec, type ChildProcess } from 'child_process'
 import path from 'path'
 import fs from 'fs'
 import crypto from 'crypto'
+import * as keytar from 'keytar'
 import { IPC_CHANNELS } from './channels'
 import { store } from '../config'
 
@@ -51,7 +52,7 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
   ipcMain.removeHandler(IPC_CHANNELS.AGENT_LAUNCH)
   ipcMain.handle(
     IPC_CHANNELS.AGENT_LAUNCH,
-    (_event, config: { model: string; prompt: string; allowedTools: string[]; timeLimitSeconds?: number }) => {
+    async (_event, config: { model: string; prompt: string; allowedTools: string[]; timeLimitSeconds?: number }) => {
       // E3: Limit concurrent agents
       const runningCount = [...agents.values()].filter(a => a.status === 'running').length
       if (runningCount >= 5) {
@@ -111,8 +112,11 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
       ]
       const currentPath = safeEnv.PATH || '/usr/bin:/bin'
       safeEnv.PATH = [...extraPaths, currentPath].join(':')
-      // Pass through ANTHROPIC_API_KEY if set (needed for Claude CLI)
-      if (process.env.ANTHROPIC_API_KEY) {
+      // Try keytar first (user configured in-app), fall back to env var
+      const claudeKey = await keytar.getPassword('com.mirox.app', 'claude-token')
+      if (claudeKey) {
+        safeEnv.ANTHROPIC_API_KEY = claudeKey
+      } else if (process.env.ANTHROPIC_API_KEY) {
         safeEnv.ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY
       }
 

@@ -3,25 +3,25 @@ import { useChatStore } from '@stores/chatStore'
 import type { ClaudeModel, GeminiTextModel } from '@/types/agent'
 
 const MODEL_OPTIONS: { value: ClaudeModel; label: string }[] = [
-  { value: 'haiku', label: 'Haiku' },
-  { value: 'sonnet', label: 'Sonnet' },
-  { value: 'opus', label: 'Opus' },
+  { value: 'haiku', label: 'Haiku 4.5 \u2014 quick & light' },
+  { value: 'sonnet', label: 'Sonnet 4.6 \u2014 fast & capable' },
+  { value: 'opus', label: 'Opus 4.6 \u2014 best quality' },
 ]
 
 const GEMINI_OPTIONS: { value: string; label: string }[] = [
-  { value: 'off', label: 'Off' },
-  { value: 'gemini-pro', label: 'Gemini Pro' },
-  { value: 'gemini-flash', label: 'Flash' },
-  { value: 'gemini-flash-2', label: 'Flash 2' },
-  { value: 'gemini-flash-lite', label: 'Flash Lite' },
+  { value: 'off', label: 'Gemini Off' },
+  { value: 'gemini-pro', label: 'Pro \u2014 deep analysis' },
+  { value: 'gemini-flash', label: 'Flash \u2014 fast generation' },
+  { value: 'gemini-flash-2', label: 'Flash 2 \u2014 latest fast' },
+  { value: 'gemini-flash-lite', label: 'Lite \u2014 lightest' },
 ]
 
 const TIME_OPTIONS: { value: string; label: string }[] = [
-  { value: '0', label: 'No limit' },
-  { value: '900', label: '15m' },
-  { value: '1800', label: '30m' },
-  { value: '3600', label: '1h' },
-  { value: '7200', label: '2h' },
+  { value: '0', label: 'No limit \u2014 run until done' },
+  { value: '900', label: '15m \u2014 quick task' },
+  { value: '1800', label: '30m \u2014 medium project' },
+  { value: '3600', label: '1h \u2014 large refactor' },
+  { value: '7200', label: '2h \u2014 full audit' },
 ]
 
 const selectClass =

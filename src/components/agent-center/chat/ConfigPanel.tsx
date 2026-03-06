@@ -1,26 +1,35 @@
 import { useChatStore } from '@stores/chatStore'
 import type { ClaudeModel, GeminiTextModel } from '@/types/agent'
 
-const CLAUDE_MODELS: { value: ClaudeModel; label: string }[] = [
-  { value: 'haiku', label: 'Haiku' },
-  { value: 'sonnet', label: 'Sonnet' },
-  { value: 'opus', label: 'Opus' },
+const CLAUDE_MODELS: { value: ClaudeModel; label: string; desc: string }[] = [
+  { value: 'haiku', label: 'Haiku 4.5', desc: 'Quick & light' },
+  { value: 'sonnet', label: 'Sonnet 4.6', desc: 'Fast & capable' },
+  { value: 'opus', label: 'Opus 4.6', desc: 'Best quality' },
 ]
 
 const GEMINI_MODELS: { value: GeminiTextModel; label: string }[] = [
-  { value: 'gemini-pro', label: 'Gemini Pro' },
-  { value: 'gemini-flash', label: 'Flash' },
-  { value: 'gemini-flash-2', label: 'Flash 2' },
-  { value: 'gemini-flash-lite', label: 'Flash Lite' },
+  { value: 'gemini-pro', label: 'Gemini Pro \u2014 deep analysis' },
+  { value: 'gemini-flash', label: 'Flash \u2014 fast generation' },
+  { value: 'gemini-flash-2', label: 'Flash 2 \u2014 latest fast' },
+  { value: 'gemini-flash-lite', label: 'Flash Lite \u2014 lightest' },
 ]
 
 const TIME_OPTIONS: { value: number; label: string }[] = [
-  { value: 0, label: 'No limit' },
-  { value: 900, label: '15 minutes' },
-  { value: 1800, label: '30 minutes' },
-  { value: 3600, label: '1 hour' },
-  { value: 7200, label: '2 hours' },
+  { value: 0, label: 'No limit \u2014 run until done' },
+  { value: 900, label: '15 minutes \u2014 quick task' },
+  { value: 1800, label: '30 minutes \u2014 medium project' },
+  { value: 3600, label: '1 hour \u2014 large refactor' },
+  { value: 7200, label: '2 hours \u2014 full audit' },
 ]
+
+function SectionHeader({ children }: { children: string }): JSX.Element {
+  return (
+    <div className="flex items-center gap-2 pt-1">
+      <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-600">{children}</span>
+      <div className="flex-1 h-px bg-black-600" />
+    </div>
+  )
+}
 
 export function ConfigPanel(): JSX.Element {
   const config = useChatStore((s) => s.config)
@@ -36,9 +45,8 @@ export function ConfigPanel(): JSX.Element {
 
   return (
     <div className="rounded-2xl bg-black-800/60 border border-black-600 p-4 mx-3 my-2 space-y-4">
-      {/* Claude Model */}
+      <SectionHeader>AI Model</SectionHeader>
       <div className="space-y-2">
-        <span className="text-xs font-medium text-gray-300">Claude Model</span>
         <div className="flex items-center gap-4">
           {CLAUDE_MODELS.map((m) => (
             <label key={m.value} className="flex items-center gap-1.5 cursor-pointer">
@@ -58,16 +66,19 @@ export function ConfigPanel(): JSX.Element {
                 onChange={() => updateConfig({ primaryModel: m.value })}
                 className="sr-only"
               />
-              <span className="text-xs text-gray-300">{m.label}</span>
+              <div className="flex flex-col">
+                <span className="text-xs text-gray-300">{m.label}</span>
+                <span className="text-[10px] text-gray-500">{m.desc}</span>
+              </div>
             </label>
           ))}
         </div>
       </div>
 
-      {/* Gemini Brain */}
+      <SectionHeader>Gemini Brain</SectionHeader>
       <div className="space-y-2">
         <div className="flex items-center gap-3">
-          <span className="text-xs font-medium text-gray-300">Gemini Brain</span>
+          <span className="text-xs text-gray-400">Enable</span>
           <button
             onClick={() => updateConfig({ geminiEnabled: !config.geminiEnabled })}
             className={`relative w-8 h-4 rounded-full transition-colors ${
@@ -95,7 +106,7 @@ export function ConfigPanel(): JSX.Element {
         </div>
       </div>
 
-      {/* Checkboxes */}
+      <SectionHeader>Execution</SectionHeader>
       <div className="flex items-center gap-6">
         <label className="flex items-center gap-1.5 cursor-pointer">
           <input
@@ -117,7 +128,6 @@ export function ConfigPanel(): JSX.Element {
         </label>
       </div>
 
-      {/* Time Limit */}
       <div className="space-y-1">
         <span className="text-xs font-medium text-gray-300">Time Limit</span>
         <select
@@ -131,7 +141,7 @@ export function ConfigPanel(): JSX.Element {
         </select>
       </div>
 
-      {/* Project Dir */}
+      <SectionHeader>Project</SectionHeader>
       <div className="space-y-1">
         <span className="text-xs font-medium text-gray-300">Project Directory</span>
         <div className="flex items-center gap-2">

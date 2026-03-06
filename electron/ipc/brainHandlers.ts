@@ -2,6 +2,7 @@ import { app, ipcMain } from 'electron'
 import { spawn } from 'child_process'
 import path from 'path'
 import fs from 'fs'
+import * as keytar from 'keytar'
 import { IPC_CHANNELS } from './channels'
 
 interface BrainKnowledge {
@@ -147,6 +148,9 @@ Rules:
 - Include frames, shapes, sticky notes, and text elements
 - Follow the spatial layout exactly as described in the blueprint`
 
+      // Read Claude key before entering Promise executor
+      const claudeKey = await keytar.getPassword('com.mirox.app', 'claude-token')
+
       return new Promise<BoardManifest>((resolve, reject) => {
         // Build safe environment (same pattern as agentHandlers.ts)
         const safeEnv: Record<string, string> = {}
@@ -168,7 +172,9 @@ Rules:
         ]
         const currentPath = safeEnv.PATH || '/usr/bin:/bin'
         safeEnv.PATH = [...extraPaths, currentPath].join(':')
-        if (process.env.ANTHROPIC_API_KEY) {
+        if (claudeKey) {
+          safeEnv.ANTHROPIC_API_KEY = claudeKey
+        } else if (process.env.ANTHROPIC_API_KEY) {
           safeEnv.ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY
         }
 

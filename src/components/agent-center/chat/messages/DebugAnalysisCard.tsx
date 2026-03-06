@@ -6,6 +6,20 @@ interface DebugAnalysisCardProps {
   message: ChatMessage
 }
 
+function renderDiff(diff: string): JSX.Element {
+  return (
+    <>
+      {diff.split('\n').map((line, i) => {
+        let cls = 'text-gray-300'
+        let bg = ''
+        if (line.startsWith('+')) { cls = 'text-green-300'; bg = 'bg-green-400/10' }
+        else if (line.startsWith('-')) { cls = 'text-red-300'; bg = 'bg-red-400/10' }
+        return <div key={i} className={`${cls} ${bg} px-1`}>{line}</div>
+      })}
+    </>
+  )
+}
+
 export default function DebugAnalysisCard({ message }: DebugAnalysisCardProps): JSX.Element {
   const setMode = useChatStore((s) => s.setMode)
   const setPendingInput = useChatStore((s) => s.setPendingInput)
@@ -54,8 +68,8 @@ export default function DebugAnalysisCard({ message }: DebugAnalysisCardProps): 
         {analysis.diffPreview && (
           <div className="mb-3">
             <h5 className="text-xs font-semibold text-gray-500 uppercase mb-1">Diff Preview</h5>
-            <pre className="bg-black-900 rounded-xl p-3 overflow-x-auto">
-              <code className="text-xs font-mono text-gray-300">{analysis.diffPreview}</code>
+            <pre className="bg-black-900 rounded-xl p-3 overflow-x-auto text-xs font-mono">
+              {renderDiff(analysis.diffPreview)}
             </pre>
           </div>
         )}

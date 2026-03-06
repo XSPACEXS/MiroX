@@ -156,6 +156,18 @@ export interface ElectronAPI {
   // Shell
   openExternal: (url: string) => Promise<{ ok: boolean; error?: string }>
 
+  // Claude
+  claude: {
+    getToken: () => Promise<{ ok: boolean; hasToken: boolean; masked: string }>
+    setToken: (token: string) => Promise<{ ok: boolean; error?: string }>
+    testConnection: () => Promise<{ ok: boolean; version?: string; error?: string }>
+  }
+
+  // System (extended)
+  system: {
+    checkiCloud: () => Promise<{ ok: boolean; account?: string; error?: string }>
+  }
+
   // Agent
   agent: {
     launch: (config: { model: string; prompt: string; allowedTools: string[] }) => Promise<

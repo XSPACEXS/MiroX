@@ -189,6 +189,18 @@ const MODEL_MAP: Record<string, string> = {
   haiku: 'haiku',
 }
 
+/** Pick a model for each pipeline phase based on user's primaryModel choice */
+function getPhaseModel(
+  primary: MissionConfig['primaryModel'],
+  phase: 'scout' | 'planner' | 'tester' | 'verifier'
+): string {
+  // High-stakes phases use the user's chosen model directly
+  if (phase === 'planner' || phase === 'verifier') return MODEL_MAP[primary] ?? 'sonnet'
+  // Scout/Tester: one tier lighter to save cost
+  if (primary === 'opus') return 'sonnet'
+  return 'haiku'
+}
+
 const MAX_BUILD_CONCURRENT = 3
 const MAX_TEST_RETRIES = 2
 
@@ -202,7 +214,7 @@ async function runPlanPhase(
   const prompt = getPlanAgentPrompt(config.prompt, scoutReport)
 
   const agentId = await launchAgent(
-    { model: 'haiku', prompt, allowedTools: ['Read', 'Glob', 'Grep'] },
+    { model: getPhaseModel(config.primaryModel, 'planner'), prompt, allowedTools: ['Read', 'Glob', 'Grep'] },
     { teamRunId: missionId, teamRole: 'collaborator', teamSkill: 'Planner', timeLimitSeconds: 300 },
     agentStore
   )
@@ -239,7 +251,7 @@ async function runScoutPhase(
   const prompt = buildScoutPrompt(config.prompt)
 
   const agentId = await launchAgent(
-    { model: 'haiku', prompt, allowedTools: ['Read', 'Glob', 'Grep'] },
+    { model: getPhaseModel(config.primaryModel, 'scout'), prompt, allowedTools: ['Read', 'Glob', 'Grep'] },
     { teamRunId: missionId, teamRole: 'collaborator', teamSkill: 'Scout', timeLimitSeconds: 300 },
     agentStore
   )
@@ -404,16 +416,16 @@ async function runBuildPhase(
 }
 
 async function runTestPhase(
+  config: MissionConfig,
   missionId: string,
   missionStore: MissionStoreAPI,
-  agentStore: AgentStoreAPI,
-  timeLimitSeconds: number
+  agentStore: AgentStoreAPI
 ): Promise<{ passed: boolean; output: string }> {
   const prompt = buildTestPrompt()
 
   const agentId = await launchAgent(
-    { model: 'haiku', prompt, allowedTools: ['Read', 'Glob', 'Grep', 'Bash'] },
-    { teamRunId: missionId, teamRole: 'collaborator', teamSkill: 'Tester', timeLimitSeconds },
+    { model: getPhaseModel(config.primaryModel, 'tester'), prompt, allowedTools: ['Read', 'Glob', 'Grep', 'Bash'] },
+    { teamRunId: missionId, teamRole: 'collaborator', teamSkill: 'Tester', timeLimitSeconds: config.timeLimitSeconds },
     agentStore
   )
 
@@ -440,7 +452,7 @@ async function runVerifyPhase(
   const prompt = buildVerifyPrompt(config.prompt)
 
   const agentId = await launchAgent(
-    { model: 'sonnet', prompt, allowedTools: ['Read', 'Glob', 'Grep', 'Bash'] },
+    { model: getPhaseModel(config.primaryModel, 'verifier'), prompt, allowedTools: ['Read', 'Glob', 'Grep', 'Bash'] },
     { teamRunId: missionId, teamRole: 'collaborator', teamSkill: 'Verifier', timeLimitSeconds: config.timeLimitSeconds },
     agentStore
   )
@@ -477,6 +489,12 @@ export async function executeMission(
   agentStore: AgentStoreAPI
 ): Promise<void> {
   const missionId = `mission-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+
+  // Global mission timeout
+  let globalTimer: ReturnType<typeof setTimeout> | null = null
+  if (config.timeLimitSeconds > 0) {
+    globalTimer = setTimeout(() => { void abortMission(missionStore) }, config.timeLimitSeconds * 1000)
+  }
 
   let phase: MissionState['phase'] = 'idle'
 
@@ -573,7 +591,7 @@ export async function executeMission(
       if (isTerminal(phase)) return
 
       // --- Test ---
-      const testResult = await runTestPhase(missionId, missionStore, agentStore, config.timeLimitSeconds)
+      const testResult = await runTestPhase(config, missionId, missionStore, agentStore)
       writeMissionLog(missionId, 'test_result', { passed: testResult.passed })
 
       if (testResult.passed) {
@@ -654,12 +672,14 @@ export async function executeMission(
       }
     }
 
+    if (globalTimer) clearTimeout(globalTimer)
     missionStore.completeMission()
     writeMissionLog(missionId, 'mission_complete', { phase: missionStore.getMission()?.phase })
 
     // Cleanup handoff manager
     handoffManager?.stopAll()
   } catch (err) {
+    if (globalTimer) clearTimeout(globalTimer)
     const message = err instanceof Error ? err.message : 'Unknown error'
     missionStore.setError(message)
     missionStore.setPhase('failed')

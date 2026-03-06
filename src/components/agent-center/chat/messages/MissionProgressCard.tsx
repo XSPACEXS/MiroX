@@ -7,6 +7,12 @@ interface MissionProgressCardProps {
   message: ChatMessage
 }
 
+function contextBarColor(usage: number): string {
+  if (usage < 50) return 'bg-green-400/60'
+  if (usage < 75) return 'bg-yellow-400/60'
+  return 'bg-red-400/60'
+}
+
 export default function MissionProgressCard({ message }: MissionProgressCardProps): JSX.Element {
   const mission = useMissionStore((s) => s.mission)
   const agents = useAgentStore((s) => s.agents)
@@ -56,21 +62,20 @@ export default function MissionProgressCard({ message }: MissionProgressCardProp
               <span className="text-gray-300 truncate">
                 {agent.teamSkill || agent.id.slice(0, 8)}
               </span>
-              {agent.contextUsage && (
-                <div className="flex-1 h-1 bg-black-600 rounded-full overflow-hidden ml-2">
-                  <div
-                    className="h-full bg-yellow-400/60 rounded-full"
-                    style={{
-                      width: `${Math.min(
-                        100,
-                        ((agent.contextUsage.inputTokens + agent.contextUsage.outputTokens) /
-                          200000) *
-                          100
-                      )}%`,
-                    }}
-                  />
-                </div>
-              )}
+              {agent.contextUsage && (() => {
+                const usagePct = Math.min(
+                  100,
+                  ((agent.contextUsage.inputTokens + agent.contextUsage.outputTokens) / 200000) * 100
+                )
+                return (
+                  <div className="flex-1 h-1 bg-black-600 rounded-full overflow-hidden ml-2">
+                    <div
+                      className={`h-full ${contextBarColor(usagePct)} rounded-full transition-all duration-300`}
+                      style={{ width: `${usagePct}%` }}
+                    />
+                  </div>
+                )
+              })()}
               <span className="text-gray-500 shrink-0">{agent.status}</span>
             </div>
           ))}

@@ -2,8 +2,8 @@ import { useEffect } from 'react'
 import { useChatStore } from '@stores/chatStore'
 import { useMissionStore } from '@stores/missionStore'
 import { useAgentStore } from '@stores/agentStore'
-import { sendChatMessage, sendDebugMessage, runProjectScan } from '@services/chatService'
-import { executeMission } from '@services/orchestrator'
+import { sendChatMessage, sendDebugMessage, runProjectScan, cancelStream } from '@services/chatService'
+import { executeMission, abortMission } from '@services/orchestrator'
 import type { MissionStoreAPI, AgentStoreAPI, MissionConfig } from '@services/orchestrator'
 import { ModeTabBar } from './ModeTabBar'
 import { ConfigStrip } from './ConfigStrip'
@@ -62,6 +62,15 @@ export function ChatPanel(): JSX.Element {
         void runProjectScan(config)
         break
       case 'mission': {
+        if (config.isLocked) return
+        useChatStore.getState().addMessage({
+          id: `msg-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+          role: 'user',
+          type: 'text',
+          mode: 'mission',
+          content: text,
+          timestamp: Date.now(),
+        })
         const missionConfig: MissionConfig = {
           prompt: text,
           primaryModel: config.primaryModel,
@@ -87,7 +96,15 @@ export function ChatPanel(): JSX.Element {
     }
   }
 
-  const showQuickActions = messages.length === 0 || !isStreaming
+  function handleStop(): void {
+    if (isStreaming) {
+      void cancelStream()
+    } else if (config.isLocked) {
+      void abortMission(buildMissionStoreAPI())
+    }
+  }
+
+  const showQuickActions = (messages.length === 0 || !isStreaming) && !config.isLocked
 
   return (
     <div className="flex flex-col h-full rounded-2xl border border-black-600 bg-black-800/40 overflow-hidden">
@@ -95,7 +112,7 @@ export function ChatPanel(): JSX.Element {
       {configExpanded ? <ConfigPanel /> : <ConfigStrip />}
       <ChatContent />
       {showQuickActions && <QuickActions />}
-      <ChatInputBar onSubmit={handleSubmit} />
+      <ChatInputBar onSubmit={handleSubmit} onStop={handleStop} />
     </div>
   )
 }

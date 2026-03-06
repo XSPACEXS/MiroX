@@ -67,6 +67,18 @@ const electronAPI = {
   // Shell
   openExternal: (url: string) => ipcRenderer.invoke(IPC_CHANNELS.SHELL_OPEN_EXTERNAL, url),
 
+  // Claude
+  claude: {
+    getToken: () => ipcRenderer.invoke(IPC_CHANNELS.CLAUDE_GET_TOKEN),
+    setToken: (token: string) => ipcRenderer.invoke(IPC_CHANNELS.CLAUDE_SET_TOKEN, token),
+    testConnection: () => ipcRenderer.invoke(IPC_CHANNELS.CLAUDE_TEST_CONNECTION),
+  },
+
+  // System (extended)
+  system: {
+    checkiCloud: () => ipcRenderer.invoke(IPC_CHANNELS.SYSTEM_CHECK_ICLOUD),
+  },
+
   // Agent
   agent: {
     launch: (config: { model: string; prompt: string; allowedTools: string[] }) =>

@@ -6,6 +6,7 @@ import { registerMiroHandlers } from './ipc/miroHandlers'
 import { registerGithubHandlers } from './ipc/githubHandlers'
 import { registerAgentHandlers } from './ipc/agentHandlers'
 import { registerSelfTestHandlers } from './ipc/selfTestHandlers'
+import { registerClaudeHandlers } from './ipc/claudeHandlers'
 import { registerGeminiHandlers } from './ipc/geminiHandlers'
 import { registerBrainHandlers } from './ipc/brainHandlers'
 import { registerMissionLogHandlers } from './ipc/missionLogHandlers'
@@ -83,6 +84,7 @@ function createWindow(): void {
   registerSystemHandlers(mainWindow)
   registerMiroHandlers()
   registerGithubHandlers()
+  registerClaudeHandlers()
   registerAgentHandlers(mainWindow)
   registerSelfTestHandlers(mainWindow)
   registerGeminiHandlers(mainWindow)
