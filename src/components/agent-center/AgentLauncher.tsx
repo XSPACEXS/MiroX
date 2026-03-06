@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { Rocket, Send, Bot, Plus, X, Clock } from 'lucide-react'
+import { Rocket, Send, Bot, Plus, X, Clock, Sparkles } from 'lucide-react'
 import { Card } from '@components/ui/Card'
 import { Button } from '@components/ui/Button'
 import { Input } from '@components/ui/Input'
@@ -7,8 +7,10 @@ import { Dropdown } from '@components/ui/Dropdown'
 import { SimpleSelect } from '@components/ui/Dropdown'
 import { Badge } from '@components/ui/Badge'
 import { ModelPicker } from './ModelPicker'
+import { ReStyleWizard } from './ReStyleWizard'
 import { useAgentStore } from '@stores/agentStore'
 import { useUIStore } from '@stores/uiStore'
+import { useRestyleStore } from '@stores/restyleStore'
 import {
   CLAUDE_MODELS,
   getModelById,
@@ -76,6 +78,7 @@ export function AgentLauncher(): JSX.Element {
   const [timeLimit, setTimeLimit] = useState('0')
   const addAgent = useAgentStore((s) => s.addAgent)
   const addToast = useUIStore((s) => s.addToast)
+  const openRestyle = useRestyleStore((s) => s.openWizard)
 
   const handleAddCollaborator = useCallback(
     (modelId: string) => {
@@ -372,6 +375,16 @@ export function AgentLauncher(): JSX.Element {
         {/* Add collaborator + time limit + launch */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
+            <button
+              onClick={openRestyle}
+              className="relative overflow-hidden flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-purple-400/30 bg-purple-400/[0.08] text-purple-400 text-sm font-semibold transition-all hover:bg-purple-400/[0.15] hover:shadow-[0_0_20px_rgba(167,139,250,0.15)]"
+            >
+              <Sparkles size={16} />
+              <div>
+                <div>Re-Style</div>
+                <div className="text-[11px] font-normal text-purple-400/60">Claude + Gemini redesign</div>
+              </div>
+            </button>
             {collaborators.length < 3 && (
               <Button
                 variant="ghost"
@@ -411,6 +424,8 @@ export function AgentLauncher(): JSX.Element {
         onSelect={handleAddCollaborator}
         excludeModelIds={collaborators.map((c) => c.model)}
       />
+
+      <ReStyleWizard />
     </div>
   )
 }

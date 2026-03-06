@@ -112,3 +112,29 @@ export const progressVariants = {
 export const staggerContainer = (stagger = 0.05, delay = 0) => ({
   animate: { transition: { staggerChildren: stagger, delayChildren: delay } },
 })
+
+export const pulseRingVariants: Variants = {
+  active: {
+    scale: [1, 1.4, 1],
+    opacity: [0.5, 0, 0.5],
+    transition: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+  },
+  inactive: {
+    scale: 1,
+    opacity: 0,
+  },
+}
+
+export const typingDotsContainerVariants: Variants = {
+  animate: {
+    transition: { staggerChildren: 0.15 },
+  },
+}
+
+export const typingDotVariants: Variants = {
+  animate: {
+    y: [0, -4, 0],
+    opacity: [0.4, 1, 0.4],
+    transition: { duration: 0.6, repeat: Infinity },
+  },
+}

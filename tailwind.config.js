@@ -42,11 +42,21 @@ export default {
       },
       animation: {
         'pulse-yellow': 'pulse-yellow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'glow-claude': 'glow-claude 2s ease-in-out infinite',
+        'glow-gemini': 'glow-gemini 2s ease-in-out infinite',
       },
       keyframes: {
         'pulse-yellow': {
           '0%, 100%': { boxShadow: '0 0 0 0 rgba(255, 214, 0, 0)' },
           '50%': { boxShadow: '0 0 20px 8px rgba(255, 214, 0, 0.3)' },
+        },
+        'glow-claude': {
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(255, 214, 0, 0)' },
+          '50%': { boxShadow: '0 0 15px 4px rgba(255, 214, 0, 0.15)' },
+        },
+        'glow-gemini': {
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(59, 130, 246, 0)' },
+          '50%': { boxShadow: '0 0 15px 4px rgba(59, 130, 246, 0.15)' },
         },
       },
       boxShadow: {

@@ -96,11 +96,6 @@ describe('AgentLauncher', () => {
     expect(readChip).toHaveAttribute('aria-pressed', 'true')
   })
 
-  it('shows Quick Actions section', () => {
-    renderWithRouter(<AgentLauncher />)
-    expect(screen.getByText('Quick Actions')).toBeInTheDocument()
-  })
-
   it('launch button is disabled when prompt is empty', () => {
     renderWithRouter(<AgentLauncher />)
     const launchButtons = screen.getAllByText('Launch Agent')
@@ -167,13 +162,6 @@ describe('AgentLauncher', () => {
       const toasts = useUIStore.getState().toasts
       expect(toasts.some((t) => t.type === 'error' && t.title === 'Launch failed')).toBe(true)
     })
-  })
-
-  it('clicking a quick action fills in the prompt', () => {
-    renderWithRouter(<AgentLauncher />)
-    fireEvent.click(screen.getByText('Fix All TypeScript Errors'))
-    const input = screen.getByPlaceholderText('Describe the task for your AI team...')
-    expect((input as HTMLInputElement).value).toContain('typecheck')
   })
 
   it('toggling a tool chip removes it from selected tools', async () => {

@@ -73,10 +73,10 @@ export function LiveLogs(): JSX.Element {
     return filtered.slice(-1000)
   }, [agents, selectedAgentId, filter, providerFilter])
 
-  // Auto-scroll
+  // Auto-scroll — scope to container only (not the page)
   useEffect(() => {
-    if (autoScroll && logEndRef.current) {
-      logEndRef.current.scrollIntoView({ behavior: 'smooth' })
+    if (autoScroll && containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight
     }
   }, [allLogs.length, autoScroll])
 
