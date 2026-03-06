@@ -60,6 +60,7 @@ export function RestylePreferences(): JSX.Element {
             teamRunId: null,
             teamRole: null,
             teamSkill: null,
+            timeLimitSeconds: 0,
           })
         }
       })()

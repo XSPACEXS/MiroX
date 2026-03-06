@@ -275,6 +275,7 @@ export function AgentLauncher(): JSX.Element {
     // Always create a team
     const teamRunId = `team-${Date.now()}`
     const taskPrompt = prompt.trim()
+    const timeLimitSec = parseInt(timeLimit, 10) * 60 // minutes → seconds (0 = no limit)
 
     try {
       // 1. Launch primary Claude agent
@@ -303,6 +304,7 @@ export function AgentLauncher(): JSX.Element {
           teamRunId,
           teamRole: 'primary',
           teamSkill: 'Lead',
+          timeLimitSeconds: timeLimitSec,
         })
       } else {
         addToast({
@@ -356,6 +358,7 @@ export function AgentLauncher(): JSX.Element {
               teamRunId,
               teamRole: 'collaborator',
               teamSkill: support.role.skill,
+              timeLimitSeconds: timeLimitSec,
             })
           }
         } catch {
@@ -417,6 +420,7 @@ export function AgentLauncher(): JSX.Element {
               teamRunId,
               teamRole: 'collaborator',
               teamSkill: collab.modelDef.outputType === 'image' ? 'Artist' : collab.modelDef.outputType === 'video' ? 'Director' : collab.role,
+              timeLimitSeconds: timeLimitSec,
             })
           } else {
             addToast({
@@ -441,7 +445,7 @@ export function AgentLauncher(): JSX.Element {
     } finally {
       setIsLaunching(false)
     }
-  }, [prompt, primaryModel, tools, collaborators, isLaunching, agents, addAgent, addToast])
+  }, [prompt, primaryModel, tools, collaborators, isLaunching, agents, addAgent, addToast, timeLimit])
 
   const toggleTool = useCallback((tool: string) => {
     setTools((prev) =>

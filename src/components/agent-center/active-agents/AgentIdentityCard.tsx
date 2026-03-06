@@ -57,11 +57,11 @@ export function AgentIdentityCard({ agent, onKill, isPrimary, compact }: AgentId
       : agent.status === 'failed'
         ? 'border-red-400/30'
         : agent.status === 'killed'
-          ? 'border-gray-500/30'
+          ? 'border-orange-400/30'
           : 'border-black-600'
 
-  // Elapsed for progress bar — use actual agent timeout (default 30min = 1800s)
-  const timeoutSeconds = (agent as { timeoutSeconds?: number }).timeoutSeconds || 1800
+  // Elapsed for progress bar — use actual agent time limit (0 = no limit → show indeterminate)
+  const timeoutSeconds = agent.timeLimitSeconds || 0
   const [elapsed, setElapsed] = useState(0)
   useEffect(() => {
     if (agent.status !== 'running') return
@@ -70,7 +70,9 @@ export function AgentIdentityCard({ agent, onKill, isPrimary, compact }: AgentId
     }, 1000)
     return () => clearInterval(interval)
   }, [agent.startedAt, agent.status])
-  const progressValue = Math.min((elapsed / timeoutSeconds) * 100, 100)
+  const progressValue = timeoutSeconds > 0
+    ? Math.min((elapsed / timeoutSeconds) * 100, 100)
+    : null // No limit — indeterminate
 
   const avatarSize = compact ? 'md' : 'lg'
 
@@ -120,7 +122,13 @@ export function AgentIdentityCard({ agent, onKill, isPrimary, compact }: AgentId
       {/* Progress bar */}
       {agent.status === 'running' && (
         <div className="w-full mt-2 px-2">
-          <LinearProgress value={progressValue} size="sm" />
+          {progressValue !== null ? (
+            <LinearProgress value={progressValue} size="sm" />
+          ) : (
+            <div className="h-1 rounded-full bg-black-600 overflow-hidden">
+              <div className="h-full w-1/3 rounded-full bg-yellow-400/40 animate-[indeterminate_1.5s_ease-in-out_infinite]" />
+            </div>
+          )}
         </div>
       )}
 
@@ -140,6 +148,15 @@ export function AgentIdentityCard({ agent, onKill, isPrimary, compact }: AgentId
           <Badge color={agent.teamRole === 'primary' ? 'yellow' : 'blue'} size="sm">
             {agent.teamSkill}
           </Badge>
+        )}
+        {agent.status === 'killed' && (
+          <Badge color="yellow" size="sm">Killed</Badge>
+        )}
+        {agent.status === 'failed' && (
+          <Badge color="red" size="sm">Failed</Badge>
+        )}
+        {agent.status === 'completed' && (
+          <Badge color="green" size="sm">Done</Badge>
         )}
       </div>
 

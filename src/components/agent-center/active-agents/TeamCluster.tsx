@@ -61,11 +61,11 @@ export function TeamCluster({ teamId, agents, onKill, onKillTeam }: TeamClusterP
           <div className="flex flex-col items-center">
             {/* Vertical line down from primary */}
             <div className="w-px h-6 bg-yellow-400/30" />
-            {/* Horizontal bar spanning collaborators */}
+            {/* Horizontal bar — cap at 3 visible per row to prevent overflow */}
             {collaborators.length > 1 && (
               <div
                 className="h-px bg-yellow-400/30"
-                style={{ width: `${(collaborators.length - 1) * (180 + 16)}px` }}
+                style={{ width: `${(Math.min(collaborators.length, 3) - 1) * (180 + 16)}px` }}
               />
             )}
           </div>

@@ -43,13 +43,12 @@ export function AppearanceConfig() {
             <p className="text-xs text-gray-500">Default theme</p>
           </Button>
           <Button
-            variant={theme === 'light' ? 'secondary' : 'ghost'}
+            variant="ghost"
             size="sm"
-            onClick={() => setTheme('light')}
-            aria-pressed={theme === 'light'}
-            className={`flex-1 p-4 flex-col items-stretch h-auto ${
-              theme === 'light' ? 'border-yellow-400' : ''
-            }`}
+            disabled
+            aria-pressed={false}
+            className="flex-1 p-4 flex-col items-stretch h-auto opacity-50 cursor-not-allowed"
+            title="Light theme coming soon"
           >
             <div className="w-full h-16 bg-gray-200 rounded-lg mb-3 border border-gray-300" />
             <p className="text-sm font-medium text-white">Light</p>
@@ -77,6 +76,14 @@ export function AppearanceConfig() {
               title={color.label}
             />
           ))}
+        </div>
+        {/* Live preview */}
+        <div className="flex items-center gap-3 mt-2 p-3 rounded-xl bg-black-800 border border-black-600">
+          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: accentColor }} />
+          <span className="text-sm font-medium" style={{ color: accentColor }}>
+            Accent preview
+          </span>
+          <span className="ml-auto text-xs font-mono text-gray-500">{accentColor}</span>
         </div>
       </div>
     </div>

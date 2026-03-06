@@ -123,6 +123,7 @@ IMPORTANT: Do each step one at a time, verify it works, then move on.`
         teamRunId: null,
         teamRole: null,
         teamSkill: null,
+        timeLimitSeconds: 0,
       })
     }
   }, [selectedProposal, buildApplyPrompt, setIsApplying, setApplyProgress, setApplyAgentId, addAgent])

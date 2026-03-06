@@ -1,8 +1,15 @@
 import { vi } from 'vitest'
 import '@testing-library/jest-dom'
+import { useBuilderDraftStore } from '../stores/builderStore'
 
 // jsdom does not implement scrollIntoView — mock it globally
 window.HTMLElement.prototype.scrollIntoView = vi.fn()
+
+// Clear sessionStorage and reset builder draft store between tests
+afterEach(() => {
+  sessionStorage.clear()
+  useBuilderDraftStore.getState().clearDraft()
+})
 
 // Mock window.electronAPI for all tests
 const mockElectronAPI = {

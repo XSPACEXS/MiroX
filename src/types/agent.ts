@@ -38,6 +38,7 @@ export interface AgentRun {
   teamRunId: string | null
   teamRole: 'primary' | 'collaborator' | null
   teamSkill: string | null
+  timeLimitSeconds: number
 }
 
 export interface AgentConfig {

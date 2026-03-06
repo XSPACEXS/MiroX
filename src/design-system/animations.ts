@@ -138,3 +138,55 @@ export const typingDotVariants: Variants = {
     transition: { duration: 0.6, repeat: Infinity },
   },
 }
+
+// --- Mission / Agent Center animation variants ---
+
+export const moodGlowVariants: Record<string, Variants> = {
+  focused: {
+    animate: {
+      scale: [1, 1.15, 1],
+      opacity: [0.4, 0.2, 0.4],
+      transition: { duration: 2.5, repeat: Infinity, ease: 'easeInOut' },
+    },
+  },
+}
+
+export const phaseSegmentVariants: Variants = {
+  inactive: { scaleX: 0, opacity: 0.3 },
+  active: {
+    scaleX: 1,
+    opacity: 1,
+    transition: { type: 'spring', stiffness: 80, damping: 15 },
+  },
+  complete: {
+    scaleX: 1,
+    opacity: 1,
+    transition: { duration: 0.3 },
+  },
+}
+
+export const characterEntranceVariants: Variants = {
+  initial: { opacity: 0, scale: 0.8, y: 20 },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { type: 'spring', stiffness: 300, damping: 25 },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.9,
+    y: -10,
+    transition: { duration: 0.2 },
+  },
+}
+
+export const subtaskAppearVariants: Variants = {
+  initial: { opacity: 0, x: -20, height: 0 },
+  animate: {
+    opacity: 1,
+    x: 0,
+    height: 'auto',
+    transition: { type: 'spring', stiffness: 200, damping: 20 },
+  },
+}

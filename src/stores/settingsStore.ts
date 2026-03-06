@@ -46,12 +46,14 @@ export const useSettingsStore = create<SettingsStore>()((set, get) => ({
     if (typeof window === 'undefined' || !window.electronAPI) return
     try {
       const settings = await window.electronAPI.settings.load()
+      const loadedAccent = (settings.accentColor as string) || '#FFD600'
       set({
         theme: (settings.theme as 'dark' | 'light') || 'dark',
-        accentColor: (settings.accentColor as string) || '#FFD600',
+        accentColor: loadedAccent,
         onboardingComplete: !!settings.onboardingComplete,
         _loaded: true,
       })
+      document.documentElement.style.setProperty('--accent', loadedAccent)
     } catch {
       set({ _loaded: true })
     }
@@ -69,7 +71,11 @@ export const useSettingsStore = create<SettingsStore>()((set, get) => ({
     set({ githubConnected, githubUsername: githubUsername || null, githubAvatarUrl: githubAvatarUrl || null }),
   setGeminiConnected: (geminiConnected) => set({ geminiConnected }),
   setTheme: (theme) => { set({ theme }); get().saveToDisk() },
-  setAccentColor: (accentColor) => { set({ accentColor }); get().saveToDisk() },
+  setAccentColor: (accentColor) => {
+    set({ accentColor })
+    document.documentElement.style.setProperty('--accent', accentColor)
+    get().saveToDisk()
+  },
   completeOnboarding: () => { set({ onboardingComplete: true }); get().saveToDisk() },
   incrementFilesImported: () => set(state => ({ filesImported: state.filesImported + 1 })),
   recordTemplateUsed: (templateId) => set(state => ({

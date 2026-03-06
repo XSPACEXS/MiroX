@@ -86,6 +86,7 @@ export function RestyleScan(): JSX.Element {
         teamRunId: null,
         teamRole: null,
         teamSkill: null,
+        timeLimitSeconds: 0,
       })
     }
   }, [setScanAgentId, setIsScanRunning, addAgent])

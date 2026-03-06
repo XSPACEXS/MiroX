@@ -168,6 +168,7 @@ Mark exactly one as recommended: true. All colors must be valid hex or rgba.`)
         teamRunId: null,
         teamRole: null,
         teamSkill: null,
+        timeLimitSeconds: 0,
       })
     }
   }, [buildPrompt, setIsGenerating, addAgent])

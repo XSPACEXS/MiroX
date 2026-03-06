@@ -21,6 +21,7 @@ function makeAgent(overrides: Partial<AgentRun> = {}): AgentRun {
     teamRunId: null,
     teamRole: null,
     teamSkill: null,
+    timeLimitSeconds: 0,
     ...overrides,
   }
 }

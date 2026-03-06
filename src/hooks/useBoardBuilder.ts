@@ -1,8 +1,10 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import type { TemplateDefinition } from '../templates/types'
 import { useBoardStore } from '../stores/boardStore'
 import { useSettingsStore } from '../stores/settingsStore'
+import { useBuilderDraftStore } from '../stores/builderStore'
 import { buildBoard } from '../services/boardBuilder'
+import { getTemplateById } from '../templates'
 
 export interface CreationStep {
   id: string
@@ -21,11 +23,16 @@ const DEFAULT_STEPS: CreationStep[] = [
 ]
 
 export function useBoardBuilder() {
-  const [currentStep, setCurrentStep] = useState(1)
-  const [selectedTemplate, setSelectedTemplate] = useState<TemplateDefinition | null>(null)
-  const [boardName, setBoardName] = useState('')
-  const [boardDescription, setBoardDescription] = useState('')
-  const [fieldValues, setFieldValues] = useState<Record<string, string>>({})
+  // Restore draft from sessionStorage on mount
+  const draft = useBuilderDraftStore.getState()
+  const restoredTemplate = draft.templateId ? (getTemplateById(draft.templateId) ?? null) : null
+  const didRestore = useRef(false)
+
+  const [currentStep, setCurrentStep] = useState(restoredTemplate ? draft.currentStep : 1)
+  const [selectedTemplate, setSelectedTemplate] = useState<TemplateDefinition | null>(restoredTemplate)
+  const [boardName, setBoardName] = useState(restoredTemplate ? draft.boardName : '')
+  const [boardDescription, setBoardDescription] = useState(restoredTemplate ? draft.boardDescription : '')
+  const [fieldValues, setFieldValues] = useState<Record<string, string>>(restoredTemplate ? draft.fieldValues : {})
   const [creationProgress, setCreationProgress] = useState(0)
   const [creationSteps, setCreationSteps] = useState<CreationStep[]>(DEFAULT_STEPS)
   const [isCreating, setIsCreating] = useState(false)
@@ -36,6 +43,22 @@ export function useBoardBuilder() {
   const addRecentBoard = useBoardStore((s) => s.addRecentBoard)
   const incrementTotal = useBoardStore((s) => s.incrementTotal)
   const recordTemplateUsed = useSettingsStore((s) => s.recordTemplateUsed)
+  const saveDraft = useBuilderDraftStore((s) => s.saveDraft)
+  const clearDraft = useBuilderDraftStore((s) => s.clearDraft)
+
+  // Auto-save draft when state changes (skip creation/completion steps)
+  useEffect(() => {
+    if (didRestore.current && currentStep < 4 && !isComplete) {
+      saveDraft({
+        templateId: selectedTemplate?.id ?? null,
+        boardName,
+        boardDescription,
+        fieldValues,
+        currentStep,
+      })
+    }
+    didRestore.current = true
+  }, [selectedTemplate, boardName, boardDescription, fieldValues, currentStep, isComplete, saveDraft])
 
   const setTemplate = useCallback((template: TemplateDefinition | null) => {
     setSelectedTemplate(template)
@@ -126,12 +149,13 @@ export function useBoardBuilder() {
       recordTemplateUsed(selectedTemplate.id)
 
       setIsComplete(true)
+      clearDraft()
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Board creation failed')
     } finally {
       setIsCreating(false)
     }
-  }, [selectedTemplate, boardName, boardDescription, fieldValues, isCreating, addRecentBoard, incrementTotal, recordTemplateUsed, updateStep])
+  }, [selectedTemplate, boardName, boardDescription, fieldValues, isCreating, addRecentBoard, incrementTotal, recordTemplateUsed, updateStep, clearDraft])
 
   const reset = useCallback(() => {
     setCurrentStep(1)
@@ -145,7 +169,8 @@ export function useBoardBuilder() {
     setIsComplete(false)
     setBoardUrl(null)
     setError(null)
-  }, [])
+    clearDraft()
+  }, [clearDraft])
 
   return {
     currentStep,

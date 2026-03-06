@@ -13,8 +13,8 @@ const PROVIDER_ICONS = {
 type AvatarSize = 'sm' | 'md' | 'lg'
 
 const SIZE_CONFIG: Record<AvatarSize, { container: string; icon: number; ring: string; badge: number; crown: string }> = {
-  sm: { container: 'w-10 h-10', icon: 18, ring: 'border-2', badge: 14, crown: 'text-xs -top-1.5 -right-1.5' },
-  md: { container: 'w-12 h-12', icon: 22, ring: 'border-2', badge: 16, crown: 'text-sm -top-1 -right-1' },
+  sm: { container: 'w-10 h-10', icon: 18, ring: 'border-2', badge: 14, crown: 'text-xs -top-1 -right-1' },
+  md: { container: 'w-12 h-12', icon: 22, ring: 'border-2', badge: 16, crown: 'text-sm -top-1.5 -right-1.5' },
   lg: { container: 'w-16 h-16', icon: 28, ring: 'border-[3px]', badge: 18, crown: 'text-base -top-1.5 -right-1.5' },
 }
 
