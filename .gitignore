@@ -5,6 +5,7 @@ node_modules/
 dist/
 dist-electron/
 release/
+main.js
 
 # Build resources (icons, DMG background) are tracked — do NOT add build/ here
 
