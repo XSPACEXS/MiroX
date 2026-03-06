@@ -15,6 +15,8 @@ interface CharacterAvatarProps {
   size: 'sm' | 'md' | 'lg'
   /** Optionally provide mood directly instead of deriving it */
   mood?: AgentCharacter['mood']
+  /** Generation number for handoff lineage badge */
+  generation?: number
 }
 
 const ICON_MAP: Record<AvatarIcon, LucideIcon> = {
@@ -36,7 +38,7 @@ const SIZE_CONFIG: Record<CharacterAvatarProps['size'], { container: string; ico
   lg: { container: 'w-16 h-16', iconSize: 24, badgeSize: 18 },
 }
 
-export function CharacterAvatar({ character, isActive, status, size, mood: moodOverride }: CharacterAvatarProps): JSX.Element {
+export function CharacterAvatar({ character, isActive, status, size, mood: moodOverride, generation }: CharacterAvatarProps): JSX.Element {
   const cfg = SIZE_CONFIG[size]
   const Icon: LucideIcon = ICON_MAP[character.avatarIcon] ?? Code
   const currentMood = moodOverride ?? character.mood
@@ -90,6 +92,13 @@ export function CharacterAvatar({ character, isActive, status, size, mood: moodO
         >
           <Skull size={cfg.badgeSize - 4} className="text-gray-300" />
         </motion.div>
+      )}
+
+      {/* Generation badge for handoff lineage */}
+      {generation != null && generation > 0 && status === 'running' && (
+        <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-orange-500 text-white text-[9px] font-bold flex items-center justify-center ring-2 ring-black-900 z-20">
+          {generation}
+        </div>
       )}
     </div>
   )

@@ -40,6 +40,9 @@ const NAME_POOLS: Record<string, string[]> = {
     'Judge', 'Sentinel', 'Auditor', 'Clarity', 'Proof',
     'Verdict', 'Arbiter', 'Gauge', 'Caliber', 'Standard',
   ],
+  reviewer: [
+    'Athena', 'Oracle', 'Sage', 'Maven', 'Iris', 'Veda', 'Lyra', 'Sybil',
+  ],
 }
 
 // --- Skill-to-pool mapping ---
@@ -59,6 +62,7 @@ const SKILL_TO_POOL: Record<string, string> = {
   'Director': 'designer',
   'Planner': 'planner',
   'Verifier': 'verifier',
+  'Reviewer': 'reviewer',
 }
 
 const SKILL_TO_ROLE_TITLE: Record<string, string> = {
@@ -76,6 +80,7 @@ const SKILL_TO_ROLE_TITLE: Record<string, string> = {
   'Director': 'Creative Director',
   'Planner': 'Mission Planner',
   'Verifier': 'Quality Verifier',
+  'Reviewer': 'Reviewer',
 }
 
 const SKILL_TO_ICON: Record<string, AvatarIcon> = {
@@ -93,6 +98,7 @@ const SKILL_TO_ICON: Record<string, AvatarIcon> = {
   'Director': 'paintbrush',
   'Planner': 'cpu',
   'Verifier': 'shield',
+  'Reviewer': 'eye',
 }
 
 const TRAIT_POOLS: Record<string, PersonalityTrait[]> = {
@@ -105,6 +111,7 @@ const TRAIT_POOLS: Record<string, PersonalityTrait[]> = {
   lead: ['decisive', 'bold', 'tenacious', 'enthusiastic'],
   planner: ['analytical', 'methodical', 'patient', 'meticulous'],
   verifier: ['meticulous', 'cautious', 'analytical', 'patient'],
+  reviewer: ['analytical', 'meticulous', 'patient', 'cautious'],
 }
 
 // --- Deterministic hash ---
@@ -158,5 +165,31 @@ export function generateCharacter(agent: AgentRun): AgentCharacter {
     avatarHue,
     avatarIcon,
     mood: 'idle',
+  }
+}
+
+export function generateCharacterForHandoff(
+  existingCharacter: AgentCharacter,
+  newAgentId: string,
+  newGeneration: number
+): AgentCharacter {
+  return {
+    ...existingCharacter,
+    id: newAgentId,
+    generation: newGeneration,
+    mood: 'focused',
+  }
+}
+
+export function generateGeminiBrainCharacter(agentId: string): AgentCharacter {
+  return {
+    id: agentId,
+    firstName: 'Gemini',
+    roleTitle: 'Mission Brain',
+    personalityTraits: ['analytical', 'patient'] as [PersonalityTrait, PersonalityTrait],
+    avatarHue: 220,
+    avatarIcon: 'cpu' as AvatarIcon,
+    mood: 'focused',
+    generation: 0,
   }
 }

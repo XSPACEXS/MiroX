@@ -1,5 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import { Cpu } from 'lucide-react'
 import { CharacterCard } from '@components/agent-center/character/CharacterCard'
+import { useMissionStore } from '@stores/missionStore'
 import type { AgentCharacter } from '@/types/character'
 import type { AgentRun } from '@/types/agent'
 
@@ -10,13 +12,15 @@ interface TeamSceneProps {
 }
 
 export function TeamScene({ agents, characters, onKill }: TeamSceneProps): JSX.Element {
+  const geminiAssistSessionId = useMissionStore((s) => s.mission?.geminiAssistSessionId)
   const primary = agents.find((a) => a.teamRole === 'primary')
   const collaborators = agents.filter((a) => a.teamRole !== 'primary')
 
   // If no primary, show all as 'md'
   if (!primary) {
     return (
-      <div className="overflow-y-auto max-h-[600px] py-2">
+      <div className="relative overflow-y-auto max-h-[600px] py-2">
+        {geminiAssistSessionId && <GeminiBrainBadge />}
         <div className="flex justify-center gap-4 flex-wrap">
           <AnimatePresence mode="popLayout">
             {agents.map((agent) => {
@@ -47,7 +51,8 @@ export function TeamScene({ agents, characters, onKill }: TeamSceneProps): JSX.E
   const primaryChar = characters[primary.id]
 
   return (
-    <div className="overflow-y-auto max-h-[600px] py-2">
+    <div className="relative overflow-y-auto max-h-[600px] py-2">
+      {geminiAssistSessionId && <GeminiBrainBadge />}
       <div className="flex flex-col items-center">
         {/* Primary agent — centered at top */}
         <AnimatePresence mode="popLayout">
@@ -139,6 +144,20 @@ export function TeamScene({ agents, characters, onKill }: TeamSceneProps): JSX.E
             </AnimatePresence>
           </div>
         )}
+      </div>
+    </div>
+  )
+}
+
+function GeminiBrainBadge(): JSX.Element {
+  return (
+    <div className="absolute top-2 right-2 z-10">
+      <div className="flex flex-col items-center gap-1 p-3 rounded-xl bg-blue-500/10 border border-blue-500/20">
+        <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+          <Cpu size={20} className="text-blue-400" />
+        </div>
+        <span className="text-xs font-semibold text-blue-400">Gemini Brain</span>
+        <span className="text-[10px] text-blue-400/60">Watching</span>
       </div>
     </div>
   )

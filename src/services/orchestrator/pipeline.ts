@@ -4,6 +4,8 @@ import { transition, isTerminal } from './stateMachine'
 import { injectScopeGuard } from './scopeGuard'
 import { parsePlanOutput, getPlanAgentPrompt } from './taskDecomposer'
 import { buildScoutPrompt, buildBuildPrompt, buildTestPrompt, buildVerifyPrompt } from './prompts'
+import { GeminiAssistant } from './geminiAssist'
+import { HandoffManager } from './handoffManager'
 
 // Re-export for convenience
 export type { MissionConfig }
@@ -22,6 +24,7 @@ export interface MissionStoreAPI {
   removeActiveAgent: (agentId: string) => void
   addCompletedAgent: (agentId: string) => void
   addPhaseTransition: (from: MissionState['phase'], to: MissionState['phase'], reason: string) => void
+  setGeminiAssistReport: (report: import('./types').GeminiAssistReport) => void
   completeMission: () => void
 }
 
@@ -58,6 +61,9 @@ async function launchAgent(
     teamSkill: string
     timeLimitSeconds: number
     outputType?: AgentRun['outputType']
+    generation?: number
+    parentAgentId?: string
+    lineageId?: string
   },
   agentStore: AgentStoreAPI
 ): Promise<string> {
@@ -91,9 +97,28 @@ async function launchAgent(
     teamRole: meta.teamRole,
     teamSkill: meta.teamSkill,
     timeLimitSeconds: meta.timeLimitSeconds,
+    generation: meta.generation ?? 0,
+    parentAgentId: meta.parentAgentId,
+    lineageId: meta.lineageId,
   })
 
   return result.id
+}
+
+/** Write an event to the disk-backed mission log */
+function writeMissionLog(
+  missionId: string,
+  type: string,
+  data: Record<string, unknown>
+): void {
+  try {
+    const api = getElectronAPI()
+    if (api.missionLog) {
+      void api.missionLog.write(missionId, { type, data })
+    }
+  } catch {
+    // Best effort — don't crash pipeline if log write fails
+  }
 }
 
 /** Wait for an agent to exit by subscribing to IPC events */
@@ -239,7 +264,9 @@ async function runBuildPhase(
   config: MissionConfig,
   missionId: string,
   missionStore: MissionStoreAPI,
-  agentStore: AgentStoreAPI
+  agentStore: AgentStoreAPI,
+  geminiAssist: GeminiAssistant | null = null,
+  handoffManager: HandoffManager | null = null
 ): Promise<void> {
   const ordered = topologicalSort(plan.subtasks.filter((s) => s.status !== 'completed'))
 
@@ -261,6 +288,7 @@ async function runBuildPhase(
     const buildPrompt = buildBuildPrompt(subtask, plan.originalPrompt, plan.scoutReport)
     const scopedPrompt = injectScopeGuard(subtask, buildPrompt)
 
+    const lineageId = `lineage-${subtask.id}-${Date.now()}`
     const model = MODEL_MAP[subtask.model] ?? 'sonnet'
     const agentId = await launchAgent(
       { model, prompt: scopedPrompt, allowedTools: subtask.tools },
@@ -269,6 +297,8 @@ async function runBuildPhase(
         teamRole: 'primary',
         teamSkill: `Builder (${subtask.title.slice(0, 20)})`,
         timeLimitSeconds: config.timeLimitSeconds,
+        generation: 0,
+        lineageId,
       },
       agentStore
     )
@@ -276,6 +306,13 @@ async function runBuildPhase(
     missionStore.updateSubtask(subtask.id, { status: 'running', agentId })
     missionStore.addActiveAgent(agentId)
     running.set(agentId, subtask)
+    writeMissionLog(missionId, 'agent_launch', { agentId, subtaskId: subtask.id, model })
+
+    // Start handoff watching if enabled
+    if (handoffManager) {
+      const threshold = config.handoffThresholdClaude ?? 0.6
+      handoffManager.startWatching(agentId, lineageId, 0, subtask, threshold, 200000)
+    }
   }
 
   // Launch initial batch
@@ -292,6 +329,8 @@ async function runBuildPhase(
         const api = getElectronAPI()
         const unsubscribe = api.agent.onExit((data) => {
           if (running.has(data.id)) {
+            // Skip if this agent is being handed off (handoff manager will handle it)
+            if (handoffManager?.isHandingOff(data.id)) return
             unsubscribe()
             resolve({ agentId: data.id, status: data.status, exitCode: data.exitCode })
           }
@@ -304,10 +343,36 @@ async function runBuildPhase(
     running.delete(result.agentId)
     missionStore.removeActiveAgent(result.agentId)
     missionStore.addCompletedAgent(result.agentId)
+    handoffManager?.stopWatching(result.agentId)
+
+    writeMissionLog(missionId, 'agent_exit', { agentId: result.agentId, status: result.status, subtaskId: subtask.id })
 
     if (result.status === 'completed') {
       missionStore.updateSubtask(subtask.id, { status: 'completed' })
       completed.add(subtask.id)
+
+      // Gemini review of completed agent work (fire and forget)
+      if (geminiAssist) {
+        void (async () => {
+          try {
+            const agent = agentStore.getAgent(result.agentId)
+            const logs = agent?.logs.map((l) => l.text) ?? []
+            const review = await geminiAssist!.reviewAgentWork(result.agentId, logs, subtask.files)
+            writeMissionLog(missionId, 'gemini_review', { agentId: result.agentId, score: review.qualityScore, issues: review.issues.length })
+
+            // Generate mockup if UI files changed
+            const uiFiles = subtask.files.filter((f) => f.endsWith('.tsx') || f.endsWith('.css'))
+            if (uiFiles.length > 0) {
+              const mockupUrl = await geminiAssist!.generateMockup(uiFiles)
+              if (mockupUrl) {
+                review.mockupUrl = mockupUrl
+              }
+            }
+          } catch {
+            // Non-fatal
+          }
+        })()
+      }
 
       // Launch newly unblocked subtasks
       for (const next of getReady()) {
@@ -415,13 +480,52 @@ export async function executeMission(
 
   let phase: MissionState['phase'] = 'idle'
 
+  // Initialize Gemini Assist if enabled
+  let geminiAssist: GeminiAssistant | null = null
+  if (config.geminiAssist?.enabled) {
+    geminiAssist = new GeminiAssistant(config.geminiAssist)
+  }
+
+  // Initialize HandoffManager if handoffs enabled
+  let handoffManager: HandoffManager | null = null
+  if (config.enableHandoff) {
+    handoffManager = new HandoffManager({
+      launchAgent: async (launchConfig, meta) => {
+        return launchAgent(launchConfig, { ...meta }, agentStore)
+      },
+      geminiAssistant: geminiAssist,
+      missionId,
+      originalPrompt: config.prompt,
+      onHandoff: (oldId, newId, lineageId, generation) => {
+        missionStore.addActiveAgent(newId)
+        missionStore.removeActiveAgent(oldId)
+        writeMissionLog(missionId, 'handoff_complete', { oldId, newId, lineageId, generation })
+      },
+    })
+  }
+
   try {
+    writeMissionLog(missionId, 'mission_start', { prompt: config.prompt, config: { ...config, geminiAssist: config.geminiAssist } })
+
+    // --- Launch Gemini Brain (if enabled) ---
+    if (geminiAssist) {
+      try {
+        const brainResult = await geminiAssist.loadProjectContext()
+        writeMissionLog(missionId, 'gemini_brain_start', { ok: brainResult.ok, sessionId: brainResult.sessionId })
+      } catch {
+        // Graceful degradation — continue without Gemini
+        geminiAssist = null
+        writeMissionLog(missionId, 'gemini_brain_start', { ok: false, error: 'Brain launch failed' })
+      }
+    }
+
     // --- Planning ---
     phase = applyTransition('idle', { type: 'PLAN_READY', plan: null as unknown as MissionPlan }, missionStore)
     // Actually set to planning manually since idle→planning isn't in the map
     missionStore.setPhase('planning')
     missionStore.addPhaseTransition('idle', 'planning', 'Mission started')
     phase = 'planning'
+    writeMissionLog(missionId, 'phase_change', { from: 'idle', to: 'planning' })
 
     // Scout first if enabled
     let scoutReport: string | null = null
@@ -429,6 +533,7 @@ export async function executeMission(
       missionStore.setPhase('scouting')
       missionStore.addPhaseTransition('planning', 'scouting', 'Starting scout phase')
       phase = 'scouting'
+      writeMissionLog(missionId, 'phase_change', { from: 'planning', to: 'scouting' })
 
       try {
         scoutReport = await runScoutPhase(config, missionId, missionStore, agentStore)
@@ -447,6 +552,7 @@ export async function executeMission(
     const plan = await runPlanPhase(config, missionId, scoutReport, missionStore, agentStore)
     missionStore.setPlan(plan)
     phase = applyTransition(phase, { type: 'PLAN_READY', plan }, missionStore)
+    writeMissionLog(missionId, 'plan_ready', { subtaskCount: plan.subtasks.length })
 
     if (isTerminal(phase)) return
 
@@ -454,36 +560,63 @@ export async function executeMission(
     missionStore.setPhase('building')
     missionStore.addPhaseTransition(phase, 'building', 'Starting build phase')
     phase = 'building'
+    writeMissionLog(missionId, 'phase_change', { from: phase, to: 'building' })
 
     let testRetries = 0
 
     // Build-test loop (retry up to MAX_TEST_RETRIES times)
     while (testRetries <= MAX_TEST_RETRIES) {
-      await runBuildPhase(plan, config, missionId, missionStore, agentStore)
+      await runBuildPhase(plan, config, missionId, missionStore, agentStore, geminiAssist, handoffManager)
       phase = applyTransition(phase, { type: 'ALL_BUILDERS_DONE' }, missionStore)
+      writeMissionLog(missionId, 'all_builders_done', { retry: testRetries })
 
       if (isTerminal(phase)) return
 
       // --- Test ---
       const testResult = await runTestPhase(missionId, missionStore, agentStore, config.timeLimitSeconds)
+      writeMissionLog(missionId, 'test_result', { passed: testResult.passed })
 
       if (testResult.passed) {
         phase = applyTransition(phase, { type: 'TEST_PASSED' }, missionStore)
         break
       } else {
+        // If Gemini is available, analyze test failure for smarter retry
+        if (geminiAssist) {
+          try {
+            const fixes = await geminiAssist.analyzeTestFailure(testResult.output, plan)
+            writeMissionLog(missionId, 'gemini_test_analysis', { fixes: fixes.length })
+            // Reset only subtasks that Gemini identified as needing fixes
+            if (fixes.length > 0) {
+              for (const fix of fixes) {
+                const subtask = plan.subtasks.find((s) => s.id === fix.subtaskId)
+                if (subtask) {
+                  subtask.status = 'pending'
+                  subtask.description = `${subtask.description}\n\nFIX REQUIRED: ${fix.fix}`
+                  missionStore.updateSubtask(subtask.id, { status: 'pending', agentId: null })
+                }
+              }
+            }
+          } catch {
+            // Fall back to resetting all subtasks
+          }
+        }
+
         testRetries++
         if (testRetries > MAX_TEST_RETRIES) {
           phase = applyTransition(phase, { type: 'TEST_FAILED', error: testResult.output.slice(-500) }, missionStore)
-          // TEST_FAILED transitions to building for retry, but we've exhausted retries
           missionStore.setPhase('failed')
           missionStore.setError('Tests failed after maximum retries')
+          writeMissionLog(missionId, 'mission_failed', { reason: 'Tests failed after maximum retries' })
           return
         }
-        // Reset failed subtasks for retry
-        for (const subtask of plan.subtasks) {
-          if (subtask.status === 'completed') {
-            subtask.status = 'pending'
-            missionStore.updateSubtask(subtask.id, { status: 'pending', agentId: null })
+        // Reset subtasks for retry (if Gemini didn't already do targeted resets)
+        const anyReset = plan.subtasks.some((s) => s.status === 'pending')
+        if (!anyReset) {
+          for (const subtask of plan.subtasks) {
+            if (subtask.status === 'completed') {
+              subtask.status = 'pending'
+              missionStore.updateSubtask(subtask.id, { status: 'pending', agentId: null })
+            }
           }
         }
         phase = 'building'
@@ -501,17 +634,38 @@ export async function executeMission(
       } else {
         phase = applyTransition(phase, { type: 'VERIFY_FAILED', error: 'Verification issues found' }, missionStore)
       }
+      writeMissionLog(missionId, 'verify_result', { verified })
     } else {
       missionStore.setPhase('done')
       missionStore.addPhaseTransition(phase, 'done', 'Verification skipped')
     }
 
+    // --- Generate Gemini Final Report ---
+    if (geminiAssist) {
+      try {
+        const mission = missionStore.getMission()
+        if (mission) {
+          const report = await geminiAssist.generateFinalReport(mission)
+          missionStore.setGeminiAssistReport(report)
+          writeMissionLog(missionId, 'gemini_final_report', { score: report.overallScore, issues: report.totalIssues })
+        }
+      } catch {
+        // Non-fatal — mission still completes without report
+      }
+    }
+
     missionStore.completeMission()
+    writeMissionLog(missionId, 'mission_complete', { phase: missionStore.getMission()?.phase })
+
+    // Cleanup handoff manager
+    handoffManager?.stopAll()
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error'
     missionStore.setError(message)
     missionStore.setPhase('failed')
     missionStore.addPhaseTransition(phase, 'failed', message)
+    writeMissionLog(missionId, 'mission_failed', { error: message })
+    handoffManager?.stopAll()
   }
 }
 

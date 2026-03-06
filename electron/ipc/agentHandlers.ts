@@ -6,6 +6,13 @@ import crypto from 'crypto'
 import { IPC_CHANNELS } from './channels'
 import { store } from '../config'
 
+interface AgentTokenTracker {
+  inputTokens: number
+  outputTokens: number
+  cacheReadTokens: number
+  cacheWriteTokens: number
+}
+
 interface AgentProcess {
   id: string
   process: ChildProcess
@@ -15,6 +22,7 @@ interface AgentProcess {
   status: 'running' | 'completed' | 'failed' | 'killed'
   allowedTools: string[]
   executionTimeout?: ReturnType<typeof setTimeout>
+  tokenTracker: AgentTokenTracker
 }
 
 const MODEL_MAP: Record<string, string> = {
@@ -43,7 +51,7 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
   ipcMain.removeHandler(IPC_CHANNELS.AGENT_LAUNCH)
   ipcMain.handle(
     IPC_CHANNELS.AGENT_LAUNCH,
-    (_event, config: { model: string; prompt: string; allowedTools: string[] }) => {
+    (_event, config: { model: string; prompt: string; allowedTools: string[]; timeLimitSeconds?: number }) => {
       // E3: Limit concurrent agents
       const runningCount = [...agents.values()].filter(a => a.status === 'running').length
       if (runningCount >= 5) {
@@ -122,23 +130,27 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
         startedAt: Date.now(),
         status: 'running',
         allowedTools: config.allowedTools,
+        tokenTracker: { inputTokens: 0, outputTokens: 0, cacheReadTokens: 0, cacheWriteTokens: 0 },
       }
 
       agents.set(id, agent)
 
-      // E1: 30-minute execution timeout
+      // E1: Execution timeout (configurable via timeLimitSeconds, default 30 minutes)
+      const timeoutMs = (config.timeLimitSeconds && config.timeLimitSeconds > 0)
+        ? config.timeLimitSeconds * 1000
+        : 30 * 60 * 1000
       agent.executionTimeout = setTimeout(() => {
         const agentRef = agents.get(id)
         if (agentRef && agentRef.status === 'running') {
           agentRef.status = 'killed'
-          sendLog(mainWindow, id, 'system', 'Agent killed — 30-minute execution timeout reached')
+          sendLog(mainWindow, id, 'system', 'Agent killed — execution timeout reached')
           agentRef.process.kill('SIGTERM')
           // Escalate to SIGKILL after 10s if still alive
           setTimeout(() => {
             try { agentRef.process.kill('SIGKILL') } catch { /* already dead */ }
           }, 10_000)
         }
-      }, 30 * 60 * 1000)
+      }, timeoutMs)
 
       sendLog(mainWindow, id, 'system', `Agent ${id.slice(0, 8)} launched with model ${config.model}`)
 
@@ -149,7 +161,33 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
         const lines = stdoutBuffer.split('\n')
         stdoutBuffer = lines.pop() || ''
         for (const line of lines) {
-          if (line.trim()) {
+          if (!line.trim()) continue
+          try {
+            const parsed = JSON.parse(line) as {
+              type?: string
+              message?: { usage?: { input_tokens?: number; output_tokens?: number; cache_read_input_tokens?: number; cache_creation_input_tokens?: number } }
+              delta?: { text?: string }
+              result?: { usage?: { input_tokens?: number; output_tokens?: number; cache_read_input_tokens?: number; cache_creation_input_tokens?: number } }
+            }
+            const agentRef = agents.get(id)
+            if (parsed.type === 'message_start' && parsed.message?.usage && agentRef) {
+              agentRef.tokenTracker.inputTokens += parsed.message.usage.input_tokens || 0
+              agentRef.tokenTracker.outputTokens += parsed.message.usage.output_tokens || 0
+              agentRef.tokenTracker.cacheReadTokens += parsed.message.usage.cache_read_input_tokens || 0
+              agentRef.tokenTracker.cacheWriteTokens += parsed.message.usage.cache_creation_input_tokens || 0
+              emitContextUpdate(mainWindow, id, agentRef.tokenTracker)
+            } else if (parsed.type === 'content_block_delta' && parsed.delta?.text) {
+              sendLog(mainWindow, id, 'stdout', parsed.delta.text)
+            } else if (parsed.type === 'result' && parsed.result?.usage && agentRef) {
+              agentRef.tokenTracker.inputTokens += parsed.result.usage.input_tokens || 0
+              agentRef.tokenTracker.outputTokens += parsed.result.usage.output_tokens || 0
+              agentRef.tokenTracker.cacheReadTokens += parsed.result.usage.cache_read_input_tokens || 0
+              agentRef.tokenTracker.cacheWriteTokens += parsed.result.usage.cache_creation_input_tokens || 0
+              emitContextUpdate(mainWindow, id, agentRef.tokenTracker)
+            }
+            // Parsed JSON lines are NOT sent as raw stdout logs (avoid double-logging)
+          } catch {
+            // Not JSON — send as regular stdout log
             sendLog(mainWindow, id, 'stdout', line)
           }
         }
@@ -192,6 +230,7 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
             id,
             exitCode: code,
             status: agentRef?.status || (code === 0 ? 'completed' : 'failed'),
+            usage: agentRef?.tokenTracker,
           })
         }
 
@@ -323,6 +362,22 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
     store.set('projectPath', dirPath)
     return { ok: true, projectPath: dirPath }
   })
+}
+
+function emitContextUpdate(
+  mainWindow: BrowserWindow,
+  agentId: string,
+  tracker: AgentTokenTracker
+): void {
+  if (!mainWindow.isDestroyed()) {
+    mainWindow.webContents.send(IPC_CHANNELS.AGENT_CONTEXT_UPDATE, {
+      agentId,
+      inputTokens: tracker.inputTokens,
+      outputTokens: tracker.outputTokens,
+      cacheReadTokens: tracker.cacheReadTokens,
+      cacheWriteTokens: tracker.cacheWriteTokens,
+    })
+  }
 }
 
 function sendLog(

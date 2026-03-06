@@ -67,6 +67,12 @@ const mockElectronAPI = {
     setProjectDir: vi.fn().mockResolvedValue({ ok: true, projectPath: '/mock/new-project' }),
     onLog: vi.fn().mockReturnValue(() => {}),
     onExit: vi.fn().mockReturnValue(() => {}),
+    onContextUpdate: vi.fn().mockReturnValue(() => {}),
+  },
+  missionLog: {
+    write: vi.fn().mockResolvedValue({ ok: true }),
+    read: vi.fn().mockResolvedValue({ ok: true, events: [] }),
+    list: vi.fn().mockResolvedValue({ ok: true, missions: [] }),
   },
   selfTest: {
     screenshot: vi.fn().mockResolvedValue({ ok: true, dataURL: 'data:image/png;base64,abc', filePath: '/tmp/test.png' }),

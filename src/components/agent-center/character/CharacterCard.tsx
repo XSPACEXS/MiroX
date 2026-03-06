@@ -7,6 +7,7 @@ import { useAgentActivity } from '@components/agent-center/active-agents/useAgen
 import { useMood } from '@hooks/useMoodEngine'
 import { useAgentStats } from '@hooks/useAgentStats'
 import { flavorSpeech } from '@hooks/useMoodEngine'
+import { useAgentStore } from '@stores/agentStore'
 import { MOOD_CONFIGS } from '@/types/character'
 import type { AgentCharacter } from '@/types/character'
 import type { AgentRun } from '@/types/agent'
@@ -107,6 +108,32 @@ export function CharacterCard({ agent, character, size, onKill }: CharacterCardP
           <CharacterStats stats={stats} compact={size !== 'lg'} />
         </div>
       )}
+
+      {/* Context usage bar */}
+      <ContextUsageBar agentId={agent.id} />
     </motion.div>
+  )
+}
+
+function ContextUsageBar({ agentId }: { agentId: string }): JSX.Element | null {
+  const contextUsage = useAgentStore((s) => s.agents.find((a) => a.id === agentId)?.contextUsage)
+  if (!contextUsage) return null
+  const total = contextUsage.inputTokens + contextUsage.outputTokens
+  const maxTokens = 200000
+  const pct = Math.min(100, Math.round((total / maxTokens) * 100))
+  const barColor = pct < 40 ? 'bg-green-400' : pct < 60 ? 'bg-yellow-400' : 'bg-red-400'
+  return (
+    <div className="mt-2 px-2 w-full">
+      <div className="flex items-center justify-between text-[10px] text-gray-500 mb-0.5">
+        <span>Context</span>
+        <span>{Math.round(total / 1000)}K / {maxTokens / 1000}K</span>
+      </div>
+      <div className="h-1.5 bg-black-700 rounded-full overflow-hidden">
+        <div
+          className={`h-full rounded-full transition-all duration-500 ${barColor}`}
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+    </div>
   )
 }

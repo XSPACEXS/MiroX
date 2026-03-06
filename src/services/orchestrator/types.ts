@@ -47,6 +47,56 @@ export interface MissionState {
   error: string | null
   startedAt: number
   finishedAt: number | null
+  geminiAssistReport?: GeminiAssistReport
+  geminiAssistSessionId?: string
+  handoffCount: number
+  totalCost: number
+}
+
+export interface GeminiAssistConfig {
+  enabled: boolean
+  brainModel: 'gemini-pro' | 'gemini-flash' | 'gemini-flash-2' | 'gemini-flash-lite'
+  autoMockup: boolean
+  autoImage: boolean
+  autoVideo: boolean
+}
+
+export interface GeminiReview {
+  agentId: string
+  issues: GeminiReviewIssue[]
+  summary: string
+  qualityScore: number
+  mockupUrl?: string
+}
+
+export interface GeminiReviewIssue {
+  severity: 'critical' | 'warning' | 'suggestion'
+  file: string
+  line?: number
+  message: string
+}
+
+export interface GeminiAssistReport {
+  overallScore: number
+  reviews: GeminiReview[]
+  filesChanged: number
+  totalIssues: number
+  mockups: string[]
+  summary: string
+}
+
+export interface HandoffBriefing {
+  id: string
+  fromAgentId: string
+  toAgentId: string | null
+  lineageId: string
+  generation: number
+  subtaskId: string
+  completedWork: string
+  remainingWork: string
+  currentFileState: string
+  knownIssues: string
+  contextSummary: string
 }
 
 export interface MissionConfig {
@@ -56,6 +106,10 @@ export interface MissionConfig {
   timeLimitSeconds: number
   enableScout: boolean
   enableVerify: boolean
+  geminiAssist?: GeminiAssistConfig
+  enableHandoff?: boolean
+  handoffThresholdClaude?: number
+  handoffThresholdGemini?: number
 }
 
 export type MissionEvent =
@@ -71,3 +125,7 @@ export type MissionEvent =
   | { type: 'VERIFY_DONE' }
   | { type: 'VERIFY_FAILED'; error: string }
   | { type: 'ABORT' }
+  | { type: 'GEMINI_REVIEW_DONE'; review: GeminiReview }
+  | { type: 'HANDOFF_START'; fromAgentId: string; lineageId: string; generation: number }
+  | { type: 'HANDOFF_COMPLETE'; fromAgentId: string; toAgentId: string; lineageId: string }
+  | { type: 'GEMINI_BRAIN_HANDOFF'; oldSessionId: string; newSessionId: string }

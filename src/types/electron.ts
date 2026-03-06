@@ -178,6 +178,13 @@ export interface ElectronAPI {
       exitCode: number | null
       status: 'completed' | 'failed' | 'killed'
     }) => void) => () => void
+    onContextUpdate: (callback: (data: {
+      agentId: string
+      inputTokens: number
+      outputTokens: number
+      cacheReadTokens: number
+      cacheWriteTokens: number
+    }) => void) => () => void
   }
 
   // Gemini
@@ -223,6 +230,16 @@ export interface ElectronAPI {
   brain: {
     loadContext: (blueprintId: string) => Promise<import('./brain').BrainContext | null>
     generateBoard: (params: import('./brain').BrainGenerateParams) => Promise<unknown>
+  }
+
+  // Mission Log
+  missionLog: {
+    write: (missionId: string, event: { type: string; data: Record<string, unknown> }) =>
+      Promise<{ ok: boolean; error?: string }>
+    read: (missionId: string) =>
+      Promise<{ ok: boolean; events?: Array<{ timestamp: number; type: string; data: Record<string, unknown> }>; error?: string }>
+    list: () =>
+      Promise<{ ok: boolean; missions?: Array<{ id: string; path: string; size: number }>; error?: string }>
   }
 
   // Navigation listener

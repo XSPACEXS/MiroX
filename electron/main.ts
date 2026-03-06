@@ -8,6 +8,7 @@ import { registerAgentHandlers } from './ipc/agentHandlers'
 import { registerSelfTestHandlers } from './ipc/selfTestHandlers'
 import { registerGeminiHandlers } from './ipc/geminiHandlers'
 import { registerBrainHandlers } from './ipc/brainHandlers'
+import { registerMissionLogHandlers } from './ipc/missionLogHandlers'
 import { IPC_CHANNELS } from './ipc/channels'
 
 let mainWindow: BrowserWindow | null = null
@@ -86,6 +87,7 @@ function createWindow(): void {
   registerSelfTestHandlers(mainWindow)
   registerGeminiHandlers(mainWindow)
   registerBrainHandlers()
+  registerMissionLogHandlers()
 
   // Prevent new windows — open external links in browser
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {

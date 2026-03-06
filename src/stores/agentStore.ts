@@ -22,6 +22,7 @@ interface AgentState {
   setLastScreenshot: (dataURL: string | null) => void
   setDomCheckResults: (results: DomCheckResult[] | null) => void
   setAdmin: (isAdmin: boolean) => void
+  updateContextUsage: (id: string, usage: { inputTokens: number; outputTokens: number; cacheReadTokens?: number; cacheWriteTokens?: number }) => void
 }
 
 export const useAgentStore = create<AgentState>()(
@@ -112,6 +113,14 @@ export const useAgentStore = create<AgentState>()(
       setAdmin: (isAdmin) =>
         set((state) => {
           state.isAdmin = isAdmin
+        }),
+
+      updateContextUsage: (id, usage) =>
+        set((state) => {
+          const agent = state.agents.find((a) => a.id === id)
+          if (agent) {
+            agent.contextUsage = usage
+          }
         }),
     })),
     {

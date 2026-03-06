@@ -27,6 +27,7 @@ export interface ModelDefinition {
   supportsTools: boolean
   outputType: ModelOutputType
   maxOutputTokens: number | null
+  contextWindow: number
   badgeColor: 'purple' | 'blue' | 'green' | 'yellow' | 'orange' | 'red' | 'gray'
   providerIcon: 'bot' | 'sparkles' | 'image' | 'video'
 }
@@ -45,6 +46,7 @@ const CLAUDE_OPUS: ModelDefinition = {
   supportsTools: true,
   outputType: 'text',
   maxOutputTokens: 32768,
+  contextWindow: 200000,
   badgeColor: 'purple',
   providerIcon: 'bot',
 }
@@ -61,6 +63,7 @@ const CLAUDE_SONNET: ModelDefinition = {
   supportsTools: true,
   outputType: 'text',
   maxOutputTokens: 16384,
+  contextWindow: 200000,
   badgeColor: 'blue',
   providerIcon: 'bot',
 }
@@ -77,6 +80,7 @@ const CLAUDE_HAIKU: ModelDefinition = {
   supportsTools: true,
   outputType: 'text',
   maxOutputTokens: 8192,
+  contextWindow: 200000,
   badgeColor: 'green',
   providerIcon: 'bot',
 }
@@ -85,64 +89,68 @@ const CLAUDE_HAIKU: ModelDefinition = {
 
 const GEMINI_PRO: ModelDefinition = {
   id: 'gemini-pro',
-  label: 'Gemini 2.5 Pro',
+  label: 'Gemini 3.1 Pro',
   provider: 'gemini',
-  apiModelId: 'gemini-2.5-pro-preview-06-05',
+  apiModelId: 'gemini-3.1-pro-preview',
   capabilities: ['text-generation', 'code-generation', 'reasoning'],
   tier: 'flagship',
-  description: 'Google flagship. Long context, strong reasoning.',
+  description: 'Google flagship. 1M context, strongest reasoning.',
   canBePrimary: false,
   supportsTools: false,
   outputType: 'text',
   maxOutputTokens: 16384,
+  contextWindow: 1048576,
   badgeColor: 'blue',
   providerIcon: 'sparkles',
 }
 
 const GEMINI_FLASH: ModelDefinition = {
   id: 'gemini-flash',
-  label: 'Gemini 2.5 Flash',
+  label: 'Gemini 3 Flash',
   provider: 'gemini',
-  apiModelId: 'gemini-2.5-flash-preview-04-17',
+  apiModelId: 'gemini-3-flash-preview',
   capabilities: ['text-generation', 'code-generation'],
   tier: 'standard',
-  description: 'Fast Gemini. Good for design audits and reviews.',
+  description: 'Fast Gemini 3. Great for reviews and design audits.',
   canBePrimary: false,
   supportsTools: false,
   outputType: 'text',
   maxOutputTokens: 8192,
+  contextWindow: 1048576,
   badgeColor: 'green',
   providerIcon: 'sparkles',
 }
 
 const GEMINI_FLASH_2: ModelDefinition = {
   id: 'gemini-flash-2',
-  label: 'Gemini 2.0 Flash',
+  label: 'Gemini 3.1 Flash Lite',
   provider: 'gemini',
-  apiModelId: 'gemini-2.0-flash',
+  apiModelId: 'gemini-3.1-flash-lite-preview',
   capabilities: ['text-generation'],
   tier: 'fast',
-  description: 'Very fast. Quick summaries and simple tasks.',
+  description: 'Lightweight Gemini 3.1. Quick summaries and simple tasks.',
   canBePrimary: false,
   supportsTools: false,
   outputType: 'text',
   maxOutputTokens: 8192,
+  contextWindow: 1048576,
   badgeColor: 'yellow',
   providerIcon: 'sparkles',
 }
 
 const GEMINI_FLASH_LITE: ModelDefinition = {
   id: 'gemini-flash-lite',
-  label: 'Flash Lite',
+  label: 'Gemini 2.5 Flash (Stable)',
   provider: 'gemini',
-  apiModelId: 'gemini-2.0-flash-lite',
+  apiModelId: 'gemini-2.5-flash-preview-04-17',
   capabilities: ['text-generation'],
   tier: 'lite',
-  description: 'Cheapest Gemini. Minimal tasks only.',
+  description: 'Stable Gemini 2.5. Reliable fallback.',
   canBePrimary: false,
   supportsTools: false,
   outputType: 'text',
   maxOutputTokens: 4096,
+  contextWindow: 1048576,
   badgeColor: 'gray',
   providerIcon: 'sparkles',
 }
@@ -161,6 +169,7 @@ const GEMINI_IMAGEN: ModelDefinition = {
   supportsTools: false,
   outputType: 'image',
   maxOutputTokens: null,
+  contextWindow: 0,
   badgeColor: 'orange',
   providerIcon: 'image',
 }
@@ -177,6 +186,7 @@ const GEMINI_IMAGEN_FAST: ModelDefinition = {
   supportsTools: false,
   outputType: 'image',
   maxOutputTokens: null,
+  contextWindow: 0,
   badgeColor: 'yellow',
   providerIcon: 'image',
 }
@@ -193,7 +203,25 @@ const GEMINI_NANO_BANANA: ModelDefinition = {
   supportsTools: false,
   outputType: 'image',
   maxOutputTokens: 8192,
+  contextWindow: 1048576,
   badgeColor: 'orange',
+  providerIcon: 'image',
+}
+
+const GEMINI_NANO_BANANA_PRO: ModelDefinition = {
+  id: 'gemini-nano-banana-pro',
+  label: 'Nano Banana Pro',
+  provider: 'gemini',
+  apiModelId: 'gemini-3-pro-image-preview',
+  capabilities: ['text-generation', 'image-generation'],
+  tier: 'flagship',
+  description: 'Pro-quality text + image generation. Best for detailed design mockups.',
+  canBePrimary: false,
+  supportsTools: false,
+  outputType: 'image',
+  maxOutputTokens: 8192,
+  contextWindow: 1048576,
+  badgeColor: 'purple',
   providerIcon: 'image',
 }
 
@@ -211,6 +239,7 @@ const GEMINI_VEO: ModelDefinition = {
   supportsTools: false,
   outputType: 'video',
   maxOutputTokens: null,
+  contextWindow: 0,
   badgeColor: 'red',
   providerIcon: 'video',
 }
@@ -228,6 +257,7 @@ export const ALL_MODELS: readonly ModelDefinition[] = [
   GEMINI_IMAGEN,
   GEMINI_IMAGEN_FAST,
   GEMINI_NANO_BANANA,
+  GEMINI_NANO_BANANA_PRO,
   GEMINI_VEO,
 ] as const
 

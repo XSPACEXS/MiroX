@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowRight, Clock, HandHelping, Star, AlertTriangle } from 'lucide-react'
+import { ArrowRight, Clock, HandHelping, Star, AlertTriangle, Eye, RefreshCw } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { CharacterAvatar } from '@components/agent-center/character/CharacterAvatar'
 import type { AgentInteraction, AgentCharacter, InteractionType } from '@/types/character'
@@ -15,6 +15,8 @@ const TYPE_CONFIG: Record<InteractionType, { icon: LucideIcon; colorClass: strin
   helping: { icon: HandHelping, colorClass: 'text-green-400' },
   celebration: { icon: Star, colorClass: 'text-yellow-400' },
   error_report: { icon: AlertTriangle, colorClass: 'text-red-400' },
+  review: { icon: Eye, colorClass: 'text-cyan-400' },
+  context_handoff: { icon: RefreshCw, colorClass: 'text-orange-400' },
 }
 
 function formatRelativeTime(timestamp: number): string {

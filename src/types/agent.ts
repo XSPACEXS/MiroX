@@ -6,6 +6,7 @@ export type GeminiMediaModel =
   | 'gemini-imagen'
   | 'gemini-imagen-fast'
   | 'gemini-nano-banana'
+  | 'gemini-nano-banana-pro'
   | 'gemini-veo'
 export type GeminiModel = GeminiTextModel | GeminiMediaModel
 export type AgentModel = ClaudeModel | GeminiModel
@@ -20,12 +21,19 @@ export interface AgentLogEntry {
   mediaMimeType?: string
 }
 
+export interface AgentContextUsage {
+  inputTokens: number
+  outputTokens: number
+  cacheReadTokens?: number
+  cacheWriteTokens?: number
+}
+
 export interface AgentRun {
   id: string
   prompt: string
   provider: AIProvider
   model: AgentModel
-  status: 'running' | 'completed' | 'failed' | 'killed'
+  status: 'running' | 'completed' | 'failed' | 'killed' | 'handing-off'
   logs: AgentLogEntry[]
   startedAt: number
   finishedAt: number | null
@@ -39,6 +47,10 @@ export interface AgentRun {
   teamRole: 'primary' | 'collaborator' | null
   teamSkill: string | null
   timeLimitSeconds: number
+  contextUsage?: AgentContextUsage
+  generation?: number
+  parentAgentId?: string
+  lineageId?: string
 }
 
 export interface AgentConfig {

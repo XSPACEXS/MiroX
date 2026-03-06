@@ -52,6 +52,12 @@ export const IPC_CHANNELS = {
   AGENT_SET_PROJECT_DIR: 'agent:set-project-dir',
   AGENT_LOG: 'agent:log',
   AGENT_EXIT: 'agent:exit',
+  AGENT_CONTEXT_UPDATE: 'agent:context-update',
+
+  // Mission Log
+  MISSION_LOG_WRITE: 'mission-log:write',
+  MISSION_LOG_READ: 'mission-log:read',
+  MISSION_LOG_LIST: 'mission-log:list',
 
   // Gemini
   GEMINI_GET_TOKEN: 'gemini:get-token',

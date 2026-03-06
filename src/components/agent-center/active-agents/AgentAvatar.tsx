@@ -22,7 +22,7 @@ interface AgentAvatarProps {
   provider: 'claude' | 'gemini'
   model: string
   isActive: boolean
-  status: 'running' | 'completed' | 'failed' | 'killed'
+  status: 'running' | 'completed' | 'failed' | 'killed' | 'handing-off'
   isPrimary?: boolean
   size?: AvatarSize
 }

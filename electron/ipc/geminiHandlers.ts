@@ -10,11 +10,12 @@ const SERVICE = 'com.mirox.app'
 const GEMINI_ACCOUNT = 'gemini-token'
 
 const GEMINI_MODEL_MAP: Record<string, string> = {
-  'gemini-pro': 'gemini-2.5-pro-preview-06-05',
-  'gemini-flash': 'gemini-2.5-flash-preview-04-17',
-  'gemini-flash-2': 'gemini-2.0-flash',
-  'gemini-flash-lite': 'gemini-2.0-flash-lite',
+  'gemini-pro': 'gemini-3.1-pro-preview',
+  'gemini-flash': 'gemini-3-flash-preview',
+  'gemini-flash-2': 'gemini-3.1-flash-lite-preview',
+  'gemini-flash-lite': 'gemini-2.5-flash-preview-04-17',
   'gemini-nano-banana': 'gemini-3.1-flash-image-preview',
+  'gemini-nano-banana-pro': 'gemini-3-pro-image-preview',
 }
 
 const BASE_URL = 'https://generativelanguage.googleapis.com/v1beta'
@@ -168,7 +169,7 @@ export function registerGeminiHandlers(mainWindow: BrowserWindow): void {
         }
 
         // Nano Banana: non-streaming with image output
-        if (config.model === 'gemini-nano-banana') {
+        if (config.model === 'gemini-nano-banana' || config.model === 'gemini-nano-banana-pro') {
           void (async () => {
             try {
               sendLog(mainWindow, id, 'system', `Nano Banana 2 started`)

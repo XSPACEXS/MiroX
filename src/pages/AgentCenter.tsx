@@ -25,6 +25,7 @@ export default function AgentCenter(): JSX.Element {
   const appendLog = useAgentStore((s) => s.appendLog)
   const updateAgentStatus = useAgentStore((s) => s.updateAgentStatus)
   const moveToHistory = useAgentStore((s) => s.moveToHistory)
+  const updateContextUsage = useAgentStore((s) => s.updateContextUsage)
 
   const pageState = useMissionStore((s) => s.pageState)
   const mission = useMissionStore((s) => s.mission)
@@ -113,15 +114,25 @@ export default function AgentCenter(): JSX.Element {
       pendingTimeouts.current.push(tid)
     })
 
+    const unsubContextUpdate = api.agent.onContextUpdate((data) => {
+      updateContextUsage(data.agentId, {
+        inputTokens: data.inputTokens,
+        outputTokens: data.outputTokens,
+        cacheReadTokens: data.cacheReadTokens,
+        cacheWriteTokens: data.cacheWriteTokens,
+      })
+    })
+
     return () => {
       unsubLog()
       unsubExit()
       unsubGeminiLog()
       unsubGeminiExit()
+      unsubContextUpdate()
       pendingTimeouts.current.forEach(clearTimeout)
       pendingTimeouts.current = []
     }
-  }, [appendLog, updateAgentStatus, moveToHistory])
+  }, [appendLog, updateAgentStatus, moveToHistory, updateContextUsage])
 
   // Generate character for agents added to the mission
   const handleAgentCharacterGeneration = useCallback(
@@ -155,6 +166,7 @@ export default function AgentCenter(): JSX.Element {
       addCompletedAgent: (agentId) => useMissionStore.getState().addCompletedAgent(agentId),
       addPhaseTransition: (from, to, reason) =>
         useMissionStore.getState().addPhaseTransition(from, to, reason),
+      setGeminiAssistReport: (report) => useMissionStore.getState().setGeminiAssistReport(report),
       completeMission: () => useMissionStore.getState().completeMission(),
     }
 

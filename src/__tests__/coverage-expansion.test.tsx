@@ -129,6 +129,8 @@ const mockTemplate: TemplateDefinition = {
   previewAscii: 'ascii',
   estimatedTime: '3 min',
   blueprintId: 'bp-kanban',
+  brainCategory: 'project-management',
+  brainBlueprint: 'kanban-board',
   fields: [
     { id: 'col1', label: 'Column 1', type: 'text' as const, placeholder: 'To Do', required: false, defaultValue: 'To Do' },
     { id: 'col2', label: 'Column 2', type: 'text' as const, placeholder: 'Done', required: false, defaultValue: 'Done' },

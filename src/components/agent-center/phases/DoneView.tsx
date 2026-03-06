@@ -1,7 +1,8 @@
-import { File } from 'lucide-react'
+import { File, Sparkles } from 'lucide-react'
 import { MissionSummary } from '@components/agent-center/mission/MissionSummary'
 import { Badge } from '@components/ui/Badge'
 import { Button } from '@components/ui/Button'
+import { useMissionStore } from '@stores/missionStore'
 import type { MissionState } from '@/services/orchestrator/types'
 import type { AgentCharacter, FileMapEntry } from '@/types/character'
 
@@ -27,6 +28,7 @@ export function DoneView({
   onNewMission,
   onRollback,
 }: DoneViewProps): JSX.Element {
+  const geminiReport = useMissionStore((s) => s.mission?.geminiAssistReport)
   const fileEntries = Object.values(fileMap)
   const fileCount = fileEntries.length
   const isFailed = mission.phase === 'failed' || mission.phase === 'aborted'
@@ -72,6 +74,65 @@ export function DoneView({
                 </div>
               ))}
           </div>
+        </div>
+      )}
+
+      {/* Gemini Assist Report */}
+      {geminiReport && (
+        <div className="rounded-2xl bg-black-800/60 border border-blue-500/20 p-6 space-y-4">
+          <div className="flex items-center gap-2">
+            <Sparkles size={18} className="text-blue-400" />
+            <h3 className="text-lg font-display font-bold text-white">Gemini Assist Report</h3>
+          </div>
+
+          {/* Quality Score */}
+          <div className="flex items-center gap-4">
+            <div className={`text-3xl font-bold ${
+              geminiReport.overallScore >= 90 ? 'text-green-400' :
+              geminiReport.overallScore >= 70 ? 'text-yellow-400' :
+              'text-red-400'
+            }`}>
+              {geminiReport.overallScore}
+            </div>
+            <div>
+              <p className="text-sm text-gray-300">Quality Score</p>
+              <p className="text-xs text-gray-500">
+                {geminiReport.totalIssues} issue(s) across {geminiReport.filesChanged} file(s)
+              </p>
+            </div>
+          </div>
+
+          {/* Summary */}
+          <p className="text-sm text-gray-400">{geminiReport.summary}</p>
+
+          {/* Issues */}
+          {geminiReport.totalIssues > 0 && (
+            <div className="space-y-2">
+              <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Issues</h4>
+              {geminiReport.reviews.flatMap((r) => r.issues).slice(0, 10).map((issue, i) => (
+                <div key={i} className={`flex items-start gap-2 text-xs ${
+                  issue.severity === 'critical' ? 'text-red-400' :
+                  issue.severity === 'warning' ? 'text-yellow-400' :
+                  'text-gray-400'
+                }`}>
+                  <span className="font-mono shrink-0">{issue.file}{issue.line ? `:${issue.line}` : ''}</span>
+                  <span>{issue.message}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Mockups */}
+          {geminiReport.mockups.length > 0 && (
+            <div className="space-y-2">
+              <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Generated Mockups</h4>
+              <div className="flex gap-2 flex-wrap">
+                {geminiReport.mockups.map((url, i) => (
+                  <img key={i} src={url} alt={`Mockup ${i + 1}`} className="w-32 h-32 rounded-lg object-cover border border-black-600" />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
 

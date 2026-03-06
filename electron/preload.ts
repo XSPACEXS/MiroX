@@ -105,6 +105,22 @@ const electronAPI = {
         ipcRenderer.removeListener(IPC_CHANNELS.AGENT_EXIT, handler)
       }
     },
+    onContextUpdate: (callback: (data: {
+      agentId: string
+      inputTokens: number
+      outputTokens: number
+      cacheReadTokens: number
+      cacheWriteTokens: number
+    }) => void) => {
+      const handler = (
+        _event: Electron.IpcRendererEvent,
+        data: { agentId: string; inputTokens: number; outputTokens: number; cacheReadTokens: number; cacheWriteTokens: number }
+      ) => callback(data)
+      ipcRenderer.on(IPC_CHANNELS.AGENT_CONTEXT_UPDATE, handler)
+      return () => {
+        ipcRenderer.removeListener(IPC_CHANNELS.AGENT_CONTEXT_UPDATE, handler)
+      }
+    },
   },
 
   // Gemini
@@ -157,6 +173,16 @@ const electronAPI = {
         ipcRenderer.removeListener(IPC_CHANNELS.GEMINI_EXIT, handler)
       }
     },
+  },
+
+  // Mission Log
+  missionLog: {
+    write: (missionId: string, event: { type: string; data: Record<string, unknown> }) =>
+      ipcRenderer.invoke(IPC_CHANNELS.MISSION_LOG_WRITE, missionId, event),
+    read: (missionId: string) =>
+      ipcRenderer.invoke(IPC_CHANNELS.MISSION_LOG_READ, missionId),
+    list: () =>
+      ipcRenderer.invoke(IPC_CHANNELS.MISSION_LOG_LIST),
   },
 
   // Brain

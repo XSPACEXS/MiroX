@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 import { persist } from 'zustand/middleware'
-import type { MissionPhase, MissionPlan, MissionState, Subtask } from '@/services/orchestrator/types'
+import type { MissionPhase, MissionPlan, MissionState, Subtask, GeminiAssistReport } from '@/services/orchestrator/types'
 import type {
   AgentCharacter,
   AgentCenterPageState,
@@ -48,6 +48,9 @@ interface MissionStoreState {
   updateMood: (agentId: string, mood: AgentCharacter['mood']) => void
   updateFileMap: (entry: FileMapEntry) => void
   addInteraction: (interaction: AgentInteraction) => void
+  setGeminiAssistReport: (report: GeminiAssistReport) => void
+  incrementHandoffCount: () => void
+  addCost: (amount: number) => void
   completeMission: () => void
   abortMission: () => void
   reset: () => void
@@ -95,6 +98,8 @@ export const useMissionStore = create<MissionStoreState>()(
             error: null,
             startedAt: Date.now(),
             finishedAt: null,
+            handoffCount: 0,
+            totalCost: 0,
           }
           state.pageState = 'planning'
           state.characters = {}
@@ -187,6 +192,27 @@ export const useMissionStore = create<MissionStoreState>()(
           // Keep max 100 interactions
           if (state.interactions.length > 100) {
             state.interactions.splice(0, state.interactions.length - 100)
+          }
+        }),
+
+      setGeminiAssistReport: (report) =>
+        set((state) => {
+          if (state.mission) {
+            state.mission.geminiAssistReport = report
+          }
+        }),
+
+      incrementHandoffCount: () =>
+        set((state) => {
+          if (state.mission) {
+            state.mission.handoffCount++
+          }
+        }),
+
+      addCost: (amount) =>
+        set((state) => {
+          if (state.mission) {
+            state.mission.totalCost += amount
           }
         }),
 

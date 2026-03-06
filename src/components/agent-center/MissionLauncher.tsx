@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
-import { Rocket, FolderOpen, Clock, Bot, Zap, Target } from 'lucide-react'
+import { Rocket, FolderOpen, Clock, Bot, Zap, Target, Sparkles } from 'lucide-react'
 import { Button } from '@components/ui/Button'
 import { SimpleSelect } from '@components/ui/Dropdown'
 import { useAgentStore } from '@stores/agentStore'
@@ -8,12 +8,17 @@ import { useUIStore } from '@stores/uiStore'
 import { executeMission } from '@services/orchestrator'
 import type { MissionStoreAPI, AgentStoreAPI } from '@services/orchestrator'
 import { generateCharacter } from '@services/characterGenerator'
-import { CLAUDE_MODELS } from '@services/modelRegistry'
-import type { ClaudeModel } from '@/types/agent'
+import { CLAUDE_MODELS, GEMINI_TEXT_MODELS } from '@services/modelRegistry'
+import type { ClaudeModel, GeminiTextModel } from '@/types/agent'
 import { AgentLauncher } from './AgentLauncher'
 import { QuickLaunchPresets } from './QuickLaunchPresets'
 
 const CLAUDE_MODEL_OPTIONS = CLAUDE_MODELS.map((m) => ({
+  value: m.id,
+  label: m.label,
+}))
+
+const GEMINI_BRAIN_OPTIONS = GEMINI_TEXT_MODELS.map((m) => ({
   value: m.id,
   label: m.label,
 }))
@@ -49,6 +54,7 @@ function buildMissionStoreAPI(): MissionStoreAPI {
     addCompletedAgent: (agentId) => useMissionStore.getState().addCompletedAgent(agentId),
     addPhaseTransition: (from, to, reason) =>
       useMissionStore.getState().addPhaseTransition(from, to, reason),
+    setGeminiAssistReport: (report) => useMissionStore.getState().setGeminiAssistReport(report),
     completeMission: () => useMissionStore.getState().completeMission(),
   }
 }
@@ -68,6 +74,10 @@ export function MissionLauncher(): JSX.Element {
   const [isLaunching, setIsLaunching] = useState(false)
   const [projectDir, setProjectDir] = useState<string | null>(null)
   const [isDirLoading, setIsDirLoading] = useState(false)
+  const [geminiEnabled, setGeminiEnabled] = useState(false)
+  const [brainModel, setBrainModel] = useState<GeminiTextModel>('gemini-pro')
+  const [autoMockup, setAutoMockup] = useState(true)
+  const [handoffEnabled, setHandoffEnabled] = useState(false)
 
   const addToast = useUIStore((s) => s.addToast)
 
@@ -125,6 +135,14 @@ export function MissionLauncher(): JSX.Element {
             timeLimitSeconds: timeLimitSec || 3600,
             enableScout: true,
             enableVerify: true,
+            geminiAssist: geminiEnabled ? {
+              enabled: true,
+              brainModel,
+              autoMockup,
+              autoImage: false,
+              autoVideo: false,
+            } : undefined,
+            enableHandoff: handoffEnabled,
           },
           missionStoreAPI,
           agentStoreAPI
@@ -140,7 +158,7 @@ export function MissionLauncher(): JSX.Element {
         setIsLaunching(false)
       }
     },
-    [prompt, primaryModel, timeLimit, isLaunching, addToast]
+    [prompt, primaryModel, timeLimit, isLaunching, addToast, geminiEnabled, brainModel, autoMockup, handoffEnabled]
   )
 
   const handlePresetSelect = useCallback(
@@ -238,6 +256,58 @@ export function MissionLauncher(): JSX.Element {
               onChange={setTimeLimit}
               className="w-32"
             />
+          </div>
+        </div>
+
+        {/* Gemini Assist */}
+        <div>
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkles size={14} className="text-blue-400" />
+            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+              Gemini Assist
+            </span>
+          </div>
+          <div className="space-y-3">
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={geminiEnabled}
+                onChange={(e) => setGeminiEnabled(e.target.checked)}
+                className="w-4 h-4 rounded border-black-500 bg-black-700 text-yellow-400 focus:ring-yellow-400/50"
+              />
+              <span className="text-sm text-gray-300">Enable Gemini Brain</span>
+            </label>
+            {geminiEnabled && (
+              <div className="pl-7 space-y-3">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs text-gray-500 w-24">Brain Model</span>
+                  <SimpleSelect
+                    options={GEMINI_BRAIN_OPTIONS}
+                    value={brainModel}
+                    onChange={(v) => setBrainModel(v as GeminiTextModel)}
+                    className="w-44"
+                  />
+                </div>
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={autoMockup}
+                    onChange={(e) => setAutoMockup(e.target.checked)}
+                    className="w-4 h-4 rounded border-black-500 bg-black-700 text-yellow-400 focus:ring-yellow-400/50"
+                  />
+                  <span className="text-xs text-gray-400">Auto UI Mockups</span>
+                </label>
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={handoffEnabled}
+                    onChange={(e) => setHandoffEnabled(e.target.checked)}
+                    className="w-4 h-4 rounded border-black-500 bg-black-700 text-yellow-400 focus:ring-yellow-400/50"
+                  />
+                  <span className="text-xs text-gray-400">Generational Handoff (auto-replace agents at 60% context)</span>
+                </label>
+              </div>
+            )}
           </div>
         </div>
 

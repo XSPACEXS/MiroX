@@ -67,6 +67,7 @@ export interface AgentCharacter {
   avatarHue: number
   avatarIcon: AvatarIcon
   mood: AgentMood
+  generation?: number
 }
 
 // --- Stats ---
@@ -81,7 +82,7 @@ export interface AgentStats {
 
 // --- Interactions ---
 
-export type InteractionType = 'handoff' | 'waiting' | 'helping' | 'celebration' | 'error_report'
+export type InteractionType = 'handoff' | 'waiting' | 'helping' | 'celebration' | 'error_report' | 'review' | 'context_handoff'
 
 export interface AgentInteraction {
   id: string
