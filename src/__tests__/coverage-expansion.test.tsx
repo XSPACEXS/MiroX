@@ -670,7 +670,7 @@ describe('Edge: Agent launch ENOENT', () => {
     renderWithRouter(<AgentLauncher />)
     const input = screen.getByPlaceholderText('Describe the task for your AI team...')
     fireEvent.change(input, { target: { value: 'Do something' } })
-    const launchButtons = screen.getAllByText('Launch Agent')
+    const launchButtons = screen.getAllByText('Launch Team')
     fireEvent.click(launchButtons[launchButtons.length - 1]!.closest('button')!)
 
     await waitFor(() => {

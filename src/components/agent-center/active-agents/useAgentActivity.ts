@@ -44,7 +44,7 @@ function computeTimeDependentState(
   timestamps: number[]
 ): { isActive: boolean; isIdle: boolean; activityDots: boolean[]; logRate: number } {
   const now = Date.now()
-  const isActive = now - lastLogTime < 2000
+  const isActive = now - lastLogTime < 4000
   const isIdle = now - lastLogTime > 10000
 
   const activityDots: boolean[] = []
@@ -73,7 +73,7 @@ export function useAgentActivity(agent: AgentRun): AgentActivity {
         logTimestamps.current = logTimestamps.current.filter((t) => t > cutoff)
       }
     }
-  }, [agent.logs.length, agent.logs])
+  }, [agent.logs])
 
   // Compute log-derived values (pure)
   const logDerived = useMemo(() => {

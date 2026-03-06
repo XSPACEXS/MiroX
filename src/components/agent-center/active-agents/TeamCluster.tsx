@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Users, Skull } from 'lucide-react'
 import { Badge } from '@components/ui/Badge'
 import { Button } from '@components/ui/Button'
@@ -23,10 +23,10 @@ export function TeamCluster({ teamId, agents, onKill, onKillTeam }: TeamClusterP
       variants={listContainerVariants}
       initial="initial"
       animate="animate"
-      className="rounded-2xl border border-yellow-400/15 bg-black-800/30 p-4 space-y-3"
+      className="rounded-2xl border border-yellow-400/15 bg-black-800/30 backdrop-blur-sm p-5"
     >
       {/* Team header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
           <Users size={14} className="text-yellow-400" />
           <span className="text-xs font-semibold text-yellow-400/70 uppercase tracking-wider">
@@ -47,37 +47,63 @@ export function TeamCluster({ teamId, agents, onKill, onKillTeam }: TeamClusterP
         </Button>
       </div>
 
-      {/* Primary agent */}
-      {primary && (
-        <motion.div variants={listItemVariants}>
-          <div className="border border-yellow-400/20 rounded-xl">
+      {/* Network graph layout */}
+      <div className="flex flex-col items-center">
+        {/* Primary agent — centered at top */}
+        {primary && (
+          <motion.div variants={listItemVariants} className="w-full max-w-[220px]">
             <AgentIdentityCard agent={primary} onKill={onKill} isPrimary />
-          </div>
-        </motion.div>
-      )}
+          </motion.div>
+        )}
 
-      {/* Collaborators with connection lines */}
-      {collaborators.length > 0 && (
-        <div className="ml-5 border-l-2 border-dashed border-yellow-400/15 pl-4 space-y-2">
-          <AnimatePresence mode="popLayout">
+        {/* Connection lines */}
+        {primary && collaborators.length > 0 && (
+          <div className="flex flex-col items-center">
+            {/* Vertical line down from primary */}
+            <div className="w-px h-6 bg-yellow-400/30" />
+            {/* Horizontal bar spanning collaborators */}
+            {collaborators.length > 1 && (
+              <div
+                className="h-px bg-yellow-400/30"
+                style={{ width: `${(collaborators.length - 1) * (180 + 16)}px` }}
+              />
+            )}
+          </div>
+        )}
+
+        {/* Collaborator row */}
+        {collaborators.length > 0 && (
+          <div className="flex justify-center gap-4 flex-wrap">
             {collaborators.map((agent) => (
               <motion.div
                 key={agent.id}
                 variants={listItemVariants}
-                initial="initial"
-                animate="animate"
-                exit={{ opacity: 0, x: -20 }}
-                layout
-                className="relative"
+                className="flex flex-col items-center"
               >
-                {/* Horizontal connector */}
-                <div className="absolute -left-4 top-1/2 w-3 border-t border-dashed border-yellow-400/15" />
+                {/* Vertical drop line */}
+                {primary && collaborators.length > 1 && (
+                  <div className="w-px h-4 bg-yellow-400/30" />
+                )}
+                {primary && collaborators.length === 1 && <div className="h-0" />}
+                <div className="w-[180px]">
+                  <AgentIdentityCard agent={agent} onKill={onKill} compact />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+
+        {/* No primary — just show all agents in a row */}
+        {!primary && (
+          <div className="flex justify-center gap-4 flex-wrap">
+            {agents.map((agent) => (
+              <motion.div key={agent.id} variants={listItemVariants} className="w-[180px]">
                 <AgentIdentityCard agent={agent} onKill={onKill} />
               </motion.div>
             ))}
-          </AnimatePresence>
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </motion.div>
   )
 }

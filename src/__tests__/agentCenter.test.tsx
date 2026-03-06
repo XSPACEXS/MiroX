@@ -68,7 +68,7 @@ describe('AgentLauncher', () => {
 
   it('renders without crashing', () => {
     renderWithRouter(<AgentLauncher />)
-    expect(screen.getAllByText('Launch Agent').length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText('Launch Team').length).toBeGreaterThanOrEqual(1)
   })
 
   it('shows the prompt input', () => {
@@ -98,7 +98,7 @@ describe('AgentLauncher', () => {
 
   it('launch button is disabled when prompt is empty', () => {
     renderWithRouter(<AgentLauncher />)
-    const launchButtons = screen.getAllByText('Launch Agent')
+    const launchButtons = screen.getAllByText('Launch Team')
     const submitBtn = launchButtons[launchButtons.length - 1]!.closest('button')
     expect(submitBtn).toBeDisabled()
   })
@@ -107,7 +107,7 @@ describe('AgentLauncher', () => {
     renderWithRouter(<AgentLauncher />)
     const input = screen.getByPlaceholderText('Describe the task for your AI team...')
     fireEvent.change(input, { target: { value: 'Fix the bug' } })
-    const launchButtons = screen.getAllByText('Launch Agent')
+    const launchButtons = screen.getAllByText('Launch Team')
     const submitBtn = launchButtons[launchButtons.length - 1]!.closest('button')
     expect(submitBtn).not.toBeDisabled()
   })
@@ -116,7 +116,7 @@ describe('AgentLauncher', () => {
     renderWithRouter(<AgentLauncher />)
     const input = screen.getByPlaceholderText('Describe the task for your AI team...')
     fireEvent.change(input, { target: { value: 'Fix the bug' } })
-    const launchButtons = screen.getAllByText('Launch Agent')
+    const launchButtons = screen.getAllByText('Launch Team')
     fireEvent.click(launchButtons[launchButtons.length - 1]!.closest('button')!)
     await waitFor(() => {
       expect(window.electronAPI.agent.launch).toHaveBeenCalledWith(
@@ -129,7 +129,7 @@ describe('AgentLauncher', () => {
     renderWithRouter(<AgentLauncher />)
     const input = screen.getByPlaceholderText('Describe the task for your AI team...')
     fireEvent.change(input, { target: { value: 'Fix the bug' } })
-    const launchButtons = screen.getAllByText('Launch Agent')
+    const launchButtons = screen.getAllByText('Launch Team')
     fireEvent.click(launchButtons[launchButtons.length - 1]!.closest('button')!)
     await waitFor(() => {
       expect((input as HTMLInputElement).value).toBe('')
@@ -140,10 +140,11 @@ describe('AgentLauncher', () => {
     renderWithRouter(<AgentLauncher />)
     const input = screen.getByPlaceholderText('Describe the task for your AI team...')
     fireEvent.change(input, { target: { value: 'My task' } })
-    const launchButtons = screen.getAllByText('Launch Agent')
+    const launchButtons = screen.getAllByText('Launch Team')
     fireEvent.click(launchButtons[launchButtons.length - 1]!.closest('button')!)
     await waitFor(() => {
-      expect(useAgentStore.getState().agents).toHaveLength(1)
+      // Auto-team: primary + specialist + scout = 3 agents
+      expect(useAgentStore.getState().agents).toHaveLength(3)
       expect(useAgentStore.getState().agents[0]!.id).toBe('test-agent-id')
     })
   })
@@ -156,7 +157,7 @@ describe('AgentLauncher', () => {
     renderWithRouter(<AgentLauncher />)
     const input = screen.getByPlaceholderText('Describe the task for your AI team...')
     fireEvent.change(input, { target: { value: 'Fix the bug' } })
-    const launchButtons = screen.getAllByText('Launch Agent')
+    const launchButtons = screen.getAllByText('Launch Team')
     fireEvent.click(launchButtons[launchButtons.length - 1]!.closest('button')!)
     await waitFor(() => {
       const toasts = useUIStore.getState().toasts

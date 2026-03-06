@@ -102,8 +102,8 @@ export function ActiveAgents(): JSX.Element {
           <p className="text-xs text-gray-500 mt-1">Launch an agent above to get started</p>
         </Card>
       ) : (
-        <div className="space-y-3">
-          {/* Team groups */}
+        <div className="space-y-4">
+          {/* Team groups — full width */}
           {teamGroups.map(([teamId, teamAgents]) => (
             <TeamCluster
               key={teamId}
@@ -114,21 +114,25 @@ export function ActiveAgents(): JSX.Element {
             />
           ))}
 
-          {/* Solo agents */}
-          <AnimatePresence mode="popLayout">
-            {soloAgents.map((agent) => (
-              <motion.div
-                key={agent.id}
-                variants={listItemVariants}
-                initial="initial"
-                animate="animate"
-                exit={{ opacity: 0, x: -20 }}
-                layout
-              >
-                <AgentIdentityCard agent={agent} onKill={handleKill} />
-              </motion.div>
-            ))}
-          </AnimatePresence>
+          {/* Solo agents — CSS grid of character tiles */}
+          {soloAgents.length > 0 && (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <AnimatePresence mode="popLayout">
+                {soloAgents.map((agent) => (
+                  <motion.div
+                    key={agent.id}
+                    variants={listItemVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    layout
+                  >
+                    <AgentIdentityCard agent={agent} onKill={handleKill} />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+          )}
         </div>
       )}
     </div>

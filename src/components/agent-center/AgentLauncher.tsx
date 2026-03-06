@@ -40,6 +40,33 @@ const ROLE_OPTIONS = COLLABORATOR_ROLES.map((r) => ({
   label: r.label,
 }))
 
+// Auto-team: model one tier down from the primary
+const TIER_DOWN: Record<string, ClaudeModel> = {
+  opus: 'sonnet',
+  sonnet: 'haiku',
+  haiku: 'haiku',
+}
+
+// Auto-team: support agent role prompts
+const SUPPORT_ROLES = {
+  specialist: {
+    prompt: (task: string): string => `You are a Code Reviewer supporting the lead agent on a team.
+
+Main task: ${task}
+
+Your role: Review the codebase related to this task. Check for bugs, type errors, edge cases, performance issues, and code quality. Run typecheck after any changes. Report findings clearly.`,
+  },
+  scout: {
+    prompt: (task: string): string => `You are a Scout supporting the lead agent on a team.
+
+Main task: ${task}
+
+Your role: Explore the codebase to find all files, functions, and dependencies relevant to this task. Search broadly using Glob and Grep. Report file paths, key patterns, and context the lead agent needs. Do NOT edit files — only read and search.`,
+  },
+} as const
+
+const MAX_CONCURRENT_CLAUDE = 5
+
 interface CollaboratorEntry {
   model: GeminiModel
   modelDef: ModelDefinition
@@ -76,6 +103,7 @@ export function AgentLauncher(): JSX.Element {
   const [isLaunching, setIsLaunching] = useState(false)
   const [isPickerOpen, setIsPickerOpen] = useState(false)
   const [timeLimit, setTimeLimit] = useState('0')
+  const agents = useAgentStore((s) => s.agents)
   const addAgent = useAgentStore((s) => s.addAgent)
   const addToast = useUIStore((s) => s.addToast)
   const openRestyle = useRestyleStore((s) => s.openWizard)
@@ -119,21 +147,22 @@ export function AgentLauncher(): JSX.Element {
     if (!prompt.trim() || isLaunching) return
     setIsLaunching(true)
 
-    const teamRunId =
-      collaborators.length > 0 ? `team-${Date.now()}` : null
+    // Always create a team
+    const teamRunId = `team-${Date.now()}`
+    const taskPrompt = prompt.trim()
 
     try {
       // 1. Launch primary Claude agent
       const claudeResult = await window.electronAPI.agent.launch({
         model: primaryModel,
-        prompt: prompt.trim(),
+        prompt: taskPrompt,
         allowedTools: tools,
       })
 
       if (claudeResult.ok && claudeResult.id && claudeResult.startedAt) {
         addAgent({
           id: claudeResult.id,
-          prompt: prompt.trim(),
+          prompt: taskPrompt,
           provider: 'claude',
           model: primaryModel,
           status: 'running',
@@ -147,7 +176,7 @@ export function AgentLauncher(): JSX.Element {
           gitTagEnd: null,
           outputType: 'text',
           teamRunId,
-          teamRole: teamRunId ? 'primary' : null,
+          teamRole: 'primary',
         })
       } else {
         addToast({
@@ -159,7 +188,54 @@ export function AgentLauncher(): JSX.Element {
         return
       }
 
-      // 2. Launch collaborators
+      // 2. Auto-spawn support Claude agents (Specialist + Scout)
+      const runningClaude = agents.filter(
+        (a) => a.provider === 'claude' && a.status === 'running'
+      ).length + 1 // +1 for the primary we just launched
+
+      const supportAgents: { model: ClaudeModel; roleKey: keyof typeof SUPPORT_ROLES; tools: string[] }[] = [
+        { model: TIER_DOWN[primaryModel] || 'haiku', roleKey: 'specialist', tools: DEFAULT_TOOLS },
+        { model: 'haiku' as ClaudeModel, roleKey: 'scout', tools: ['Read', 'Glob', 'Grep'] },
+      ]
+
+      for (const support of supportAgents) {
+        if (runningClaude + supportAgents.indexOf(support) + 1 > MAX_CONCURRENT_CLAUDE) {
+          break // Don't exceed concurrent limit
+        }
+
+        try {
+          const supportResult = await window.electronAPI.agent.launch({
+            model: support.model,
+            prompt: SUPPORT_ROLES[support.roleKey].prompt(taskPrompt),
+            allowedTools: support.tools,
+          })
+
+          if (supportResult.ok && supportResult.id && supportResult.startedAt) {
+            addAgent({
+              id: supportResult.id,
+              prompt: taskPrompt,
+              provider: 'claude',
+              model: support.model,
+              status: 'running',
+              logs: [],
+              startedAt: supportResult.startedAt,
+              finishedAt: null,
+              exitCode: null,
+              cost: null,
+              allowedTools: support.tools,
+              gitTagStart: null,
+              gitTagEnd: null,
+              outputType: 'text',
+              teamRunId,
+              teamRole: 'collaborator',
+            })
+          }
+        } catch {
+          // Support agent failures are non-fatal — primary is already running
+        }
+      }
+
+      // 3. Launch manual Gemini collaborators (if any)
       for (const collab of collaborators) {
         try {
           let result: {
@@ -175,17 +251,16 @@ export function AgentLauncher(): JSX.Element {
             collab.model === 'gemini-imagen-fast'
           ) {
             result = await window.electronAPI.gemini.launchImagen({
-              prompt: prompt.trim(),
+              prompt: taskPrompt,
               model: collab.model,
             })
           } else if (collab.model === 'gemini-veo') {
             result = await window.electronAPI.gemini.launchVeo({
-              prompt: prompt.trim(),
+              prompt: taskPrompt,
             })
           } else {
-            // Text or Nano Banana — use gemini.launch with role-derived prompt
             const collabPrompt = buildCollaboratorPrompt(
-              prompt.trim(),
+              taskPrompt,
               collab.role,
               collab.customInstruction
             )
@@ -198,7 +273,7 @@ export function AgentLauncher(): JSX.Element {
           if (result.ok && result.id) {
             addAgent({
               id: result.id,
-              prompt: prompt.trim(),
+              prompt: taskPrompt,
               provider: 'gemini',
               model: collab.model,
               status: 'running',
@@ -237,7 +312,7 @@ export function AgentLauncher(): JSX.Element {
     } finally {
       setIsLaunching(false)
     }
-  }, [prompt, primaryModel, tools, collaborators, isLaunching, addAgent, addToast])
+  }, [prompt, primaryModel, tools, collaborators, isLaunching, agents, addAgent, addToast])
 
   const toggleTool = useCallback((tool: string) => {
     setTools((prev) =>
@@ -255,7 +330,7 @@ export function AgentLauncher(): JSX.Element {
       <div className="flex items-center gap-2 mb-1">
         <Rocket size={20} className="text-yellow-400" />
         <h2 className="font-display font-bold text-xl text-white">
-          Launch Agent{collaborators.length > 0 ? ' Team' : ''}
+          Launch Agent Team
         </h2>
       </div>
 
@@ -313,11 +388,11 @@ export function AgentLauncher(): JSX.Element {
           </div>
         </div>
 
-        {/* Collaborators */}
+        {/* Gemini Collaborators (manual) */}
         {collaborators.length > 0 && (
           <div>
             <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 block">
-              Collaborators
+              Gemini Collaborators
             </span>
             <div className="space-y-2">
               {collaborators.map((collab, i) => (
@@ -375,16 +450,15 @@ export function AgentLauncher(): JSX.Element {
         {/* Add collaborator + time limit + launch */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <button
+            <Button
+              variant="ghost"
+              size="sm"
+              leftIcon={<Sparkles size={14} />}
               onClick={openRestyle}
-              className="relative overflow-hidden flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-purple-400/30 bg-purple-400/[0.08] text-purple-400 text-sm font-semibold transition-all hover:bg-purple-400/[0.15] hover:shadow-[0_0_20px_rgba(167,139,250,0.15)]"
+              title="Claude + Gemini redesign your app's visual theme"
             >
-              <Sparkles size={16} />
-              <div>
-                <div>Re-Style</div>
-                <div className="text-[11px] font-normal text-purple-400/60">Claude + Gemini redesign</div>
-              </div>
-            </button>
+              Re-Style
+            </Button>
             {collaborators.length < 3 && (
               <Button
                 variant="ghost"
@@ -392,7 +466,7 @@ export function AgentLauncher(): JSX.Element {
                 leftIcon={<Plus size={14} />}
                 onClick={() => setIsPickerOpen(true)}
               >
-                Add Collaborator
+                Add Gemini
               </Button>
             )}
             <div className="flex items-center gap-1.5">
@@ -413,7 +487,7 @@ export function AgentLauncher(): JSX.Element {
             onClick={handleLaunch}
             leftIcon={<Rocket size={16} />}
           >
-            {collaborators.length > 0 ? 'Launch Team' : 'Launch Agent'}
+            Launch Team
           </Button>
         </div>
       </Card>
