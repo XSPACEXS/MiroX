@@ -243,20 +243,23 @@ async function runPlanAttempt(
 
   // Register collector BEFORE launch to prevent race condition
   const collector = createPreLaunchCollector()
+  const planModel = getPhaseModel(config.primaryModel, 'planner')
 
   const agentId = await launchAgent(
-    { model: getPhaseModel(config.primaryModel, 'planner'), prompt, allowedTools: ['Read', 'Glob', 'Grep'] },
+    { model: planModel, prompt, allowedTools: ['Read', 'Glob', 'Grep'] },
     { teamRunId: missionId, teamRole: 'collaborator', teamSkill: 'Planner', timeLimitSeconds: 300 },
     agentStore
   )
 
   collector.setAgentId(agentId)
   missionStore.addActiveAgent(agentId)
+  writeMissionLog(missionId, 'agent_launch', { agentId, phase: 'plan', model: planModel })
 
   const exitResult = await waitForAgent(agentId)
   collector.stop()
   missionStore.removeActiveAgent(agentId)
   missionStore.addCompletedAgent(agentId)
+  writeMissionLog(missionId, 'agent_exit', { agentId, phase: 'plan', status: exitResult.status })
 
   if (exitResult.status !== 'completed') {
     return { error: 'Planning agent failed', logsLength: 0, logsPreview: '' }
@@ -316,20 +319,23 @@ async function runScoutPhase(
 
   // Register collector BEFORE launch to prevent race condition
   const collector = createPreLaunchCollector()
+  const scoutModel = getPhaseModel(config.primaryModel, 'scout')
 
   const agentId = await launchAgent(
-    { model: getPhaseModel(config.primaryModel, 'scout'), prompt, allowedTools: ['Read', 'Glob', 'Grep'] },
+    { model: scoutModel, prompt, allowedTools: ['Read', 'Glob', 'Grep'] },
     { teamRunId: missionId, teamRole: 'collaborator', teamSkill: 'Scout', timeLimitSeconds: 300 },
     agentStore
   )
 
   collector.setAgentId(agentId)
   missionStore.addActiveAgent(agentId)
+  writeMissionLog(missionId, 'agent_launch', { agentId, phase: 'scout', model: scoutModel })
 
   const exitResult = await waitForAgent(agentId)
   collector.stop()
   missionStore.removeActiveAgent(agentId)
   missionStore.addCompletedAgent(agentId)
+  writeMissionLog(missionId, 'agent_exit', { agentId, phase: 'scout', status: exitResult.status })
 
   if (exitResult.status !== 'completed') {
     throw new Error('Scout agent failed')
@@ -492,20 +498,23 @@ async function runTestPhase(
 
   // Register collector BEFORE launch to prevent race condition
   const collector = createPreLaunchCollector()
+  const testModel = getPhaseModel(config.primaryModel, 'tester')
 
   const agentId = await launchAgent(
-    { model: getPhaseModel(config.primaryModel, 'tester'), prompt, allowedTools: ['Read', 'Glob', 'Grep', 'Bash'] },
+    { model: testModel, prompt, allowedTools: ['Read', 'Glob', 'Grep', 'Bash'] },
     { teamRunId: missionId, teamRole: 'collaborator', teamSkill: 'Tester', timeLimitSeconds: config.timeLimitSeconds },
     agentStore
   )
 
   collector.setAgentId(agentId)
   missionStore.addActiveAgent(agentId)
+  writeMissionLog(missionId, 'agent_launch', { agentId, phase: 'test', model: testModel })
 
   const exitResult = await waitForAgent(agentId)
   collector.stop()
   missionStore.removeActiveAgent(agentId)
   missionStore.addCompletedAgent(agentId)
+  writeMissionLog(missionId, 'agent_exit', { agentId, phase: 'test', status: exitResult.status })
 
   const output = collector.logs.join('')
   const passed = exitResult.status === 'completed' && exitResult.exitCode === 0
@@ -521,17 +530,25 @@ async function runVerifyPhase(
 ): Promise<boolean> {
   const prompt = buildVerifyPrompt(config.prompt)
 
+  // Register collector BEFORE launch to prevent race condition
+  const collector = createPreLaunchCollector()
+  const verifyModel = getPhaseModel(config.primaryModel, 'verifier')
+
   const agentId = await launchAgent(
-    { model: getPhaseModel(config.primaryModel, 'verifier'), prompt, allowedTools: ['Read', 'Glob', 'Grep', 'Bash'] },
+    { model: verifyModel, prompt, allowedTools: ['Read', 'Glob', 'Grep', 'Bash'] },
     { teamRunId: missionId, teamRole: 'collaborator', teamSkill: 'Verifier', timeLimitSeconds: config.timeLimitSeconds },
     agentStore
   )
 
+  collector.setAgentId(agentId)
   missionStore.addActiveAgent(agentId)
+  writeMissionLog(missionId, 'agent_launch', { agentId, phase: 'verify', model: verifyModel })
 
   const exitResult = await waitForAgent(agentId)
+  collector.stop()
   missionStore.removeActiveAgent(agentId)
   missionStore.addCompletedAgent(agentId)
+  writeMissionLog(missionId, 'agent_exit', { agentId, phase: 'verify', status: exitResult.status })
 
   return exitResult.status === 'completed'
 }
@@ -593,7 +610,17 @@ export async function executeMission(
   }
 
   try {
-    writeMissionLog(missionId, 'mission_start', { prompt: config.prompt, config: { ...config, geminiAssist: config.geminiAssist } })
+    writeMissionLog(missionId, 'mission_start', {
+      prompt: config.prompt,
+      config: {
+        primaryModel: config.primaryModel,
+        enableScout: config.enableScout,
+        enableVerify: config.enableVerify,
+        enableHandoff: config.enableHandoff,
+        timeLimitSeconds: config.timeLimitSeconds,
+        geminiAssist: config.geminiAssist,
+      },
+    })
 
     // --- Launch Gemini Brain (if enabled) ---
     if (geminiAssist) {
@@ -632,8 +659,10 @@ export async function executeMission(
       }
 
       // Go back to planning to run decomposition with scout report
+      const prevPhase = phase
       missionStore.setPhase('planning')
       phase = 'planning'
+      writeMissionLog(missionId, 'phase_change', { from: prevPhase, to: 'planning' })
     }
 
     // Run task decomposition
@@ -645,18 +674,20 @@ export async function executeMission(
     if (isTerminal(phase)) return
 
     // --- Build ---
+    writeMissionLog(missionId, 'phase_change', { from: phase, to: 'building' })
     missionStore.setPhase('building')
     missionStore.addPhaseTransition(phase, 'building', 'Starting build phase')
     phase = 'building'
-    writeMissionLog(missionId, 'phase_change', { from: phase, to: 'building' })
 
     let testRetries = 0
 
     // Build-test loop (retry up to MAX_TEST_RETRIES times)
     while (testRetries <= MAX_TEST_RETRIES) {
       await runBuildPhase(plan, config, missionId, missionStore, agentStore, geminiAssist, handoffManager)
+      const prevBuildPhase = phase
       phase = applyTransition(phase, { type: 'ALL_BUILDERS_DONE' }, missionStore)
       writeMissionLog(missionId, 'all_builders_done', { retry: testRetries })
+      writeMissionLog(missionId, 'phase_change', { from: prevBuildPhase, to: phase })
 
       if (isTerminal(phase)) return
 
@@ -665,7 +696,9 @@ export async function executeMission(
       writeMissionLog(missionId, 'test_result', { passed: testResult.passed })
 
       if (testResult.passed) {
+        const prevTestPhase = phase
         phase = applyTransition(phase, { type: 'TEST_PASSED' }, missionStore)
+        writeMissionLog(missionId, 'phase_change', { from: prevTestPhase, to: phase })
         break
       } else {
         // If Gemini is available, analyze test failure for smarter retry
@@ -694,6 +727,7 @@ export async function executeMission(
           phase = applyTransition(phase, { type: 'TEST_FAILED', error: testResult.output.slice(-500) }, missionStore)
           missionStore.setPhase('failed')
           missionStore.setError('Tests failed after maximum retries')
+          writeMissionLog(missionId, 'phase_change', { from: 'testing', to: 'failed' })
           writeMissionLog(missionId, 'mission_failed', { reason: 'Tests failed after maximum retries' })
           return
         }
@@ -707,8 +741,9 @@ export async function executeMission(
             }
           }
         }
-        phase = 'building'
         missionStore.setPhase('building')
+        writeMissionLog(missionId, 'phase_change', { from: 'testing', to: 'building' })
+        phase = 'building'
       }
     }
 
@@ -716,6 +751,7 @@ export async function executeMission(
 
     // --- Verify ---
     if (config.enableVerify) {
+      // phase is already 'verifying' (from TEST_PASSED transition, logged above)
       const verified = await runVerifyPhase(config, missionId, missionStore, agentStore)
       if (verified) {
         phase = applyTransition(phase, { type: 'VERIFY_DONE' }, missionStore)
@@ -723,7 +759,9 @@ export async function executeMission(
         phase = applyTransition(phase, { type: 'VERIFY_FAILED', error: 'Verification issues found' }, missionStore)
       }
       writeMissionLog(missionId, 'verify_result', { verified })
+      writeMissionLog(missionId, 'phase_change', { from: 'verifying', to: phase })
     } else {
+      writeMissionLog(missionId, 'phase_change', { from: phase, to: 'done' })
       missionStore.setPhase('done')
       missionStore.addPhaseTransition(phase, 'done', 'Verification skipped')
     }
@@ -754,6 +792,7 @@ export async function executeMission(
     missionStore.setError(message)
     missionStore.setPhase('failed')
     missionStore.addPhaseTransition(phase, 'failed', message)
+    writeMissionLog(missionId, 'phase_change', { from: phase, to: 'failed' })
     writeMissionLog(missionId, 'mission_failed', { error: message })
     handoffManager?.stopAll()
   }

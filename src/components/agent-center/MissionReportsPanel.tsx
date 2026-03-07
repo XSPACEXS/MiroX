@@ -212,6 +212,23 @@ function parseEventsToTimeline(events: MissionLogEvent[]): { timeline: TimelineE
           icon: <Sparkles size={12} className="text-purple-400" />,
         })
         break
+      case 'plan_parse_failed':
+        timeline.push({
+          time,
+          label: `Plan parse failed (attempt ${String(event.data.attempt)})`,
+          detail: event.data.error ? String(event.data.error).slice(0, 80) : undefined,
+          color: 'text-red-400',
+          icon: <AlertTriangle size={12} className="text-red-400" />,
+        })
+        break
+      case 'gemini_brain_start':
+        timeline.push({
+          time,
+          label: event.data.ok ? 'Gemini Brain connected' : 'Gemini Brain failed',
+          color: event.data.ok ? 'text-purple-400' : 'text-red-400',
+          icon: <Sparkles size={12} className={event.data.ok ? 'text-purple-400' : 'text-red-400'} />,
+        })
+        break
       default:
         timeline.push({
           time,
