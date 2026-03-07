@@ -7,23 +7,62 @@ const VALID_TOOLS = new Set(['Read', 'Edit', 'Write', 'Glob', 'Grep', 'Bash'])
 
 /** Extract JSON from a markdown code block in agent output */
 export function extractJsonFromLogs(logs: string): unknown | null {
-  // Try ```json ... ``` block first
-  const jsonBlockMatch = logs.match(/```json\s*\n([\s\S]*?)```/)
+  // The result event sends the complete response prefixed with \n__RESULT__\n
+  // If present, prefer extracting from that (it's the full, uncorrupted response)
+  const resultMarker = '\n__RESULT__\n'
+  const resultIdx = logs.lastIndexOf(resultMarker)
+  const searchText = resultIdx !== -1 ? logs.slice(resultIdx + resultMarker.length) : logs
+
+  // Strategy 1: ```json ... ``` block
+  const jsonBlockMatch = searchText.match(/```json\s*\n?([\s\S]*?)```/)
   if (jsonBlockMatch?.[1]) {
     try {
-      return JSON.parse(jsonBlockMatch[1])
+      return JSON.parse(jsonBlockMatch[1].trim())
     } catch {
       // fall through
     }
   }
 
-  // Try raw JSON object
-  const rawJsonMatch = logs.match(/\{[\s\S]*"subtasks"[\s\S]*\}/)
-  if (rawJsonMatch?.[0]) {
-    try {
-      return JSON.parse(rawJsonMatch[0])
-    } catch {
-      // fall through
+  // Strategy 2: balanced JSON object containing "subtasks"
+  const subtasksIdx = searchText.indexOf('"subtasks"')
+  if (subtasksIdx !== -1) {
+    const openIdx = searchText.lastIndexOf('{', subtasksIdx)
+    if (openIdx !== -1) {
+      let depth = 0
+      for (let i = openIdx; i < searchText.length; i++) {
+        if (searchText[i] === '{') depth++
+        else if (searchText[i] === '}') {
+          depth--
+          if (depth === 0) {
+            try {
+              return JSON.parse(searchText.slice(openIdx, i + 1))
+            } catch {
+              break
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Strategy 3: try the entire text as raw JSON
+  try {
+    const parsed = JSON.parse(searchText.trim())
+    if (parsed && typeof parsed === 'object') return parsed
+  } catch {
+    // fall through
+  }
+
+  // Strategy 4: if we had a result marker, also try the full logs (deltas)
+  if (resultIdx !== -1) {
+    const deltaText = logs.slice(0, resultIdx)
+    const deltaMatch = deltaText.match(/```json\s*\n?([\s\S]*?)```/)
+    if (deltaMatch?.[1]) {
+      try {
+        return JSON.parse(deltaMatch[1].trim())
+      } catch {
+        // fall through
+      }
     }
   }
 

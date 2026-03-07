@@ -140,16 +140,44 @@ function waitForAgent(agentId: string): Promise<{
   })
 }
 
-/** Collect all stdout logs for an agent (for parsing output) */
-function collectAgentLogs(agentId: string): { logs: string[]; stop: () => void } {
-  const logs: string[] = []
+/**
+ * Create a log collector BEFORE launching an agent.
+ * Captures all stdout logs, then filters by agentId once known.
+ * This eliminates the race condition where events fire before a
+ * post-launch listener is registered.
+ */
+function createPreLaunchCollector(): {
+  setAgentId: (id: string) => void
+  logs: string[]
+  stop: () => void
+} {
+  const allLogs: Array<{ agentId: string; text: string }> = []
+  const filteredLogs: string[] = []
+  let targetId: string | null = null
   const api = getElectronAPI()
+
   const unsubscribe = api.agent.onLog((data) => {
-    if (data.agentId === agentId && data.type === 'stdout') {
-      logs.push(data.text)
+    if (data.type !== 'stdout') return
+    if (targetId) {
+      if (data.agentId === targetId) filteredLogs.push(data.text)
+    } else {
+      // Buffer everything until we know which agent to track
+      allLogs.push({ agentId: data.agentId, text: data.text })
     }
   })
-  return { logs, stop: unsubscribe }
+
+  return {
+    setAgentId: (id: string) => {
+      targetId = id
+      // Flush buffered logs for this agent
+      for (const entry of allLogs) {
+        if (entry.agentId === id) filteredLogs.push(entry.text)
+      }
+      allLogs.length = 0
+    },
+    logs: filteredLogs,
+    stop: unsubscribe,
+  }
 }
 
 // -------------------------------------------------------------------
@@ -204,14 +232,17 @@ function getPhaseModel(
 const MAX_BUILD_CONCURRENT = 3
 const MAX_TEST_RETRIES = 2
 
-async function runPlanPhase(
+async function runPlanAttempt(
   config: MissionConfig,
   missionId: string,
   scoutReport: string | null,
   missionStore: MissionStoreAPI,
   agentStore: AgentStoreAPI
-): Promise<MissionPlan> {
+): Promise<MissionPlan | { error: string; logsLength: number; logsPreview: string }> {
   const prompt = getPlanAgentPrompt(config.prompt, scoutReport)
+
+  // Register collector BEFORE launch to prevent race condition
+  const collector = createPreLaunchCollector()
 
   const agentId = await launchAgent(
     { model: getPhaseModel(config.primaryModel, 'planner'), prompt, allowedTools: ['Read', 'Glob', 'Grep'] },
@@ -219,8 +250,8 @@ async function runPlanPhase(
     agentStore
   )
 
+  collector.setAgentId(agentId)
   missionStore.addActiveAgent(agentId)
-  const collector = collectAgentLogs(agentId)
 
   const exitResult = await waitForAgent(agentId)
   collector.stop()
@@ -228,18 +259,51 @@ async function runPlanPhase(
   missionStore.addCompletedAgent(agentId)
 
   if (exitResult.status !== 'completed') {
-    throw new Error('Planning agent failed')
+    return { error: 'Planning agent failed', logsLength: 0, logsPreview: '' }
   }
 
-  const allLogs = collector.logs.join('\n')
+  const allLogs = collector.logs.join('')
   const plan = parsePlanOutput(allLogs, config.prompt)
 
   if ('error' in plan) {
-    throw new Error(plan.error)
+    return { error: plan.error, logsLength: allLogs.length, logsPreview: allLogs.slice(0, 500) }
   }
 
   plan.scoutReport = scoutReport
   return plan
+}
+
+async function runPlanPhase(
+  config: MissionConfig,
+  missionId: string,
+  scoutReport: string | null,
+  missionStore: MissionStoreAPI,
+  agentStore: AgentStoreAPI
+): Promise<MissionPlan> {
+  // First attempt
+  const result = await runPlanAttempt(config, missionId, scoutReport, missionStore, agentStore)
+  if (!('error' in result)) return result
+
+  // Log the failure for debugging
+  writeMissionLog(missionId, 'plan_parse_failed', {
+    error: result.error,
+    logsLength: result.logsLength,
+    logsPreview: result.logsPreview,
+    attempt: 1,
+  })
+
+  // Retry once
+  const retry = await runPlanAttempt(config, missionId, scoutReport, missionStore, agentStore)
+  if (!('error' in retry)) return retry
+
+  writeMissionLog(missionId, 'plan_parse_failed', {
+    error: retry.error,
+    logsLength: retry.logsLength,
+    logsPreview: retry.logsPreview,
+    attempt: 2,
+  })
+
+  throw new Error(retry.error)
 }
 
 async function runScoutPhase(
@@ -250,14 +314,17 @@ async function runScoutPhase(
 ): Promise<string> {
   const prompt = buildScoutPrompt(config.prompt)
 
+  // Register collector BEFORE launch to prevent race condition
+  const collector = createPreLaunchCollector()
+
   const agentId = await launchAgent(
     { model: getPhaseModel(config.primaryModel, 'scout'), prompt, allowedTools: ['Read', 'Glob', 'Grep'] },
     { teamRunId: missionId, teamRole: 'collaborator', teamSkill: 'Scout', timeLimitSeconds: 300 },
     agentStore
   )
 
+  collector.setAgentId(agentId)
   missionStore.addActiveAgent(agentId)
-  const collector = collectAgentLogs(agentId)
 
   const exitResult = await waitForAgent(agentId)
   collector.stop()
@@ -268,7 +335,7 @@ async function runScoutPhase(
     throw new Error('Scout agent failed')
   }
 
-  return collector.logs.join('\n')
+  return collector.logs.join('')
 }
 
 async function runBuildPhase(
@@ -423,21 +490,24 @@ async function runTestPhase(
 ): Promise<{ passed: boolean; output: string }> {
   const prompt = buildTestPrompt()
 
+  // Register collector BEFORE launch to prevent race condition
+  const collector = createPreLaunchCollector()
+
   const agentId = await launchAgent(
     { model: getPhaseModel(config.primaryModel, 'tester'), prompt, allowedTools: ['Read', 'Glob', 'Grep', 'Bash'] },
     { teamRunId: missionId, teamRole: 'collaborator', teamSkill: 'Tester', timeLimitSeconds: config.timeLimitSeconds },
     agentStore
   )
 
+  collector.setAgentId(agentId)
   missionStore.addActiveAgent(agentId)
-  const collector = collectAgentLogs(agentId)
 
   const exitResult = await waitForAgent(agentId)
   collector.stop()
   missionStore.removeActiveAgent(agentId)
   missionStore.addCompletedAgent(agentId)
 
-  const output = collector.logs.join('\n')
+  const output = collector.logs.join('')
   const passed = exitResult.status === 'completed' && exitResult.exitCode === 0
 
   return { passed, output }
