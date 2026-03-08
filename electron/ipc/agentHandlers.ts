@@ -167,11 +167,20 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
         for (const line of lines) {
           if (!line.trim()) continue
           try {
+            interface UsageData {
+              input_tokens?: number
+              output_tokens?: number
+              cache_read_input_tokens?: number
+              cache_creation_input_tokens?: number
+            }
             const parsed = JSON.parse(line) as {
               type?: string
-              message?: { usage?: { input_tokens?: number; output_tokens?: number; cache_read_input_tokens?: number; cache_creation_input_tokens?: number } }
+              message?: { usage?: UsageData }
               delta?: { text?: string }
-              result?: { result?: string; usage?: { input_tokens?: number; output_tokens?: number; cache_read_input_tokens?: number; cache_creation_input_tokens?: number } }
+              // Claude CLI result event: flat format has result as string + usage at top level;
+              // nested format has result as {result: string, usage: {...}}
+              result?: string | { result?: string; usage?: UsageData }
+              usage?: UsageData
             }
             const agentRef = agents.get(id)
             if (parsed.type === 'message_start' && parsed.message?.usage && agentRef) {
@@ -183,16 +192,26 @@ export function registerAgentHandlers(mainWindow: BrowserWindow): void {
             } else if (parsed.type === 'content_block_delta' && parsed.delta?.text) {
               sendLog(mainWindow, id, 'stdout', parsed.delta.text)
             } else if (parsed.type === 'result') {
-              if (parsed.result?.usage && agentRef) {
-                agentRef.tokenTracker.inputTokens += parsed.result.usage.input_tokens || 0
-                agentRef.tokenTracker.outputTokens += parsed.result.usage.output_tokens || 0
-                agentRef.tokenTracker.cacheReadTokens += parsed.result.usage.cache_read_input_tokens || 0
-                agentRef.tokenTracker.cacheWriteTokens += parsed.result.usage.cache_creation_input_tokens || 0
+              // Handle both flat format (result: "text", usage: {...} at top level)
+              // and nested format (result: {result: "text", usage: {...}})
+              const resultObj = parsed.result
+              const usage: UsageData | undefined =
+                typeof resultObj === 'object' && resultObj !== null
+                  ? resultObj.usage
+                  : parsed.usage
+              if (usage && agentRef) {
+                agentRef.tokenTracker.inputTokens += usage.input_tokens || 0
+                agentRef.tokenTracker.outputTokens += usage.output_tokens || 0
+                agentRef.tokenTracker.cacheReadTokens += usage.cache_read_input_tokens || 0
+                agentRef.tokenTracker.cacheWriteTokens += usage.cache_creation_input_tokens || 0
                 emitContextUpdate(mainWindow, id, agentRef.tokenTracker)
               }
-              // Capture the final result text (complete response as fallback for missed deltas)
-              if (typeof parsed.result?.result === 'string' && parsed.result.result.trim()) {
-                sendLog(mainWindow, id, 'stdout', '\n__RESULT__\n' + parsed.result.result)
+              // Capture final result text
+              const resultText = typeof resultObj === 'string'
+                ? resultObj
+                : (typeof resultObj?.result === 'string' ? resultObj.result : null)
+              if (resultText?.trim()) {
+                sendLog(mainWindow, id, 'stdout', '\n__RESULT__\n' + resultText)
               }
             }
             // Parsed JSON lines are NOT sent as raw stdout logs (avoid double-logging)

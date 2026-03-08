@@ -42,30 +42,14 @@ export async function sendChatMessage(message: string, config: ChatConfig): Prom
 
   const api = window.electronAPI
   const prompt = buildChatPrompt(message, config.projectDir)
-  const result = await api.agent.launch({
-    model: MODEL_MAP[config.primaryModel] ?? 'sonnet',
-    prompt,
-    allowedTools: ['Read', 'Glob', 'Grep'],
-  })
 
-  if (!result.ok) {
-    store.replaceLastThinking({
-      id: thinkingId,
-      role: 'assistant',
-      type: 'error',
-      mode: 'chat',
-      content: `Failed to launch agent: ${result.error}`,
-      timestamp: Date.now(),
-    })
-    return
-  }
-
-  const agentId = result.id
-  store.setStreaming(true, agentId)
-
+  // Register listeners BEFORE launch to prevent race condition where
+  // fast agents complete before listeners are attached
+  let pendingAgentId: string | null = null
   let accumulated = ''
+
   const unsubLog = api.agent.onLog((data) => {
-    if (data.agentId !== agentId) return
+    if (!pendingAgentId || data.agentId !== pendingAgentId) return
     if (data.type === 'stdout') {
       accumulated += data.text + '\n'
       store.updateMessage(thinkingId, { content: accumulated.trim() })
@@ -73,7 +57,7 @@ export async function sendChatMessage(message: string, config: ChatConfig): Prom
   })
 
   const unsubExit = api.agent.onExit((data) => {
-    if (data.id !== agentId) return
+    if (!pendingAgentId || data.id !== pendingAgentId) return
     unsubLog()
     unsubExit()
     store.setStreaming(false)
@@ -85,11 +69,34 @@ export async function sendChatMessage(message: string, config: ChatConfig): Prom
       mode: 'chat',
       content: accumulated.trim() || 'No response received.',
       timestamp: Date.now(),
-      agentId,
+      agentId: pendingAgentId,
     }
 
     store.replaceLastThinking(finalMessage)
   })
+
+  const result = await api.agent.launch({
+    model: MODEL_MAP[config.primaryModel] ?? 'sonnet',
+    prompt,
+    allowedTools: ['Read', 'Glob', 'Grep'],
+  })
+
+  if (!result.ok) {
+    unsubLog()
+    unsubExit()
+    store.replaceLastThinking({
+      id: thinkingId,
+      role: 'assistant',
+      type: 'error',
+      mode: 'chat',
+      content: `Failed to launch agent: ${result.error}`,
+      timestamp: Date.now(),
+    })
+    return
+  }
+
+  pendingAgentId = result.id
+  store.setStreaming(true, result.id)
 }
 
 // ---------------------------------------------------------------------------
@@ -120,30 +127,13 @@ export async function sendDebugMessage(errorText: string, config: ChatConfig): P
 
   const api = window.electronAPI
   const prompt = buildDebugPrompt(errorText, config.projectDir)
-  const result = await api.agent.launch({
-    model: MODEL_MAP[config.primaryModel] ?? 'sonnet',
-    prompt,
-    allowedTools: ['Read', 'Glob', 'Grep', 'Bash'],
-  })
 
-  if (!result.ok) {
-    store.replaceLastThinking({
-      id: thinkingId,
-      role: 'assistant',
-      type: 'error',
-      mode: 'debug',
-      content: `Failed to launch agent: ${result.error}`,
-      timestamp: Date.now(),
-    })
-    return
-  }
-
-  const agentId = result.id
-  store.setStreaming(true, agentId)
-
+  // Register listeners BEFORE launch to prevent race condition
+  let pendingAgentId: string | null = null
   let accumulated = ''
+
   const unsubLog = api.agent.onLog((data) => {
-    if (data.agentId !== agentId) return
+    if (!pendingAgentId || data.agentId !== pendingAgentId) return
     if (data.type === 'stdout') {
       accumulated += data.text + '\n'
       store.updateMessage(thinkingId, { content: accumulated.trim() })
@@ -151,7 +141,7 @@ export async function sendDebugMessage(errorText: string, config: ChatConfig): P
   })
 
   const unsubExit = api.agent.onExit((data) => {
-    if (data.id !== agentId) return
+    if (!pendingAgentId || data.id !== pendingAgentId) return
     unsubLog()
     unsubExit()
     store.setStreaming(false)
@@ -166,7 +156,7 @@ export async function sendDebugMessage(errorText: string, config: ChatConfig): P
           mode: 'debug',
           content: accumulated.trim(),
           timestamp: Date.now(),
-          agentId,
+          agentId: pendingAgentId,
           metadata: { debugAnalysis: analysis },
         }
       : {
@@ -176,11 +166,34 @@ export async function sendDebugMessage(errorText: string, config: ChatConfig): P
           mode: 'debug',
           content: accumulated.trim() || 'No analysis produced.',
           timestamp: Date.now(),
-          agentId,
+          agentId: pendingAgentId,
         }
 
     store.replaceLastThinking(finalMessage)
   })
+
+  const result = await api.agent.launch({
+    model: MODEL_MAP[config.primaryModel] ?? 'sonnet',
+    prompt,
+    allowedTools: ['Read', 'Glob', 'Grep', 'Bash'],
+  })
+
+  if (!result.ok) {
+    unsubLog()
+    unsubExit()
+    store.replaceLastThinking({
+      id: thinkingId,
+      role: 'assistant',
+      type: 'error',
+      mode: 'debug',
+      content: `Failed to launch agent: ${result.error}`,
+      timestamp: Date.now(),
+    })
+    return
+  }
+
+  pendingAgentId = result.id
+  store.setStreaming(true, result.id)
 }
 
 // ---------------------------------------------------------------------------
@@ -211,30 +224,13 @@ export async function runProjectScan(config: ChatConfig): Promise<void> {
 
   const api = window.electronAPI
   const prompt = buildScanPrompt(config.projectDir)
-  const result = await api.agent.launch({
-    model: MODEL_MAP[config.primaryModel] ?? 'sonnet',
-    prompt,
-    allowedTools: ['Read', 'Glob', 'Grep', 'Bash'],
-  })
 
-  if (!result.ok) {
-    store.replaceLastThinking({
-      id: thinkingId,
-      role: 'assistant',
-      type: 'error',
-      mode: 'scan',
-      content: `Failed to launch agent: ${result.error}`,
-      timestamp: Date.now(),
-    })
-    return
-  }
-
-  const agentId = result.id
-  store.setStreaming(true, agentId)
-
+  // Register listeners BEFORE launch to prevent race condition
+  let pendingAgentId: string | null = null
   let accumulated = ''
+
   const unsubLog = api.agent.onLog((data) => {
-    if (data.agentId !== agentId) return
+    if (!pendingAgentId || data.agentId !== pendingAgentId) return
     if (data.type === 'stdout') {
       accumulated += data.text + '\n'
       store.updateMessage(thinkingId, { content: accumulated.trim() })
@@ -242,7 +238,7 @@ export async function runProjectScan(config: ChatConfig): Promise<void> {
   })
 
   const unsubExit = api.agent.onExit((data) => {
-    if (data.id !== agentId) return
+    if (!pendingAgentId || data.id !== pendingAgentId) return
     unsubLog()
     unsubExit()
     store.setStreaming(false)
@@ -256,7 +252,7 @@ export async function runProjectScan(config: ChatConfig): Promise<void> {
           mode: 'scan',
           content: accumulated.trim(),
           timestamp: Date.now(),
-          agentId,
+          agentId: pendingAgentId,
           metadata: { scanResults },
         }
       : {
@@ -266,11 +262,34 @@ export async function runProjectScan(config: ChatConfig): Promise<void> {
           mode: 'scan',
           content: accumulated.trim() || 'Scan produced no output.',
           timestamp: Date.now(),
-          agentId,
+          agentId: pendingAgentId,
         }
 
     store.replaceLastThinking(finalMessage)
   })
+
+  const result = await api.agent.launch({
+    model: MODEL_MAP[config.primaryModel] ?? 'sonnet',
+    prompt,
+    allowedTools: ['Read', 'Glob', 'Grep', 'Bash'],
+  })
+
+  if (!result.ok) {
+    unsubLog()
+    unsubExit()
+    store.replaceLastThinking({
+      id: thinkingId,
+      role: 'assistant',
+      type: 'error',
+      mode: 'scan',
+      content: `Failed to launch agent: ${result.error}`,
+      timestamp: Date.now(),
+    })
+    return
+  }
+
+  pendingAgentId = result.id
+  store.setStreaming(true, result.id)
 }
 
 // ---------------------------------------------------------------------------
