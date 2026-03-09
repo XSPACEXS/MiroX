@@ -61,13 +61,17 @@ export const useAgentStore = create<AgentState>()(
             agent.logs.push(log)
             // Keep max 2000 log entries per agent
             if (agent.logs.length > 2000) {
-              agent.logs.splice(0, agent.logs.length - 2000)
+              agent.logs = agent.logs.slice(-2000)
             }
           }
           // Also check history for active log viewing
           const histAgent = state.history.find((a) => a.id === id)
           if (histAgent) {
             histAgent.logs.push(log)
+            // Cap history logs to prevent unbounded growth
+            if (histAgent.logs.length > 500) {
+              histAgent.logs = histAgent.logs.slice(-500)
+            }
           }
         }),
 

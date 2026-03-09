@@ -126,9 +126,12 @@ export const useMissionStore = create<MissionStoreState>()(
       updateSubtask: (id, update) =>
         set((state) => {
           if (state.mission?.plan) {
-            const subtask = state.mission.plan.subtasks.find((s) => s.id === id)
-            if (subtask) {
-              Object.assign(subtask, update)
+            const idx = state.mission.plan.subtasks.findIndex((s) => s.id === id)
+            if (idx !== -1) {
+              state.mission.plan.subtasks[idx] = {
+                ...state.mission.plan.subtasks[idx]!,
+                ...update,
+              }
             }
           }
         }),

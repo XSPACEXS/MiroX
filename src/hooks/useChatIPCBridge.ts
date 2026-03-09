@@ -5,12 +5,21 @@ import { useMissionStore } from '@stores/missionStore'
 /**
  * Subscribes to Electron IPC events for agent/gemini logs, exits, and context updates.
  * Extracted from AgentCenter.tsx for reuse with the ChatPanel.
+ *
+ * Uses refs for store callbacks so the IPC listeners only register once
+ * on mount, avoiding double-registration when Zustand selectors change.
  */
 export function useChatIPCBridge(): void {
   const appendLog = useAgentStore((s) => s.appendLog)
   const updateAgentStatus = useAgentStore((s) => s.updateAgentStatus)
   const moveToHistory = useAgentStore((s) => s.moveToHistory)
   const updateContextUsage = useAgentStore((s) => s.updateContextUsage)
+
+  // Keep callbacks in a ref so the effect doesn't re-run when they change
+  const cbRef = useRef({ appendLog, updateAgentStatus, moveToHistory, updateContextUsage })
+  useEffect(() => {
+    cbRef.current = { appendLog, updateAgentStatus, moveToHistory, updateContextUsage }
+  })
 
   const pendingTimeouts = useRef<ReturnType<typeof setTimeout>[]>([])
 
@@ -19,7 +28,7 @@ export function useChatIPCBridge(): void {
     if (!api?.agent || !api?.gemini) return
 
     const unsubLog = api.agent.onLog((data) => {
-      appendLog(data.agentId, {
+      cbRef.current.appendLog(data.agentId, {
         timestamp: data.timestamp,
         type: data.type,
         text: data.text,
@@ -49,16 +58,16 @@ export function useChatIPCBridge(): void {
     })
 
     const unsubExit = api.agent.onExit((data) => {
-      updateAgentStatus(data.id, data.status, data.exitCode)
+      cbRef.current.updateAgentStatus(data.id, data.status, data.exitCode)
       const tid = setTimeout(() => {
-        moveToHistory(data.id)
+        cbRef.current.moveToHistory(data.id)
         pendingTimeouts.current = pendingTimeouts.current.filter((t) => t !== tid)
       }, 2000)
       pendingTimeouts.current.push(tid)
     })
 
     const unsubGeminiLog = api.gemini.onLog((data) => {
-      appendLog(data.agentId, {
+      cbRef.current.appendLog(data.agentId, {
         timestamp: data.timestamp,
         type: data.type,
         text: data.text,
@@ -68,16 +77,16 @@ export function useChatIPCBridge(): void {
     })
 
     const unsubGeminiExit = api.gemini.onExit((data) => {
-      updateAgentStatus(data.id, data.status, data.exitCode)
+      cbRef.current.updateAgentStatus(data.id, data.status, data.exitCode)
       const tid = setTimeout(() => {
-        moveToHistory(data.id)
+        cbRef.current.moveToHistory(data.id)
         pendingTimeouts.current = pendingTimeouts.current.filter((t) => t !== tid)
       }, 2000)
       pendingTimeouts.current.push(tid)
     })
 
     const unsubContextUpdate = api.agent.onContextUpdate((data) => {
-      updateContextUsage(data.agentId, {
+      cbRef.current.updateContextUsage(data.agentId, {
         inputTokens: data.inputTokens,
         outputTokens: data.outputTokens,
         cacheReadTokens: data.cacheReadTokens,
@@ -94,5 +103,5 @@ export function useChatIPCBridge(): void {
       pendingTimeouts.current.forEach(clearTimeout)
       pendingTimeouts.current = []
     }
-  }, [appendLog, updateAgentStatus, moveToHistory, updateContextUsage])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps -- callbacks accessed via ref
 }

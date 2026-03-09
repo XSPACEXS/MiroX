@@ -122,14 +122,24 @@ function writeMissionLog(
 }
 
 /** Wait for an agent to exit by subscribing to IPC events */
-function waitForAgent(agentId: string): Promise<{
+function waitForAgent(
+  agentId: string,
+  timeoutMs = 600_000
+): Promise<{
   status: 'completed' | 'failed' | 'killed'
   exitCode: number | null
 }> {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const api = getElectronAPI()
+
+    const timer = setTimeout(() => {
+      unsubscribe()
+      reject(new Error(`Agent ${agentId} timed out after ${timeoutMs}ms`))
+    }, timeoutMs)
+
     const unsubscribe = api.agent.onExit((data) => {
       if (data.id === agentId) {
+        clearTimeout(timer)
         unsubscribe()
         resolve({
           status: data.status as 'completed' | 'failed' | 'killed',
@@ -395,8 +405,13 @@ async function runBuildPhase(
 
     // Start handoff watching if enabled
     if (handoffManager) {
-      const threshold = config.handoffThresholdClaude ?? 0.6
-      handoffManager.startWatching(agentId, lineageId, 0, subtask, threshold, 200000)
+      try {
+        const threshold = config.handoffThresholdClaude ?? 0.6
+        handoffManager.startWatching(agentId, lineageId, 0, subtask, threshold, 200000)
+      } catch {
+        // Non-fatal: agent will run without handoff monitoring
+        writeMissionLog(missionId, 'handoff_watch_failed', { agentId })
+      }
     }
   }
 
@@ -414,8 +429,6 @@ async function runBuildPhase(
         const api = getElectronAPI()
         const unsubscribe = api.agent.onExit((data) => {
           if (running.has(data.id)) {
-            // Skip if this agent is being handed off (handoff manager will handle it)
-            if (handoffManager?.isHandingOff(data.id)) return
             unsubscribe()
             resolve({ agentId: data.id, status: data.status, exitCode: data.exitCode })
           }
@@ -424,6 +437,25 @@ async function runBuildPhase(
     )
 
     const result = await exitPromise
+
+    // If this agent is being handed off, the handoff manager launched a replacement.
+    // Clean up the old agent and continue waiting for exits.
+    if (handoffManager?.isHandingOff(result.agentId)) {
+      const oldSubtask = running.get(result.agentId)!
+      running.delete(result.agentId)
+      missionStore.removeActiveAgent(result.agentId)
+      missionStore.addCompletedAgent(result.agentId)
+      handoffManager.stopWatching(result.agentId)
+      writeMissionLog(missionId, 'agent_handoff_exit', { agentId: result.agentId, subtaskId: oldSubtask.id })
+
+      // Track the replacement agent in running map
+      const replacementId = handoffManager.getReplacementId?.(result.agentId)
+      if (replacementId && !running.has(replacementId)) {
+        running.set(replacementId, oldSubtask)
+      }
+      continue
+    }
+
     const subtask = running.get(result.agentId)!
     running.delete(result.agentId)
     missionStore.removeActiveAgent(result.agentId)
@@ -577,10 +609,16 @@ export async function executeMission(
 ): Promise<void> {
   const missionId = `mission-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
 
-  // Global mission timeout
+  // Global mission timeout with guard flag to prevent double-abort
   let globalTimer: ReturnType<typeof setTimeout> | null = null
+  let missionAborted = false
   if (config.timeLimitSeconds > 0) {
-    globalTimer = setTimeout(() => { void abortMission(missionStore) }, config.timeLimitSeconds * 1000)
+    globalTimer = setTimeout(() => {
+      if (!missionAborted) {
+        missionAborted = true
+        void abortMission(missionStore)
+      }
+    }, config.timeLimitSeconds * 1000)
   }
 
   let phase: MissionState['phase'] = 'idle'
@@ -780,6 +818,7 @@ export async function executeMission(
       }
     }
 
+    missionAborted = true
     if (globalTimer) clearTimeout(globalTimer)
     missionStore.completeMission()
     writeMissionLog(missionId, 'mission_complete', { phase: missionStore.getMission()?.phase })
@@ -787,6 +826,7 @@ export async function executeMission(
     // Cleanup handoff manager
     handoffManager?.stopAll()
   } catch (err) {
+    missionAborted = true
     if (globalTimer) clearTimeout(globalTimer)
     const message = err instanceof Error ? err.message : 'Unknown error'
     missionStore.setError(message)

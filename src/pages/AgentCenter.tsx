@@ -18,6 +18,7 @@ import { useGemini } from '@hooks/useGemini'
 import { CelebrationOverlay } from '@components/agent-center/scene/CelebrationOverlay'
 import { ReStyleWizard } from '@components/agent-center/ReStyleWizard'
 import { Button } from '@components/ui/Button'
+import { ErrorBoundary } from '@components/ui/ErrorBoundary'
 
 export default function AgentCenter(): JSX.Element {
   const isAdmin = useAgentStore((s) => s.isAdmin)
@@ -180,7 +181,23 @@ export default function AgentCenter(): JSX.Element {
       )}
 
       {/* Chat panel — the unified interface */}
-      <ChatPanel />
+      <ErrorBoundary
+        fallback={
+          <div className="flex-1 flex items-center justify-center rounded-2xl border border-black-600 bg-black-800/40">
+            <div className="text-center p-8">
+              <p className="text-red-400 font-semibold mb-2">Chat panel encountered an error</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="px-4 py-2 rounded-lg bg-yellow-400 text-black font-semibold text-sm hover:bg-yellow-300 transition-colors"
+              >
+                Reload
+              </button>
+            </div>
+          </div>
+        }
+      >
+        <ChatPanel />
+      </ErrorBoundary>
 
       {/* Celebration overlay */}
       <AnimatePresence>
