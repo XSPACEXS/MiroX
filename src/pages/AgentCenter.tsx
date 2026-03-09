@@ -6,8 +6,7 @@ import { useAgentStore } from '@stores/agentStore'
 import { useMissionStore } from '@stores/missionStore'
 import { useChatStore } from '@stores/chatStore'
 import { useUIStore } from '@stores/uiStore'
-import { abortMission } from '@services/orchestrator'
-import type { MissionStoreAPI } from '@services/orchestrator'
+import { abortMission, buildMissionStoreAPI } from '@services/orchestrator'
 import { generateCharacter } from '@services/characterGenerator'
 import { startMissionAdapter } from '@services/chatService/missionAdapter'
 import { useChatIPCBridge } from '@hooks/useChatIPCBridge'
@@ -87,27 +86,7 @@ export default function AgentCenter(): JSX.Element {
   }, [mission?.activeAgentIds, handleAgentCharacterGeneration, mission])
 
   const handleAbort = useCallback(async () => {
-    const missionStoreAPI: MissionStoreAPI = {
-      getMission: () => useMissionStore.getState().mission,
-      setPhase: (phase) => useMissionStore.getState().setPhase(phase),
-      setPlan: (plan) => useMissionStore.getState().setPlan(plan),
-      updateSubtask: (id, update) => useMissionStore.getState().updateSubtask(id, update),
-      setError: (error) => useMissionStore.getState().setError(error),
-      addActiveAgent: (agentId) => useMissionStore.getState().addActiveAgent(agentId),
-      removeActiveAgent: (agentId) => useMissionStore.getState().removeActiveAgent(agentId),
-      addCompletedAgent: (agentId) => useMissionStore.getState().addCompletedAgent(agentId),
-      addPhaseTransition: (from, to, reason) =>
-        useMissionStore.getState().addPhaseTransition(from, to, reason),
-      setGeminiAssistReport: (report) => useMissionStore.getState().setGeminiAssistReport(report),
-      completeMission: () => useMissionStore.getState().completeMission(),
-      addInteraction: (interaction) => useMissionStore.getState().addInteraction(interaction),
-      getCharacterName: (agentId) => {
-        const char = useMissionStore.getState().characters[agentId]
-        return char?.firstName ?? 'Agent'
-      },
-    }
-
-    await abortMission(missionStoreAPI)
+    await abortMission(buildMissionStoreAPI())
     addToast({ type: 'warning', title: 'Mission aborted' })
   }, [addToast])
 
@@ -176,7 +155,9 @@ export default function AgentCenter(): JSX.Element {
         {/* B2: LiveLogs strip button */}
         <button
           onClick={() => setShowLogs((v) => !v)}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs transition-colors ${
+          aria-label="Toggle live logs"
+          aria-expanded={showLogs}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 ${
             showLogs
               ? 'border-yellow-400/30 bg-yellow-400/10 text-yellow-400'
               : 'border-black-600 bg-black-700 text-gray-400 hover:text-gray-200 hover:border-black-500'

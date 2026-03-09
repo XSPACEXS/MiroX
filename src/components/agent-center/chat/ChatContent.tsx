@@ -100,7 +100,8 @@ export function ChatContent(): JSX.Element {
       {!isAtBottom && (
         <button
           onClick={scrollToBottom}
-          className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1 px-3 py-1.5 rounded-full bg-black-700 border border-black-500 hover:border-yellow-400/30 text-xs text-gray-400 hover:text-white shadow-lg transition-colors"
+          aria-label={newCount > 0 ? `${newCount} new messages, scroll to bottom` : 'Scroll to bottom'}
+          className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1 px-3 py-1.5 rounded-full bg-black-700 border border-black-500 hover:border-yellow-400/30 text-xs text-gray-400 hover:text-white shadow-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50"
         >
           <ChevronDown size={14} />
           {newCount > 0 ? `${newCount} new` : 'Scroll to bottom'}

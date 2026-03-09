@@ -466,22 +466,34 @@ async function runBuildPhase(
     await launchSubtask(subtask)
   }
 
+  // Register a SINGLE exit listener before the loop to avoid accumulating
+  // orphaned listeners on each iteration (see audit issue #1).
+  type ExitEvent = { agentId: string; status: string; exitCode: number | null }
+  const exitQueue: ExitEvent[] = []
+  let exitResolve: ((event: ExitEvent) => void) | null = null
+
+  const api = getElectronAPI()
+  const unsubExitListener = api.agent.onExit((data) => {
+    if (!running.has(data.id)) return
+    const event: ExitEvent = { agentId: data.id, status: data.status, exitCode: data.exitCode }
+    if (exitResolve) {
+      const resolve = exitResolve
+      exitResolve = null
+      resolve(event)
+    } else {
+      exitQueue.push(event)
+    }
+  })
+
+  function waitForNextExit(): Promise<ExitEvent> {
+    const queued = exitQueue.shift()
+    if (queued) return Promise.resolve(queued)
+    return new Promise<ExitEvent>((resolve) => { exitResolve = resolve })
+  }
+
   // Wait for agents to complete and launch new ones
   while (running.size > 0 && !failed && !isAborted(missionStore)) {
-    // Wait for any agent to exit
-    const exitPromise = new Promise<{ agentId: string; status: string; exitCode: number | null }>(
-      (resolve) => {
-        const api = getElectronAPI()
-        const unsubscribe = api.agent.onExit((data) => {
-          if (running.has(data.id)) {
-            unsubscribe()
-            resolve({ agentId: data.id, status: data.status, exitCode: data.exitCode })
-          }
-        })
-      }
-    )
-
-    const result = await exitPromise
+    const result = await waitForNextExit()
 
     // If this agent is being handed off, the handoff manager launched a replacement.
     // Clean up the old agent and continue waiting for exits.
@@ -572,6 +584,9 @@ async function runBuildPhase(
       }
     }
   }
+
+  // Clean up the single exit listener
+  unsubExitListener()
 
   if (failed) {
     throw new Error('One or more build agents failed after retry')

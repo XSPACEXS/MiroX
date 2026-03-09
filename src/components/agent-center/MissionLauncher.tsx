@@ -6,12 +6,9 @@ import {
 } from 'lucide-react'
 import { Button } from '@components/ui/Button'
 import { SimpleSelect } from '@components/ui/Dropdown'
-import { useAgentStore } from '@stores/agentStore'
 import { useMissionStore } from '@stores/missionStore'
 import { useUIStore } from '@stores/uiStore'
-import { executeMission } from '@services/orchestrator'
-import type { MissionStoreAPI, AgentStoreAPI } from '@services/orchestrator'
-import { generateCharacter } from '@services/characterGenerator'
+import { executeMission, buildMissionStoreAPI, buildAgentStoreAPI } from '@services/orchestrator'
 import { CLAUDE_MODELS, GEMINI_TEXT_MODELS } from '@services/modelRegistry'
 import type { ClaudeModel, GeminiTextModel } from '@/types/agent'
 import { AgentLauncher } from './AgentLauncher'
@@ -37,43 +34,6 @@ const TIME_LIMIT_OPTIONS = [
 ]
 
 type LauncherTab = 'mission' | 'simple'
-
-function buildMissionStoreAPI(): MissionStoreAPI {
-  return {
-    getMission: () => useMissionStore.getState().mission,
-    setPhase: (phase) => useMissionStore.getState().setPhase(phase),
-    setPlan: (plan) => useMissionStore.getState().setPlan(plan),
-    updateSubtask: (id, update) => useMissionStore.getState().updateSubtask(id, update),
-    setError: (error) => useMissionStore.getState().setError(error),
-    addActiveAgent: (agentId) => {
-      useMissionStore.getState().addActiveAgent(agentId)
-      // Generate character for the new agent
-      const agent = useAgentStore.getState().agents.find((a) => a.id === agentId)
-      if (agent) {
-        const character = generateCharacter(agent)
-        useMissionStore.getState().addCharacter(agentId, character)
-      }
-    },
-    removeActiveAgent: (agentId) => useMissionStore.getState().removeActiveAgent(agentId),
-    addCompletedAgent: (agentId) => useMissionStore.getState().addCompletedAgent(agentId),
-    addPhaseTransition: (from, to, reason) =>
-      useMissionStore.getState().addPhaseTransition(from, to, reason),
-    setGeminiAssistReport: (report) => useMissionStore.getState().setGeminiAssistReport(report),
-    completeMission: () => useMissionStore.getState().completeMission(),
-    addInteraction: (interaction) => useMissionStore.getState().addInteraction(interaction),
-    getCharacterName: (agentId) => {
-      const char = useMissionStore.getState().characters[agentId]
-      return char?.firstName ?? 'Agent'
-    },
-  }
-}
-
-function buildAgentStoreAPI(): AgentStoreAPI {
-  return {
-    addAgent: (agent) => useAgentStore.getState().addAgent(agent),
-    getAgent: (id) => useAgentStore.getState().agents.find((a) => a.id === id),
-  }
-}
 
 export function MissionLauncher(): JSX.Element {
   const [tab, setTab] = useState<LauncherTab>('mission')

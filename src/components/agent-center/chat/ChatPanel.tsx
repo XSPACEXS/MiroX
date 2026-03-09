@@ -1,44 +1,15 @@
 import { useEffect } from 'react'
 import { useChatStore } from '@stores/chatStore'
 import { useMissionStore } from '@stores/missionStore'
-import { useAgentStore } from '@stores/agentStore'
 import { sendChatMessage, sendDebugMessage, runProjectScan, cancelStream } from '@services/chatService'
-import { executeMission, abortMission } from '@services/orchestrator'
-import type { MissionStoreAPI, AgentStoreAPI, MissionConfig } from '@services/orchestrator'
+import { executeMission, abortMission, buildMissionStoreAPI, buildAgentStoreAPI } from '@services/orchestrator'
+import type { MissionConfig } from '@services/orchestrator'
 import { ModeTabBar } from './ModeTabBar'
 import { ConfigStrip } from './ConfigStrip'
 import { ConfigPanel } from './ConfigPanel'
 import { ChatContent } from './ChatContent'
 import { QuickActions } from './QuickActions'
 import { ChatInputBar } from './ChatInputBar'
-
-function buildMissionStoreAPI(): MissionStoreAPI {
-  return {
-    getMission: () => useMissionStore.getState().mission,
-    setPhase: (phase) => useMissionStore.getState().setPhase(phase),
-    setPlan: (plan) => useMissionStore.getState().setPlan(plan),
-    updateSubtask: (id, update) => useMissionStore.getState().updateSubtask(id, update),
-    setError: (error) => useMissionStore.getState().setError(error),
-    addActiveAgent: (agentId) => useMissionStore.getState().addActiveAgent(agentId),
-    removeActiveAgent: (agentId) => useMissionStore.getState().removeActiveAgent(agentId),
-    addCompletedAgent: (agentId) => useMissionStore.getState().addCompletedAgent(agentId),
-    addPhaseTransition: (from, to, reason) => useMissionStore.getState().addPhaseTransition(from, to, reason),
-    setGeminiAssistReport: (report) => useMissionStore.getState().setGeminiAssistReport(report),
-    completeMission: () => useMissionStore.getState().completeMission(),
-    addInteraction: (interaction) => useMissionStore.getState().addInteraction(interaction),
-    getCharacterName: (agentId) => {
-      const char = useMissionStore.getState().characters[agentId]
-      return char?.firstName ?? 'Agent'
-    },
-  }
-}
-
-function buildAgentStoreAPI(): AgentStoreAPI {
-  return {
-    addAgent: (agent) => useAgentStore.getState().addAgent(agent),
-    getAgent: (id) => useAgentStore.getState().agents.find((a) => a.id === id),
-  }
-}
 
 export function ChatPanel(): JSX.Element {
   const mode = useChatStore((s) => s.mode)

@@ -18,7 +18,7 @@ export function CopyButton({ text, className = '' }: CopyButtonProps): JSX.Eleme
   return (
     <button
       onClick={handleCopy}
-      className={`p-1 rounded hover:bg-white/10 transition-colors ${className}`}
+      className={`p-1 rounded hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50 ${className}`}
       aria-label="Copy to clipboard"
     >
       {copied ? (

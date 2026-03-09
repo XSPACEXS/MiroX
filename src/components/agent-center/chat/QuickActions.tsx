@@ -153,7 +153,7 @@ export function QuickActions(): JSX.Element {
         <button
           key={label}
           onClick={handler}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black-700 border border-black-600 hover:border-yellow-400/30 hover:bg-yellow-400/5 text-xs text-gray-400 hover:text-gray-200 transition-colors"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black-700 border border-black-600 hover:border-yellow-400/30 hover:bg-yellow-400/5 text-xs text-gray-400 hover:text-gray-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/50"
         >
           <Icon size={12} />
           {label}

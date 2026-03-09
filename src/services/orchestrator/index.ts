@@ -1,5 +1,6 @@
 export { executeMission, abortMission } from './pipeline'
 export type { MissionConfig, MissionStoreAPI, AgentStoreAPI } from './pipeline'
+export { buildMissionStoreAPI, buildAgentStoreAPI } from './storeApiFactory'
 export { transition, isTerminal, isActive } from './stateMachine'
 export type { TransitionResult } from './stateMachine'
 export { validateFileOwnership, mergeConflictingSubtasks, injectScopeGuard } from './scopeGuard'
