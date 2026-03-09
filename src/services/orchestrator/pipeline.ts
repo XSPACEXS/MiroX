@@ -1,8 +1,9 @@
 import type { MissionConfig, MissionPlan, MissionState, Subtask } from './types'
 import type { AgentRun } from '@/types/agent'
+import type { AgentInteraction } from '@/types/character'
 import { transition, isTerminal } from './stateMachine'
 import { injectScopeGuard } from './scopeGuard'
-import { parsePlanOutput, getPlanAgentPrompt } from './taskDecomposer'
+import { parsePlanOutput, getPlanAgentPrompt, getStrictPlanPrompt } from './taskDecomposer'
 import { buildScoutPrompt, buildBuildPrompt, buildTestPrompt, buildVerifyPrompt } from './prompts'
 import { GeminiAssistant } from './geminiAssist'
 import { HandoffManager } from './handoffManager'
@@ -26,6 +27,8 @@ export interface MissionStoreAPI {
   addPhaseTransition: (from: MissionState['phase'], to: MissionState['phase'], reason: string) => void
   setGeminiAssistReport: (report: import('./types').GeminiAssistReport) => void
   completeMission: () => void
+  addInteraction: (interaction: AgentInteraction) => void
+  getCharacterName: (agentId: string) => string
 }
 
 export interface AgentStoreAPI {
@@ -190,6 +193,30 @@ function createPreLaunchCollector(): {
   }
 }
 
+/** Check if mission has been aborted or failed */
+function isAborted(missionStore: MissionStoreAPI): boolean {
+  const m = missionStore.getMission()
+  return m != null && (m.phase === 'aborted' || m.phase === 'failed')
+}
+
+/** Generate a unique interaction and push it to the store */
+function emitInteraction(
+  missionStore: MissionStoreAPI,
+  type: AgentInteraction['type'],
+  fromAgentId: string,
+  toAgentId: string | null,
+  message: string
+): void {
+  missionStore.addInteraction({
+    id: `ix-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    timestamp: Date.now(),
+    type,
+    fromAgentId,
+    toAgentId,
+    message,
+  })
+}
+
 // -------------------------------------------------------------------
 // Topological sort for subtask dependencies
 // -------------------------------------------------------------------
@@ -247,9 +274,10 @@ async function runPlanAttempt(
   missionId: string,
   scoutReport: string | null,
   missionStore: MissionStoreAPI,
-  agentStore: AgentStoreAPI
+  agentStore: AgentStoreAPI,
+  promptOverride?: string
 ): Promise<MissionPlan | { error: string; logsLength: number; logsPreview: string }> {
-  const prompt = getPlanAgentPrompt(config.prompt, scoutReport)
+  const prompt = promptOverride ?? getPlanAgentPrompt(config.prompt, scoutReport)
 
   // Register collector BEFORE launch to prevent race condition
   const collector = createPreLaunchCollector()
@@ -316,7 +344,19 @@ async function runPlanPhase(
     attempt: 2,
   })
 
-  throw new Error(retry.error)
+  // B9: 3rd attempt with strict JSON-only prompt
+  const strictPrompt = getStrictPlanPrompt(config.prompt, scoutReport)
+  const strictRetry = await runPlanAttempt(config, missionId, scoutReport, missionStore, agentStore, strictPrompt)
+  if (!('error' in strictRetry)) return strictRetry
+
+  writeMissionLog(missionId, 'plan_parse_failed', {
+    error: strictRetry.error,
+    logsLength: strictRetry.logsLength,
+    logsPreview: strictRetry.logsPreview,
+    attempt: 3,
+  })
+
+  throw new Error(strictRetry.error)
 }
 
 async function runScoutPhase(
@@ -403,6 +443,11 @@ async function runBuildPhase(
     running.set(agentId, subtask)
     writeMissionLog(missionId, 'agent_launch', { agentId, subtaskId: subtask.id, model })
 
+    // B3: Emit "started" interaction
+    const agentName = missionStore.getCharacterName(agentId)
+    emitInteraction(missionStore, 'helping', agentId, null, `${agentName} picked up "${subtask.title}"`)
+
+
     // Start handoff watching if enabled
     if (handoffManager) {
       try {
@@ -417,12 +462,12 @@ async function runBuildPhase(
 
   // Launch initial batch
   for (const subtask of getReady()) {
-    if (running.size >= MAX_BUILD_CONCURRENT) break
+    if (running.size >= MAX_BUILD_CONCURRENT || isAborted(missionStore)) break
     await launchSubtask(subtask)
   }
 
   // Wait for agents to complete and launch new ones
-  while (running.size > 0 && !failed) {
+  while (running.size > 0 && !failed && !isAborted(missionStore)) {
     // Wait for any agent to exit
     const exitPromise = new Promise<{ agentId: string; status: string; exitCode: number | null }>(
       (resolve) => {
@@ -464,9 +509,19 @@ async function runBuildPhase(
 
     writeMissionLog(missionId, 'agent_exit', { agentId: result.agentId, status: result.status, subtaskId: subtask.id })
 
+    // B4: If agent was killed (abort), don't retry — break immediately
+    if (result.status === 'killed' || isAborted(missionStore)) {
+      missionStore.updateSubtask(subtask.id, { status: 'failed' })
+      break
+    }
+
     if (result.status === 'completed') {
       missionStore.updateSubtask(subtask.id, { status: 'completed' })
       completed.add(subtask.id)
+
+      // B3: Emit "completed" interaction
+      const completedName = missionStore.getCharacterName(result.agentId)
+      emitInteraction(missionStore, 'celebration', result.agentId, null, `${completedName} finished "${subtask.title}"`)
 
       // Gemini review of completed agent work (fire and forget)
       if (geminiAssist) {
@@ -492,8 +547,11 @@ async function runBuildPhase(
       }
 
       // Launch newly unblocked subtasks
+      // B3: Emit "handoff" interactions for dependency-unblocked subtasks
       for (const next of getReady()) {
-        if (running.size >= MAX_BUILD_CONCURRENT) break
+        if (running.size >= MAX_BUILD_CONCURRENT || isAborted(missionStore)) break
+        emitInteraction(missionStore, 'handoff', result.agentId, null,
+          `${completedName} completed, handing off to "${next.title}"`)
         await launchSubtask(next)
       }
     } else {
@@ -727,7 +785,10 @@ export async function executeMission(
       writeMissionLog(missionId, 'all_builders_done', { retry: testRetries })
       writeMissionLog(missionId, 'phase_change', { from: prevBuildPhase, to: phase })
 
-      if (isTerminal(phase)) return
+      if (isTerminal(phase) || isAborted(missionStore)) return
+
+      // B3: Emit phase transition interaction
+      emitInteraction(missionStore, 'handoff', 'system', null, 'Build complete, handing off to testing')
 
       // --- Test ---
       const testResult = await runTestPhase(config, missionId, missionStore, agentStore)
@@ -785,10 +846,13 @@ export async function executeMission(
       }
     }
 
-    if (isTerminal(phase)) return
+    if (isTerminal(phase) || isAborted(missionStore)) return
 
     // --- Verify ---
     if (config.enableVerify) {
+      // B3: Emit phase transition interaction
+      emitInteraction(missionStore, 'handoff', 'system', null, 'Tests done, handing off to verification')
+
       // phase is already 'verifying' (from TEST_PASSED transition, logged above)
       const verified = await runVerifyPhase(config, missionId, missionStore, agentStore)
       if (verified) {

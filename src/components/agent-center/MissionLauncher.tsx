@@ -60,6 +60,11 @@ function buildMissionStoreAPI(): MissionStoreAPI {
       useMissionStore.getState().addPhaseTransition(from, to, reason),
     setGeminiAssistReport: (report) => useMissionStore.getState().setGeminiAssistReport(report),
     completeMission: () => useMissionStore.getState().completeMission(),
+    addInteraction: (interaction) => useMissionStore.getState().addInteraction(interaction),
+    getCharacterName: (agentId) => {
+      const char = useMissionStore.getState().characters[agentId]
+      return char?.firstName ?? 'Agent'
+    },
   }
 }
 

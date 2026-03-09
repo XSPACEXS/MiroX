@@ -1,4 +1,4 @@
-import { Search, Bug, FlaskConical, Shield, BookOpen, Zap, FileSearch, Terminal, TestTube2 } from 'lucide-react'
+import { Search, Bug, FlaskConical, Shield, BookOpen, Zap, FileSearch, Terminal, TestTube2, Gauge } from 'lucide-react'
 import { useChatStore } from '@stores/chatStore'
 import { runProjectScan } from '@services/chatService'
 import type { ChatMode } from '@/types/chat'
@@ -63,7 +63,15 @@ function buildActions(
         icon: Zap,
         handler: () => {
           setMode('mission')
-          setPendingInput('Refactor the codebase for clarity, performance, and maintainability.')
+          setPendingInput('Refactor the codebase for clarity, remove dead code, simplify complex functions, and improve naming.')
+        },
+      },
+      {
+        label: 'Performance Audit',
+        icon: Gauge,
+        handler: () => {
+          setMode('mission')
+          setPendingInput('Audit the codebase for performance bottlenecks — unnecessary re-renders, large bundle imports, slow operations, memory leaks.')
         },
       },
     ],
@@ -73,7 +81,15 @@ function buildActions(
         icon: Search,
         handler: () => {
           setMode('scan')
-          void runProjectScan(config)
+          setPendingInput('Run a comprehensive project scan — types, lint, tests, dependencies, security.')
+        },
+      },
+      {
+        label: 'Quick Scan',
+        icon: Zap,
+        handler: () => {
+          setMode('scan')
+          setPendingInput('Quick scan — just check for type errors and lint warnings.')
         },
       },
       {
@@ -81,7 +97,15 @@ function buildActions(
         icon: Shield,
         handler: () => {
           setMode('scan')
-          setPendingInput('Focus on security vulnerabilities and OWASP top-10 issues.')
+          setPendingInput('Security-focused scan — check for OWASP top-10 vulnerabilities, exposed secrets, unsafe dependencies.')
+        },
+      },
+      {
+        label: 'Type Safety Only',
+        icon: FileSearch,
+        handler: () => {
+          setMode('scan')
+          setPendingInput('Type safety scan — find all TypeScript errors, any-typed code, missing return types.')
         },
       },
     ],

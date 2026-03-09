@@ -1,3 +1,5 @@
+import { CopyButton } from './CopyButton'
+
 export function renderContent(content: string): JSX.Element {
   const blocks: JSX.Element[] = []
   const lines = content.split('\n')
@@ -10,10 +12,16 @@ export function renderContent(content: string): JSX.Element {
 
     if (line.startsWith('```')) {
       if (inCodeBlock) {
+        const codeText = codeBlock.join('\n')
         blocks.push(
-          <pre key={blockIndex++} className="bg-black-900 rounded-xl p-3 mt-2 mb-2 overflow-x-auto">
-            <code className="text-xs font-mono text-gray-300">{codeBlock.join('\n')}</code>
-          </pre>
+          <div key={blockIndex++} className="relative group mt-2 mb-2">
+            <pre className="bg-black-900 rounded-xl p-3 overflow-x-auto">
+              <code className="text-xs font-mono text-gray-300">{codeText}</code>
+            </pre>
+            <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <CopyButton text={codeText} />
+            </div>
+          </div>
         )
         codeBlock = []
         inCodeBlock = false
@@ -54,10 +62,16 @@ export function renderContent(content: string): JSX.Element {
 
   // Handle unclosed code block
   if (inCodeBlock && codeBlock.length > 0) {
+    const codeText = codeBlock.join('\n')
     blocks.push(
-      <pre key={blockIndex++} className="bg-black-900 rounded-xl p-3 mt-2 mb-2 overflow-x-auto">
-        <code className="text-xs font-mono text-gray-300">{codeBlock.join('\n')}</code>
-      </pre>
+      <div key={blockIndex++} className="relative group mt-2 mb-2">
+        <pre className="bg-black-900 rounded-xl p-3 overflow-x-auto">
+          <code className="text-xs font-mono text-gray-300">{codeText}</code>
+        </pre>
+        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          <CopyButton text={codeText} />
+        </div>
+      </div>
     )
   }
 

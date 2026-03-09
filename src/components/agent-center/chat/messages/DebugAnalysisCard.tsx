@@ -1,5 +1,6 @@
 import { Bug } from 'lucide-react'
 import { useChatStore } from '@stores/chatStore'
+import { CopyButton } from './CopyButton'
 import type { ChatMessage } from '@/types/chat'
 
 interface DebugAnalysisCardProps {
@@ -41,7 +42,10 @@ export default function DebugAnalysisCard({ message }: DebugAnalysisCardProps): 
       <div className="w-7 h-7 rounded-full bg-red-400/20 flex items-center justify-center shrink-0 mt-0.5">
         <Bug size={14} className="text-red-400" />
       </div>
-      <div className="flex-1 rounded-2xl border border-red-500/20 bg-red-500/5 p-4 max-w-[85%]">
+      <div className="relative flex-1 rounded-2xl border border-red-500/20 bg-red-500/5 p-4 max-w-[85%] group">
+        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+          <CopyButton text={`Root Cause: ${analysis.rootCause}\n\nAffected Files:\n${analysis.affectedFiles.map((f) => `  ${f}`).join('\n')}\n\nSuggested Fix: ${analysis.suggestedFix}${analysis.diffPreview ? `\n\nDiff:\n${analysis.diffPreview}` : ''}`} />
+        </div>
         <h4 className="text-sm font-semibold text-white mb-2">Debug Analysis</h4>
 
         <div className="mb-3">

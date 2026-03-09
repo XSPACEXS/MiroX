@@ -1,6 +1,7 @@
 import { Bot, AlertCircle } from 'lucide-react'
 import type { ChatMessage } from '@/types/chat'
 import { renderContent } from './markdownRenderer'
+import { CopyButton } from './CopyButton'
 
 interface AssistantMessageProps {
   message: ChatMessage
@@ -26,7 +27,10 @@ export default function AssistantMessage({ message }: AssistantMessageProps): JS
           <Bot size={14} className="text-yellow-400" />
         )}
       </div>
-      <div className="max-w-[85%] min-w-0">
+      <div className="relative max-w-[85%] min-w-0 group">
+        <div className="absolute -top-1 right-0 opacity-0 group-hover:opacity-100 transition-opacity">
+          <CopyButton text={message.content} />
+        </div>
         <div
           className={`text-sm whitespace-pre-wrap break-words leading-relaxed ${
             isError ? 'text-red-400' : 'text-gray-200'

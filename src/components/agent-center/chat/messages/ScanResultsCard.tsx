@@ -1,5 +1,6 @@
 import { Bot, Search } from 'lucide-react'
 import { useChatStore } from '@stores/chatStore'
+import { CopyButton } from './CopyButton'
 import type { ChatMessage, ScanIssue } from '@/types/chat'
 
 interface ScanResultsCardProps {
@@ -41,7 +42,10 @@ export default function ScanResultsCard({ message }: ScanResultsCardProps): JSX.
       <div className="w-7 h-7 rounded-full bg-yellow-400/20 flex items-center justify-center shrink-0 mt-0.5">
         <Bot size={14} className="text-yellow-400" />
       </div>
-      <div className="flex-1 rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4 max-w-[85%]">
+      <div className="relative flex-1 rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4 max-w-[85%] group">
+        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+          <CopyButton text={`Project Health Report — Score: ${overallScore}/100\n\n${categories.map((c) => `${c.name}: ${c.score}/100\n${c.issues.map((i) => `  [${i.severity}] ${i.message}${i.file ? ` (${i.file})` : ''}`).join('\n')}`).join('\n\n')}${strengths.length > 0 ? `\n\nStrengths: ${strengths.join(', ')}` : ''}`} />
+        </div>
         <div className="flex items-center gap-2 mb-4">
           <Search size={16} className="text-cyan-400" />
           <h4 className="text-sm font-semibold text-white">Project Health Report</h4>

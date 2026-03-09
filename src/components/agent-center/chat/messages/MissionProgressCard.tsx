@@ -1,4 +1,5 @@
-import { Bot, Activity } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Bot, Activity, Clock } from 'lucide-react'
 import { useMissionStore } from '@stores/missionStore'
 import { useAgentStore } from '@stores/agentStore'
 import type { ChatMessage } from '@/types/chat'
@@ -13,9 +14,31 @@ function contextBarColor(usage: number): string {
   return 'bg-red-400/60'
 }
 
+function formatElapsed(ms: number): string {
+  const totalSec = Math.floor(ms / 1000)
+  const min = Math.floor(totalSec / 60)
+  const sec = totalSec % 60
+  if (min >= 60) {
+    const hr = Math.floor(min / 60)
+    const remMin = min % 60
+    return `${hr}:${String(remMin).padStart(2, '0')}:${String(sec).padStart(2, '0')}`
+  }
+  return `${min}:${String(sec).padStart(2, '0')}`
+}
+
 export default function MissionProgressCard({ message }: MissionProgressCardProps): JSX.Element {
   const mission = useMissionStore((s) => s.mission)
   const agents = useAgentStore((s) => s.agents)
+
+  // B12: Elapsed timer
+  const [elapsed, setElapsed] = useState(0)
+  useEffect(() => {
+    if (!mission?.startedAt) return
+    const update = () => setElapsed(Date.now() - mission.startedAt)
+    update()
+    const id = setInterval(update, 1000)
+    return () => clearInterval(id)
+  }, [mission?.startedAt])
 
   const missionAgents = agents.filter(
     (a) => a.teamRunId === mission?.id || (mission?.activeAgentIds.includes(a.id) ?? false)
@@ -40,10 +63,16 @@ export default function MissionProgressCard({ message }: MissionProgressCardProp
         </div>
 
         {mission?.phase && (
-          <div className="mb-3">
+          <div className="mb-3 flex items-center gap-2">
             <span className="px-2 py-0.5 rounded-full bg-purple-400/10 text-purple-400 text-[11px] font-medium uppercase">
               {mission.phase}
             </span>
+            {mission.startedAt && (
+              <span className="inline-flex items-center gap-1 text-[11px] text-gray-500 font-mono">
+                <Clock size={10} />
+                {formatElapsed(elapsed)}
+              </span>
+            )}
           </div>
         )}
 

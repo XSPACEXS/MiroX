@@ -53,6 +53,18 @@ export function extractJsonFromLogs(logs: string): unknown | null {
     // fall through
   }
 
+  // Strategy 3.5: extract JSON array (first [ to last ]) and wrap as { subtasks: [...] }
+  const firstBracket = searchText.indexOf('[')
+  const lastBracket = searchText.lastIndexOf(']')
+  if (firstBracket !== -1 && lastBracket > firstBracket) {
+    try {
+      const arr = JSON.parse(searchText.slice(firstBracket, lastBracket + 1))
+      if (Array.isArray(arr) && arr.length > 0) return { subtasks: arr }
+    } catch {
+      // fall through
+    }
+  }
+
   // Strategy 4: if we had a result marker, also try the full logs (deltas)
   if (resultIdx !== -1) {
     const deltaText = logs.slice(0, resultIdx)
@@ -63,6 +75,32 @@ export function extractJsonFromLogs(logs: string): unknown | null {
       } catch {
         // fall through
       }
+    }
+  }
+
+  // Strategy 5: best-effort line-by-line parse for numbered/bullet task patterns
+  const taskPattern = /^(?:\d+[.)]\s*|[-*]\s+)(?:\*\*)?(.+?)(?:\*\*)?(?:\s*[-—:]\s*(.+))?$/
+  const extractedTasks: Array<{ title: string; description: string }> = []
+  for (const line of searchText.split('\n')) {
+    const match = line.trim().match(taskPattern)
+    if (match?.[1]) {
+      extractedTasks.push({
+        title: match[1].trim(),
+        description: match[2]?.trim() ?? match[1].trim(),
+      })
+    }
+  }
+  if (extractedTasks.length > 0) {
+    return {
+      subtasks: extractedTasks.map((t, i) => ({
+        id: `subtask-${String(i + 1).padStart(3, '0')}`,
+        title: t.title,
+        description: t.description,
+        files: [],
+        dependencies: [],
+        model: 'sonnet',
+        tools: ['Read', 'Edit', 'Glob', 'Grep', 'Bash'],
+      })),
     }
   }
 
@@ -155,4 +193,14 @@ export function parsePlanOutput(logs: string, originalPrompt: string): MissionPl
 /** Build the prompt to send to the Haiku planning agent */
 export function getPlanAgentPrompt(userPrompt: string, scoutReport: string | null): string {
   return buildPlanPrompt(userPrompt, scoutReport)
+}
+
+/** Build a strict-format prompt for the final retry attempt */
+export function getStrictPlanPrompt(userPrompt: string, scoutReport: string | null): string {
+  const base = buildPlanPrompt(userPrompt, scoutReport)
+  return `${base}
+
+CRITICAL: You MUST respond with ONLY valid JSON. No markdown. No explanation. No code fences.
+Exact format:
+{"subtasks":[{"id":"subtask-001","title":"...","description":"...","files":["src/..."],"dependencies":[],"model":"sonnet","tools":["Read","Edit","Glob","Grep","Bash"]}]}`
 }

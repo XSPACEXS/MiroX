@@ -3,6 +3,7 @@ import { Bot, ClipboardList, CheckCircle2, Loader2, Circle, XCircle } from 'luci
 import { useChatStore } from '@stores/chatStore'
 import { useMissionStore } from '@stores/missionStore'
 import { isTerminal } from '@services/orchestrator'
+import { CopyButton } from './CopyButton'
 import type { ChatMessage } from '@/types/chat'
 import type { Subtask } from '@/services/orchestrator/types'
 
@@ -57,7 +58,10 @@ export default function MissionPlanCard({ message }: MissionPlanCardProps): JSX.
       <div className="w-7 h-7 rounded-full bg-yellow-400/20 flex items-center justify-center shrink-0 mt-0.5">
         <Bot size={14} className="text-yellow-400" />
       </div>
-      <div className="flex-1 rounded-2xl border border-blue-500/20 bg-blue-500/5 p-4 max-w-[85%]">
+      <div className="relative flex-1 rounded-2xl border border-blue-500/20 bg-blue-500/5 p-4 max-w-[85%] group">
+        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+          <CopyButton text={plan.subtasks.map((s: Subtask, i: number) => `${i + 1}. [${s.model}] ${s.title}: ${s.description}`).join('\n')} />
+        </div>
         <div className="flex items-center gap-2 mb-3">
           <ClipboardList size={16} className="text-blue-400" />
           <h4 className="text-sm font-semibold text-white">Mission Plan</h4>

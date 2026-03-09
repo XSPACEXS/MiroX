@@ -1,9 +1,10 @@
 import { useEffect, useCallback, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Lock, Wrench, Octagon } from 'lucide-react'
+import { Lock, Wrench, Octagon, Terminal } from 'lucide-react'
 import { pageVariants } from '@design-system/animations'
 import { useAgentStore } from '@stores/agentStore'
 import { useMissionStore } from '@stores/missionStore'
+import { useChatStore } from '@stores/chatStore'
 import { useUIStore } from '@stores/uiStore'
 import { abortMission } from '@services/orchestrator'
 import type { MissionStoreAPI } from '@services/orchestrator'
@@ -13,6 +14,11 @@ import { useChatIPCBridge } from '@hooks/useChatIPCBridge'
 import { ChatPanel } from '@components/agent-center/chat/ChatPanel'
 import { ConnectionsStrip, ConnectionsPanel } from '@components/agent-center/ConnectionsPanel'
 import { MissionReportsStrip, MissionReportsPanel } from '@components/agent-center/MissionReportsPanel'
+import { LiveLogs } from '@components/agent-center/LiveLogs'
+import { PlanningView } from '@components/agent-center/phases/PlanningView'
+import { WorkingView } from '@components/agent-center/phases/WorkingView'
+import { VerifyingView } from '@components/agent-center/phases/VerifyingView'
+import { DoneView } from '@components/agent-center/phases/DoneView'
 import { useClaude } from '@hooks/useClaude'
 import { useGemini } from '@hooks/useGemini'
 import { CelebrationOverlay } from '@components/agent-center/scene/CelebrationOverlay'
@@ -33,9 +39,13 @@ export default function AgentCenter(): JSX.Element {
 
   const missionHistory = useMissionStore((s) => s.missionHistory)
 
+  const fileMap = useMissionStore((s) => s.fileMap)
+  const interactions = useMissionStore((s) => s.interactions)
+
   const [showCelebration, setShowCelebration] = useState(false)
   const [showConnections, setShowConnections] = useState(false)
   const [showReports, setShowReports] = useState(false)
+  const [showLogs, setShowLogs] = useState(false)
   const claude = useClaude()
   const gemini = useGemini()
 
@@ -90,11 +100,26 @@ export default function AgentCenter(): JSX.Element {
         useMissionStore.getState().addPhaseTransition(from, to, reason),
       setGeminiAssistReport: (report) => useMissionStore.getState().setGeminiAssistReport(report),
       completeMission: () => useMissionStore.getState().completeMission(),
+      addInteraction: (interaction) => useMissionStore.getState().addInteraction(interaction),
+      getCharacterName: (agentId) => {
+        const char = useMissionStore.getState().characters[agentId]
+        return char?.firstName ?? 'Agent'
+      },
     }
 
     await abortMission(missionStoreAPI)
     addToast({ type: 'warning', title: 'Mission aborted' })
   }, [addToast])
+
+  const handleKillAgent = useCallback((id: string) => {
+    void window.electronAPI.agent.kill(id)
+  }, [])
+
+  const handleNewMission = useCallback(() => {
+    useMissionStore.getState().reset()
+    useChatStore.getState().clearMessages()
+    useChatStore.getState().unlockConfig()
+  }, [])
 
   if (!isAdmin) {
     return (
@@ -148,6 +173,18 @@ export default function AgentCenter(): JSX.Element {
             </span>
           </div>
         )}
+        {/* B2: LiveLogs strip button */}
+        <button
+          onClick={() => setShowLogs((v) => !v)}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs transition-colors ${
+            showLogs
+              ? 'border-yellow-400/30 bg-yellow-400/10 text-yellow-400'
+              : 'border-black-600 bg-black-700 text-gray-400 hover:text-gray-200 hover:border-black-500'
+          }`}
+        >
+          <Terminal size={14} />
+          Logs
+        </button>
         <MissionReportsStrip
           onClick={() => setShowReports((v) => !v)}
           count={missionHistory.length}
@@ -180,24 +217,73 @@ export default function AgentCenter(): JSX.Element {
         <MissionReportsPanel onClose={() => setShowReports(false)} />
       )}
 
-      {/* Chat panel — the unified interface */}
-      <ErrorBoundary
-        fallback={
-          <div className="flex-1 flex items-center justify-center rounded-2xl border border-black-600 bg-black-800/40">
-            <div className="text-center p-8">
-              <p className="text-red-400 font-semibold mb-2">Chat panel encountered an error</p>
-              <button
-                onClick={() => window.location.reload()}
-                className="px-4 py-2 rounded-lg bg-yellow-400 text-black font-semibold text-sm hover:bg-yellow-300 transition-colors"
-              >
-                Reload
-              </button>
-            </div>
+      {/* B2: LiveLogs panel */}
+      {showLogs && (
+        <div className="shrink-0 rounded-2xl border border-black-600 bg-black-800/40 p-4">
+          <LiveLogs />
+        </div>
+      )}
+
+      {/* B1: Phase view + Chat panel split layout */}
+      <div className="flex-1 flex flex-col gap-3 min-h-0">
+        {/* Phase view — rendered above chat when mission is active */}
+        {pageState === 'planning' && mission && (
+          <div className="shrink-0 rounded-2xl border border-black-600 bg-black-800/40 p-4 max-h-[40%] overflow-y-auto">
+            <PlanningView mission={mission} characters={characters} />
           </div>
-        }
-      >
-        <ChatPanel />
-      </ErrorBoundary>
+        )}
+
+        {pageState === 'working' && mission && (
+          <div className="flex-[3] min-h-0 rounded-2xl border border-black-600 bg-black-800/40 p-3 overflow-hidden">
+            <WorkingView
+              agents={agents}
+              mission={mission}
+              characters={characters}
+              fileMap={fileMap}
+              interactions={interactions}
+              onKill={handleKillAgent}
+            />
+          </div>
+        )}
+
+        {pageState === 'verifying' && (
+          <div className="flex-1 min-h-0 rounded-2xl border border-black-600 bg-black-800/40 p-3 overflow-hidden">
+            <VerifyingView agents={agents} characters={characters} />
+          </div>
+        )}
+
+        {pageState === 'done' && mission && (
+          <div className="flex-[3] min-h-0 rounded-2xl border border-black-600 bg-black-800/40 p-4 overflow-y-auto">
+            <DoneView
+              mission={mission}
+              fileMap={fileMap}
+              characters={characters}
+              onNewMission={handleNewMission}
+            />
+          </div>
+        )}
+
+        {/* Chat panel — always visible, flexes to fill remaining space */}
+        <ErrorBoundary
+          fallback={
+            <div className="flex-1 flex items-center justify-center rounded-2xl border border-black-600 bg-black-800/40">
+              <div className="text-center p-8">
+                <p className="text-red-400 font-semibold mb-2">Chat panel encountered an error</p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="px-4 py-2 rounded-lg bg-yellow-400 text-black font-semibold text-sm hover:bg-yellow-300 transition-colors"
+                >
+                  Reload
+                </button>
+              </div>
+            </div>
+          }
+        >
+          <div className={pageState === 'idle' ? 'flex-1 min-h-0' : 'flex-[2] min-h-[200px]'}>
+            <ChatPanel />
+          </div>
+        </ErrorBoundary>
+      </div>
 
       {/* Celebration overlay */}
       <AnimatePresence>

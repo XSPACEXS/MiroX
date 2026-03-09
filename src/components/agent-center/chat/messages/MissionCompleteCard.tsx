@@ -1,5 +1,6 @@
 import { Bot, CheckCircle2, XCircle, Octagon } from 'lucide-react'
 import { useChatStore } from '@stores/chatStore'
+import { CopyButton } from './CopyButton'
 import type { ChatMessage } from '@/types/chat'
 
 interface MissionCompleteCardProps {
@@ -55,8 +56,11 @@ export default function MissionCompleteCard({ message }: MissionCompleteCardProp
         )}
       </div>
       <div
-        className={`flex-1 rounded-2xl border ${cardBorder} p-4 max-w-[85%]`}
+        className={`relative flex-1 rounded-2xl border ${cardBorder} p-4 max-w-[85%] group`}
       >
+        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+          <CopyButton text={`Mission ${status === 'done' ? 'Complete' : status === 'aborted' ? 'Aborted' : 'Failed'}\nDuration: ${summary.duration}\nFiles changed: ${summary.filesChanged}\nAgents: ${summary.agentCount}${summary.qualityScore != null ? `\nQuality: ${summary.qualityScore}/100` : ''}`} />
+        </div>
         <div className="flex items-center gap-2 mb-3">
           {status === 'done' ? (
             <CheckCircle2 size={16} className="text-green-400" />
