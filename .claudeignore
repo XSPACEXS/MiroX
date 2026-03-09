@@ -1,0 +1,26 @@
+# Dependencies (737MB)
+node_modules/
+
+# Build output
+dist/
+dist-electron/
+
+# Packaged releases (749MB)
+release/
+
+# Git
+.git/
+
+# macOS
+.DS_Store
+
+# Lock file (huge, noisy)
+package-lock.json
+
+# Build resources (icons, DMG background)
+build/
+
+# Electron cache
+*.dmg
+*.zip
+*.blockmap
